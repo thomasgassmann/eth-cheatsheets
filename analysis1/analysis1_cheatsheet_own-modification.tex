@@ -1,0 +1,826 @@
+% Basic stuff
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[german]{babel}
+
+% 3 column landscape layout with fewer margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
+\usepackage{flowfram}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+\Ncolumn{3}
+
+% define nice looking boxes
+\usepackage{tcolorbox}
+
+% a base set, that is then customised
+\tcbset {
+  base/.style={
+    boxrule=0mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm, 
+    fonttitle=\bfseries, 
+    colbacktitle=black!10!white, 
+    coltitle=black, 
+    toptitle=0.75mm, 
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+\definecolor{brandblue}{rgb}{0.6, 1, 0.8}
+\newtcolorbox{mainbox}[1]{
+  colframe=brandblue, 
+  base={#1}
+}
+
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Mathematical typesetting & symbols
+\usepackage{amsthm, mathtools, amssymb} 
+\usepackage{marvosym, wasysym}
+
+% Tables
+\usepackage{tabularx, multirow}
+\usepackage{booktabs}
+\renewcommand*{\arraystretch}{2}
+
+% Make enumerations more compact
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt}
+\setenumerate{itemsep=0.75pt}
+
+% To include sketches
+\usepackage{graphicx}
+
+
+% Math helper stuff
+\def\limn{\lim\limits_{n\to \infty}}
+\def\sumk{\sum\limits_{k=1}^{\infty}}
+\def\sumn{\sum\limits_{n=0}^{\infty}}
+\def\R{\mathbb{R}}
+\def\N{\mathbb{N}}
+\def\dx{\text{ d}x}
+
+\begin{document}
+
+\section{Folgen und Reihen}
+\subsection{Folgen}
+\subsubsection{Konvergenz}
+Sei $(a_n)_{n\geq1}$ eine Folge. Sie ist konvergent falls es l $\in\R$, so dass $\forall \epsilon > 0$: $\{n\in\N:a_n\notin ]l-\epsilon,l+\epsilon[ \neq \emptyset $
+
+\begin{itemize}
+ \item $(a_n)_{n\geq 1}$ konvergiert gegen l := $\limn a_n$
+ \item $\forall \epsilon >0 \, \exists N\geq 1$: $|a_n-l|<\epsilon \qquad \forall n\geq N$
+ \item Monoton wachsend und nach oben beschränkt: \par $\limn a_n = sup\{a_n:\, n\geq 1\}$
+ \item Monoton fallend und nach unten beschränkt: \par $\limn a_n = inf\{a_n:\, n\geq 1\}$
+ \item $\limn$inf $a_n = \limn$inf $\{a_k : k\geq n\}$
+ \item $\limn$sup $a_n = \limn$sup $\{a_k : k\geq n\}$
+ \item $\limn a_n = \limn$sup $a_n =\limn$inf $a_n$
+\end{itemize}
+
+Cauchy-Kriterium: $\forall \epsilon \, \exists N \>: |a_n-a_m| < \epsilon \quad \forall n,m\geq N$
+
+\subsection{Reihen}
+\subsubsection{Konvergenz von Reihen}
+\begin{mainbox}{Cauchy-Kriterium für Reihen}
+Die Reihe $\sumk a_k$ ist genau dann konvergent, falls $\forall \epsilon > 0 \ \exists N \geq 1$ mit $| \sum\limits_{k=n}^{m} a_k | < \epsilon,  \forall m \geq n \ge N$.
+\end{mainbox}
+
+\subsubsection{Geometrische Reihe} 
+$\sum_{k=0}^\infty q^k$ divergiert für $|q| \ge 1$ und konvergiert zu $\frac{1}{1 - q}$ für $|q| < 1$
+\subsubsection{Zeta-Funktion}
+$\zeta(s) = \sum_{n=1}^\infty \frac{1}{n^s}$ divergiert für $s \le 1$ und konvergiert für $s > 1$.
+
+\begin{mainbox}{Vergleichsatz}
+  Seien $\sumk a_k$ und $\sumk b_k$ Reihen mit $0\leq a_k \leq b_k \> \forall k\geq 1$ Dann gilt:
+  \[ \sumk b_k \text{ konvergent } \Rightarrow \sumk a_k \text{ konvergent }\]
+  \[ \sumk b_k \text{ divergent } \Rightarrow \sumk a_k \text{ divergent }\]
+  
+\end{mainbox}
+
+\subsubsection{Absolute Konvergenz}
+Die Reihe $\sumk a_k$ ist \textbf{absolut konvergent} falls $\sumk|a_k|$ konvergiert und es gilt
+\begin{itemize}
+  \item $\left| \sumk a_k \right| \leq \sumk|a_k|$
+  \item absolut konvergent $\Rightarrow$ konvergent
+\end{itemize}
+
+\begin{mainbox}{Leibnizkriterium}
+  Sei $(a_n)_{n\geq 1}$ monoton fallend mit $a_n \geq 0 \quad \forall n\geq 1$ und $\limn a_n = 0$ Dann konvergiert \par
+  \[S := \sumk (-1)^{k+1}a_k\]
+  und es gilt: $a_1 - a_2 \leq S \leq a_1$
+\end{mainbox}
+
+\begin{mainbox}{Quotientenkriterium}
+  Sei $(a_n)_{n\geq 1}$ mit $a_n \neq 0 \> \forall n \geq 1$
+  \[\limn sup \frac{|a_{n+1}}{|a_n|} < 1 \Rightarrow \sumk a_k \text{ konvergiert absolut}\] 
+  \[\limn inf \frac{|a_{n+1}}{|a_n|} > 1 \Rightarrow \sumk a_k \text{ divergiert}\] 
+\end{mainbox}
+\begin{mainbox}{Wurzelkriterium}
+  \[\limn sup \sqrt[n]{|a_n|} < 1 \Rightarrow \sumk a_k \text{ konvergiert absolut }\] \par
+  \[\limn sup \sqrt[n]{|a_n|} > 1 \Rightarrow \sumk a_k \text{ und } \sumk |a_k| \text{ divergiert}\]
+\end{mainbox}
+
+\subsubsection{Wichtige Reihen}
+\begin{align*}
+ &\sum_{i=1}^n i = \frac{n(n+1)}{2} \\
+ &\sum_{i=1}^n i^2 = \frac{1}{6}n(n+1)(2n+1) \\
+ &\sum_{i=1}^n i^3 = \frac{1}{4}n^2(n+1)^2 \\
+ &\sum_{i=1}^\infty \frac{1}{i^2} = \frac{\pi^2}{6} \\
+ &\sum_{n=1}^\infty \frac{1}{n(n+1)} =1
+\end{align*}
+
+\subsubsection{Strategie - Konvergenz von Reihen}
+\begin{enumerate}
+ \item Ist Reihe ein bekannter Typ? (Teleskopieren, Geometrische/Harmonische Reihe, Zetafunktion, ...)
+ \item Ist $\limn a_n = 0$? Wenn nein, divergent.
+ \item Quotientenkriterium \& Wurzelkriterium anwenden
+ \item Vergleichssatz anwenden, Vergleichsreihen suchen
+ \item Leibnizkriterium anwenden
+\end{enumerate}
+
+\begin{mainbox}{Cauchy-Produkt von Reihen}
+  Cauchy-Produkt von $\sumn a_i$ und $\sumn b_i$ ist:
+  $\sumn(\sum\limits_{j=0}^{n}a_{n-j}b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + ...$
+\end{mainbox}
+Falls $\sumn a_i$ und $\sumn b_i$ absolut konvergieren, absolut ihr Cauchy-Produkt auch mit dem Produkt beider Grenzwerte.
+
+\section{Funktionen}
+\subsection{Stetigkeit}
+Sei $f : D \to \R^d, x \to f(x)$ eine Funktion in $D \subseteq \R^d$.
+\begin{mainbox}{Definition Stetigkeit}
+ $f$ ist in $x_0 \in D$ stetig, falls $\lim_{x\to x_0} f(x) = f(x_0)$.
+ $f$ ist stetig, falls sie in jedem $x_0 \in D$ stetig ist.
+\end{mainbox}
+
+f ist genau dann in $x_0$ stetig, falls für jede Folge \par
+$(a_n)_{n\geq 1}, \limn a_n = x_0 \Rightarrow \limn f(a_n) = f(x_0)$ gilt
+
+Polynomiale Funktionen sind auf $\R$ stetig.
+\begin{subbox}{}
+ Falls $f$ und $g$ den gleichen Definitions-/Bildbereich haben und in $x_0$ stetig sind, dann sind auch $$f + g, \lambda \cdot f, f \cdot g, \frac{f}{g}, |f|, \max(f,g), \min(f,g)$$ stetig in $x_0$.
+\end{subbox}
+
+
+\begin{mainbox}{Zwischenwertsatz}
+ Sei $I \subseteq \R$ ein Intervall, $f: I \to \R$ stetig und sei $a, b \in I$ , dann gibt es für jedes $c$ zwischen $f(a)$ und $f(b)$ ein $a \le z \le b$ mit $f(z) = c$.
+\end{mainbox}
+Daraus folgt, dass ein Polynom mit ungeradem Grad mindestens eine Nullstelle in $\R$ besitzt.
+
+\subsubsection{Kompaktes Intervall}
+Ein Intervall $I \in \R$ ist kompakt, falls es von der Form $I = [a,b]$ mit $a \le b$ ist.
+
+\begin{mainbox}{Min-Max-Satz}
+ Sei $f: I = [a,b] \to \R$ stetig auf einem kompakten Intervall $I$. Dann gibt es $u, v \in I$ mit $f(u) \le f(x) \le f(v), \forall x \in I$. Insbesondere ist $f$ beschränkt.
+\end{mainbox}
+
+\begin{subbox}{Stetigkeit der Verknüpfung}
+ Sei $f: D_1 \to D_2, g: D_2 \to \R$ und $x_0 \in D_1$. Falls $f$ in $x_0$ und $g$ in $f(x_0)$ stetig ist, dann ist $g \circ f: D_1 \to \R$ in $x_0$ stetig.
+\end{subbox}
+
+\begin{mainbox}{Satz über die Umkehrabbildung}
+ Sei $f: I \to \R$ stetig und streng monoton und sei $J = f(I) \subseteq \R$. Dann ist $f^{-1}: J \to I$ stetig und streng monoton.
+\end{mainbox}
+
+\begin{subbox}{Umkehrabbildung}
+\end{subbox}
+
+\begin{subbox}{Die reelle Exponentialfunktion}
+ $\exp: \R \to \ ]0,+\infty[$ ist streng monoton wachsend, stetig und surjektiv. Auch die Umkehrfunktion $\ln: \ ]0,+\infty[ \to \R$ hat diese Eigenschaften.
+\end{subbox}
+
+\subsection{Konvergenz von Funktionenfolgen}
+
+\begin{mainbox}{Punktweise Konvergenz}
+  Die Funktionenfolge $(f_n)$ konvergiert punktweise gegen eine Funktion $f: D \to \R$ falls für alle $x \in D$: $\limn f(x) = f_n(x)$.
+\end{mainbox}
+
+\begin{mainbox}{Gleichmässige Konvergenz}
+ Die Folge $(f_n)$ konvergiert gleichmässig in $D$ gegen $f$ falls gilt $\forall \epsilon > 0 \ \exists N \ge 1$, so dass $\forall n \ge N, \ \forall x \in D: | f_n(x) - f(x) | \le \epsilon$. \\
+ Die Funktionenfolge $(g_n)$ ist gleichmässig konvergent, falls für alle $x\in D$ der Grenzwert $\limn g_n(x) = g(x)$ existiert und die Folge $(g_n)$ gleichmässig gegen $g$ konvergiert.
+\end{mainbox}
+Die Reihe $\sumk f_k(x)$ konvergiert gleichmässig, falls die durch $S_n(x) = \sum_{k=0}^n f_k(x)$ definierte Funktionenfolge gleichmässig konvergiert.
+
+\begin{subbox}{}
+ Sei $f_n$ eine Folge stetiger Funktionen. Ausserdem ist $|f_n(x)| \le c_n \quad \forall x \in D$ und $\sum_{n=0}^\infty c_n$ konvergiert. Dann konvergiert die Reihe $\sum_{n=0}^\infty f_n(x)$ gleichmässig und deren Grenzwert ist eine in $D$ stetige Funktion.
+\end{subbox}
+
+\subsection{Grenzwerte und Potenzreihen}
+
+\begin{subbox}{Potenzreihe}
+ Potenzreihen sind Reihen der Form $\sum_{n=0}^\infty a_n x^n$. Eine Potenzreihe mit Entwicklungspunkt $x_0$ wird als $\sum_{n=0}^\infty a_n(x-x_0)^n$ definiert.
+\end{subbox}
+
+\begin{mainbox}{Konvergenzradius}
+ Der Konvergenzradius einer Potenzreihe um einen Entwicklungspunkt $x_0$ ist die grösste Zahl $r$, so dass die Potenzreihe für alle $x$ mit $|x - x_0| < r$ konvergiert. Falls die Reihe für alle $x$ konvergiert, ist der Konvergenzradius $r$ unendlich. Sonst:
+ $$r = \limn \left| \frac{a_n}{a_{n+1}} \right| = \frac{1}{\limn\sup \sqrt[n]{|a_n|}} $$
+\end{mainbox}
+
+\subsubsection{Definitionen per Potenzreihen}
+
+\begin{align*}
+\exp(x) &= \sumn \frac{x^n}{n!} & r &= \infty \\
+\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} & r &= \infty \\
+\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} & r &= \infty \\
+\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} & r &= 1
+\end{align*}
+
+\begin{subbox}{Häufungspunkt}
+ $x_0 \in \R$ ist ein Häufungspunkt der Menge D falls $\forall \delta > 0: (]x_0 - \delta, x_0 + \delta[ \backslash \{x_0\}) \cap D \ne \emptyset $.
+\end{subbox}
+
+\begin{mainbox}{Grenzwert - Funktionen}
+ sEI $f: D \to \R, x_0 \in \R$ Häufungspunkt von $D$. Dann ist $A \in \R$ der Grenzwert von $f(x)$ für $x \to x_0$ bezeichnet mit $\lim_{x\to x_0} f(x) = A$, falls $\forall \epsilon > 0 \ \exists \delta > 0$, so dass \par
+ $\forall x \in D \cap (]x_0 - \delta, x_0 + \delta[ \backslash \{x_0\}): |f(x) - A| < \epsilon$.
+\end{mainbox}
+
+\begin{itemize}
+  \item Sei $f : D \to \R$ und $x_0$ ein Häufungspunkt von D dann gilt $\lim\limits_{x\to x_0} f(x) = A$ genau dann wenn für jede Folge $(a_n)_{n\geq 1}$ in D $\backslash \{x_0\}$ mit $\limn a_n = x_0$ folgt $\limn f(a_n) = A$
+  \item Sei $x_0 \in D$, dann ist f stetig in $x_0 /\Leftrightarrow \lim\limits_{x\to x_0} f(x) = f(x_0)$
+  \item Falls $g_1 \leq f \leq g_2$ und $\lim\limits_{x\to x_0} g_1(x) = \lim\limits_{x\to x_0} g_2(x)$, dann existiert $\lim\limits_{x\to x_0} f(x) = \lim\limits_{x\to x_0} g_1(x)$
+\end{itemize}
+
+Seien $D,E\subseteq \R, x_0$ Häufungspunkt von D, $f:D\to E$ eine Funktion. Nehme an dass $y_0 := \lim\limits_{x\to x_0}f(x)$ existiert und $y_0 \in E$. Falls $g:E\to\R$ stetig in $y_0$, dann gilt: $\lim\limits_{x\to x_0}g(f(x)) = g(y_0)$
+
+\section{Ableitungen}
+\subsection{Differenzierbarkeit}
+\begin{mainbox}{Differenzierbar}
+ $f$ ist \textbf{in $x_0$ differenzierbar}, falls der Grenzwert $\lim\limits_{x\to x_0} \frac{f(x) - f(x_0)}{x - x_0}$ existiert. Wenn dies der Fall ist, wird der Grenzwert mit $f'(x_0)$ bezeichnet. $f$ ist \textbf{differenzierbar}, falls $f$ für jedes $x_0 \in D$ differenzierbar ist.
+\end{mainbox}
+
+Sei $f: D \to \R, x_0 \in D$ Häufungspunkt von D. Folgende Aussagen sind aquivalent:
+\begin{enumerate}
+  \item f ist in $x_0$ differenzierbar
+  \item Es gibt $c \in \R$ und $r: D\to \R$ mit:
+    \subitem $f(x) = f(x_0) + c(x-x_0) +r(x)(x-x_0)$
+    \subitem $r(x_0) = 0$ und r ist stetig in $x_0$
+\end{enumerate}
+
+Variation: Sei $\phi(x) = f'(x_0) + r(x)$. Dann gilt $f$ in $x_0$ differenzierbar, falls $f(x) = f(x_0) + \phi(x) (x-x_0), \ \forall x \in D$ und $\phi$ in $x_0$ stetig ist.
+Dann gilt $\phi(x_0) = f'(x_0)$.
+
+\begin{subbox}{Inverse mit Ableitung}
+  Sei $f: D\to E$ eine bijektive Funktion, $x_0 \in D$ Häufungspunkt. Wir nehmen an f ist in $x_0$ differenzierbar und $f'(x_0) \neq 0$; zudem nehmen wir an $f^{-1}$ ist in $y_0 = f(x_0)$ stetig. Dann ist $y_0$ Häufungspunkt von E, $f^{-1}$ ist in $y_0$ differenzierbar und:\\ $(f^{-1})(y_0) = \frac{1}{f'(x_0)}$
+\end{subbox}
+
+\begin{mainbox}{Höhere Ableitungen}
+ \begin{enumerate}
+  \item Für $n \ge 2$ ist $f$ n-mal differenzierbar in $D$ falls $f^{(n-1)}$ in $D$ differenzierbar ist. Dann ist $f^{(n)} = (f^{(n-1)})'$ die n-te Ableitung von $f$.
+  \item $f$ ist n-mal stetig differenzierbar in $D$, falls sie n-mal differnzierbar und $f^{(n)}$ in $D$ stetig ist.
+  \item $f$ ist in $D$ glatt, falls sie $\forall n \ge 1$ n-mal differenzierbar ist (``unendlich differenzierbar'').
+ \end{enumerate}
+\end{mainbox}
+Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \arccos, \text{arccot}, \arctan$ und alle Polynome. $\tan$ ist auf $\R \backslash \{\pi/2 + k\pi\}$, $\cot$ auf $\R \backslash \{k\pi\}$ glatt.
+
+\subsection{Ableitungsregeln}
+
+\begin{subbox}{Linearität der Ableitung}
+ $(\alpha \cdot f(x) + g(x))' = \alpha \cdot f'(x) + g'(x)$
+\end{subbox}
+
+\begin{mainbox}{Produktregel}
+ $(f(x) + g(x))' = f'(x) \cdot g(x) + f(x) \cdot g'(x)$
+\end{mainbox}
+
+\begin{mainbox}{Quotientenregel}
+ $\left(\frac{f(x)}{g(x)}\right)' = \frac{f'(x) \cdot g(x) - f(x) \cdot g'(x)}{g(x)^2}$
+\end{mainbox}
+
+\begin{mainbox}{Kettenregel}
+ $(f(g(x)))' = g'(x) \cdot f'(g(x))$
+\end{mainbox}
+
+\begin{subbox}{Potenzregel}
+ $(c \cdot x^a)' = c \cdot a \cdot x^{a - 1}$
+\end{subbox}
+
+\subsection{Sätze zur Ableitung}
+\begin{subbox}{Satz von Rolle}
+ Sei $f: [a,b] \to \R$ stetig und in $]a,b[$ differenzierbar. Wenn $f(a) = f(b)$, dann gibt es ein $\xi \in ]a,b[$ mit $f'(\xi) = 0$.
+\end{subbox}
+\begin{mainbox}{Mittelwertsatz (Lagrange)}
+ Sei $f: [a,b] \to \R$ stetig und in $]a,b[$ differenzierbar. Dann gibt es $\xi \in ]a,b[$ mit $f(b) - f(a) = f'(\xi)(b-a)$.
+\end{mainbox}
+
+\begin{mainbox}{L'Hospitâl}
+  Seien $f,g: ]a,b[ \to \R$ differenzierbar mit $g'(x) \neq 0 \> \forall x\in]a,b[$
+  Falls $\lim\limits_{x\to b^-} f(x) = 0$ und $\lim\limits_{x\to b^-} g(x) = 0$ und $\lim\limits_{x\to b^-} \frac{f'(x)}{g'(x)} = \lambda$ existiert folgt \[\lim\limits_{x\to b^-} \frac{f(x)}{g(x)} = \lim\limits_{x\to b^-} \frac{f'(x)}{g'(x)}\]
+\end{mainbox}
+
+\subsubsection{Konvexe Funktionen}
+\begin{mainbox}{Definition von Konvexität}
+  \begin{enumerate}[leftmargin=*]
+    \item f ist \textbf{konvex} (auf I) falls für alle $x \leq y,\, x,y\in I$ und $\lambda \in [0,1]$ \[f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda)f(y)\] gilt
+    \item f ist \textbf{streng konvex} falls für alle $x < y, \, x,y \in I$ und $\lambda\in]0,1[$ \[ f(\lambda x + (1-\lambda)y) < \lambda f(x) + (1-\lambda)f(y) \] gilt
+  \end{enumerate}
+\end{mainbox}
+Sei $f: I \to \R$ eine Funktion. Sie ist genau dann konvex, falls für alle $x_0, x < x_1 \in I$ \[\frac{f(x)-f(x_0)}{x-x_0}\leq \frac{f(x_1)-f(x)}{x_1-x}\] gilt
+Sei $f:]a,b[ \to \R$ in $]a,b[$ differenzierbar. Die Funktion ist genau dann (streng) konvex falls f' (streng) monoton wachsend ist.
+
+\subsection{Höhere Ableitungen}
+\begin{mainbox}{n-mal Differenzieren}
+  Angenommen $f,g: D\to \R$ und n-mal differenzierbar
+  \begin{enumerate}[leftmargin=*]
+    \item $(f+g)^{(n)} = f^{(n)} + g^{(n)}$
+    \item $(f\cdot g)^{(n)} = \sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$ 
+  \end{enumerate}
+\end{mainbox}
+
+\subsection{Taylorreihen}
+Taylorreihen sind ein Weg, glatte Funktionen als Potenzreihen anzunähern.
+
+\begin{subbox}{Taylor-Polynom}
+ Das n-te Talyor-Polynom $T_n f(x; a)$ an einer Entwicklungsstelle $a$ ist definiert als:
+ $$T_n f(x; a) := \sum_{k=0}^{n} \frac{f^{(k) (a)}}{n!} \cdot (x - a)^k$$ 
+ $ = f(a) + f'(a) \cdot (x-a) + \frac{f''(a)}{2} \cdot (x - a)^2 + \ldots$
+\end{subbox}
+
+\begin{mainbox}{Taylorreihe}
+ Die unendliche Reihe
+ $$Tf(x;a) := T_\infty = \sumn \frac{f^{(n)}(a)}{n!} \cdot (x-a)^n$$
+ wird Taylorreihe von $f$ an Stelle $a$ genannt.
+\end{mainbox}
+Beispiele Taylorreihen ($a = 0$):
+\begin{itemize}
+ \item $\sin(x) = \sumn (-1)^n \cdot \frac{x^{2n+1}}{(2n+1)!}$
+ \item $\cos(x) = \sumn (-1)^n \cdot \frac{x^{2n}}{(2n)!}$
+ \item $e^x = \sumn \frac{x^n}{n!}$
+ \item $e^{-x} = \sumn (-1)^n \cdot \frac{x^n}{n!}$
+\end{itemize}
+
+\section{Integrale}
+\subsection{Riemann-Integral}
+\begin{subbox}{Partition}
+ Eine Partition von $I$ ist eine endliche Teilmenge $P \subsetneq [a,b]$, wobei $\{a,b\} \subseteq P$. (``Aufteilung'')
+\end{subbox}
+\begin{mainbox}{Riemann-Summe}
+ $$S(f, P, \xi) := \sum_{i=1}^n f(\xi_i) \cdot (x_i - x_{i-1})$$
+\end{mainbox}
+\begin{subbox}{Ober- und Untersumme}
+ Obersumme: $\overline{S}(f,P) := \sup_{\xi \in I_i} f(\xi) \cdot (x_i - x_{i-1})$ \\
+ Untersumme: $\underline{S}(f,P) := \inf_{\xi \in I_i} f(\xi) \cdot (x_i - x_{i-1})$
+\end{subbox}
+\begin{mainbox}{Riemann-integrierbar}
+ $f:[a,b] \to \R$ ist Riemann-integrierbar, falls $\sup_{p_1} \underline{S}(f,P_1) = \inf_{p_2}\overline{S}(f, P_2)$, also falls Obersumme gleich Untersumme wird, wenn die Partition feiner wird. Dann ist $A := \int_a^b f(x)\dx$.
+\end{mainbox}
+\begin{itemize}
+ \item $f$ stetig in $[a,b] \implies f$ integrierbar über $[a,b]$
+ \item $f$ monoton in $[a,b] \implies f$ integrierbar über $[a,b]$
+\end{itemize}
+
+\begin{mainbox}{Satz Du Bois-Reymond, Darboux}
+  Eine beschränkte Funktion $f: [a,b] \to \R$ ist genau dann Integrierbar falls $\forall \epsilon > 0 \, \exists \delta > 0$ so dass\\
+  $\forall P \in \mathcal{P}_\delta(I), \, S(f,P) - s(f, P) < \epsilon$ 
+\end{mainbox}
+
+\begin{subbox}{}
+ Wenn $f,g$ beschränkt und integrierbar sind, dann sind
+ $$f+g, \lambda \cdot f, f \cdot g, |f|, \max(f,g), \min(f,g), \frac{f}{g}$$ integrierbar.
+\end{subbox}
+
+\subsection{Sätze \& Ungleichungen}
+\begin{itemize}
+ \item $f(x) \le g(x), \forall x \in [a,b] \rightarrow \int_a^b f(x) \dx \le \int_a^b g(x) \dx$
+ \item $\left|\int_a^b f(x) \dx\right| \le \int_a^b |f(x)| \dx$
+ \item $\left|\int_a^b f(x) g(x) \dx \right| \le \sqrt{\int_a^b f^2(x) \dx} \sqrt{\int_a^b g^2(x) \dx}$
+ \item $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \N, x > -1$
+\end{itemize}
+
+\begin{mainbox}{Mittelwertsatz}
+ Wenn $f: [a,b] \to \R$ stetig ist, dann gibt es $\xi \in [a,b]$ mit $\int_a^b f(x) \dx = f(\xi) (b-a)$.
+\end{mainbox}
+Daraus folgt auch, dass wenn $f,g: [a,b] \to \R$ wobei $f$ stetig, $g$ beschränkt und integrierbar mit $g(x) \ge 0, \forall x \in [a,b]$ ist, dann gibt es $\xi \in [a,b]$ mit $\int_a^b f(x)g(x) \dx = f(\xi) \int_a^b g(x) \dx$.
+
+\subsection{Stammfunktionen}
+\begin{subbox}{Stammfunktion}
+ Eine Funktion $F: [a,b] \to \R$ heisst Stammfunktion von $f$, falls $F$ (stetig) differenzierbar in $[a,b]$ ist und $F' = f$ in $[a,b]$ gilt.
+\end{subbox}
+``$f$ integrierbar'' impliziert \textit{nicht}, dass eine Stammfunktion existiert. Beispiel:
+$$
+ f(x) = \begin{cases}
+        0, & \text{für } x \le 0 \\
+        1, & \text{für } x > 0
+        \end{cases}
+$$
+
+\begin{mainbox}{Hauptsatz Differential-/Integralrechnung}
+ Sei $a<b$ und $f: [a,b] \to \R$ stetig. Die Funktion 
+ $$F(x) = \int_a^x f(t) \text{ d}t, \ a \le x \le b$$
+ ist in $[a,b]$ stetig differenzierbar und $F'(x) = f(x) \ \forall x \in [a,b]$.
+\end{mainbox}
+
+\subsection{Integrationsregeln}
+\begin{subbox}{Linearität}
+ \vspace{-12pt}
+ $$\int u\cdot f(x) + v \cdot g(x) \dx = u \int f(x) \dx + v \int g(x) \dx$$
+\end{subbox}
+\begin{subbox}{Gebietsadditivität}
+ \vspace{-12pt}
+ $$\int_a^b f(x) \dx = \int_a^c f(x) \dx + \int_c^b f(x) \dx, \ c \in [a,b]$$
+\end{subbox}
+\begin{mainbox}{Partielle Integration}
+ \vspace{-12pt}
+ $$\int f'(x) g(x) \dx = f(x)g(x) - \int f(x) g'(x) \dx$$
+\end{mainbox}
+\begin{itemize}
+ \item Grundsätzlich gilt: Polynome ableiten ($g(x)$), wo das Integral periodisch ist ($\sin, \cos, e^x$,...) integrieren ($f'(x)$)
+ \item Teils ist es nötig, mit $1$ zu multiplizieren, um partielle Integration anwenden zu können (z.B. $\int \log(x) \dx$)
+ \item Muss eventuell mehrmals angewendet werden
+\end{itemize}
+\begin{mainbox}{Substitution}
+ Um $\int_a^b f(g(x)) \dx$ zu berechnen: Ersetze $g(x)$ durch $u$ und integriere $\int_{g(a)}^{g(b)} f(u) \frac{\text{d}u}{g'(x)}$.
+\end{mainbox}
+\begin{itemize}
+ \item $g'(x)$ muss sich irgendwie herauskürzen, sonst nutzlos.
+ \item Grenzen substituieren nicht vergessen.
+ \item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
+\end{itemize}
+
+\begin{mainbox}{Partialbruchzerlegung}
+ Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)}$ wird wie folgend berechnet:
+ \begin{enumerate}
+  \item Falls $\deg(p) \ge \deg(q)$, führe eine Polynomdivision durch. Dies führt zum Integral $\int a(x) + \frac{r(x)}{q(x)}$.
+  \item Berechne die Nullstellen von $q(x)$.
+  \item Pro Nullstelle: Einen Partialbruch erstellen.
+  \begin{itemize}[left=0pt]
+   \item Einfach, reell: $x_1 \to \frac{A}{x - x_1}$
+   \item $n$-fach, reell: $x_1 \to \frac{A_1}{x - x_1} + \ldots + \frac{A_r}{(x-x_1)^r}$ 
+   \item Einfach, komplex: $x^2 + px + q \to \frac{Ax + B} {x^2 + px + q}$
+   \item $n$-fach, komplex: $x^2 + px + q \to \frac{A_1x+b_1}{x^2+px+q} + \ldots$
+  \end{itemize}
+  \item Parameter $A_1, \ldots, A_n$ (bzw. $B_1, \ldots, B_n$) bestimmen. ($x$ jeweils gleich Nullstelle setzen, umformen und lösen).
+
+ \end{enumerate}
+
+\end{mainbox}
+
+
+\section{Trigonometrie}
+
+\subsection{Regeln}
+\subsubsection{Periodizität}
+\begin{itemize}
+ \item $\sin(\alpha + 2 \pi) = \sin(\alpha) \quad \cos(\alpha + 2 \pi) = \cos(\alpha)$
+ \item $\tan(\alpha + \pi) = \tan(\alpha) \quad \cot(\alpha + \pi) = \cot(\alpha)$
+\end{itemize}
+
+\subsubsection{Parität}
+\begin{itemize}
+ \item $\sin(-\alpha) = - \sin(\alpha) \quad \cos(-\alpha) = \cos(\alpha)$
+ \item $\tan(-\alpha) = - \tan(\alpha) \quad \cot(-\alpha) = - \cot(\alpha)$
+\end{itemize}
+
+\subsubsection{Ergänzung}
+\begin{itemize}
+ \item $\sin(\pi - \alpha) = \sin(\alpha) \quad \cos(\pi - \alpha) = - \cos(\alpha)$
+ \item $\tan(\pi - \alpha) = -\tan(\alpha) \quad \cot(\pi - \alpha) = - \cot(\alpha)$
+\end{itemize}
+
+
+\subsubsection{Komplemente}
+\begin{itemize}
+ \item $\sin(\pi/2 - \alpha) = \cos(\alpha) \quad \cos(\pi/2 - \alpha) = \sin(\alpha)$
+ \item $\tan(\pi/2 - \alpha) = -\tan(\alpha) \quad \cot(\pi/2 - \alpha) = -\cot(\alpha)$
+\end{itemize}
+
+\subsubsection{Doppelwinkel}
+\begin{itemize}
+ \item $\sin(2\alpha) = 2 \sin(\alpha) \cos(\alpha)$
+ \item $\cos(2\alpha) = \cos^2(\alpha) - \sin^2(\alpha) = 1 - 2 \sin(\alpha)$
+ \item $\tan(2\alpha) = \frac{2\tan(\alpha)}{1 - \tan^2(\alpha)}$
+\end{itemize}
+
+\subsubsection{Addition}
+\begin{itemize}
+ \item $\sin(\alpha + \beta) = \sin(\alpha) \cos(\beta) + \cos(\alpha) \sin(\beta)$
+ \item $\cos(\alpha + \beta) = \cos(\alpha) \cos(\beta) - \sin(\alpha) \sin(\beta)$
+ \item $\tan(\alpha + \beta) = \frac{\tan(\alpha) + \tan(\beta)}{1 - \tan(\alpha) \tan(\beta)}$
+\end{itemize}
+
+\subsubsection{Subtraktion}
+\begin{itemize}
+ \item $\sin(\alpha - \beta) = \sin(\alpha) \cos(\beta) - \cos(\alpha)\sin(\beta)$
+ \item $\cos(\alpha - \beta) = \cos(\alpha) \cos(\beta) + \sin(\alpha)\sin(\beta)$
+ \item $\tan(\alpha - \beta) = \frac{\tan(\alpha) - \tan(\beta)}{1+\tan(\alpha) \tan(\beta)}$
+\end{itemize}
+
+\subsubsection{Multiplikation}
+\begin{itemize}
+ \item $\sin(\alpha) \sin(\beta) = -\frac{\cos(\alpha + \beta) - \cos(\alpha - \beta)}{2}$
+ \item $\cos(\alpha) \cos(\beta) =  \frac{\cos(\alpha + \beta) + \cos(\alpha - \beta)}{2}$
+ \item $\sin(\alpha) \cos(\beta) =  \frac{\sin(\alpha + \beta) + \sin(\alpha - \beta)}{2}$
+\end{itemize}
+
+\subsubsection{Potenzen}
+\begin{itemize}
+ \item $\sin^2(\alpha) = \frac{1}{2}(1-\cos(2\alpha))$
+ \item $\cos^2(\alpha) = \frac{1}{2}(1+\cos(2\alpha))$
+ \item $\tan^2(\alpha) = \frac{1-\cos(2\alpha)}{1+\cos(2\alpha)}$
+\end{itemize}
+
+\subsubsection{Diverse}
+
+\begin{itemize}
+ \item $\sin^2(\alpha) + \cos^2(\alpha) = 1$
+ \item $\cosh^2(\alpha) - \sinh^2(\alpha) = 1$
+ \item $\sin(z) = \frac{e^{iz} - e^{-iz}}{2}$ und $\cos(z) = \frac{e^{iz} + e^{-iz}}{2}$
+\end{itemize}
+
+
+\begin{mainbox}{Wichtige Werte}
+\begin{center} 
+ \begin{tabular}{c|cccccc}
+  rad & 0 & $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & $\frac{\pi}{2}$ & $\pi$ \\
+  \midrule
+  cos & 1 & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & 0 & -1 \\
+  sin & 0 & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & 1 & 0 \\
+  tan & 0 & $\frac{1}{\sqrt{3}}$ & 1 & $\sqrt{3}$ & $+\infty$ & 0 \\
+
+ \end{tabular}
+\end{center}
+\end{mainbox}
+
+\section{Diverse}
+\begin{mainbox}{Gammafunktion}
+  Die Gamma-Funktion ist wie folgt definiert: \\
+  $\Gamma (a) := \int_{0}^{\infty} x^{a-1}e^{-x}dx$
+  Es gilt: 
+  \begin{itemize}
+    \item $\Gamma(\alpha + 1) = \alpha\Gamma(\alpha)$
+    \item $\Gamma(n) = (n-1)!$
+    \item $\Gamma(\frac{1}{2}) = \sqrt(\pi)$
+    \item $\Gamma(\alpha)\Gamma(1-\alpha) = \frac{\pi}{\sin(\pi\alpha)}, (0 < \alpha < 1 )$
+  \end{itemize}
+  Solche Integrale kann man oft mithilfe von Substitution lösen.
+\end{mainbox}
+
+\begin{mainbox}{Bernoulli Polynome}
+  \begin{itemize}
+    \item $B_0 = 1$, $B_1 = -\frac{1}{2}$, $B_2 = \frac{1}{6}$, $B_3 = 0$
+    \item $B_4 = -\frac{1}{30}$,, $B_5 = 0$, $B_6 = \frac{1}{42}$
+  \end{itemize}
+  Die Formel für $1^l + 2^l + 3^l + ... n^l$ lautet:\\
+  $\frac{1}{l+1}\sum\limits_{j=0}^{l}(-1)^j B_j\binom{l+1}{j}n^{l+1-j}$,
+  wo $\binom{n}{k} = \frac{n!}{k!(n-k)!}$  
+\end{mainbox}
+
+\begin{mainbox}{Hyperbelfunktionen}
+  \begin{center}
+  \end{center}
+\end{mainbox}
+
+\begin{subbox}{Stirling'sche Formel}
+  $n! \approx \frac{\sqrt{2\pi n}n^n}{e^n}$
+\end{subbox}
+
+\section{Tabellen}
+
+
+\subsection{Ableitungen}
+\begin{center}
+  % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
+  \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
+  \toprule
+  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ & $\mathbf{f'(x)}$ \\
+  \midrule
+  $\frac{1}{2}(\cosh(x)\sinh(x)+1)$ & $\cosh(x)^2$ & $2\sinh(x)\cosh(x)$\\
+  $\frac{1}{2}(\sinh(x)\cosh(x) + x)$ & $\sinh(x)^2$ & $2\sinh(x)\cosh(x)$\\
+
+  \bottomrule
+  \end{tabularx}
+\end{center}
+
+
+\subsection{Ableitungen}
+\begin{center}
+  % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
+  \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
+  \toprule
+  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ & $\mathbf{f'(x)}$ \\
+  \midrule
+  $\frac{x^{-a+1}}{a+1}$ & $\frac{1}{x^a}$ & $\frac{a}{x^{a+1}}$ \\
+  $\frac{x^{a+1}}{a+1}$ & $x^a (a \ne 1)$ & $a \cdot x^{a-1}$ \\
+  $\frac{1}{k \ln(a)}a^{kx}$ & $a^{kx}$ & $ka^{kx} \ln(a)$ \\
+  $\ln |x|$ & $\frac{1}{x}$ & $-\frac{1}{x^2}$ \\
+  $\frac{2}{3}x^{2/3}$ & $\sqrt{x}$ & $\frac{1}{2\sqrt{x}}$\\
+  $-\cos(x)$ & $\sin(x)$ & $\cos(x)$ \\
+  $\sin(x)$ & $\cos(x)$ & $-\sin(x)$ \\
+  $\frac{1}{2}(x-\frac{1}{2}\sin(2x))$ & $\sin^2(x)$ & $2 \sin(x)\cos(x)$ \\
+  $\frac{1}{2}(x + \frac{1}{2}\sin(2x))$ & $\cos^2(x)$ & $-2\sin(x)\cos(x)$ \\
+  \multirow{2}*{$-\ln|\cos(x)|$} & \multirow{2}*{$\tan(x)$} & $\frac{1}{\cos^2(x)}$  \\
+  & & $1 + \tan^2(x)$ \\
+  $\cosh(x)$ & $\sinh(x)$ & $\cosh(x)$ \\
+  $\log(\cosh(x))$ & $\tanh(x)$ & $\frac{1}{\cosh^2(x)}$ \\
+  $\ln | \sin(x)|$ & $\cot(x)$ & $-\frac{1}{\sin^2(x)}$ \\
+  $\frac{1}{c} \cdot e^{cx}$ & $e^{cx}$ & $c \cdot e^{cx}$ \\
+  $x(\ln |x| - 1)$ & $\ln |x|$ & $\frac{1}{x}$ \\
+  $\frac{1}{2}(\ln(x))^2$ & $\frac{\ln(x)}{x}$ & $\frac{1 - \ln(x)}{x^2}$ \\
+  $\frac{x}{\ln(a)} (\ln|x| -1)$ & $\log_a |x|$ & $\frac{1}{\ln(a)x}$ \\
+  \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsection{Integrale}
+\begin{center}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{F(x)}$ \\
+  \midrule
+  $\int f'(x) f(x) \dx$ & $\frac{1}{2}(f(x))^2$ \\
+  $\int \frac{f'(x)}{f(x)} \dx$ & $\ln|f(x)|$ \\
+  $\int_{-\infty}^\infty e^{-x^2} \dx$ & $\sqrt{\pi}$ \\
+  $\int (ax+b)^n \dx$ & $\frac{1}{a(n+1)}(ax+b)^{n+1}$ \\
+  $\int x(ax+b)^n \dx$ & $\frac{(ax+b)^{n+2}}{(n+2)a^2} - \frac{b(ax+b)^{n+1}}{(n+1)a^2}$ \\
+  $\int (ax^p+b)^n x^{p-1} \dx$ & $\frac{(ax^p+b)^{n+1}}{ap(n+1)}$ \\
+  $\int (ax^p + b)^{-1} x^{p-1} \dx$ & $\frac{1}{ap} \ln |ax^p + b|$ \\
+  $\int \frac{ax+b}{cx+d} \dx$ & $\frac{ax}{c} - \frac{ad-bc}{c^2} \ln |cx +d|$ \\
+  $\int \frac{1}{x^2+a^2} \dx$ & $\frac{1}{a} \arctan \frac{x}{a}$ \\
+  $\int \frac{1}{x^2 - a^2} \dx$ & $\frac{1}{2a} \ln\left| \frac{x-a}{x+a} \right|$ \\
+  $\int \sqrt{a^2+x^2} \dx $ & $\frac{x}{2}\sqrt{a^2 + x^2} + \frac{a^2}{2}\ln(x+\sqrt{a^2+x^2})$ \\
+  $\int \frac{1}{1-x^2}$ & $\text{arctanh}(x)$\\
+  $\int \frac{1}{\sqrt{x^2-1}}$ & $\text{arcosh}(x)$\\
+  $\int \frac{1}{\sqrt{1+x^2}}$ & $\text{arcsinh}(x)$\\
+  $\int \frac{1}{1+x^2}$ & $\arctan(x)$\\
+  $\int \frac{-1}{\sqrt{1-x^2}}$ & $\arccos(x)$\\
+  $\int \frac{1}{\sqrt{1-x^2}}$ & $\arcsin(x)$\\
+  \bottomrule
+ \end{tabularx}
+
+ \subsection{Trigonometrische Identitäten}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
+  \midrule
+  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
+  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
+  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
+  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
+  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
+  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
+  \bottomrule
+ \end{tabularx}
+\end{center}
+
+
+\section{Kochrezepte und Tricks}
+\subsection{Gleichmässige	Konvergenz}
+\begin{subbox}{}
+  Gegeben: Folge \textbf{stetiger} Funktionen $f_n : \Omega \subset \R \to \R$\\
+  Gefragt: Konvergiert $f_n$ auf $\Omega$ Gleichmässig?\\
+  \textbf{Schritt 1:} Berechne $f(x) := \limn f_n(x)$ für fixes $x \in \Omega$\\
+  \textbf{Schritt 2: Prüfe $f_n$ auf gleichmässige Konvergenz:}\\
+  Direkte methode:
+  \begin{enumerate}
+    \item Berechne $\underset{x\in\Omega}{\sup} |f_n(x) - f(x)|$, oft nützlich das innere abzuleiten und gleich Null zu setzen.
+    \item Falls $\limn \underset{x\in\Omega}{\sup} |f_n(x) - f(x)| = 0$, dann ist $f_n$ auf $\Omega$ gleichmässig konvergent.
+  \end{enumerate} 
+
+  Indirekte Methoden:
+  \begin{itemize}
+    \item f unstetig $\Rightarrow$ keine gleichmässige Konvergenz
+    \item f stetig, $f_n(x) \leq f_{n+1}(x) \forall x \in \Omega$ und $\Omega$ kompakt $\Rightarrow$ gleichmässige Konvergenz
+  \end{itemize}
+\end{subbox}
+
+\subsection{Nullfolgenkriterium}
+\begin{subbox}{}
+  $\sumn a_n$ konvergiert $\Rightarrow \limn a_n = 0$\\
+  Definiere $S_k = \sum\limits_{n=0}^{k} a_n$\\
+  $\limn a_n = \lim\limits_{k\to \infty} S_k - S_{k-1} = \lim\limits_{k\to \infty} S_k - \lim\limits_{k\to \infty} S_{k-1} = S - S = 0$
+\end{subbox}
+
+\subsection{Beweise}
+\begin{subbox}{}
+  Seien $f,g : [a,b] \to \R$ wobei f stetig, g beschränkt integrierbar mit $g(x) \geq 0 \forall x\in[a,b]$. Dann gibt es $\xi \in [a,b]$ mit:\\
+  $\int_a^b f(x)g(x)dx = f(\xi)\int_a^b g(x)dx$\\
+  Beweis, weil $g(x) \geq 0$:\\
+  $\underset{y\in[a,b]}{\inf}g(y)f(x) \leq f(x)g(x) \leq \underset{x\in[a,b]}{\inf} f(x)g(x) \forall x \in [a,b]$\\
+  $\underset{y\in[a,b]}{\inf}g(y)\int_a^b f(x)dx \leq \int_a^b g(x)f(x)dx \leq \underset{x\in[a,b]}{\inf} \int_a^b f(x)dx \, \forall x \in [a,b]$
+\end{subbox}
+
+\begin{subbox}{}
+  Cauchy-Produkt von $e^x - 1 = x + x^2 + ...$ mit $\sumn \frac{c_n x^n}{n!}$ ist gleich x genau dann wenn $c_0=1$ und für alle $k\geq 2$ $\sum\limits_{i=0}^{k}\binom{k}{i} = 0$\\
+  \begin{align*}
+    CP &= \sum\limits_{i=0}^{\infty}a_i \sum\limits_{j=0}^{\infty}\frac{c_j x^j}{j!} = \sumn(\sum\limits_{j=0}^{n}a_{n-j}b_j)\\
+    &= \sumn(\frac{c_0}{n!}x^n + \frac{c_1}{1!(n-1)!}x^n\\
+    &+ \frac{c_2}{2!(n-2)!}x^n + ... + \frac{c_{n-1}}{(n-1)!1!} + 0)\\
+    &= 0 + c_0x + \sum\limits_{n=2}^{\infty}(\sum\limits_{j=0}^{n-1}\frac{c_j}{j!(n-j)!}x^n)
+  \end{align*}
+  aber: 
+  $\sum\limits_{j=0}^{n-1}\frac{c_j}{j!(n-j)!}x^n = \frac{1}{n!}\sum\limits_{j=0}^{n-1}\frac{n!}{j!(n-j)!}c_j = \frac{1}{n!}\sum\limits_{j=0}^{n-1}\binom{n}{j}c_j$\\
+  Also $CP = c_0x + \sum\limits_{n=2}^{\infty}(\sum\limits_{j=0}^{n-1}\binom{n}{j}c_j)\frac{x^n}{n}$\\
+  Was zeigt, dass $CP = x \Leftrightarrow c_0 = 1$ und $\sum\limits_{j=0}^{n-1}\binom{n}{j}c_j = 0, \, \forall n\geq 2$
+\end{subbox}
+
+\begin{subbox}{}
+  Falls $\sumn a_n x^n$ positive Konvergenzradius besitzt, so ist der Konvergenzradius von $\sumn \frac{a_n x^n}{n!}$ gleich $+\infty$.\\
+  Es gilt, dass $\limn \sup \sqrt[n]{|a_n|}$ existiert, also $\limn \sup \sqrt[n]{|a_n|} = \limn \underset{k\geq n}{\sup} \sqrt[k]{|a_k|}$\\
+  Per definition ist der Konvergenzradius $\rho$ von $\sumn \frac{a_n}{n!}x^n$ (wo $\frac{a_n}{n!}=b_n$) gleich $+\infty$ gdw. $\limn \sup \sqrt[n]{|b_n|}=0$\\
+  Wir zeigen also $\limn\sup \sqrt[n]{|b_n|} = \limn \underset{k\geq n}{\sup} \sqrt[k]{|b_k|} = \limn \underset{k\geq n}{\sup}|a_k|^\frac{1}{k}\cdot k!^{-\frac{1}{k}}$\\
+  Mit der Stirling'schen Formel gilt:\\
+  $k!^{-\frac{1}{k}} \approx (\frac{\sqrt{2\pi k}k^k}{e^k}) = \frac{(2\pi k)^{-\frac{k}{2}}e}{k} = \frac{e}{(\sqrt{2\pi k})^k\cdot k} \rightarrow 0$\\
+  Ausserdem existiert $\limn\underset{k\geq n}{\sup}\sqrt[k]{|a_k|}$, wo $\underset{k\geq n}{\sup}\sqrt[k]{|a_k|} = c_n$ per Annahme und somit ist die Folge $c_n$ beschränkt. Ex existiert also eine $C\in\R$ mit $c_n \leq C$ für all n und damit\\
+  \begin{align*}
+    \limn\sup\sqrt[n]{|b_n|} &= \limn \underset{k\geq n}{\sup}|a_k|^\frac{1}{k}\cdot k!^{-\frac{1}{k}}\\
+    &\leq \limn C\cdot k!^{-\frac{1}{k}}\\
+    &C \limn \underset{k \geq n}{\sup}k!^{-\frac{1}{k}}\\
+    &C \limn \sup n!^{-\frac{1}{n}}\\
+    &C \limn n!^{-\frac{1}{n}}\\
+    &=0
+  \end{align*}
+
+  Im vorletzten Schritt: falls der Grenzwert existiert ist lim inf gleich lim sup 
+\end{subbox}
+
+
+\begin{subbox}{}
+  Zeige, dass f integrierbar ist:
+  \begin{equation*}
+    f(x) =
+    \begin{cases*}
+      0 & $x=0$ oder $x\in\R \backslash \mathbb{Q}$\\
+      \frac{1}{q} & $x=\frac{p}{q}$ mit p,q$\in \mathbb{N}_{>0}$ teilerfremd.
+    \end{cases*}
+  \end{equation*}
+  
+  Wir wenden den Satz von Du-Bois an:
+  Bemerke: jedes Intervall $[x_{i-1}, x_i]$ beinhaltet eine irrationale Zahl, solange $x_{i-1} \neq x_i$. Damis ist für jede Partition P von [0,1] die Untersumme s(f,P) gleich 0.\\
+  Sei $\epsilon > 0$ und $n\in \N$ so dass $\frac{1}{n} < \frac{\epsilon}{2}$ und $B_n$ die Menge aller "komprimen Brüche" mit Nenner kleiner gleich n:\\
+  $B_n = \{1, \frac{1}{2}, \frac{1}{3}, \frac{2}{3}, \frac{1}{4},\frac{3}{4}, \frac{1}{5}, ..., \frac{1}{n}, ..., \frac{n-1}{n}\}$, sei $m = |B_n|$\\
+  wähle $k>m$ und $P = \{x_0, ..., x_k\}$ eine Partition mit: $\underset{1\leq i\leq k}{max}|x_i - x_{i-1} < \frac{\epsilon}{4m}$\\
+  So eine Partition existiert immer wenn wir k gross genuig wählen. Mit der Notation aus der Vorlesung gilt somit $ P = P_{\frac{e}{4m}}$.\\
+  Da $B_n$ aus m-vielen Elementen besteht, gibt es höchstens 2m-viele Intervalle $[x_{i-1}, x_i]$ die $B_n$ schneiden.\\
+  Falls $x\notin B_n$, dann ist x entweder irrational (f(x) = 0), 0, oder ein Bruch $\frac{p}{q}$ mit p,q teilerfremd und q>n. Auf jeden Fall gilt dann $f(x) < \frac{1}{n}$.\\
+  Wir schätzen die Obersumme S(f,P) von oben ab:
+  \begin{align*}
+    S(f,P) &= \sum\limits_{i=1}^{k}(x_i - x_{i-1})\cdot \underset{x\in[x_i, x_{i-1}]}{\sup}f(x)\\
+    &= \underset{i: [x_{i-1}], x_i \cap B_n \neq \emptyset}{\sum}(x_i - x_{i-1})\cdot f_i \\
+    &+ \underset{j: [x_{j-1}], x_j \cap B_n \neq \emptyset}{\sum}(x_j - x_{j-1})\cdot f_j
+  \end{align*}
+  Die erste Summe läuft höchstens über 2m Indizes, da es höchstens soviele Intervalle gibt die $B_n$ schneiden und es gilt $f_i \leq 1$ (weil $f(x) \leq 1$). In der Zweiten Summe können wir $f_i$ mit $\frac{1}{n}$ abschätzen, da das Intervall $B_n$ nicht schneidet und wir f(y) für Element ausserhalb von $B_n$ mit $\frac{1}{n}$ oben abgeschätzt haben. 
+\end{subbox}
+\begin{subbox}{}
+  Ausserdem gilt:\\
+  $\underset{i: [x_{i-1}, x_i]\cap B_n \neq \emptyset}{\sum}(x_i - x_{i-1}) \leq \sum_{j = 1}^{k}(x_j - x_{j-1}) = x_k - x_0 = 1 - 0 = 1$\\
+  Wir werfen alle zusammen und erhalten:\\
+  $S(f,P) \leq 2m\cdot \frac{\epsilon}{4m}\cdot 1+1\cdot\frac{1}{n} < \frac{\epsilon}{2}+\frac{\epsilon}{2} = \epsilon$\\
+  Damit wäre $S(f,P) - s(f,P) < \epsilon, \, P = P_\frac{\epsilon}{4m}$ gezeigt und der Satz besagt, dass f integrierbar ist.
+\end{subbox}
+
+\begin{subbox}{tan(x)}
+  \begin{enumerate}
+    \item Zeige $tan: (-\frac{\pi}{2}, \frac{\pi}{2})$ ist strikt monoton wachsend:\\
+    $tan'(x) = \frac{1}{\cos(x)^2} > 0$ und damit gezeigt, dass tan(x) strikt monoton wachsend ist.
+    \item Zeige $\underset{x\to(\frac{\pi}{2})^-}{\lim}\tan(x) = +\infty$ und $\underset{x\to(\frac{\pi}{2})^+}{\lim}\tan(x) = -\infty$\\
+    $\frac{\sin(x)}{\cos(x)}$ wo $\sin(\frac{\pi}{2}) = 1$ und $\cos{\frac{\pi}{2}} = 0$ aber $\cos(x) > 0$ für $(-\frac{\pi}{2}, 0)$ und $<0$ umgekehrt. 
+    \item Zeige dass $\tan(x)$ bijektiv ist:\\
+    Wir wissen, dass $\tan(x)$ injektiv ist, weil sie strikt monoton wachsend ist und stetig weil $\frac{\sin(x)}{\cos(x)}$ stetig sind. Zusammen mit den zwei Limes wissen wir aus dem Zwischenwertsatz, dass sie auch surjektiv ist. Damit ist sie bijektiv.
+    \item Berechne die Ableitung von $\arctan(x)$:\\
+    Sei $y = tan(x)$ es gilt dann $\arctan'(y) = \frac{1}{\tan'(x)} = \cos(x)^2$\\
+    Bemerke: $y^2 = tan(x)^2 = \frac{1}{\cos(x)^2}-1$ und $\cos(x)^2 = \frac{1}{y^2 +1}$ und somit $\arctan'(x) = \frac{1}{y^2 + 1}$
+  \end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Beweis Young'sche Ungleichung}
+  Seien $p,q > 1$ mit $\frac{1}{p}+\frac{1}{q} = 1$ gegeben. Zeige, dass für $a,b\geq 0$ die Ungleichung $ab\leq\frac{a^p}{p} + \frac{b^q}{q}$ gilt.\\
+  Definiere $f:[0, \infty]\to \R$ durch $f(x):= \frac{1}{p}a^p + \frac{1}{q}x^q - ax$\\
+  Die Ableitung ist gegeben durch $f'(x)= x^{q-1}-a$. Die Gleichung $f'(x) = 0$ hat die eindeutige Lösung $x_0 := a^\frac{1}{q-1}$\\
+  $f(x_0) = \frac{1}{p}a^p + \frac{1}{q}a^\frac{q}{q-1} - aa^\frac{1}{q-1} = \frac{1}{p}a^p + \frac{1}{q}a^\frac{q}{q-1} - a^\frac{q}{q-1} = \frac{1}{p}a^p + \frac{1}{q}a^p - a^p = 0$\\
+  Dabei haben wir $\frac{1}{p} + \frac{1}{q} = 1$ benutzt.\\
+  Da $q>1$ gilt, ist $x^{q-1}$ eine streng monoton wachsende Funktion und es gilt $f'(x) < 0 $ für $x\in[0, x_0]$ sowie $f'(x) > 0$ für $x\in(x_0, \infty)$. Insbesondere ist f auf dem Intervall $[0,x_0)$ streng monoton fallend, auf dem Intervall $(x_0, \infty)$ streng monoton wachsend und die Funktion f nimmt an der Stelle $x_0$ ihr globales Minimum an. Für eine beliebige positive reelle Zahl $b\geq 0$ folgt:\\
+  $\frac{1}{p}a^p + \frac{1}{q}b^q -ab = f(b) \geq f(x_0) = 0$\\
+  und dies ist genau die Young'sche Ungleichung
+\end{subbox}
+
+\begin{subbox}{Riemann Integral}
+  Zeige, dass $f:[0,1] \to \R$ integrierbar ist:
+  \begin{equation*}
+    f(x) =
+    \begin{cases*}
+      0 & $x=0$ oder $x\in\R \backslash \mathbb{Q}$\\
+      \frac{1}{q} & $x=\frac{p}{q}$ mit p,q$\in \mathbb{N}_{>0}$ teilerfremd.
+    \end{cases*}
+  \end{equation*}
+
+  Wenn u eine Treppenfunktion mit $u \leq f$ ist, dann gilt $\int_{a}^{b}u\,dx\leq 0$. Insbesondere $u =0\leq f$, $\int_{a}^{b}u \, dx = 0$. Die obere Schranke ist erreicht und dann erhalten wir $sup s(f) = 0$. Wir möchten $inf S(g) = 0$ beweisen. Dies genügt uns zu beweisen, dass f Riemann-integrierbar ist.\\
+  
+  Sei $\epsilon > 0$. Es gibt $n \in \N$ mit $\frac{1}{n} < \epsilon$. Wenn $x\in [0,1]$ mit $f(x)\geq \epsilon$ ist, dann gibt es höchstens $\sum_{k =1}^{n-1} k\leq \frac{n^2}{2}$ Werte x. Wir nennen diese Werte \textbf{schlechte Punkte}, und sonst \textbf{gute Punkte}. Sei $0 =  x_0 < x_1 < ... < x_N = 1$ eine Zerlegung wobei $N > \frac{n^2}{\epsilon}$. Diese Zerlegung ist gegeben durch $x_k \frac{k}{N}$. Zudem gilt $x_{k+1} - x_k = \frac{1}{N}$. Wir setzen: 
+  \begin{equation*}
+    v_N(x) = 
+    \begin{cases*}
+      1 & x slechter Punkt\\
+      \epsilon & x guter Punkt
+    \end{cases*}
+  \end{equation*}
+
+  Somit ist $\int_{a}^{b}v_N\, dx \leq n^2 \frac{1}{N} + N\epsilon\frac{1}{N} = \frac{n^2}{N} + e \leq 2\epsilon$. Ausserdem haben wir $v_n \geq f$. Wir erhalten:\\
+  $0 = sup s(f) \leq inf S(f) \leq 2\epsilon$.\\
+  Weil $\epsilon > 0$ beliebig ist, schliessen wir dass f Riemann-integrierbar ist und $\int_{0}^{1} f \, dx = 0$
+\end{subbox}
+
+\end{document}
