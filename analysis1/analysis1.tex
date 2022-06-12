@@ -92,7 +92,10 @@
 
 \section{Folgen}
 \subsection{Konvergenz}
-Eine Folge $(a_n)_{n\in \mathbb{N}}$ konvergiert gegen L \\ $\iff \lim_{n \to \infty} a_n = L $ \\ $\iff \forall \epsilon > 0 \ \exists N_e \ \forall n \ge N_\epsilon : \ | a_n - L | < e$\\
+Eine Folge $(a_n)_{n\in \mathbb{N}}$ konvergiert gegen L \\
+ $\iff \lim_{n \to \infty} a_n = L $ \\ 
+ $\iff \forall \epsilon > 0 \ \exists N_\epsilon \ \forall n \ge N_\epsilon : \ | a_n - L | < \epsilon$\\
+ $\iff \forall \epsilon > 0\text{ gilt }\{ n\in\mathbb{N}:a_n\notin ]L-\epsilon,L+\epsilon[ \} \neq \emptyset $\\
 
 Wir dürfen (o.B.d.A.) annehmen, dass $\epsilon$ durch eine Konstante $C \in \R$ beschränkt ist.
 Es gilt ausserdem:
@@ -118,7 +121,7 @@ Wenn $a_n$ monoton fallend und nach unten beschränkt ist, dann konvergiert $a_n
 \end{mainbox}
 
 \begin{mainbox}{Cauchy-Kriterium}
-Die Folge $a_n$ ist genau dann konvergent, falls $\forall e > 0 \ \exists N \ge 1$ so dass $| a_n - a_m | < \epsilon \quad \forall n,m \ge N$.
+Die Folge $a_n$ ist genau dann konvergent, falls $\forall \epsilon > 0 \ \exists N \ge 1$ so dass $| a_n - a_m | < \epsilon \quad \forall n,m \ge N$.
 \end{mainbox}
 
 \subsubsection{Teilfolge}
@@ -138,7 +141,6 @@ Jede beschränkte Folge besitzt eine konvergente Teilfolge.
  \item Limit per Definition der Konvergenz zeigen.
  \item Anwendung des Cauchy-Kriteriums.
  \item Suchen eines konvergenten Majorant.
- \item Weinen und die Aufgabe überspringen.
 \end{enumerate}
 
 \subsection{Strategie - Divergenz von Folgen}
@@ -203,7 +205,7 @@ $\sumk a_k$ heisst \textbf{absolut konvergent}, wenn $\sumk |a_k|$ konvergiert. 
 
 Falls eine Reihe absolut konvergiert, dann konvergiert jede Umordnung der Reihe mit dem selben Grenzwert.
 
-Falls die Reihe hingegen nur konvergiert, so gibt es immer eine Anordnung, so dass $\sum_{k=1}^\infty a_{\phi(k)} = x, \ \forall x\in \R$.
+Falls die Reihe hingegen nur konvergiert, kann es immer eine Anordnung geben, so dass $\sum_{k=1}^\infty a_{\phi(k)} = x, \ \forall x\in \R$.
 
 \begin{subbox}{Leibnizkriterium}
 Wenn $a_n \ge 0, \ \forall n \ge 1$ monoton fallend ist und $\limn a_n = 0$ gilt, dann konvergiert $S = \sumk (-1)^{k+1} a_k$ und $a_1 - a_2 \le S \le a_1$.
@@ -234,7 +236,7 @@ Sei $(a_n)$ eine Folge mit $a_n \ne 0, \forall n \ge 1$. Sei $q = \limn \sup \sq
 \subsection{Cauchy-Produkt}
 \begin{subbox}{Definition Cauchy-Produkt}
   Das Cauchy-Produkt von zwei Reihen $\sum_{i = 0}^\infty a_i$ und $\sum_{j = 0}^\infty b_j$ ist definiert als
-  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + \ldots$$ Es konvergiert, falls beide Reihen konvergieren.
+  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + \ldots$$ Es konvergiert, falls beide Reihen absolut konvergieren.
 \end{subbox}
 
 \subsection{Strategie - Konvergenz von Reihen}
@@ -254,7 +256,8 @@ Sei $f : D \to \R^d, x \to f(x)$ eine Funktion in $D \subseteq \R^d$.
  $f$ ist in $x_0 \in D$ stetig, falls $\lim_{x\to x_0} f(x) = f(x_0)$.
  $f$ ist stetig, falls sie in jedem $x_0 \in D$ stetig ist.
 \end{mainbox}
-Polynomiale Funktionen sind auf $\R$ stetig.
+
+$f$ ist genau dann in $x_0$ stetig, falls für jede Folge \par $(a_n)_{n\geq 1}, \limn a_n = x_0 \Rightarrow \limn f(a_n) = f(x_0)$ gilt. Polynome sind auf $\R$ stetig.
 \begin{subbox}{}
  Falls $f$ und $g$ den gleichen Definitions-/Bildbereich haben und in $x_0$ stetig sind, dann sind auch $$f + g, \lambda \cdot f, f \cdot g, \frac{f}{g}, |f|, \max(f,g), \min(f,g)$$ stetig in $x_0$.
 \end{subbox}
@@ -275,7 +278,7 @@ Ein Intervall $I \in \R$ ist kompakt, falls es von der Form $I = [a,b]$ mit $a \
 \end{mainbox}
 
 \begin{subbox}{Stetigkeit der Verknüpfung}
- Sei $f: D_1 \to D_2, g: D_2 \to \R$ und $x_0 \in D_1$. Falls $f$ in $x_0$ und $g$ in $f(x_0)$ stetig ist, dann ist $g \ocircle f: D_1 \to \R$ in $x_0$ stetig.
+ Sei $f: D_1 \to D_2, g: D_2 \to \R$ und $x_0 \in D_1$. Falls $f$ in $x_0$ und $g$ in $f(x_0)$ stetig ist, dann ist $g \circ f: D_1 \to \R$ in $x_0$ stetig.
 \end{subbox}
 
 \begin{mainbox}{Satz über die Umkehrabbildung}
@@ -351,11 +354,11 @@ Dann gilt $\phi(x_0) = f'(x_0)$.
 \begin{mainbox}{Höhere Ableitungen}
  \begin{enumerate}
   \item Für $n \ge 2$ ist $f$ n-mal differenzierbar in $D$ falls $f^{(n-1)}$ in $D$ differenzierbar ist. Dann ist $f^{(n)} = (f^{(n-1)})'$ die n-te Ableitung von $f$.
-  \item $f$ ist n-mal stetig differenzierbar in $D$, falls sie n-mal differnzierbar und $f^{(n)}$ in $D$ stetig ist.
+  \item $f$ ist n-mal stetig differenzierbar in $D$, falls sie n-mal differenzierbar und $f^{(n)}$ in $D$ stetig ist.
   \item $f$ ist in $D$ glatt, falls sie $\forall n \ge 1$ n-mal differenzierbar ist (``unendlich differenzierbar'').
  \end{enumerate}
 \end{mainbox}
-Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \arccos, \text{arccot}, \arctan$ und alle Polynome. $\tan$ ist auf $\R \backslash \{\pi/2 + k\pi\}$, $\cot$ auf $\R \backslash \{k\pi\}$ glatt.
+Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \arccos, \text{arccot}, \arctan$ und alle Polynome. $\tan$ ist auf $\R \backslash \{\pi/2 + k\pi\}$, $\cot$ auf $\R \backslash \{k\pi\}$ glatt. Die Komposition von glatten Funktionen ist glatt.
 
 \subsection{Ableitungsregeln}
 
@@ -406,7 +409,7 @@ Taylorreihen sind ein Weg, glatte Funktionen als Potenzreihen anzunähern.
  $$Tf(x;a) := T_\infty = \sumn \frac{f^{(n)}(a)}{n!} \cdot (x-a)^n$$
  wird Taylorreihe von $f$ an Stelle $a$ genannt.
 \end{mainbox}
-Beispiele Taylorreihen ($a = 0$):
+Beispiele Taylorreihen ($a = 0$, ausser für \ln):
 \begin{itemize}
  \item $\sin(x) = \sumn (-1)^n \cdot \frac{x^{2n+1}}{(2n+1)!}$
  \item $\cos(x) = \sumn (-1)^n \cdot \frac{x^{2n}}{(2n)!}$
@@ -414,6 +417,8 @@ Beispiele Taylorreihen ($a = 0$):
  \item $e^{-x} = \sumn (-1)^n \cdot \frac{x^n}{n!}$
  \item $\sinh(x) = \sumn \frac{x^{2n+1}}{(2n+1)!}$
  \item $\cosh(x) = \sumn \frac{x^{2n}}{(2n)!}$
+ \item $\ln(1 + x) = \sumk (-1)^{k+1} \frac{x^{k}}{k}$
+ \item $\arctan(x) = \sumn (-1)^n \frac{x^{2n+1}}{2n+1}$
 \end{itemize}
 
 \subsection{Länge einer Kurve}
@@ -747,6 +752,8 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   $\arcsin(x)$ & $\frac{1}{\sqrt{1 - x^2}}$ \\
   $\arccos(x)$ & $\frac{-1}{\sqrt{1 - x^2}}$ \\
   $\arctan(x)$ & $\frac{1}{1 + x^2}$ \\ 
+  $\text{arsinh}(x)$ & $\frac{1}{\sqrt{1 + x^2}}$ \\
+  $\text{arcosh}(x)$ & $\frac{1}{\sqrt{x^2 - 1}}$ \\
   $x^x \ (x > 0)$ & $x^x \cdot (1 + \ln x)$ \\
   \bottomrule
   \end{tabularx}
