@@ -267,7 +267,7 @@ $\sumk b_k$ ist eine \textbf{lineare Anordnung} der Doppelreihe $\Sigma_{i,j \ge
 \subsection{Stetigkeit}
 Sei $f : D \to \R^d, x \to f(x)$ eine Funktion in $D \subseteq \R^d$.
 \begin{mainbox}{Definition Stetigkeit}
- $f$ ist in $x_0 \in D$ stetig, falls $\lim_{x\to x_0} f(x) = f(x_0)$.
+ $f$ ist in $x_0 \in D$ stetig gdw. $\lim_{x\to x_0} f(x) = f(x_0)$.
  $f$ ist stetig, falls sie in jedem $x_0 \in D$ stetig ist.
 \end{mainbox}
 
@@ -343,8 +343,6 @@ Gleichmässige Konvergenz bewahrt Stetigkeit.
 \end{mainbox}
 Die Potenzreihe $\sum_{k=0}^\infty c_n x^n$ konvergiert absolut und gleichmässig für alle $|x| < r$ und divergiert für alle $|x| > r$. Der Fall $|x| = r$ ist unklar und muss geprüft werden.
 
-
-
 \subsubsection{Definitionen per Potenzreihen}
 \begin{align*}
 \exp(x) &= \sumn \frac{x^n}{n!} & r &= \infty \\
@@ -366,6 +364,8 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
  Wenn $f: D \to \R, x_0 \in \R$ ein Häufungspunkt von $D$ ist, dann ist $A \in \R$ der Grenzwert von $f(x)$ für $x \to x_0$ ($\lim_{x\to x_0} f(x) = A$), falls $\forall \epsilon > 0 \ \exists \delta > 0$, so dass $\forall x \in D \cap (]x_0 - \delta, x_0 + \delta[ \backslash \{x_0\}): |f(x) - A| < \epsilon$.
 \end{mainbox}
 
+$\lim_{x \rightarrow x_0} f(x) = A$ gdw. für jede Folge $(a_n)_{n \geq 1}$ in $D \setminus \{x_0\}$ mit $\limn a_n = x_0$ folgt $\limn f(a_n) = A$.
+
 \begin{subbox}{Satz von L'Hôpital}
   Seien $f,g$ stetig und differenzierbar auf $]a,b[$. Wenn $\lim_{x\to c} f(x) = \lim_{x \to c} g(x) = 0$ oder $\pm \infty$ und $g'(x) \ne 0 \ \forall x \in I \backslash \{c\}$, dann gilt $$\lim_{x\to c} \frac{f(x)}{g(x)} = \lim_{x\to c}\frac{f'(x)}{g'(x)}$$
 \end{subbox}
@@ -375,7 +375,7 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
 \section{Ableitungen}
 \subsection{Differenzierbarkeit}
 \begin{mainbox}{Differenzierbar}
- $f$ ist \textbf{in $x_0$ differenzierbar}, falls der Grenzwert $\lim_{x\to x_0} \frac{f(x) - f(x_0)}{x - x_0}$ existiert. Wenn dies der Fall ist, wird der Grenzwert mit $f'(x_0)$ bezeichnet. $f$ ist \textbf{differenzierbar}, falls $f$ für jedes $x_0 \in D$ differenzierbar ist.
+ $f$ ist \textbf{in $x_0$ differenzierbar}, falls der Grenzwert $\lim_{x\to x_0} \frac{f(x) - f(x_0)}{x - x_0}$ bzw. $\lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}$ existiert. Wenn dies der Fall ist, wird der Grenzwert mit $f'(x_0)$ bezeichnet. $f$ ist \textbf{differenzierbar}, falls $f$ für jedes $x_0 \in D$ differenzierbar ist.
 \end{mainbox}
 \begin{subbox}{Differenzierbarkeit nach Weierstrass}
  $f$ ist in $x_0$ differenzierbar $\iff$ \\
@@ -392,7 +392,7 @@ Dann gilt $\phi(x_0) = f'(x_0)$.
   \item $f$ ist in $D$ glatt, falls sie $\forall n \ge 1$ n-mal differenzierbar ist (``unendlich differenzierbar'').
  \end{enumerate}
 \end{mainbox}
-Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \arccos, \text{arccot}, \arctan$ und alle Polynome. $\tan$ ist auf $\R \backslash \{\pi/2 + k\pi\}$, $\cot$ auf $\R \backslash \{k\pi\}$ glatt. Die Komposition von glatten Funktionen ist glatt.
+Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \arccos, \text{arccot}, \arctan$ und alle Polynome. $\tan$ ist auf $\R \backslash \{\pi/2 + k\pi\}$, $\cot$ auf $\R \backslash \{k\pi\}$ glatt. Die Komposition von glatten Funktionen ist glatt. Es folgt, dass eine $n$-mal differenzierbare Funktion $(n-1)$-mal stetig differenzierbar ist.
 
 \subsection{Ableitungsregeln}
 
@@ -416,14 +416,17 @@ Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \a
 
 \subsection{Implikationen der Ableitung}
 \begin{enumerate}
-  \item $f$ besitzt ein lokales Minimum in $x_0$, wenn $f'(x_0) = 0$ und $f''(x_0) > 0$ oder falls das Vorzeichen von $f'$ um $x_0$ von $-$ zu $+$ wechselt.
-  \item $f$ besitzt ein lokales Maximum in $x_0$, wenn $f'(x_0) = 0$ und $f''(x_0) < 0$ oder falls das Vorzeichen von $f'$ um $x_0$ von $+$ zu $-$ wechselt.
-  \item $f$ besitzt ein lokales Extremum in $x_0$, wenn $f'(x_0) = 0$ und $f''(x_0) \ne 0$.
+  \item $f$ besitzt ein lokales Minimum in $x_0$, wenn $f'(x_0) = 0$ und $f''(x_0) > 0$ oder falls das Vorzeichen von $f'$ um $x_0$ von $-$ zu $+$ wechselt. Alternativ $f^{(n)}(x_0) > 0$ für $n$ gerade.
+  \item $f$ besitzt ein lokales Maximum in $x_0$, wenn $f'(x_0) = 0$ und $f''(x_0) < 0$ oder falls das Vorzeichen von $f'$ um $x_0$ von $+$ zu $-$ wechselt. Alternativ $f^{(n)}(x_0) < 0$ für $n$ gerade.
+  \item $f$ besitzt ein lokales Extremum in $x_0$, wenn $f'(x_0) = 0$ und $f''(x_0) \ne 0$ bzw. $f^{(n)}(x_0) \neq 0$ für $n$ gerade.
   \item $f$ besitzt einen Sattelpunkt in $x_0$, wenn $f'(x_0) = 0$ und $f''(x_0) = 0$.
   \item $f$ besitzt einen Wendepunkt in $x_0$, wenn $f''(x_0) = 0$.
   \item $f$ ist in $x_0$ konvex, wenn $f''(x_0) \ge 0$.
   \item $f$ ist in $x_0$ konkav, wenn $f''(x_0) \le 0$.
 \end{enumerate}
+
+Falls $f'(x_0) = 0$ und $f^{(n)}(x_0) < 0$ für $n$ gerade, dann ist $x_0$ ein Maximum.\\
+Falls $f'(x_0) = 0$ und $f^{(n)}(x_0) > 0$ für $n$ gerade, dann ist $x_0$ ein Minimum.
 
 \subsection{Sätze zur Ableitung}
 \begin{subbox}{Satz von Rolle}
@@ -434,20 +437,15 @@ Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \a
  \includegraphics[width=\linewidth]{mittelwertsatz.png}
 \end{mainbox}
 
+\begin{subbox}{Cauchy - Verallgemeinerung Lagrange}
+  Seien $f, g: [a, b] \to \mathbb{R}$ stetig und in $]a, b[$ differenzierbar. Dann gibt es $\xi \in ]a, b[$ mit $g'(\xi)(f(b) - f(a)) = f'(\xi)(g(b) - g(a))$. Falls $g'(x) \neq 0 \ \forall x \in ]a, b[$ folgt $g(a) \neq g(b)$ und $\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(\xi)}{g'(\xi)}$.
+\end{subbox}
+
 \subsection{Konvexe Funktionen}
 \begin{mainbox}{Definition von Konvexität}
   f ist \textbf{konvex} (auf I) falls für alle $x \leq y,\, x,y\in I$ und $\lambda \in [0,1]$ \[f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda)f(y)\] gilt. Verwende $<$ für \textbf{streng konvex}.
 \end{mainbox}
-Sei $f: I \to \R$ eine Funktion. Sie ist genau dann konvex, falls für alle $x_0 < x < x_1$ in $I$ \[\frac{f(x)-f(x_0)}{x-x_0}\leq \frac{f(x_1)-f(x)}{x_1-x}\] gilt. Sei $f:]a,b[ \to \R$ in $]a,b[$ differenzierbar. Die Funktion ist genau dann (streng) konvex falls $f'$ (streng) monoton wachsend ist.
-
-\subsection{Höhere Ableitungen}
-\begin{mainbox}{n-mal Differenzieren}
-  Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
-  \begin{enumerate}[leftmargin=*]
-    \item $(f+g)^{(n)} = f^{(n)} + g^{(n)}$
-    \item $(f\cdot g)^{(n)} = \sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$ 
-  \end{enumerate}
-\end{mainbox}
+Sei $f: I \to \R$ eine Funktion. Sie ist genau dann konvex, falls für alle $x_0 < x < x_1$ in $I$ \[\frac{f(x)-f(x_0)}{x-x_0}\leq \frac{f(x_1)-f(x)}{x_1-x}\] gilt. Sei $f:]a,b[ \to \R$ in $]a,b[$ differenzierbar. Die Funktion ist genau dann (streng) konvex falls $f'$ (streng) monoton wachsend ist. Die Funktion ist genau dann (streng) konkav falls $f'$ (streng) monoton fallend ist. Die Summe konvexer Funktionen ist konvex.
 
 \subsection{Taylorreihen}
 Taylorreihen sind ein Weg, glatte Funktionen als Potenzreihen anzunähern.
@@ -457,12 +455,19 @@ Taylorreihen sind ein Weg, glatte Funktionen als Potenzreihen anzunähern.
  $$T_n f(x; a) := \sum_{k=0}^{n} \frac{f^{(k)} (a)}{k!} \cdot (x - a)^k$$ 
  $ = f(a) + f'(a) \cdot (x-a) + \frac{f''(a)}{2} \cdot (x - a)^2 + \ldots$
 \end{subbox}
-
 \begin{mainbox}{Taylorreihe}
  Die unendliche Reihe
  $$Tf(x;a) := T_\infty = \sumn \frac{f^{(n)}(a)}{n!} \cdot (x-a)^n$$
  wird Taylorreihe von $f$ an Stelle $a$ genannt.
 \end{mainbox}
+\begin{subbox}{Taylor Approximation}
+  Sei $f: [a, b] \to \mathbb{R}$ stetig und in $]a, b[$ $(n+1)$-mal differenzierbar. Für jedes $a < x \leq b$ gibt es $\xi \in ]a, x[$ mit:\\
+  $$f(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!} (x - a)^k + \frac{f^{(n+1)}(\xi)}{(n + 1)!} (x - a)^{n + 1}$$
+\end{subbox}
+\begin{subbox}{Differenzierbarkeit von Funktionenfolgen}
+  Sei $f_n: ]a, b[ \to \mathbb{R}$ einmal stetig differenzierbar $\forall n \geq 1$. Falls $(f_n)_{n \geq 1}$ und $(f_n')_{n \geq 1}$ gleichmässig konvergieren mit $f := \limn f_n$ und $p := \limn f_n'$, dann gilt $f' = p$.  
+\end{subbox}
+Innerhalb ihres Konvergenzradius sind Potenzreihen glatt und gliedweise differenzierbar.
 
 \subsection{Länge einer Kurve}
 Für eine Kurve $p(t) = (x(t), y(t))$ in der $xy$-Ebene gilt 
@@ -651,6 +656,12 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   \item $\cot(x) = \frac{1}{\tan(x)}$
   \item $\sec(x) = \frac{1}{\cos(x)}$
   \item $\csc(x) = \frac{1}{\sin(x)}$
+\end{itemize}
+
+\subsection{Hyperbolische Funktionen}
+\begin{itemize}
+  \item $\sinh(x) = \frac{e^x - e^{-x}}{2}$
+  \item $\cosh(x) = \frac{e^x + e^{-x}}{2}$
 \end{itemize}
 
 \subsection{Regeln}
@@ -851,7 +862,8 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   $\arctan(x)$ & $\frac{1}{1 + x^2}$ \\ 
   $\text{arsinh}(x)$ & $\frac{1}{\sqrt{1 + x^2}}$ \\
   $\text{arcosh}(x)$ & $\frac{1}{\sqrt{x^2 - 1}}$ \\
-  $\text{arctanh}(x)$ & $\frac{1}{\sqrt{1 - x^2}}$ \\
+  $\text{artanh}(x)$ & $\frac{1}{1 - x^2}$ \\
+  $\text{arccot}(x)$ & $-\frac{1}{1 + x^2}$ \\
   $x^x \ (x > 0)$ & $x^x \cdot (1 + \ln x)$ \\
   \bottomrule
   \end{tabularx}
@@ -861,6 +873,11 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
 n-te Ableitung von $\sin(x)$:
 \begin{center}
   $\sin^{(n)}(x) = \sin(\frac{n\pi}{2} + x)$
+\end{center}\\
+Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
+\begin{center}
+  $(f+g)^{(n)} = f^{(n)} + g^{(n)}$\\
+  $(f\cdot g)^{(n)} = \sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$ 
 \end{center}
 
 \subsection{Ungleichungen}
