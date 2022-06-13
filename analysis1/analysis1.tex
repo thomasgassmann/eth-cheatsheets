@@ -320,7 +320,11 @@ Die Potenzreihe $\sum_{k=0}^\infty a_n x^n$ konvergiert absolut für alle $|x| <
 \exp(x) &= \sumn \frac{x^n}{n!} & r &= \infty \\
 \sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} & r &= \infty \\
 \cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} & r &= \infty \\
-\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} & r &= 1
+\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} & r &= 1 \\
+\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} & r &= \infty \\
+\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} & r &= \infty \\
+\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= \infty \\
+e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
 \end{align*}
 
 \subsection{Grenzwerte von Funktionen}
@@ -375,6 +379,11 @@ Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \a
   $$(c \cdot x^a)' = c \cdot a \cdot x^{a - 1}$$
 \end{itemize}
 
+\begin{subbox}{Inverse mit Ableitung}
+  Sei $f: D\to E$ eine bijektive Funktion, $x_0 \in D$ Häufungspunkt. Wir nehmen an f ist in $x_0$ differenzierbar und $f'(x_0) \neq 0$; zudem nehmen wir an $f^{-1}$ ist in $y_0 = f(x_0)$ stetig. Dann ist $y_0$ Häufungspunkt von E, $f^{-1}$ ist in $y_0$ differenzierbar und:\\ 
+  \center{$(f^{-1})(y_0) = \frac{1}{f'(x_0)} = \frac{1}{f'(f^{-1}(y_0))}$}
+\end{subbox}
+
 \subsection{Implikationen der Ableitung}
 \begin{enumerate}
   \item $f$ besitzt ein lokales Minimum in $x_0$, wenn $f'(x_0) = 0$ und $f''(x_0) > 0$ oder falls das Vorzeichen von $f'$ um $x_0$ von $-$ zu $+$ wechselt.
@@ -395,6 +404,21 @@ Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \a
  \includegraphics[width=\linewidth]{mittelwertsatz.png}
 \end{mainbox}
 
+\subsection{Konvexe Funktionen}
+\begin{mainbox}{Definition von Konvexität}
+  f ist \textbf{konvex} (auf I) falls für alle $x \leq y,\, x,y\in I$ und $\lambda \in [0,1]$ \[f(\lambda x + (1-\lambda)y) \leq \lambda f(x) + (1-\lambda)f(y)\] gilt. Verwende $<$ für \textbf{streng konvex}.
+\end{mainbox}
+Sei $f: I \to \R$ eine Funktion. Sie ist genau dann konvex, falls für alle $x_0 < x < x_1$ in $I$ \[\frac{f(x)-f(x_0)}{x-x_0}\leq \frac{f(x_1)-f(x)}{x_1-x}\] gilt. Sei $f:]a,b[ \to \R$ in $]a,b[$ differenzierbar. Die Funktion ist genau dann (streng) konvex falls $f'$ (streng) monoton wachsend ist.
+
+\subsection{Höhere Ableitungen}
+\begin{mainbox}{n-mal Differenzieren}
+  Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
+  \begin{enumerate}[leftmargin=*]
+    \item $(f+g)^{(n)} = f^{(n)} + g^{(n)}$
+    \item $(f\cdot g)^{(n)} = \sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$ 
+  \end{enumerate}
+\end{mainbox}
+
 \subsection{Taylorreihen}
 Taylorreihen sind ein Weg, glatte Funktionen als Potenzreihen anzunähern.
 
@@ -409,17 +433,6 @@ Taylorreihen sind ein Weg, glatte Funktionen als Potenzreihen anzunähern.
  $$Tf(x;a) := T_\infty = \sumn \frac{f^{(n)}(a)}{n!} \cdot (x-a)^n$$
  wird Taylorreihe von $f$ an Stelle $a$ genannt.
 \end{mainbox}
-Beispiele Taylorreihen ($a = 0$, ausser für \ln):
-\begin{itemize}
- \item $\sin(x) = \sumn (-1)^n \cdot \frac{x^{2n+1}}{(2n+1)!}$
- \item $\cos(x) = \sumn (-1)^n \cdot \frac{x^{2n}}{(2n)!}$
- \item $e^x = \sumn \frac{x^n}{n!}$
- \item $e^{-x} = \sumn (-1)^n \cdot \frac{x^n}{n!}$
- \item $\sinh(x) = \sumn \frac{x^{2n+1}}{(2n+1)!}$
- \item $\cosh(x) = \sumn \frac{x^{2n}}{(2n)!}$
- \item $\ln(1 + x) = \sumk (-1)^{k+1} \frac{x^{k}}{k}$
- \item $\arctan(x) = \sumn (-1)^n \frac{x^{2n+1}}{2n+1}$
-\end{itemize}
 
 \subsection{Länge einer Kurve}
 Für eine Kurve $p(t) = (x(t), y(t))$ in der $xy$-Ebene gilt 
@@ -434,11 +447,11 @@ $$L = \int_a^b \sqrt{x'(t)^2+ y'(t)^2} \text{ d}t$$
  $$S(f, P, \xi) := \sum_{i=1}^n f(\xi_i) \cdot (x_i - x_{i-1})$$
 \end{mainbox}
 \begin{subbox}{Ober- und Untersumme}
- Obersumme: $\overline{S}(f,P) := \sup_{\xi \in I_i} f(\xi) \cdot (x_i - x_{i-1})$ \\
- Untersumme: $\underline{S}(f,P) := \inf_{\xi \in I_i} f(\xi) \cdot (x_i - x_{i-1})$
+ $\overline{S}(f,P) := \Sigma_{i=1}^{n} \sup_{x_{i-1} \leq x \leq x_i} f(x) \cdot (x_i - x_{i-1})$ \\
+ $\underline{S}(f,P) := \Sigma_{i=1}^{n} \inf_{x_{i-1} \leq x \leq x_i} f(x) \cdot (x_i - x_{i-1})$
 \end{subbox}
 \begin{mainbox}{Riemann-integrierbar}
- $f:[a,b] \to \R$ ist Riemann-integrierbar, falls $\sup_{p_1} \underline{S}(f,P_1) = \inf_{p_2}\overline{S}(f, P_2)$, also falls Obersumme gleich Untersumme wird, wenn die Partition feiner wird. Dann ist $A := \int_a^b f(x)\dx$.
+ $f:[a,b] \to \R$ ist Riemann-integrierbar, falls $\sup_{P \in \mathcal{P}(I)} \underline{S}(f,P) = \inf_{P \in \mathcal{P}(I)}\overline{S}(f, P_2)$, also falls Obersumme gleich Untersumme wird, wenn die Partition feiner wird. Dann ist $A := \int_a^b f(x)\dx$.
 \end{mainbox}
 
 \subsection{Integrierbarkeit zeigen}
@@ -449,6 +462,11 @@ $$L = \int_a^b \sqrt{x'(t)^2+ y'(t)^2} \text{ d}t$$
  $$f+g, \lambda \cdot f, f \cdot g, |f|, \max(f,g), \min(f,g), \frac{f}{g}$$ integrierbar
  \item Jedes Polynom ist integrierbar, auch $\frac{P(x)}{Q(x)}$ falls $Q(x)$ in $[a,b]$ keine Nullstellen besitzt
 \end{itemize}
+
+\begin{mainbox}{Satz Du Bois-Reymond, Darboux}
+  Eine beschränkte Funktion $f: [a,b] \to \R$ ist genau dann Integrierbar falls $\forall \epsilon > 0 \, \exists \delta > 0$ so dass\\
+  $\forall P \in \mathcal{P}_\delta(I), \, \overline{S}(f,P) - \underline{S}(f, P) < \epsilon$.
+\end{mainbox}
 
 \subsection{Sätze \& Ungleichungen}
 \begin{itemize}
@@ -499,23 +517,22 @@ $$
  \item Muss eventuell mehrmals angewendet werden
 \end{itemize}
 \begin{mainbox}{Substitution}
- Um $\int_a^b f(g(x)) \dx$ zu berechnen: Ersetze $g(x)$ durch $u$ und integriere $\int_{g(a)}^{g(b)} f(u) \frac{\text{d}u}{g'(x)}$.
+ Um $\int_a^b f(g(x))g'(x) \dx$ zu berechnen: Ersetze $g(x)$ durch $u$ und integriere $\int_{g(a)}^{g(b)} f(u) \text{d}u$.
 \end{mainbox}
 \begin{itemize}
- \item $g'(x)$ muss sich irgendwie herauskürzen, sonst nutzlos.
  \item Grenzen substituieren nicht vergessen.
  \item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
 \end{itemize}
 
 \begin{mainbox}{Partialbruchzerlegung}
- Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)}$ wird wie folgend berechnet:
+ Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)} dx$ wird wie folgend berechnet:
  \begin{enumerate}
-  \item Falls $\deg(p) \ge \deg(q)$, führe eine Polynomdivision durch. Dies führt zum Integral $\int a(x) + \frac{r(x)}{q(x)}$.
+  \item Falls $\deg(p) \ge \deg(q)$, führe eine Polynomdivision durch. Dies führt zum Integral $\int (a(x) + \frac{r(x)}{q(x)})dx$.
   \item Berechne die Nullstellen von $q(x)$.
   \item Pro Nullstelle: Einen Partialbruch erstellen.
   \begin{itemize}[left=0pt]
    \item Einfach, reell: $x_1 \to \frac{A}{x - x_1}$
-   \item $n$-fach, reell: $x_1 \to \frac{A_1}{x - x_1} + \ldots + \frac{A_r}{(x-x_1)^r}$ 
+   \item $r$-fach, reell: $x_1 \to \frac{A_1}{x - x_1} + \ldots + \frac{A_r}{(x-x_1)^r}$ 
    \item Einfach, komplex: $x^2 + px + q \to \frac{Ax + B} {x^2 + px + q}$
    \item $n$-fach, komplex: $x^2 + px + q \to \frac{A_1x+b_1}{x^2+px+q} + \ldots$
   \end{itemize}
@@ -567,9 +584,10 @@ Hier ein paar Bernoulli-Polynome: $B_0(x) = 1$, $B_1(x) = x - \frac{1}{2}$, $B_2
 
 \subsection{Gamma-Funktion}
 Die Gamma-Funktion wird gebraucht, um die Funktion $n \mapsto (n-1)!$ zu interpolieren. Für $s > 0$ definieren wir: $$\Gamma(s) := \int_0^\infty e^{-x}x^{s-1}\dx = (s-1)!$$
-Die Gamma-Funktion konvergiert für alle $s > 0$ und hat folgende weiter Eingeschaften:
+Die Gamma-Funktion konvergiert für alle $s > 0$ und hat folgende weiter Eigenschaften:
 \begin{enumerate}
   \item $\Gamma(1) = 1$
+  \item $\Gamma(\frac{1}{2}) = \sqrt{\pi}$
   \item $\Gamma(s + 1) = s \Gamma(s)$
   \item $\Gamma$ ist logarithmisch konvex, d.h.: $$\Gamma(\lambda x + (2 - \lambda)y) \leq \Gamma(x)^\lambda \Gamma(y)^{1 - \lambda}$$ für alle $x, y > 0$ und $0 \leq \lambda \leq 1$
 \end{enumerate}
@@ -715,7 +733,8 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
     \bottomrule
   \end{tabularx}
 \end{center}
-\subsection{Ableitungen}
+
+\subsection{Ableitungen (I)}
 \begin{center}
   % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
   \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
@@ -743,22 +762,8 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   \bottomrule
   \end{tabularx}
 \end{center}
-\subsection{Weitere Ableitungen}
-\begin{center}
-  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-  \toprule
-  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ \\
-  \midrule
-  $\arcsin(x)$ & $\frac{1}{\sqrt{1 - x^2}}$ \\
-  $\arccos(x)$ & $\frac{-1}{\sqrt{1 - x^2}}$ \\
-  $\arctan(x)$ & $\frac{1}{1 + x^2}$ \\ 
-  $\text{arsinh}(x)$ & $\frac{1}{\sqrt{1 + x^2}}$ \\
-  $\text{arcosh}(x)$ & $\frac{1}{\sqrt{x^2 - 1}}$ \\
-  $x^x \ (x > 0)$ & $x^x \cdot (1 + \ln x)$ \\
-  \bottomrule
-  \end{tabularx}
-\end{center}
-\subsection{Integrale}
+
+\subsection{Weitere Integrale}
 \begin{center}
  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
   \toprule
@@ -779,5 +784,58 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
  \end{tabularx}
 \end{center}
 
+\subsection{Ableitungen (II)}
+\begin{center}
+  % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
+  \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
+  \toprule
+  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ & $\mathbf{f'(x)}$ \\
+  \midrule
+  $\frac{1}{2}(\cosh(x)\sinh(x)+1)$ & $\cosh(x)^2$ & $2\sinh(x)\cosh(x)$\\
+  $\frac{1}{2}(\sinh(x)\cosh(x) + x)$ & $\sinh(x)^2$ & $2\sinh(x)\cosh(x)$\\
+  \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsection{Weitere Ableitungen}
+\begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ \\
+  \midrule
+  $\arcsin(x)$ & $\frac{1}{\sqrt{1 - x^2}}$ \\
+  $\arccos(x)$ & $\frac{-1}{\sqrt{1 - x^2}}$ \\
+  $\arctan(x)$ & $\frac{1}{1 + x^2}$ \\ 
+  $\text{arsinh}(x)$ & $\frac{1}{\sqrt{1 + x^2}}$ \\
+  $\text{arcosh}(x)$ & $\frac{1}{\sqrt{x^2 - 1}}$ \\
+  $\text{arctanh}(x)$ & $\frac{1}{\sqrt{1 - x^2}}$ \\
+  $x^x \ (x > 0)$ & $x^x \cdot (1 + \ln x)$ \\
+  \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsection{Ungleichungen}
+\begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+    $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \mathbb{N}, x > -1$\\
+    $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$\\
+  \end{tabularx}
+\end{center}
+
+\subsection{Trigonometrische Identitäten}
+\begin{center}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
+  \midrule
+  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
+  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
+  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
+  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
+  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
+  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
+  \bottomrule
+ \end{tabularx}
+\end{center}
 
 \end{document}
