@@ -83,12 +83,10 @@
 
 \begin{document}
 
-\begin{abstract}
-    \begin{center}
-        Lizenziert unter CC BY-SA 4.0. Für Urheber, Quellen und Lizenzinformationen, siehe:\\
-        \href{https://github.com/thomasgassmann/eth-summaries}{thomasgassmann/eth-summaries}
-    \end{center}
-\end{abstract}
+\begin{center}
+  Lizenziert unter CC BY-SA 4.0. Für Urheber, Quellen und Lizenzinformationen, siehe:\\
+  \href{https://github.com/thomasgassmann/eth-summaries}{thomasgassmann/eth-summaries}
+\end{center}
 
 \section{Folgen}
 \subsection{Konvergenz}
@@ -96,6 +94,8 @@ Eine Folge $(a_n)_{n\in \mathbb{N}}$ konvergiert gegen L \\
  $\iff \lim_{n \to \infty} a_n = L $ \\ 
  $\iff \forall \epsilon > 0 \ \exists N_\epsilon \ \forall n \ge N_\epsilon : \ | a_n - L | < \epsilon$\\
  $\iff \forall \epsilon > 0\text{ gilt }\{ n\in\mathbb{N}:a_n\notin ]L-\epsilon,L+\epsilon[ \} \neq \emptyset $\\
+
+Falls $a := (a_n)_{n \geq 1}$ und $b := (b_n)_{n \geq 1}$ konvergente Folgen sind, sind auch $(a_n + b_n)_{n \geq 1}$ sowie $(a_n \cdot b_n)_{n \geq 1}$ konvergent. Falls $b_n \neq 0$ $\forall n \geq 1$, ist auch $(\frac{a_n}{b_n})_{n \geq 1}$ konvergent.\\
 
 Wir dürfen (o.B.d.A.) annehmen, dass $\epsilon$ durch eine Konstante $C \in \R$ beschränkt ist.
 Es gilt ausserdem:
@@ -179,6 +179,7 @@ Die Reihe $\sumk a_k$ ist genau dann konvergent, falls $\forall \epsilon > 0 \ \
  Wenn für eine Folge $\limn |a_n| \ne 0$ ist, dann divergiert $\sumn a_n$.
 \end{subbox}
 
+Eine Reihe konvergiert genau dann, falls die Folge $(S_n)_{n \geq 1}$ mit $S_n := \Sigma_{k=1}^{n+1} a_k$ nach oben beschränkt ist.
 
 \subsubsection{Reihenarithmetik}
 Wenn $\sumk a_k$ und $\sumk b_k$ konvergent sind, dann gilt:
@@ -205,7 +206,7 @@ $\sumk a_k$ heisst \textbf{absolut konvergent}, wenn $\sumk |a_k|$ konvergiert. 
 
 Falls eine Reihe absolut konvergiert, dann konvergiert jede Umordnung der Reihe mit dem selben Grenzwert.
 
-Falls die Reihe hingegen nur konvergiert, kann es immer eine Anordnung geben, so dass $\sum_{k=1}^\infty a_{\phi(k)} = x, \ \forall x\in \R$.
+Falls die Reihe hingegen "nur" konvergiert, kann es immer eine Anordnung geben, so dass $\sum_{k=1}^\infty a_{\phi(k)} = x, \ \forall x\in \R$.
 
 \begin{subbox}{Leibnizkriterium}
 Wenn $a_n \ge 0, \ \forall n \ge 1$ monoton fallend ist und $\limn a_n = 0$ gilt, dann konvergiert $S = \sumk (-1)^{k+1} a_k$ und $a_1 - a_2 \le S \le a_1$.
@@ -234,17 +235,30 @@ Sei $(a_n)$ eine Folge mit $a_n \ne 0, \forall n \ge 1$. Sei $q = \limn \sup \sq
 \end{align*}
 
 \subsection{Cauchy-Produkt}
-\begin{subbox}{Definition Cauchy-Produkt}
-  Das Cauchy-Produkt von zwei Reihen $\sum_{i = 0}^\infty a_i$ und $\sum_{j = 0}^\infty b_j$ ist definiert als
-  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + \ldots$$ Es konvergiert, falls beide Reihen absolut konvergieren.
+$\sumk b_k$ ist eine \textbf{lineare Anordnung} der Doppelreihe $\Sigma_{i,j \geq 0} a_{i,j}$, falls es eine Bijektion $\sigma : \mathbb{N} \rightarrow \mathbb{N} \times \mathbb{N}$ gibt, mit $b_k = a_{\sigma(k)}$.\\
+
+\begin{subbox}{Konvergenz Doppelreihe}
+  Wenn es $B \geq 0$ gibt, so dass $\Sigma_{i=0}^m \Sigma_{j=0}^m |a_{ij}| \leq B$ $\forall m \geq 0$, dann konvergieren $S_i := \Sigma_{j=0}^\infty a_{ij}$ $\forall i \geq 0$ und $U_j := \Sigma_{i=0}^\infty a_{ij}$ $\forall j \geq 0$ sowie $\Sigma_{i=0}^\infty S_i$, $\Sigma_{j=0}^\infty U_j$ und es gilt $\Sigma_{i=0}^\infty S_i = \Sigma_{j=0}^\infty U_j$. Jede lineare Anordnung einer Doppelreihe konvergiert dann absolut mit demselben Grenzwert.
 \end{subbox}
+
+\begin{mainbox}{Cauchy-Produkt}
+  Das Cauchy-Produkt von zwei Reihen $\sum_{i = 0}^\infty a_i$ und $\sum_{j = 0}^\infty b_j$ ist definiert als
+  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + \ldots$$ Es konvergiert, falls beide Reihen absolut konvergieren. Dann gilt:\\
+  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = (\sum_{i=0}^\infty a_i) (\sum_{j=0}^\infty b_j)$$
+\end{mainbox}
+
+\begin{subbox}{Tauschbarkeit Summation / Limes}
+  Sei $f_n : \mathbb{N} \rightarrow \mathbb{R}$ eine Folge. Wenn $f(j) := \limn f_n(j)$ $\forall j \in \mathbb{N}$ existiert und $|f_n(j)| \leq g(j)$ für eine Funktion $g: \mathbb{N} \rightarrow \mathbb [0, \infty[$ und falls $\sum_{j=0}^\infty g(j)$ konvergiert, dann folgt $\sum_{j=0}^\infty f(j) = \limn \sum_{j=0}^\infty f_n(j)$.
+\end{subbox}
+
 
 \subsection{Strategie - Konvergenz von Reihen}
 \begin{enumerate}
  \item Ist Reihe ein bekannter Typ? (Teleskopieren, Geometrische/Harmonische Reihe, Zetafunktion, ...)
  \item Ist $\limn a_n = 0$? Wenn nein, divergent.
  \item Leibnizkriterium anwenden, falls alternierend
- \item Quotientenkriterium \& Wurzelkriterium anwenden
+ \item Quotientenkriterium für Exponentialfunktionen oder Fakultäten
+ \item Wurzelkriterium
  \item Vergleichssatz anwenden, Vergleichsreihen suchen, konvergente Majorante oder divergente Minorante
  \item Integral-Test anwenden (Reihe zu Integral)
 \end{enumerate}
@@ -829,6 +843,8 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
     $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \mathbb{N}, x > -1$\\
     $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$\\
+    $2|xy| \leq \epsilon x^2 + \frac{1}{\epsilon} y^2$ für $\forall \epsilon > 0$ und $\forall x,y \in \mathbb{R}$\\
+    $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$\\
   \end{tabularx}
 \end{center}
 

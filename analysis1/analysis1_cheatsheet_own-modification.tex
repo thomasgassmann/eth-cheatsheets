@@ -161,17 +161,6 @@
   \end{enumerate}
 \end{subbox}
 
-\begin{subbox}{Beweis Young'sche Ungleichung}
-  Seien $p,q > 1$ mit $\frac{1}{p}+\frac{1}{q} = 1$ gegeben. Zeige, dass für $a,b\geq 0$ die Ungleichung $ab\leq\frac{a^p}{p} + \frac{b^q}{q}$ gilt.\\
-  Definiere $f:[0, \infty]\to \R$ durch $f(x):= \frac{1}{p}a^p + \frac{1}{q}x^q - ax$\\
-  Die Ableitung ist gegeben durch $f'(x)= x^{q-1}-a$. Die Gleichung $f'(x) = 0$ hat die eindeutige Lösung $x_0 := a^\frac{1}{q-1}$\\
-  $f(x_0) = \frac{1}{p}a^p + \frac{1}{q}a^\frac{q}{q-1} - aa^\frac{1}{q-1} = \frac{1}{p}a^p + \frac{1}{q}a^\frac{q}{q-1} - a^\frac{q}{q-1} = \frac{1}{p}a^p + \frac{1}{q}a^p - a^p = 0$\\
-  Dabei haben wir $\frac{1}{p} + \frac{1}{q} = 1$ benutzt.\\
-  Da $q>1$ gilt, ist $x^{q-1}$ eine streng monoton wachsende Funktion und es gilt $f'(x) < 0 $ für $x\in[0, x_0]$ sowie $f'(x) > 0$ für $x\in(x_0, \infty)$. Insbesondere ist f auf dem Intervall $[0,x_0)$ streng monoton fallend, auf dem Intervall $(x_0, \infty)$ streng monoton wachsend und die Funktion f nimmt an der Stelle $x_0$ ihr globales Minimum an. Für eine beliebige positive reelle Zahl $b\geq 0$ folgt:\\
-  $\frac{1}{p}a^p + \frac{1}{q}b^q -ab = f(b) \geq f(x_0) = 0$\\
-  und dies ist genau die Young'sche Ungleichung
-\end{subbox}
-
 \begin{subbox}{Riemann Integral}
   Zeige, dass $f:[0,1] \to \R$ integrierbar ist:
   \begin{equation*}
