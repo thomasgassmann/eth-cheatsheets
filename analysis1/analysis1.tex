@@ -243,9 +243,9 @@ Sei $(a_n)$ eine Folge mit $a_n \ne 0, \forall n \ge 1$. Sei $q = \limn \sup \sq
 \begin{enumerate}
  \item Ist Reihe ein bekannter Typ? (Teleskopieren, Geometrische/Harmonische Reihe, Zetafunktion, ...)
  \item Ist $\limn a_n = 0$? Wenn nein, divergent.
+ \item Leibnizkriterium anwenden, falls alternierend
  \item Quotientenkriterium \& Wurzelkriterium anwenden
- \item Vergleichssatz anwenden, Vergleichsreihen suchen
- \item Leibnizkriterium anwenden
+ \item Vergleichssatz anwenden, Vergleichsreihen suchen, konvergente Majorante oder divergente Minorante
  \item Integral-Test anwenden (Reihe zu Integral)
 \end{enumerate}
 
@@ -616,6 +616,13 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
 
 \section{Trigonometrie}
 
+\subsection{Inverse}
+\begin{itemize}
+  \item $\cot(x) = \frac{1}{\tan(x)}$
+  \item $\sec(x) = \frac{1}{\cos(x)}$
+  \item $\csc(x) = \frac{1}{\sin(x)}$
+\end{itemize}
+
 \subsection{Regeln}
 \subsubsection{Periodizität}
 \begin{itemize}
@@ -780,6 +787,9 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   $\int \frac{1}{x^2+a^2} \dx$ & $\frac{1}{a} \arctan \frac{x}{a}$ \\
   $\int \frac{1}{x^2 - a^2} \dx$ & $\frac{1}{2a} \ln\left| \frac{x-a}{x+a} \right|$ \\
   $\int \sqrt{a^2+x^2} \dx $ & $\frac{x}{2}f(x) + \frac{a^2}{2}\ln(x+f(x))$ \\
+  $\int \csc(x) \dx $ & $\ln|\csc(x) + \cot(x)|$ \\
+  $\int \sec(x) \dx $ & $\ln|\sec(x) + \tan(x)|$ \\
+  $\int \cot(x) \dx $ & $\ln|\sin(x)|$ \\
   \bottomrule
  \end{tabularx}
 \end{center}
@@ -837,5 +847,23 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   \bottomrule
  \end{tabularx}
 \end{center}
+
+\section{Kochrezepte und Tricks}
+
+\subsection{Gleichmässige Konvergenz}
+\begin{subbox}{}
+  Gegeben: Folge \textbf{stetiger} Funktionen $f_n : \Omega \subset \R \to \R$\\
+  Gefragt: Konvergiert $f_n$ auf $\Omega$ Gleichmässig?\\
+  \textbf{Schritt 1:} Berechne $f(x) := \limn f_n(x)$ für fixes $x \in \Omega$\\
+  \textbf{Schritt 2:} Prüfe $f_n$ auf gleichmässige Konvergenz:\\
+  Direkte Methode:\\
+  Falls $\limn \underset{x\in\Omega}{\sup} |f_n(x) - f(x)| = 0$, dann ist $f_n$ auf $\Omega$ gleichmässig konvergent.
+
+  Indirekte Methoden:
+  \begin{itemize}
+    \item f unstetig $\Rightarrow$ keine gleichmässige Konvergenz
+    \item f stetig, $f_n(x) \leq f_{n+1}(x) \forall x \in \Omega$ und $\Omega$ kompakt $\Rightarrow$ gleichmässige Konvergenz
+  \end{itemize}
+\end{subbox}
 
 \end{document}

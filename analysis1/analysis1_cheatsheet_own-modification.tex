@@ -69,37 +69,6 @@
 \begin{document}
 
 
-
-
-
-
-\section{Kochrezepte und Tricks}
-\subsection{Gleichmässige	Konvergenz}
-\begin{subbox}{}
-  Gegeben: Folge \textbf{stetiger} Funktionen $f_n : \Omega \subset \R \to \R$\\
-  Gefragt: Konvergiert $f_n$ auf $\Omega$ Gleichmässig?\\
-  \textbf{Schritt 1:} Berechne $f(x) := \limn f_n(x)$ für fixes $x \in \Omega$\\
-  \textbf{Schritt 2: Prüfe $f_n$ auf gleichmässige Konvergenz:}\\
-  Direkte methode:
-  \begin{enumerate}
-    \item Berechne $\underset{x\in\Omega}{\sup} |f_n(x) - f(x)|$, oft nützlich das innere abzuleiten und gleich Null zu setzen.
-    \item Falls $\limn \underset{x\in\Omega}{\sup} |f_n(x) - f(x)| = 0$, dann ist $f_n$ auf $\Omega$ gleichmässig konvergent.
-  \end{enumerate} 
-
-  Indirekte Methoden:
-  \begin{itemize}
-    \item f unstetig $\Rightarrow$ keine gleichmässige Konvergenz
-    \item f stetig, $f_n(x) \leq f_{n+1}(x) \forall x \in \Omega$ und $\Omega$ kompakt $\Rightarrow$ gleichmässige Konvergenz
-  \end{itemize}
-\end{subbox}
-
-\subsection{Nullfolgenkriterium}
-\begin{subbox}{}
-  $\sumn a_n$ konvergiert $\Rightarrow \limn a_n = 0$\\
-  Definiere $S_k = \sum\limits_{n=0}^{k} a_n$\\
-  $\limn a_n = \lim\limits_{k\to \infty} S_k - S_{k-1} = \lim\limits_{k\to \infty} S_k - \lim\limits_{k\to \infty} S_{k-1} = S - S = 0$
-\end{subbox}
-
 \subsection{Beweise}
 \begin{subbox}{}
   Seien $f,g : [a,b] \to \R$ wobei f stetig, g beschränkt integrierbar mit $g(x) \geq 0 \forall x\in[a,b]$. Dann gibt es $\xi \in [a,b]$ mit:\\
