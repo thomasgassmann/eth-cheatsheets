@@ -280,6 +280,10 @@ Polynome sind auf $\R$ stetig.
  Falls $f$ und $g$ den gleichen Definitions-/Bildbereich haben und in $x_0$ stetig sind, dann sind auch $$f + g, \lambda \cdot f, f \cdot g, |f|, \max(f,g), \min(f,g)$$ stetig in $x_0$. Falls $g(x_0) \neq 0$, dann auch $\frac{f}{g}$.
 \end{subbox}
 
+\begin{subbox}{Gleichmässige Stetigkeit}
+  Eine Funktion $f: D \to \mathbb{R}$ ist in $D$ gleichmässig stetig, falls $\forall \epsilon > 0 \ \exists \delta > 0 \ \forall x, y \in D$ gilt $|x - y| < \delta \implies |f(x) - f(y)| < \epsilon$. Eine stetige Funktion auf einem kompaktem Intervall ist gleichmässig stetig.
+\end{subbox}
+
 \begin{mainbox}{Zwischenwertsatz}
  Wenn $I \subseteq \R$ ein Intervall, $f: I \to \R$ und $a, b \in I$ ist, dann gibt es für jedes $c$ zwischen $f(a)$ und $f(b)$ ein $a \le z \le b$ mit $f(z) = c$.
  \includegraphics[width=\linewidth]{zwischenwertsatz.png}
@@ -489,6 +493,8 @@ $$L = \int_a^b \sqrt{x'(t)^2+ y'(t)^2} \text{ d}t$$
  $f:[a,b] \to \R$ ist Riemann-integrierbar, falls $\sup_{P \in \mathcal{P}(I)} \underline{S}(f,P) = \inf_{P \in \mathcal{P}(I)}\overline{S}(f, P_2)$, also falls Obersumme gleich Untersumme wird, wenn die Partition feiner wird. Dann ist $A := \int_a^b f(x)\dx$.
 \end{mainbox}
 
+Eine beschränkte Funktion ist genau dann integrierbar, falls $\forall \epsilon > 0 \ \exists P \in \mathcal{P}(I)$ mit $\overline{S}(f, P) - \underline{S}(f, P) < \epsilon$.
+
 \subsection{Integrierbarkeit zeigen}
 \begin{itemize}
  \item $f$ stetig in $[a,b] \implies f$ integrierbar über $[a,b]$
@@ -505,7 +511,7 @@ $$L = \int_a^b \sqrt{x'(t)^2+ y'(t)^2} \text{ d}t$$
 
 \subsection{Sätze \& Ungleichungen}
 \begin{itemize}
- \item $f(x) \le g(x), \forall x \in [a,b] \rightarrow \int_a^b f(x) \dx \le \int_a^b g(x) \dx$
+ \item $f(x) \le g(x), \forall x \in [a,b] \implies \int_a^b f(x) \dx \le \int_a^b g(x) \dx$
  \item $\left|\int_a^b f(x) \dx\right| \le \int_a^b |f(x)| \dx$
  \item $\left|\int_a^b f(x) g(x) \dx \right| \le \sqrt{\int_a^b f^2(x) \dx} \sqrt{\int_a^b g^2(x) \dx}$
 \end{itemize}
@@ -533,6 +539,11 @@ $$
  ist in $[a,b]$ stetig differenzierbar und $F'(x) = f(x) \ \forall x \in [a,b]$.
 \end{mainbox}
 
+\begin{mainbox}{Fundamentalsatz der Differentialrechnung}
+  Sei $f: [a, b] \to \mathbb{R}$ stetig. Dann gibt es eine Stammfunktion $F$ von $f$, die bis auf eine additive Konstante eindeutig bestimmt ist und es gilt:
+  $$\int_{a}^{b} f(x)dx = F(b) - F(a)$$
+\end{mainbox}
+
 \subsection{Integrationsregeln}
 \begin{subbox}{Linearität}
  \vspace{-12pt}
@@ -542,6 +553,8 @@ $$
  \vspace{-12pt}
  $$\int_a^b f(x) \dx = \int_a^c f(x) \dx + \int_c^b f(x) \dx, \ c \in [a,b]$$
 \end{subbox}
+
+Ausserdem $\int_{a}^{b} f(x) dx = -\int_{b}^{a} f(x) dx$.
 \begin{mainbox}{Partielle Integration}
  \vspace{-12pt}
  $$\int f'(x) g(x) \dx = f(x)g(x) - \int f(x) g'(x) \dx$$
@@ -552,11 +565,18 @@ $$
  \item Muss eventuell mehrmals angewendet werden
 \end{itemize}
 \begin{mainbox}{Substitution}
- Um $\int_a^b f(g(x))g'(x) \dx$ zu berechnen: Ersetze $g(x)$ durch $u$ und integriere $\int_{g(a)}^{g(b)} f(u) \text{d}u$.
+  Sei $g: [a, b] \to \mathbb{R}$ stetig differenzierbar. $f: I \to \mathbb{R}$ ($g([a, b]) \subset I$) eine stetige Funktion. Dann gilt:
+  $$\int_{g(a)}^{g(b)} f(x)dx = \int_{a}^{b} f(g(x))g'(x)dt$$
 \end{mainbox}
 \begin{itemize}
  \item Grenzen substituieren nicht vergessen.
  \item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
+\end{itemize}
+
+Anwendungen:
+\begin{itemize}
+  \item $\int_{a+c}^{b+c} f(x)dx = \int_a^b f(t+c)dt$
+  \item $\int_a^b f(x)dx = \frac{1}{c} \int_{ac}^{bc} f(x)dx$
 \end{itemize}
 
 \begin{mainbox}{Partialbruchzerlegung}
