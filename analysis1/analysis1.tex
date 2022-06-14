@@ -337,7 +337,7 @@ Die Reihe $\sumk f_k(x)$ konvergiert gleichmässig, falls die durch $S_n(x) = \s
 
 Gleichmässige Konvergenz bewahrt Stetigkeit und Beschränktheit.
 
-\begin{subbox}{}
+\begin{subbox}{Weierstrass M-test}
  Sei $f_n$ eine Folge stetiger Funktionen. Ausserdem ist $|f_n(x)| \le c_n \quad \forall x \in D$ und $\sum_{n=0}^\infty c_n$ konvergiert. Dann konvergiert die Reihe $\sum_{n=0}^\infty f_n(x)$ gleichmässig und deren Grenzwert ist eine in $D$ stetige Funktion.
 \end{subbox}
 
@@ -436,6 +436,9 @@ Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \a
   \item $f$ besitzt einen Wendepunkt in $x_0$, wenn $f''(x_0) = 0$.
   \item $f$ ist in $x_0$ konvex, wenn $f''(x_0) \ge 0$.
   \item $f$ ist in $x_0$ konkav, wenn $f''(x_0) \le 0$.
+  \item $f'(\xi) = 0 \ \forall \xi \in I \implies f$ konstant.
+  \item Falls $f'(\xi) = g'(\xi) \ \forall \xi \in I$ gibt es $c \in \mathbb{R}$ mit $f(x) = g(x) + c \ \forall x \in I$.
+  \item Falls $f'(\xi) > 0 \ \forall \xi \in I$ ist $f$ auf $I$ streng monoton wachsend. Analog für monoton wachsend sowie (streng) monoton fallend.
 \end{enumerate}
 
 Falls $f'(x_0) = 0$ und $f^{(n)}(x_0) < 0$ für $n$ gerade, dann ist $x_0$ ein Maximum.\\
@@ -798,22 +801,6 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
 
 \section{Tabellen}
 
-\subsection{Trigonometrische Identitäten}
-\begin{center}
- \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-  \toprule
-  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
-  \midrule
-  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
-  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
-  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
-  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
-  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
-  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
-  \bottomrule
- \end{tabularx}
-\end{center}
-
 \subsection{Grenzwerte}
 \begin{center}
   \begin{tabularx}{\linewidth}{XX}
@@ -948,6 +935,22 @@ Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
   \end{tabularx}
 \end{center}
 
+\subsection{Trigonometrische Identitäten}
+\begin{center}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
+  \midrule
+  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
+  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
+  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
+  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
+  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
+  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
+  \bottomrule
+ \end{tabularx}
+\end{center}
+
 \subsection{Uneigentliche Integrale}
 $$\int_1^\infty \frac{1}{x^\alpha} dx = \begin{cases}
   \text{divergiert, } & \alpha \leq 1\\
@@ -962,6 +965,9 @@ $$\int_0^\infty e^{-x}dx = 1$$
 \section{Kochrezepte und Tricks}
 
 \subsection{Gleichmässige Konvergenz}
+\begin{subbox}{Negation der gleichmässigen Konvergenz}
+  Eine Funktionenfolge $(f_n)_{n \geq 0}$ konvergiert \textbf{nicht} gleichmässig gegen eine Funktion $f: D \to \mathbb{R}$, falls $\exists \epsilon > 0, \forall N \in \mathbb{N}, \exists n \geq N, \exists x \in D$ sodass gilt $|f_n(x) - f(x)| \geq \epsilon$.
+\end{subbox}
 \begin{subbox}{Zeige gleichmässige Konvergenz}
   \begin{itemize}
     \item $f$ unstetig und $f_n$ stetig für $\forall n \geq 1$ $\implies$ keine gleichmässige Konvergenz
@@ -969,9 +975,6 @@ $$\int_0^\infty e^{-x}dx = 1$$
     \item $f_n$ stetig für $\forall n \geq 1$, $f$ stetig und $f_n(x) \leq f_{n+1}(x)$ für $\forall x \in D$ und $D$ kompakt $\implies$ gleichmässige Konvergenz
     \item Schätze $|f_n(x) - f(x)| \leq g(n)$ mit einer Funktion $g(n)$ (die also nicht von $x$ abhängt) ab, mit $\limn g(n) = 0$. Dann gilt $\lim_{n \rightarrow \infty} \sup_{x \in D} |f_n(x) - f(x)| = 0 \leq \limn g(n) = 0$.
   \end{itemize}
-\end{subbox}
-\begin{subbox}{Negation der gleichmässigen Konvergenz}
-  Eine Funktionenfolge $(f_n)_{n \geq 0}$ konvergiert \textbf{nicht} gleichmässig gegen eine Funktion $f: D \to \mathbb{R}$, falls $\exists \epsilon > 0, \forall N \in \mathbb{N}, \exists n \geq N, \exists x \in D$ sodass gilt $|f_n(x) - f(x)| \geq \epsilon$.
 \end{subbox}
 
 \subsection{Stetigkeit}
