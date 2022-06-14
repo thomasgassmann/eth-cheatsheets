@@ -364,7 +364,7 @@ Die Potenzreihe $\sum_{k=0}^\infty c_n x^n$ konvergiert absolut und gleichmässi
 \ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} & r &= 1 \\
 \sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} & r &= \infty \\
 \cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} & r &= \infty \\
-\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= \infty \\
+\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= 1 \\
 e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
 \end{align*}
 
@@ -595,7 +595,8 @@ Anwendungen:
 \begin{subbox}{Integration - gleichmässige Konvergenz}
   Sei $f_n: [a, b] \to \mathbb{R}$ eine Folge von beschränkten, integrierbaren Funktionen die gleichmässig gegen eine Funktion $f: [a, b] \to \mathbb{R}$ konvergiert. Dann ist $f$ beschränkt integrierbar und $\limn \int_a^b f_n(x)dx = \int_a^b f(x)dx$.
 \end{subbox}
-Daraus folgt für eine Folge beschränkter integrierbaren Funktionen $f_n: [a, b] \to \mathbb{R}$ mit $\sumn f_n$ gleichmässig $[a, b]$ konvergent, dass $\sumn \int_a^b f_n(x)dx = \int_a^b (\sumn f_n(x))dx$. Potenzreihen sind in ihrem Konvergenzradius gliedweise integrierbar.
+Daraus folgt für eine Folge beschränkter integrierbaren Funktionen $f_n: [a, b] \to \mathbb{R}$ mit $\sumn f_n$ gleichmässig $[a, b]$ konvergent, dass $\sumn \int_a^b f_n(x)dx = \int_a^b (\sumn f_n(x))dx$. Potenzreihen sind in ihrem Konvergenzradius gliedweise integrierbar.\\
+Es gilt bspw. $\frac{1}{1 + x^2} = 1 - x^2 + x^4 - x^6 + \cdots$ (einsetzen $x^2$ in geometrische Reihe) und durch integrieren erhalten wir $\arctan(x) = x - \frac{x^3}{3} + \frac{x^5}{5} - \frac{x^7}{7} + \cdots$.
 
 \begin{mainbox}{Partialbruchzerlegung}
  Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)} dx$ wird wie folgend berechnet:
@@ -984,6 +985,31 @@ $$\int_0^\infty e^{-x}dx = 1$$
     \item Finde $|f(x) - f(x_0)| = \cdots = M|x_0 - x|$.
     \item Falls $M$ von $x$ abhängig ist: $M$ so lange abschätzen, bis $x$ nur noch in der Form von $x - x_0$ vorkommt, und der Rest nur noch von $x_0$ abhängig ist und dann eine geschickte Bedingung an $\delta$ stellen.
     \item $\delta$ in der Form $\delta = \frac{\epsilon}{M}$ wählen. Falls $\delta$ von $x$ abhängt, $\delta = min(\cdots)$.
+  \end{itemize}
+\end{subbox}
+
+\subsection{Gerade Funktionen}
+\begin{itemize}
+  \item Die Verknüpfung von ungeraen Funktionen ist ungerade. 
+  \item Produkt einer geraden und einer ungeraden Funktion ist ungerade.
+  \item Für $f: [-a, a] \to \mathbb{R}$ stetig und ungerade, d.h. $f(-x) = -f(x)$ gilt $\int_{-a}^a f(x) dx = 0$.
+\end{itemize}
+
+\subsection{Extremwerte}
+\begin{subbox}{Extremwerte}
+  Wir möchten nun die Extremwerte einer Funktion $f: [a, b] \to \mathbb{R}$ bestimmen, die auf $(a, b)$ glatt ist. Wir gehen dazu wie folgt vor:
+  \begin{itemize}
+    \item Funktion eingeschränkt auf offenes Intervall untersuchen, d.h. $f|_{(a,b)}: (a, b) \to \mathbb{R}$.
+    \item Finde alle $x_0$ sodass $f'(x_0) = 0$.
+    \item $f''(x_0) > 0 \implies x_0$ Minimum, $f''(x_0) < 0 \implies x_0$ Maximum
+    \item Falls $f''(x_0) = 0$: Ableiten bis $f^{(n)}(x_0) \neq 0$ oder alternativ Vorzeichenwechsel von $f'$ analysieren. Falls bei $x_0$ ein Wechsel $- \to +$ geschieht, so ist $x_0$ ein Minimum, umgekehrt ein Maxmimum. {
+      \begin{itemize}
+        \item $n$ gerade und $f^{(n)}(x_0) < 0 \implies x_0$ Maximum
+        \item $n$ gerade und $f^{(n)}(x_0) > 0 \implies x_0$ Minimum
+        \item $n$ ungerade $\implies$ Wendestelle.
+      \end{itemize} 
+    }
+    \item Untersuche Randpunkte $a, b$. Falls $a, b = \pm \infty$, untersuche $\lim_{x \to \infty} f(x)$ und $\lim_{x \to -\infty} f(x)$.
   \end{itemize}
 \end{subbox}
 
