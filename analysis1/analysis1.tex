@@ -579,6 +579,12 @@ Anwendungen:
   \item $\int_a^b f(x)dx = \frac{1}{c} \int_{ac}^{bc} f(x)dx$
 \end{itemize}
 
+\subsection{Integration konvergenter Reihen}
+\begin{subbox}{Integration - gleichmässige Konvergenz}
+  Sei $f_n: [a, b] \to \mathbb{R}$ eine Folge von beschränkten, integrierbaren Funktionen die gleichmässig gegen eine Funktion $f: [a, b] \to \mathbb{R}$ konvergiert. Dann ist $f$ beschränkt integrierbar und $\limn \int_a^b f_n(x)dx = \int_a^b f(x)dx$.
+\end{subbox}
+Daraus folgt für eine Folge beschränkter integrierbaren Funktionen $f_n: [a, b] \to \mathbb{R}$ mit $\sumn f_n$ gleichmässig $[a, b]$ konvergent, dass $\sumn \int_a^b f_n(x)dx = \int_a^b (\sumn f_n(x))dx$. Potenzreihen sind in ihrem Konvergenzradius gliedweise integrierbar.
+
 \begin{mainbox}{Partialbruchzerlegung}
  Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)} dx$ wird wie folgend berechnet:
  \begin{enumerate}
