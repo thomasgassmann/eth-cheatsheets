@@ -252,15 +252,15 @@ $\sumk b_k$ ist eine \textbf{lineare Anordnung} der Doppelreihe $\Sigma_{i,j \ge
   Wenn es $B \geq 0$ gibt, so dass $\Sigma_{i=0}^m \Sigma_{j=0}^m |a_{ij}| \leq B$ $\forall m \geq 0$, dann konvergieren $S_i := \Sigma_{j=0}^\infty a_{ij}$ $\forall i \geq 0$ und $U_j := \Sigma_{i=0}^\infty a_{ij}$ $\forall j \geq 0$ sowie $\Sigma_{i=0}^\infty S_i$, $\Sigma_{j=0}^\infty U_j$ und es gilt $\Sigma_{i=0}^\infty S_i = \Sigma_{j=0}^\infty U_j$. Jede lineare Anordnung einer Doppelreihe konvergiert dann absolut mit demselben Grenzwert.
 \end{subbox}
 
+\begin{subbox}{Tauschbarkeit Summation / Limes}
+  Sei $f_n : \mathbb{N} \rightarrow \mathbb{R}$ eine Folge. Wenn $f(j) := \limn f_n(j)$ $\forall j \in \mathbb{N}$ existiert und $|f_n(j)| \leq g(j)$ für eine Funktion $g: \mathbb{N} \rightarrow \mathbb [0, \infty[$ und falls $\sum_{j=0}^\infty g(j)$ konvergiert, dann folgt $\sum_{j=0}^\infty f(j) = \limn \sum_{j=0}^\infty f_n(j)$.
+\end{subbox}
+
 \begin{mainbox}{Cauchy-Produkt}
   Das Cauchy-Produkt von zwei Reihen $\sum_{i = 0}^\infty a_i$ und $\sum_{j = 0}^\infty b_j$ ist definiert als
   $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + \ldots$$ Es konvergiert, falls beide Reihen absolut konvergieren. Dann gilt:\\
   $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = (\sum_{i=0}^\infty a_i) (\sum_{j=0}^\infty b_j)$$
 \end{mainbox}
-
-\begin{subbox}{Tauschbarkeit Summation / Limes}
-  Sei $f_n : \mathbb{N} \rightarrow \mathbb{R}$ eine Folge. Wenn $f(j) := \limn f_n(j)$ $\forall j \in \mathbb{N}$ existiert und $|f_n(j)| \leq g(j)$ für eine Funktion $g: \mathbb{N} \rightarrow \mathbb [0, \infty[$ und falls $\sum_{j=0}^\infty g(j)$ konvergiert, dann folgt $\sum_{j=0}^\infty f(j) = \limn \sum_{j=0}^\infty f_n(j)$.
-\end{subbox}
 
 
 \subsection{Strategie - Konvergenz von Reihen}
@@ -295,16 +295,16 @@ Polynome sind auf $\R$ stetig.
  Falls $f$ und $g$ den gleichen Definitions-/Bildbereich haben und in $x_0$ stetig sind, dann sind auch $$f + g, \lambda \cdot f, f \cdot g, |f|, \max(f,g), \min(f,g)$$ stetig in $x_0$. Falls $g(x_0) \neq 0$, dann auch $\frac{f}{g}$. Die Verknüpfung stetiger Funktionen ist stetig.
 \end{subbox}
 
-\begin{subbox}{Gleichmässige Stetigkeit}
-  Eine Funktion $f: D \to \mathbb{R}$ ist in $D$ gleichmässig stetig, falls $\forall \epsilon > 0 \ \exists \delta > 0 \ \forall x, y \in D$ gilt $|x - y| < \delta \implies |f(x) - f(y)| < \epsilon$. Eine stetige Funktion auf einem kompaktem Intervall ist gleichmässig stetig.
-\end{subbox}
-
 \begin{mainbox}{Zwischenwertsatz}
  Wenn $I \subseteq \R$ ein Intervall, $f: I \to \R$ und $a, b \in I$ ist, dann gibt es für jedes $c$ zwischen $f(a)$ und $f(b)$ ein $a \le z \le b$ mit $f(z) = c$.
  \includegraphics[width=\linewidth]{zwischenwertsatz.png}
  Wird häufig verwendet um zu zeigen, das eine Funktion einen gewissen Wert (z.B. Nullstelle) annimmt.
 \end{mainbox}
 Daraus folgt, dass ein Polynom mit ungeradem Grad mindestens eine Nullstelle in $\R$ besitzt.
+
+\begin{subbox}{Gleichmässige Stetigkeit}
+  Eine Funktion $f: D \to \mathbb{R}$ ist in $D$ gleichmässig stetig, falls $\forall \epsilon > 0 \ \exists \delta > 0 \ \forall x, y \in D$ gilt $|x - y| < \delta \implies |f(x) - f(y)| < \epsilon$. Eine stetige Funktion auf einem kompaktem Intervall ist gleichmässig stetig.
+\end{subbox}
 
 \subsubsection{Kompaktes Intervall}
 Ein Intervall $I \in \R$ ist kompakt, falls es von der Form $I = [a,b]$ mit $a \le b$ ist.
@@ -1058,5 +1058,11 @@ Aufhören falls:
   \item Produkt einer Reihe einfach integrierbar. Addiere oder subtrahiere je nach Reihe das Integral des Produkts.
   \item Eine Reihe wiederholt sich. Verwende Rekurrenz.
 \end{itemize}
+
+\subsection{Substitution}
+Berechne:
+$$\int 3x^2 \cos(x^3) dx$$
+Sei $y = x^3$. Dann folgt $\frac{dy}{dx} = 3x^2 \iff dx = \frac{1}{3x^2} dy$. Substituieren liefert also:
+$$\int cos(y) dy$$
 
 \end{document}
