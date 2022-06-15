@@ -91,9 +91,10 @@
 \section{Folgen}
 \subsection{Konvergenz}
 Eine Folge $(a_n)_{n\in \mathbb{N}}$ konvergiert gegen L \\
- $\iff \lim_{n \to \infty} a_n = L $ \\ 
+ $\iff \lim_{n \to \infty} a_n = L$ \\ 
  $\iff \forall \epsilon > 0 \ \exists N_\epsilon \ \forall n \ge N_\epsilon : \ | a_n - L | < \epsilon$\\
  $\iff \forall \epsilon > 0\text{ gilt }\{ n\in\mathbb{N}:a_n\notin ]L-\epsilon,L+\epsilon[ \} \neq \emptyset $\\
+ $\iff \forall \epsilon > 0 \ \{ n \in \mathbb{N}^* : a_n \notin ]L - \epsilon, L + \epsilon[ \}$ endlich\\
 
 Falls $a := (a_n)_{n \geq 1}$ und $b := (b_n)_{n \geq 1}$ konvergente Folgen sind, sind auch $(a_n + b_n)_{n \geq 1}$ sowie $(a_n \cdot b_n)_{n \geq 1}$ konvergent. Falls $b_n \neq 0$ $\forall n \geq 1$, ist auch $(\frac{a_n}{b_n})_{n \geq 1}$ konvergent.\\
 
@@ -113,6 +114,10 @@ $\limn \sup x_n = \limn \left( \sup_{m \ge n} x_m \right)$
 \begin{mainbox}{Einschliessungskriterium \\ (Sandwich-Theorem)}
 Wenn $\limn a_n = \alpha, \ \limn b_n = \alpha$ und $a_n \le c_n \le b_n, \forall n \ge k$, dann $\limn c_n = \alpha$.
 \end{mainbox}
+
+\begin{subbox}{Cauchy-Cantor}
+  Für kompakte Intervalle $I_1 \supseteq I_2 \supseteq \cdots$ gilt $\cap_{n \geq 1} I_n \neq \emptyset$. Falls $n \to \infty$ und $\limn \mathcal{L}(I_n) = 0$ enthält die Union genau einen Punkt.
+\end{subbox}
 
 \begin{mainbox}{Weierstrass}
 Wenn $a_n$ monoton wachsend und nach oben beschränkt ist, dann konvergiert $a_n$ mit Grenzwert $\limn a_n = \sup \{a_n : \ n \ge 1\}$.
@@ -396,7 +401,8 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
  Falls $f$ differenzierbar ist, dann ist $c = f'(x_0)$ eindeutig bestimmt.
 \end{subbox}
 Variation: Sei $\phi(x) = f'(x_0) + r(x)$. Dann gilt $f$ in $x_0$ differenzierbar, falls $f(x) = f(x_0) + \phi(x) (x-x_0), \ \forall x \in D$ und $\phi$ in $x_0$ stetig ist.
-Dann gilt $\phi(x_0) = f'(x_0)$.
+Dann gilt $\phi(x_0) = f'(x_0)$.\\
+Differenzierbarkeit impliziert Stetigkeit.
 
 \begin{mainbox}{Höhere Ableitungen}
  \begin{enumerate}
@@ -483,6 +489,7 @@ Taylorreihen sind ein Weg, glatte Funktionen als Potenzreihen anzunähern.
 \begin{subbox}{Differenzierbarkeit von Funktionenfolgen}
   Sei $f_n: ]a, b[ \to \mathbb{R}$ einmal stetig differenzierbar $\forall n \geq 1$. Falls $(f_n)_{n \geq 1}$ und $(f_n')_{n \geq 1}$ gleichmässig konvergieren mit $f := \limn f_n$ und $p := \limn f_n'$, dann gilt $f' = p$.  
 \end{subbox}
+Der obige Satz impliziert \textbf{nicht}, dass gleichmässige Konvergenz Differenzierbarkeit beibehält.\\
 Innerhalb ihres Konvergenzradius sind Potenzreihen glatt und gliedweise differenzierbar.
 
 \subsection{Länge einer Kurve}
@@ -933,6 +940,7 @@ Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
     $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$\\
     $2|xy| \leq \epsilon x^2 + \frac{1}{\epsilon} y^2$ für $\forall \epsilon > 0$ und $\forall x,y \in \mathbb{R}$\\
     $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$\\
+    $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
   \end{tabularx}
 \end{center}
 
