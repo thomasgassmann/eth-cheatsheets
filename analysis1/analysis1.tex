@@ -188,7 +188,7 @@ Die Reihe $\sumk a_k$ ist genau dann konvergent, falls $\forall \epsilon > 0 \ \
  Wenn für eine Folge $\limn |a_n| \ne 0$ ist, dann divergiert $\sumn a_n$.
 \end{subbox}
 
-Eine Reihe konvergiert genau dann, falls die Folge $(S_n)_{n \geq 1}$ mit $S_n := \Sigma_{k=1}^{n+1} a_k$ nach oben beschränkt ist.\\
+Eine Reihe konvergiert genau dann, falls die Folge $(S_n)_{n \geq 1}$ mit $S_n := \Sigma_{k=1}^{n} a_k$ konvergiert. Falls $a_k \geq 0$ und $S_n$ nach oben beschränkt, konvergiert die Reihe.\\
 
 $\sumn a_n$ konvergent $\implies \limn a_n = 0$.
 
@@ -220,7 +220,7 @@ Falls eine Reihe absolut konvergiert, dann konvergiert jede Umordnung der Reihe 
 Falls die Reihe hingegen "nur" konvergiert, kann es immer eine Anordnung geben, so dass $\sum_{k=1}^\infty a_{\phi(k)} = x, \ \forall x\in \R$.
 
 \begin{subbox}{Leibnizkriterium}
-Wenn $a_n \ge 0, \ \forall n \ge 1$ monoton fallend ist und $\limn a_n = 0$ gilt, dann konvergiert $S = \sumk (-1)^{k+1} a_k$ und $a_1 - a_2 \le S \le a_1$.
+Wenn $a_n \ge 0, \ \forall n \ge 1$ monoton fallend (ab gewissen $n_0$) ist und $\limn a_n = 0$ gilt, dann konvergiert $S = \sumk (-1)^{k+1} a_k$ und $a_1 - a_2 \le S \le a_1$.
 \end{subbox}
 
 \begin{mainbox}{Quotientenkriterium}
