@@ -810,6 +810,22 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
 
 \section{Tabellen}
 
+\subsection{Trigonometrische Identitäten}
+\begin{center}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
+  \midrule
+  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
+  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
+  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
+  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
+  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
+  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
+  \bottomrule
+ \end{tabularx}
+\end{center}
+
 \subsection{Grenzwerte}
 \begin{center}
   \begin{tabularx}{\linewidth}{XX}
@@ -945,22 +961,6 @@ Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
   \end{tabularx}
 \end{center}
 
-\subsection{Trigonometrische Identitäten}
-\begin{center}
- \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-  \toprule
-  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
-  \midrule
-  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
-  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
-  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
-  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
-  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
-  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
-  \bottomrule
- \end{tabularx}
-\end{center}
-
 \subsection{Uneigentliche Integrale}
 $$\int_1^\infty \frac{1}{x^\alpha} dx = \begin{cases}
   \text{divergiert, } & \alpha \leq 1\\
@@ -1004,6 +1004,14 @@ $$\int_0^\infty e^{-x}dx = 1$$
   \item Sei $f$ gerade und $g$ ungerade. $g \circ f$ und $f \circ g$ sind gerade.
   \item Produkt einer geraden und einer ungeraden Funktion ist ungerade.
   \item Für $f: [-a, a] \to \mathbb{R}$ stetig und ungerade, d.h. $f(-x) = -f(x)$ gilt $\int_{-a}^a f(x) dx = 0$.
+\end{itemize}
+
+\subsection{Monotonität}
+
+\begin{itemize}
+  \item Definiere $(b_n)_{n \in \mathbb{N}}$ mit $b_n = a_{n+1} - a_n$. $a_n$ ist monoton wachsend, wenn alle Folgenglieder von $(b_n)_{n \in \mathbb{N}}$ positiv sind.
+  \item Definiere $(b_n)_{n \in \mathbb{N}}$ mit $b_n = \frac{a_{n+1}}{a_n}$. $a_n$ ist monoton wachsend, wenn $\forall n b_n \geq 1$ gilt.
+  \item Induktionsbeweis.
 \end{itemize}
 
 \subsection{Extremwerte}
