@@ -957,9 +957,15 @@ Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
   $\text{artanh}(x)$ & $\frac{1}{1 - x^2}$ \\
   $\text{arccot}(x)$ & $-\frac{1}{1 + x^2}$ \\
   $x^x \ (x > 0)$ & $x^x \cdot (1 + \ln x)$ \\
+  $\cosh(x)$ & $\sinh(x)$ \\
+  $\sinh(x)$ & $\cosh(x)$ \\
   \bottomrule
   \end{tabularx}
 \end{center}
+
+\subsection{Rekursive Integrale}
+
+$J_n = \int \frac{1}{(1 + x^2)^n} dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
 
 \subsection{Ungleichungen}
 \begin{center}
@@ -983,16 +989,9 @@ $$\int_0^1 \frac{1}{x^\alpha} dx = \begin{cases}
 \end{cases}$$
 $$\int_0^\infty e^{-x}dx = 1$$
 
-\subsection{Rekursive Integrale}
-
-$J_n = \int \frac{1}{(1 + x^2)^n} dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
-
 \section{Kochrezepte und Tricks}
 
 \subsection{Gleichmässige Konvergenz}
-\begin{subbox}{Negation der gleichmässigen Konvergenz}
-  Eine Funktionenfolge $(f_n)_{n \geq 0}$ konvergiert \textbf{nicht} gleichmässig gegen eine Funktion $f: D \to \mathbb{R}$, falls $\exists \epsilon > 0, \forall N \in \mathbb{N}, \exists n \geq N, \exists x \in D$ sodass gilt $|f_n(x) - f(x)| \geq \epsilon$.
-\end{subbox}
 \begin{subbox}{Zeige gleichmässige Konvergenz}
   \begin{itemize}
     \item $f$ unstetig und $f_n$ stetig für $\forall n \geq 1$ $\implies$ keine gleichmässige Konvergenz
@@ -1000,6 +999,9 @@ $J_n = \int \frac{1}{(1 + x^2)^n} dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} +
     \item $f_n$ stetig für $\forall n \geq 1$, $f$ stetig und $f_n(x) \leq f_{n+1}(x)$ für $\forall x \in D$ und $D$ kompakt $\implies$ gleichmässige Konvergenz
     \item Schätze $|f_n(x) - f(x)| \leq g(n)$ mit einer Funktion $g(n)$ (die also nicht von $x$ abhängt) ab, mit $\limn g(n) = 0$. Dann gilt $\lim_{n \rightarrow \infty} \sup_{x \in D} |f_n(x) - f(x)| = 0 \leq \limn g(n) = 0$.
   \end{itemize}
+\end{subbox}
+\begin{subbox}{Negation der gleichmässigen Konvergenz}
+  Eine Funktionenfolge $(f_n)_{n \geq 0}$ konvergiert \textbf{nicht} gleichmässig gegen eine Funktion $f: D \to \mathbb{R}$, falls $\exists \epsilon > 0, \forall N \in \mathbb{N}, \exists n \geq N, \exists x \in D$ sodass gilt $|f_n(x) - f(x)| \geq \epsilon$.
 \end{subbox}
 
 \subsection{Stetigkeit}
@@ -1084,7 +1086,6 @@ Aufhören falls:
 \end{itemize}
 
 \subsection{Substitution}
-Berechne:
 $$\int 3x^2 \cos(x^3) dx$$
 Sei $y = x^3$. Dann folgt $\frac{dy}{dx} = 3x^2 \iff dx = \frac{1}{3x^2} dy$. Substituieren liefert also:
 $$\int cos(y) dy$$
