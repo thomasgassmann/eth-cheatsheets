@@ -2,4 +2,4 @@
 
 Overview:
 
-- Analysis 1: forked from XYQuadrat/eth-cheatsheets
+- Analysis 1: based on [XYQuadrat/eth-cheatsheets](https://github.com/xyQuadrat/eth-cheatsheets/) with various modifications, improvements used in FS22
