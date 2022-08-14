@@ -9,6 +9,8 @@
 \usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
 \usepackage{flowfram}
 \usepackage{floatrow}
+\usepackage{amsmath}
+
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 \Ncolumn{3}
@@ -188,7 +190,7 @@ Die Reihe $\sumk a_k$ ist genau dann konvergent, falls $\forall \epsilon > 0 \ \
  Wenn für eine Folge $\limn |a_n| \ne 0$ ist, dann divergiert $\sumn a_n$.
 \end{subbox}
 
-Eine Reihe konvergiert genau dann, falls die Folge $(S_n)_{n \geq 1}$ mit $S_n := \Sigma_{k=1}^{n+1} a_k$ nach oben beschränkt ist.\\
+Eine Reihe konvergiert genau dann, falls die Folge $(S_n)_{n \geq 1}$ mit $S_n := \Sigma_{k=1}^{n} a_k$ konvergiert. Falls $a_k \geq 0$ und $S_n$ nach oben beschränkt, konvergiert die Reihe.\\
 
 $\sumn a_n$ konvergent $\implies \limn a_n = 0$.
 
@@ -220,7 +222,7 @@ Falls eine Reihe absolut konvergiert, dann konvergiert jede Umordnung der Reihe 
 Falls die Reihe hingegen "nur" konvergiert, kann es immer eine Anordnung geben, so dass $\sum_{k=1}^\infty a_{\phi(k)} = x, \ \forall x\in \R$.
 
 \begin{subbox}{Leibnizkriterium}
-Wenn $a_n \ge 0, \ \forall n \ge 1$ monoton fallend ist und $\limn a_n = 0$ gilt, dann konvergiert $S = \sumk (-1)^{k+1} a_k$ und $a_1 - a_2 \le S \le a_1$.
+Wenn $a_n \ge 0, \ \forall n \ge 1$ monoton fallend (ab gewissen $n_0$) ist und $\limn a_n = 0$ gilt, dann konvergiert $S = \sumk (-1)^{k+1} a_k$ und $a_1 - a_2 \le S \le a_1$.
 \end{subbox}
 
 \begin{mainbox}{Quotientenkriterium}
@@ -347,7 +349,7 @@ Gleichmässige Konvergenz bewahrt Stetigkeit und Beschränktheit.
  Sei $f_n$ eine Folge stetiger Funktionen. Ausserdem ist $|f_n(x)| \le c_n \quad \forall x \in D$ und $\sum_{n=0}^\infty c_n$ konvergiert. Dann konvergiert die Reihe $\sum_{n=0}^\infty f_n(x)$ gleichmässig und deren Grenzwert ist eine in $D$ stetige Funktion.
 \end{subbox}
 
-\begin{subbox}{Funktionenreihe gleichmässige Konvergenz}
+\begin{subbox}{}
   Die Reihe $\sum_{k=0}^\infty f_k(x)$ konvergiert gleichmässig (in $D$), falls die durch $S_n(x) := \sum_{k=0}^n f_k(x)$ definierte Funktionenfolge gleichmässig konvergiert.
 \end{subbox}
 
@@ -357,17 +359,22 @@ Gleichmässige Konvergenz bewahrt Stetigkeit und Beschränktheit.
 \end{subbox}
 
 \begin{mainbox}{Konvergenzradius}
- Der Konvergenzradius einer Potenzreihe um einen Entwicklungspunkt $x_0$ ist die grösste Zahl $r$, so dass die Potenzreihe für alle $x$ mit $|x - x_0| < r$ konvergiert. Falls die Reihe für alle $x$ konvergiert, ist der Konvergenzradius $r$ unendlich. Sonst:
- $$r = \limn \left| \frac{a_n}{a_{n+1}} \right| = \frac{1}{\limn\sup \sqrt[n]{|a_n|}} $$
+ Der Konvergenzradius einer Potenzreihe $\sumn a_n x^n$ um einen Entwicklungspunkt $x_0$ ist die grösste Zahl $r$, so dass die Potenzreihe für alle $x$ mit $|x - x_0| < r$ konvergiert. Falls die Reihe für alle $x$ konvergiert, ist der Konvergenzradius $r$ unendlich. Sonst:
+ $$r = \begin{cases}
+    +\infty & \text{ falls } \limn\sup \sqrt[n]{|a_n|} = 0\\
+    \frac{1}{\limn\sup \sqrt[n]{|a_n|}} & \text{ falls }  \limn\sup \sqrt[n]{|a_n|} > 0
+ \end{cases} $$
+ Alternativ, falls existiert, kann $r = \limn \left| \frac{a_n}{a_{n+1}} \right|$ verwendet werden (weniger starke Aussage).\\
+ Dies folgt aus dem Wurzelkriterium für $a_n := c_n z^n$. Also wollen wir $\sqrt[n]{|a_n|} \overset{!}{<} 1$ und können dann nach $|z|$ umformen. Hilfreich, wenn nicht exakt $z^n$-Format vorhanden ist.
 \end{mainbox}
 Die Potenzreihe $\sum_{k=0}^\infty c_n x^n$ konvergiert absolut und gleichmässig für alle $|x| < r$ und divergiert für alle $|x| > r$. Der Fall $|x| = r$ ist unklar und muss geprüft werden.
 
-\subsubsection{Definitionen per Potenzreihen}
+\subsubsection{Potenzreihen}
 \begin{align*}
-\exp(x) &= \sumn \frac{x^n}{n!} & r &= \infty \\
-\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} & r &= \infty \\
-\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} & r &= \infty \\
-\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} & r &= 1 \\
+\exp(x) &= \sumn \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots & r &= \infty \\
+\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
+\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots & r &= \infty \\
+\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots & r &= 1 \\
 \sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} & r &= \infty \\
 \cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} & r &= \infty \\
 \arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= 1 \\
@@ -396,6 +403,7 @@ Grenzwerte der Form $\infty^0$ und $1^\infty$ können meist mit $f(x)^{g(x)} = e
 \begin{mainbox}{Differenzierbar}
  $f$ ist \textbf{in $x_0$ differenzierbar}, falls der Grenzwert $\lim_{x\to x_0} \frac{f(x) - f(x_0)}{x - x_0}$ bzw. $\lim_{h \to 0} \frac{f(x_0 + h) - f(x_0)}{h}$ existiert. Wenn dies der Fall ist, wird der Grenzwert mit $f'(x_0)$ bezeichnet. $f$ ist \textbf{differenzierbar}, falls $f$ für jedes $x_0 \in D$ differenzierbar ist.
 \end{mainbox}
+Um Differenzierbarkeit zu widerlegen, zeige dass links- und rechtsseitger Grenzwert nicht übereinstimmen.
 \begin{subbox}{Differenzierbarkeit nach Weierstrass}
  $f$ ist in $x_0$ differenzierbar $\iff$ \\
  Es gibt $c \in \R$ und $r: D \to \R$ mit $f(x) = f(x_0) + c(x - x_0) + r(x) (x - x_0)$ und $r(x_0) = 0$, $r$ stetig in $x_0$. \\
@@ -431,7 +439,7 @@ Glatte Funktionen: $\exp, \sin, \cos, \sinh, \cosh, \tanh, \ln,$\\ $ \arcsin, \a
 
 \begin{subbox}{Inverse mit Ableitung}
   Sei $f: D\to E$ eine bijektive Funktion, $x_0 \in D$ Häufungspunkt. Wir nehmen an f ist in $x_0$ differenzierbar und $f'(x_0) \neq 0$; zudem nehmen wir an $f^{-1}$ ist in $y_0 = f(x_0)$ stetig. Dann ist $y_0$ Häufungspunkt von E, $f^{-1}$ ist in $y_0$ differenzierbar und:\\ 
-  \center{$(f^{-1})(y_0) = \frac{1}{f'(x_0)} = \frac{1}{f'(f^{-1}(y_0))}$}
+  \center{$(f^{-1})'(y_0) = \frac{1}{f'(x_0)} = \frac{1}{f'(f^{-1}(y_0))}$}
 \end{subbox}
 
 \subsection{Implikationen der Ableitung}
@@ -491,7 +499,8 @@ Taylorreihen sind ein Weg, glatte Funktionen als Potenzreihen anzunähern.
   Sei $f_n: ]a, b[ \to \mathbb{R}$ einmal stetig differenzierbar $\forall n \geq 1$. Falls $(f_n)_{n \geq 1}$ und $(f_n')_{n \geq 1}$ gleichmässig konvergieren mit $f := \limn f_n$ und $p := \limn f_n'$, dann gilt $f' = p$.  
 \end{subbox}
 Der obige Satz impliziert \textbf{nicht}, dass gleichmässige Konvergenz Differenzierbarkeit beibehält.\\
-Innerhalb ihres Konvergenzradius sind Potenzreihen glatt und gliedweise differenzierbar.
+Innerhalb ihres Konvergenzradius sind Potenzreihen glatt und gliedweise differenzierbar.\\
+Da Potenzreihen innerhalb ihres Konvergenzradius stetig sind, können wir den Limes auch gliedweise anwenden.
 
 \subsection{Länge einer Kurve}
 Für eine Kurve $p(t) = (x(t), y(t))$ in der $xy$-Ebene gilt 
@@ -539,7 +548,7 @@ Eine beschränkte Funktion ist genau dann integrierbar, falls $\forall \epsilon 
 \begin{mainbox}{Mittelwertsatz}
  Wenn $f: [a,b] \to \R$ stetig ist, dann gibt es $\xi \in [a,b]$ mit $\int_a^b f(x) \dx = f(\xi) (b-a)$.
 \end{mainbox}
-Daraus folgt auch, dass wenn $f,g: [a,b] \to \R$ wobei $f$ stetig, $g$ beschränkt und integrierbar mit $g(x) \ge 0, \forall x \in [a,b]$ ist, dann gibt es $\xi \in [a,b]$ mit $\int_a^b f(x)g(x) \dx = f(\xi) \int_a^b g(x) \dx$.
+Daraus folgt auch, dass wenn $f,g: [a,b] \to \R$ wobei $f$ stetig, $g$ beschränkt und integrierbar mit $g(x) \ge 0 \text{ (oder }g(x) \le 0\text{)}, \forall x \in [a,b]$ ist, dann gibt es $\xi \in [a,b]$ mit $\int_a^b f(x)g(x) \dx = f(\xi) \int_a^b g(x) \dx$.
 
 \subsection{Stammfunktionen}
 \begin{subbox}{Definition: Stammfunktion}
@@ -622,6 +631,8 @@ Es gilt bspw. $\frac{1}{1 + x^2} = 1 - x^2 + x^4 - x^6 + \cdots$ (einsetzen $x^2
 
  \end{enumerate}
 \end{mainbox}
+
+Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{1}{q} - \frac{1}{q + 1}$ oder $\frac{1}{q(q-1)(q+1)} = \frac{-1}{q} + \frac{1}{2(q+1)} + \frac{1}{2(q-1)}$.
 
 \subsection{Euler-McLaurin-Formel}
 Die Formel hilft Summen wie $1^l + 2^l + 3^l + ... + n^l$ abzuschätzen.
@@ -716,6 +727,7 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
 \begin{itemize}
   \item $\sinh(x) = \frac{e^x - e^{-x}}{2}$
   \item $\cosh(x) = \frac{e^x + e^{-x}}{2}$
+  \item $\tanh(x) = \frac{\sinh(x)}{\cosh(x)}$
 \end{itemize}
 
 \subsection{Regeln}
@@ -767,7 +779,7 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
 
 \subsubsection{Multiplikation}
 \begin{itemize}
- \item $\sin(\alpha) \sin(\beta) = -\frac{\cos(\alpha + \beta) - \cos(\alpha - \beta)}{2}$
+ \item $\sin(\alpha) \sin(\beta) =  \frac{\cos(\alpha - \beta) - \cos(\alpha + \beta)}{2}$
  \item $\cos(\alpha) \cos(\beta) =  \frac{\cos(\alpha + \beta) + \cos(\alpha - \beta)}{2}$
  \item $\sin(\alpha) \cos(\beta) =  \frac{\sin(\alpha + \beta) + \sin(\alpha - \beta)}{2}$
 \end{itemize}
@@ -776,7 +788,7 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
 \begin{itemize}
  \item $\sin^2(\alpha) = \frac{1}{2}(1-\cos(2\alpha))$
  \item $\cos^2(\alpha) = \frac{1}{2}(1+\cos(2\alpha))$
- \item $\tan^2(\alpha) = \frac{1-\cos(2\alpha)}{1+\cos(2\alpha)}$
+ \item $\tan^2(\alpha) = \frac{1-\cos(2\alpha)}{1+\cos(2\alpha)} = \frac{1}{\cos^2(x)} - 1$
 \end{itemize}
 
 \subsubsection{Diverse}
@@ -810,6 +822,22 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
 
 \section{Tabellen}
 
+\subsection{Trigonometrische Identitäten}
+\begin{center}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
+  \midrule
+  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
+  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
+  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
+  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
+  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
+  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
+  \bottomrule
+ \end{tabularx}
+\end{center}
+
 \subsection{Grenzwerte}
 \begin{center}
   \begin{tabularx}{\linewidth}{XX}
@@ -829,12 +857,12 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   \begin{tabularx}{\linewidth}{XX}
     $\limxo \frac{\sin x}{x} = 1$ & $\limxo \frac{\sin kx}{x} = k$\\
     $\limxo \frac{1}{\cos x} = 1$ & $\limxo \frac{\cos x -1}{x} = 0$ \\
-    $\limxo \frac{\log 1 - x}{x} = -1$ & $\limxo x \log x = 0$\\
+    $\limxo x \sin(\frac{1}{x}) = 0$ & $\limxo x \log x = 0$\\
     $\limxo \frac{1 - \cos x}{x^2} = \frac{1}{2}$ & $\limxo \frac{e^x-1}{x} = 1$ \\
     $\limxo \frac{x}{\arctan x} = 1$ & $\limxi \arctan x = \frac{\pi}{2}$ \\
     $\limxo \frac{e^{ax}-1}{x} = a$ & $\limxo \frac{\ln(x+1)}{x} = 1$ \\
-    $\lim_{x\to 1} \frac{\ln(x)}{x-1} = 1$ & $\limxi \frac{\log(x)}{x^a} = 0$ \\
-    $\limxi \sqrt[x]{x} = 1$ & $\limxi \frac{2x}{2^x} = 0$ \\
+    $\lim_{x\to 1} \frac{\ln(x)}{x-1} = 1$ & $\limxi \sqrt{x^2 + c} - x = 0$ \\
+    $\limxi \sqrt[x]{x} = 1$ & $\limxi x(\sqrt[x]{n} - 1) = \ln(n)$ \\
     \bottomrule
   \end{tabularx}
 \end{center}
@@ -855,10 +883,9 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   $\sin(x)$ & $\cos(x)$ & $-\sin(x)$ \\
   $\frac{1}{2}(x-\frac{1}{2}\sin(2x))$ & $\sin^2(x)$ & $2 \sin(x)\cos(x)$ \\
   $\frac{1}{2}(x + \frac{1}{2}\sin(2x))$ & $\cos^2(x)$ & $-2\sin(x)\cos(x)$ \\
-  \multirow{2}*{$-\ln|\cos(x)|$} & \multirow{2}*{$\tan(x)$} & $\frac{1}{\cos^2(x)}$  \\
-  & & $1 + \tan^2(x)$ \\
+  $-\ln|\cos(x)|$ & $\tan(x)$ & $\frac{1}{\cos^2(x)} = 1 + \tan^2(x)$  \\
   $\cosh(x)$ & $\sinh(x)$ & $\cosh(x)$ \\
-  $\log(\cosh(x))$ & $\tanh(x)$ & $\frac{1}{\cosh^2(x)}$ \\
+  $\log(\cosh(x))$ & $\tanh(x)$ & $\frac{1}{\cosh^2(x)} = 1 - \tanh^2(x)$ \\
   $\ln | \sin(x)|$ & $\cot(x)$ & $-\frac{1}{\sin^2(x)}$ \\
   $\frac{1}{c} \cdot e^{cx}$ & $e^{cx}$ & $c \cdot e^{cx}$ \\
   $x(\ln |x| - 1)$ & $\ln |x|$ & $\frac{1}{x}$ \\
@@ -884,12 +911,12 @@ Das unbestimmte Integral ist die Umkehroperation der Ableitung.
   $\int \frac{ax+b}{cx+d} \dx$ & $\frac{ax}{c} - \frac{ad-bc}{c^2} \ln |cx +d|$ \\
   $\int \frac{1}{x^2+a^2} \dx$ & $\frac{1}{a} \arctan \frac{x}{a}$ \\
   $\int \frac{1}{x^2 - a^2} \dx$ & $\frac{1}{2a} \ln\left| \frac{x-a}{x+a} \right|$ \\
-  $\int \sqrt{a^2+x^2} \dx $ & $\frac{x}{2}f(x) + \frac{a^2}{2}\ln(x+f(x))$ \\
+  $\int \sqrt{a^2 - x^2} \dx $ & $\frac{a^2}{2} \arcsin(\frac{x}{a}) + \frac{x}{2} \sqrt{a^2 - x^2}$ \\
   $\int \csc(x) \dx $ & $\ln|\csc(x) + \cot(x)|$ \\
   $\int \sec(x) \dx $ & $\ln|\sec(x) + \tan(x)|$ \\
   $\int \cot(x) \dx $ & $\ln|\sin(x)|$ \\
   \bottomrule
- \end{tabularx}
+ \end{tabularx} 
 \end{center}
 
 \subsection{Ableitungen (II)}
@@ -930,9 +957,15 @@ Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
   $\text{artanh}(x)$ & $\frac{1}{1 - x^2}$ \\
   $\text{arccot}(x)$ & $-\frac{1}{1 + x^2}$ \\
   $x^x \ (x > 0)$ & $x^x \cdot (1 + \ln x)$ \\
+  $\cosh(x)$ & $\sinh(x)$ \\
+  $\sinh(x)$ & $\cosh(x)$ \\
   \bottomrule
   \end{tabularx}
 \end{center}
+
+\subsection{Rekursive Integrale}
+
+$J_n = \int \frac{1}{(1 + x^2)^n} dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
 
 \subsection{Ungleichungen}
 \begin{center}
@@ -943,22 +976,6 @@ Angenommen $f,g: D\to \R$ und n-mal differenzierbar:
     $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$\\
     $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
   \end{tabularx}
-\end{center}
-
-\subsection{Trigonometrische Identitäten}
-\begin{center}
- \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-  \toprule
-  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
-  \midrule
-  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
-  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
-  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
-  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
-  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
-  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
-  \bottomrule
- \end{tabularx}
 \end{center}
 
 \subsection{Uneigentliche Integrale}
@@ -975,9 +992,6 @@ $$\int_0^\infty e^{-x}dx = 1$$
 \section{Kochrezepte und Tricks}
 
 \subsection{Gleichmässige Konvergenz}
-\begin{subbox}{Negation der gleichmässigen Konvergenz}
-  Eine Funktionenfolge $(f_n)_{n \geq 0}$ konvergiert \textbf{nicht} gleichmässig gegen eine Funktion $f: D \to \mathbb{R}$, falls $\exists \epsilon > 0, \forall N \in \mathbb{N}, \exists n \geq N, \exists x \in D$ sodass gilt $|f_n(x) - f(x)| \geq \epsilon$.
-\end{subbox}
 \begin{subbox}{Zeige gleichmässige Konvergenz}
   \begin{itemize}
     \item $f$ unstetig und $f_n$ stetig für $\forall n \geq 1$ $\implies$ keine gleichmässige Konvergenz
@@ -985,6 +999,9 @@ $$\int_0^\infty e^{-x}dx = 1$$
     \item $f_n$ stetig für $\forall n \geq 1$, $f$ stetig und $f_n(x) \leq f_{n+1}(x)$ für $\forall x \in D$ und $D$ kompakt $\implies$ gleichmässige Konvergenz
     \item Schätze $|f_n(x) - f(x)| \leq g(n)$ mit einer Funktion $g(n)$ (die also nicht von $x$ abhängt) ab, mit $\limn g(n) = 0$. Dann gilt $\lim_{n \rightarrow \infty} \sup_{x \in D} |f_n(x) - f(x)| = 0 \leq \limn g(n) = 0$.
   \end{itemize}
+\end{subbox}
+\begin{subbox}{Negation der gleichmässigen Konvergenz}
+  Eine Funktionenfolge $(f_n)_{n \geq 0}$ konvergiert \textbf{nicht} gleichmässig gegen eine Funktion $f: D \to \mathbb{R}$, falls $\exists \epsilon > 0, \forall N \in \mathbb{N}, \exists n \geq N, \exists x \in D$ sodass gilt $|f_n(x) - f(x)| \geq \epsilon$.
 \end{subbox}
 
 \subsection{Stetigkeit}
@@ -994,6 +1011,7 @@ $$\int_0^\infty e^{-x}dx = 1$$
     \item Finde $|f(x) - f(x_0)| = \cdots = M|x_0 - x|$.
     \item Falls $M$ von $x$ abhängig ist: $M$ so lange abschätzen, bis $x$ nur noch in der Form von $x - x_0$ vorkommt, und der Rest nur noch von $x_0$ abhängig ist und dann eine geschickte Bedingung an $\delta$ stellen.
     \item $\delta$ in der Form $\delta = \frac{\epsilon}{M}$ wählen. Falls $\delta$ von $x$ abhängt, $\delta = min(\cdots)$.
+    \item Stetigkeit kann oft einfach widerlegt werden, indem eine Folge $(a_n)_{n \geq 1}$ angegeben wird mit mit $\limn a_n = x_0$ aber $\limn f(a_n) \neq f(x_0)$.
   \end{itemize}
 \end{subbox}
 
@@ -1006,6 +1024,14 @@ $$\int_0^\infty e^{-x}dx = 1$$
   \item Für $f: [-a, a] \to \mathbb{R}$ stetig und ungerade, d.h. $f(-x) = -f(x)$ gilt $\int_{-a}^a f(x) dx = 0$.
 \end{itemize}
 
+\subsection{Monotonität}
+
+\begin{itemize}
+  \item Definiere $(b_n)_{n \in \mathbb{N}}$ mit $b_n = a_{n+1} - a_n$. $a_n$ ist monoton wachsend, wenn alle Folgenglieder von $(b_n)_{n \in \mathbb{N}}$ positiv sind.
+  \item Definiere $(b_n)_{n \in \mathbb{N}}$ mit $b_n = \frac{a_{n+1}}{a_n}$. $a_n$ ist monoton wachsend, wenn $\forall n b_n \geq 1$ gilt.
+  \item Induktionsbeweis.
+\end{itemize}
+
 \subsection{Extremwerte}
 \begin{subbox}{Extremwerte}
   Wir möchten nun die Extremwerte einer Funktion $f: [a, b] \to \mathbb{R}$ bestimmen, die auf $(a, b)$ glatt ist. Wir gehen dazu wie folgt vor:
@@ -1013,7 +1039,7 @@ $$\int_0^\infty e^{-x}dx = 1$$
     \item Funktion eingeschränkt auf offenes Intervall untersuchen, d.h. $f|_{(a,b)}: (a, b) \to \mathbb{R}$.
     \item Finde alle $x_0$ sodass $f'(x_0) = 0$.
     \item $f''(x_0) > 0 \implies x_0$ Minimum, $f''(x_0) < 0 \implies x_0$ Maximum
-    \item Falls $f''(x_0) = 0$: Ableiten bis $f^{(n)}(x_0) \neq 0$ oder alternativ Vorzeichenwechsel von $f'$ analysieren. Falls bei $x_0$ ein Wechsel $- \to +$ geschieht, so ist $x_0$ ein Minimum, umgekehrt ein Maxmimum. {
+    \item Falls $f''(x_0) = 0$: Ableiten bis $f^{(n)}(x_0) \neq 0$ oder alternativ Vorzeichenwechsel von $f'$ analysieren. Falls bei $x_0$ ein Wechsel $- \to +$ geschieht, so ist $x_0$ ein Minimum, umgekehrt ein Maximum. {
       \begin{itemize}
         \item $n$ gerade und $f^{(n)}(x_0) < 0 \implies x_0$ Maximum
         \item $n$ gerade und $f^{(n)}(x_0) > 0 \implies x_0$ Minimum
@@ -1023,6 +1049,11 @@ $$\int_0^\infty e^{-x}dx = 1$$
     \item Untersuche Randpunkte $a, b$. Falls $a, b = \pm \infty$, untersuche $\lim_{x \to \infty} f(x)$ und $\lim_{x \to -\infty} f(x)$.
   \end{itemize}
 \end{subbox}
+
+\subsection{Substitution}
+$$\int 3x^2 \cos(x^3) dx$$
+Sei $y = x^3$. Dann folgt $\frac{dy}{dx} = 3x^2 \iff dx = \frac{1}{3x^2} dy$. Substituieren liefert also:
+$$\int cos(y) dy$$
 
 \subsection{Synthetische Division}
 Berechne $\frac{6x^3 + 5x^2 - 7}{3x^2 - 2x - 1} = 2x + 3 + \frac{8x - 4}{3x^2 -2x - 1}$:\\
@@ -1059,11 +1090,5 @@ Aufhören falls:
   \item Produkt einer Reihe einfach integrierbar. Addiere oder subtrahiere je nach Reihe das Integral des Produkts.
   \item Eine Reihe wiederholt sich. Verwende Rekurrenz.
 \end{itemize}
-
-\subsection{Substitution}
-Berechne:
-$$\int 3x^2 \cos(x^3) dx$$
-Sei $y = x^3$. Dann folgt $\frac{dy}{dx} = 3x^2 \iff dx = \frac{1}{3x^2} dy$. Substituieren liefert also:
-$$\int cos(y) dy$$
 
 \end{document}
