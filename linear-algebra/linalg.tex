@@ -2,8 +2,11 @@
 \documentclass[a4paper,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[nswissgerman]{babel}
-
+\usepackage{scrextend}
 \usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage{gauss}
+\usepackage{amssymb} % to import \leadsto
 
 % 3 column landscape layout with fewer margins
 \usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
@@ -11,6 +14,7 @@
 \usepackage{floatrow}
 \usepackage{amsmath}
 
+\changefontsizes[8pt]{8pt}
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 \Ncolumn{3}
@@ -84,6 +88,8 @@
 \def\R{\mathbb{R}}
 \def\dx{\text{ d}x}
 
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
 \begin{document}
 
 \begin{center}
@@ -96,5 +102,44 @@
 \begin{mainbox}{Definition}
 Ein Ausdruck der Form $z = a + ib$, wobei $i^2 = -1$. $a = Re(z)$ ist der Realteil, $b = Im(z)$ ist der Imaginärteil.
 \end{mainbox}
+
+Addition erfolgt komponentenweise, Multiplikation erfolgt unter Annahme des Binomialgesetzes und $i^2 = -1$ (i.e. $z w = (a c - b d) + i (a d + b  c)$). Für Division gilt $\frac{z}{w} = \frac{c + id}{a + ib} = \frac{(ca + bd) + i(ad - cb)}{a^2 + b^2}$.\\
+Die Norm ist definiert als $|z| = \sqrt{Re(z)^2 + Im(z)^2} = \sqrt{z \cdot \overbar{z}}$. Für $z = x + iy$ ist $\overbar{z} = x - iy$ konjugiert-komplex.
+
+\begin{subbox}{}
+$$z \overbar{z} = Re(z)^2 + Im(z)^2$$
+\end{subbox}
+
+Eine komplexe Zahl kann in Polarkoordinaten dargestellt werden. Es gilt $z = re^{i\phi} = r(\cos(\phi) + i\sin(\phi))$.
+
+\section{LGS / Gauss}
+
+\begin{enumerate}
+  \item Wir können Zeilen austauschen, eine Zeile mit $a \in \mathbb{R}\setminus \{0\}$ multiplizieren und Zeilen voneinander subtrahieren bzw. addieren.
+  \item Wir schreiben das lineare Gleichungssystem (LGS) in Matrixform.
+  \item Wir transformieren das LGS in die Zeilenstufenform.
+  \item Wir lösen das LGS von unten nach oben.
+\end{enumerate}
+
+
+
+\section{Tabellen}
+
+\begin{mainbox}{Wichtige Werte}
+  \begin{center} 
+   \begin{tabular}{c|cccccc}
+    deg & 0° & 30° & 45° & 60° & 90° & 180° \\
+    \midrule
+    rad & 0 & $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & $\frac{\pi}{2}$ & $\pi$ \\
+    cos & 1 & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & 0 & -1 \\
+    sin & 0 & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & 1 & 0 \\
+    tan & 0 & $\frac{1}{\sqrt{3}}$ & 1 & $\sqrt{3}$ & $+\infty$ & 0 \\
+   \end{tabular}
+  \end{center}
+\end{mainbox}
+
+\begin{center}
+  \includegraphics[width=\linewidth]{degrees_circle.pdf}
+\end{center}
 
 \end{document}
