@@ -95,7 +95,7 @@
   wo die Koeffizienten \(a_0, \ldots, a_{n-1}\) komplexe Funktionen auf \(I \subset \R\) sind, welche von \(y\) abhängig sein können. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
 \end{mainbox}
 Die Menge \(S\) an Lösungen ist ein Unterraum des Vektorraums der komplexen (oder reellen, wenn die Funktionen $a_i$ reellwertig sind) Funktionen auf \(I\) mit Dimension \(n\). Die Dimension von \(S\) ist $k$ und für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in C^k$ gibt es eine eindeutige Funktion $f \in S$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots, f^{(k-1)}(x_0) = y_{k-1}$. Wenn $b$ und $a_i$ reellwertig sind, gibt es auch eine reellwertige Lösung. \\
-Falls $b$ eine stetige Funktion auf $I$ ist, dann existiert eine Lösung $f_0$ für die inhomogene Gleichung $y^{(k)} + a_{k-1}y^{(k-1)} + \cdots + a_1y' + a_0y = b$ und die Menge $S_b$ ist die Menge der Funktionen $f + f_0$ wobei $f \in S$. Für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in C^k$ gibt es eine eindeutige Funktion $f \in S_b$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots, f^{(k-1)}(x_0) = y_{k-1}$.
+Falls $b$ eine stetige Funktion auf $I$ ist, dann existiert eine Lösung $f_0$ für die inhomogene Gleichung $y^{(k)} + a_{k-1}y^{(k-1)} + \cdots + a_1y' + a_0y = b$ und die Menge $S_b$ ist die Menge der Funktionen $f + f_0$ wobei $f \in S$. Für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in C^k$ gibt es eine eindeutige Funktion $f \in S_b$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots, f^{(k-1)}(x_0) = y_{k-1}$. Falls $b \neq 0$, so ist $S_b$ kein Vektorraum.
 \\
 \(S_0\) das Set der Lösungen zu einer homogenen DGL. Für ein \(b(x)\) ist die Menge der Lösungen \(S_b = \{f_h + f_p \mid f_h \in S_0\}\).
 \subsubsection*{Lineare DGL erkennen}
