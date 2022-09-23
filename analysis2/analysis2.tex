@@ -94,10 +94,20 @@
   Eine gewöhnliche lineare Differentialgleichung ist eine Gleichung, welche Ableitungen enthält. Sie hat die Form \[y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_0y = b(x)\]
   wo die Koeffizienten \(a_0, \ldots, a_{n-1}\) komplexe Funktionen auf \(I \subset \R\) sind, welche von \(y\) abhängig sein können. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
 \end{mainbox}
-Die Menge \(S\) an Lösungen ist ein Unterraum des Vektorraums der komplexen (oder reellen, wenn die Funktionen $a_i$ reellwertig sind) Funktionen auf \(I\) mit Dimension \(n\). Die Dimension von \(S\) ist $k$ und für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in C^k$ gibt es eine eindeutige Funktion $f \in S$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots, f^{(k-1)}(x_0) = y_{k-1}$. Wenn $b$ und $a_i$ reellwertig sind, gibt es auch eine reellwertige Lösung. \\
-Falls $b$ eine stetige Funktion auf $I$ ist, dann existiert eine Lösung $f_0$ für die inhomogene Gleichung $y^{(k)} + a_{k-1}y^{(k-1)} + \cdots + a_1y' + a_0y = b$ und die Menge $S_b$ ist die Menge der Funktionen $f + f_0$ wobei $f \in S$. Für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in C^k$ gibt es eine eindeutige Funktion $f \in S_b$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots, f^{(k-1)}(x_0) = y_{k-1}$. Falls $b \neq 0$, so ist $S_b$ kein Vektorraum.
-\\
-\(S_0\) das Set der Lösungen zu einer homogenen DGL. Für ein \(b(x)\) ist die Menge der Lösungen \(S_b = \{f_h + f_p \mid f_h \in S_0\}\).
+
+\begin{subbox}{Hauptresultat über Lineare ODEs}
+  Sei $I \subseteq \mathbb{R}$ ein offenes Intervall und $y^{(k)} + a_{k-1} y^{(k-1)} + \cdots + a_0 y = b$ eine lineare ODE über $I$ mit stetigen Koeffizienten.
+  \begin{itemize}
+    \item Sei $S_0$ die Menge der Lösungen für $b = 0$ (assoziierte homogene ODE). Dann ist $S_0$ ein Vektorraum der Dimension $k$. Wenn $f_1, \cdots, f_k$ Lösungen sind, dann auch $\alpha_1 f_1 + \cdots \alpha_k f_k$ Lösungen.
+    \item Für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in \mathbb{C}^k$ gibt es ein eindeutiges $f \in S_0$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots$.
+    \item Für jedes $b(x)$ ist die Menge der Lösungen $S_b = \{f + f_p | f \in S_0\}$ wobei $f_p$ eine partikuläre Lösung ist.
+    \item Für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in \mathbb{C}^k$ gibt es ein eindeutiges $f \in S_b$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots$.
+  \end{itemize}
+\end{subbox}
+
+Die Menge $S$ an Lösungen ist ein Subset des Raums der komplexen Funktionen auf $I$ mit Dimension $n$.\\
+\(S_0\) ist das Set der Lösungen zu einer homogenen DGL.
+
 \subsubsection*{Lineare DGL erkennen}
 \begin{itemize}
   \item keine Koeffizienten vor der höchsten Ableitung
@@ -120,11 +130,11 @@ Wir betrachten DGL der Form \[y' + a(x)y = b(x)\]
   \item (partikuläre Lösung) Verwende entweder ``Variation der Konstanten'' oder ``Fundiertes Raten''.
 \end{enumerate}
 \subsection{Variation der Konstanten}
-Sei \(f_p = z(x)e^{-A(x)}\) für eine Funktion \(z: I \to \C\). Dann ist \(z'(x) = b(x) e^{A(x)}\) und somit \[z(x) = \int_{x_0}^x b(t) e^{A(t)} \mathop{dt}\] Daraus erhalten wir \[f_p = \int_{x_0}^x b(t) e^{A(t)} \mathop{dt} \cdot e^{-A(t)}\]
+Wir nehmen an, dass die partikuläre Lösung die homogene Lösung imitiert. Sei \(f_p = z(x)e^{-A(x)}\) für eine Funktion \(z: I \to \C\). Dann ist \(z'(x) = b(x) e^{A(x)}\) (einsetzen in DGL!) und somit \[z(x) = \int_{x_0}^x b(t) e^{A(t)} \mathop{dt}\] Daraus erhalten wir \[f_p = \int_{x_0}^x b(t) e^{A(t)} \mathop{dt} \cdot e^{-A(t)}\]
 
 \subsection{Fundiertes Raten}
 
-Wenn $b(x)$ von einer bestimmten Form ist, versuchen wir folgende $f_p$, wobei wir unseren Versuch in die DGL einsetzen, was uns dann ein Gleichungssystem für die Konstanten gibt:
+Wir nehmen an, dass die partikuläre Lösung $b$ imitiert. Wenn $b(x)$ von einer bestimmten Form ist, versuchen wir folgende $f_p$, wobei wir unseren Versuch in die DGL einsetzen, was uns dann ein Gleichungssystem für die Konstanten gibt:
 
 \begin{center}
   \renewcommand*{\arraystretch}{1.6}
