@@ -167,6 +167,37 @@ Ein homogenes LGS hat die Form $Ax = 0$.
 
 Es gilt immer $r \leq \min(m, n)$.
 
+\section{Matrizen \& Vektoren}
+
+Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element mit $a_{i,j}$ oder $(A)_{i,j}$ bezeichnet wird. Ein $m \times 1$ Vektor ist ein \textbf{Spaltenvektor} und ein $1 \times n$ Vektor ist ein \textbf{Zeilenvektor} (n-Tupel). Die Elemente $a_{jj}, j = 1,2,\cdots,\min(m,n)$ heissen \textbf{Diagonalelemente}. Für eine \textbf{Diagonalmatrix} $A$ gilt $(A)_{ij} = 0$ für $i = j$. Wir bezeichnen die Matrix dann durch die Elemente auf der Diagonale: $A = diag(d_{11}, \cdots, d_{nn})$. Für eine \textbf{obere Dreiecksmatrix} gilt: $(R)_{ij} = 0$ für $i > j$. Für eine \textbf{untere Dreiecksmatrix} gilt: $(L)_{ij} = 0$ für $i < j$.
+
+\begin{subbox}{Multiplikation}
+  Für eine $m \times n$ Matrix $A$ und eine $n \times p$ Matrix $B$ gilt $(AB)_{ij} = \sumn a_{ik} b_{kj}$ wobei $AB$ eine $m \times p$ Matrix ist. Generell \textbf{nicht kommutativ}.
+\end{subbox}
+
+\begin{subbox}{}
+  $(\alpha \beta)A = \alpha(\beta A)$,
+  $(\alpha A)B = \alpha(AB) = A(\alpha B)$,
+  $(\alpha + \beta)A = \alpha A + \beta A$,
+  $\alpha(A + B) = \alpha A + \alpha B$,
+  $A + B = B + A$,
+  $A + (B + C) = (A + B) + C$,
+  $(AB)C = A(BC)$,
+  $(A + B)C = AC + BC$,
+  $A(B + C) = AB + AC$
+\end{subbox}
+
+Eine \textbf{Linearkombination} der Vektoren $a_1, \cdots, a_n$ ist $\alpha_1 a_1 + \cdots + \alpha_n a_n$.\\
+Falls $AB = 0$, so sind $A$ und $B$ \textbf{Nullteiler}.\\
+\begin{subbox}{}
+  \textbf{Transponiert}: $A^T$ wird definiert als $(A^T)_{ij} = (A)_{ji}$.\\
+  \textbf{Hermitesch}: $A^H = (\overbar{A})^T = \overbar{A^T}$.
+\end{subbox}
+Eine Matrix ist \textbf{symmetrisch} falls $A^T = A$ und hermitesch falls $A^H = A$ (Diagonale reell). \textbf{Schiefsymmetrisch} ist sie falls $A^T = -A$. $AB$ ist genau dann symmetrisch falls $AB = BA$, $A^T A$ und $A A^T$ sind  immer symmetrisch.
+\begin{subbox}{}
+  $(A^T)^T = A$, $(A^H)^H = A$, $(\alpha A)^T = \alpha A^T$, $(\alpha A)^H = \overbar{\alpha} A^H$, $(A + B)^T = A^T + B^T$, $(A + B)^H = A^H + B^H$, $(AB)^T = B^T A^T$, $(AB)^H = B^H A^H$
+\end{subbox}
+
 \section{Tabellen}
 
 \begin{mainbox}{Wichtige Werte}
