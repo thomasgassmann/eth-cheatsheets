@@ -130,11 +130,13 @@ $$
 
 \subsection{Polynome}
 
-Bei Polynomen mit komplexen Nullstellen treten die Nullstellen als komplex konjugiertes Paar auf. Für Grad 2, verwende $z = \frac{b \pm \sqrt{b^2 - 4ac}}{2a}$ um ein Polynom $p(z) = 0$ zu lösen. Für $a z^n + c = 0$, verwende $z = \sqrt[n]{-\frac{c}{a}}$.
+Bei Polynomen mit reellen Nullstellen treten die Nullstellen als komplex konjugiertes Paar auf. Für Grad 2, verwende $z = \frac{b \pm \sqrt{b^2 - 4ac}}{2a}$ um ein Polynom $p(z) = 0$ zu lösen. Für $a z^n + c = 0$, verwende $z = \sqrt[n]{-\frac{c}{a}}$.
 
 Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine reelle Nullstelle.
 
 \section{LGS / Gauss}
+
+Ein homogenes LGS hat die Form $Ax = 0$.
 
 \begin{enumerate}
   \item Wir können Zeilen austauschen, eine Zeile mit $a \in \mathbb{R}\setminus \{0\}$ multiplizieren und Zeilen voneinander subtrahieren bzw. addieren.
@@ -143,7 +145,27 @@ Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine 
   \item Wir lösen das LGS von unten nach oben.
 \end{enumerate}
 
+\begin{center}
+  \includegraphics[width=\linewidth]{gauss.png}
+\end{center}
 
+\textbf{Verträglichkeitsbedingungen (VTB):} Falls die Verträglichkeitsbedingungen $c_{r+1} = \cdots = c_m = 0$ nicht erfüllt sind, so gibt es keine Lösung. Bei homogenen LGS sind die Verträglichkeitsbedingungen immer erfüllt. Nur wenn $r < n$ gibt es also nicht-triviale Lösungen.\\
+
+\begin{subbox}{Lösungen}
+  $Ax = b$ hat mindestens eine Lösung gdw. ($r = m$) oder ($r < m$ und VTB sind erfüllt). In diesem Fall gibt es 1 Lösung falls $r = n$, andernfalls eine $n - r$ Schar an Lösungen.
+  \begin{itemize}
+    \item $r = m$: $\begin{cases}
+      r = m = n\text{: eindeutige Lösung, regulär}\\
+      r < n\text{: }\infty\text{ Lösungen mit } n - r \text{ freien Variablen}
+    \end{cases}$\\
+    \item $r < m$: $\begin{cases}
+      r = n\text{: eindeutige Lösung}\\
+      r < n\text{: }\infty\text{ Lösungen mit } n - r \text{ freien Variablen}
+    \end{cases}$
+  \end{itemize}
+\end{subbox}
+
+Es gilt immer $r \leq \min(m, n)$.
 
 \section{Tabellen}
 
