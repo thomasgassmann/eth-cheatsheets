@@ -137,18 +137,35 @@ Wir nehmen an, dass die partikuläre Lösung die homogene Lösung imitiert. Sei 
 Wir nehmen an, dass die partikuläre Lösung $b$ imitiert. Wenn $b(x)$ von einer bestimmten Form ist, versuchen wir folgende $f_p$, wobei wir unseren Versuch in die DGL einsetzen, was uns dann ein Gleichungssystem für die Konstanten gibt:
 
 \begin{center}
-  \renewcommand*{\arraystretch}{1.6}
-  \begin{tabular}{cc} 
+  \renewcommand*{\arraystretch}{1.1}
+  \begin{tabular}{cc}
     \toprule
     $b(x)$ & Raten \\ 
     \midrule
     $a \cdot e^{\alpha x}$ & $b \cdot e^{\alpha x}$\\
+    \hline
     $a \sin(\beta x)$ & $c \sin(\beta x) + d \cos(\beta x)$\\
+    \hline
     $b \cos(\beta x)$ & $c \sin(\beta x) + d \cos(\beta x)$\\
+    \hline
     $a e^{\alpha x} \sin(\beta x)$ & $e^{\alpha x} \Big( c \sin(\beta x) + d \cos(\beta x) \Big)$\\
+    \hline
     $b e^{\alpha x} \cos(\beta x)$ & $e^{\alpha x} \Big( c \sin(\beta x) + d \cos(\beta x) \Big)$\\
-    $P_n(x) e^{\alpha x}$ & $R_n(x) \cdot e^{\alpha x}$\\
+    \hline
+    \begin{tabular}{@{}c@{}}$P_n(x) e^{\alpha x}$ \\ $P_n(\alpha) \neq 0$\end{tabular} & $R_n(x) e^{\alpha x}$\\
+    \hline
+    \begin{tabular}{@{}c@{}}$P_n(x) e^{\alpha x}$ \\ $(x - \alpha)^m | P_n(x)$\end{tabular} & $R_n(x) x^m e^{\alpha x}$\\
+    \hline
+    \begin{tabular}{@{}c@{}}$P_n(x) \sin(\alpha x)$ \\ $P_n(i \alpha) \neq 0$\end{tabular} & $R_n(x) \sin(\alpha x) + S_n(x) \cos(\alpha x)$\\
+    \hline
+    \begin{tabular}{@{}c@{}}$P_n(x) \cos(\alpha x)$ \\ $P_n(i \alpha) \neq 0$\end{tabular} & $R_n(x) \sin(\alpha x) + S_n(x) \cos(\alpha x)$\\
+    \hline
+    \begin{tabular}{@{}c@{}}$P_n(x) \sin(\alpha x)$ \\ $(x - i \alpha)^m | P_n(x)$\end{tabular} & $R_n(x) x^m \sin(\alpha x) + S_n(x) x^m \cos(\alpha x)$\\
+    \hline
+    \begin{tabular}{@{}c@{}}$P_n(x) \cos(\alpha x)$ \\ $(x - i \alpha)^m | P_n(x)$\end{tabular} & $R_n(x) x^m \sin(\alpha x) + S_n(x) x^m \cos(\alpha x)$\\
+    \hline
     $P_n e^{\alpha x} \sin(\beta x)$ & $e^{\alpha x} \left( R_n \sin(\beta x) + S_n \cos(\beta x) \right)$\\
+    \hline
     $P_n e^{\alpha x} \cos(\beta x)$ & $e^{\alpha x} \left( R_n \sin(\beta x) + S_n \cos(\beta x) \right)$\\
     \bottomrule
   \end{tabular}
@@ -157,9 +174,8 @@ Wir nehmen an, dass die partikuläre Lösung $b$ imitiert. Wenn $b(x)$ von einer
 \(P_n, R_n \) und \(S_n\) sind Funktionen von \(x\). 
 
 \begin{enumerate}
-  \item Wenn \(b(x)\) eine Linearkombination der Basisfunktionen ist, dann versuche eine Linearkombination.
+  \item Wenn \(b(x)\) eine Linearkombination der Basisfunktionen ist, dann versuche eine Linearkombination. Partikuläre Lösungen können auch separat gefunden werden und danach addiert werden.
   \item Wenn die geratene Lösung der homogenen Lösung entspricht, dann multipliziere mit \(x^m\), wobei \(x\) die Vielfachheit der Wurzel ist.
-  \item Ist $P_n(\alpha) = 0$ eine Nullstelle, dann ist der Ansatz $x^q R_n(x) e^{\alpha x}$ wobei $q$ die Vielfachheit der Nullstelle ist.
 \end{enumerate}
 
 \subsection{Lineare DGL mit konstanten Koeffizienten}
