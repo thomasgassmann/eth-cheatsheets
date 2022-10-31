@@ -332,6 +332,8 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
   \item Wenn \(m = 1\) ist, dann ist \(f\cdot g\) differenzierbar. Wenn ausserdem \(g \ne 0\) gilt, dann ist es \(f/g\) auch.
   \item Wenn \(f: \X \to Y, g: Y \to \R^m\) beide differenzierbar sind, so gilt \(d(g \circ f)(x_0) = dg(f(x_0)) \circ df(x_0)\). 
   Weiter ist \(J_{g \circ f}(x_0) = J_g(f(x_0)) \cdot J_f(x_0)\).
+  \item Äquivalent dazu: $f$ differenzierbar in $x_0$\\
+  falls $\lim_{x \rightarrow x_0} \frac{f(x) - (f(x_0) + u(x - x_0))}{||x - x_0||} = 0$ für eine lineare Abbildung $u: \mathbb{R}^n \rightarrow \mathbb{R}^m$.
 \end{enumerate}
 Die Ableitung einer Funktion ist gegeben durch
 \begin{align*}
