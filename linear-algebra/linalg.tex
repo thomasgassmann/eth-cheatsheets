@@ -200,6 +200,34 @@ Eine Matrix ist \textbf{symmetrisch} falls $A^T = A$ und hermitesch falls $A^H =
 
 TODO: Korollar 2.8, Satz 2.4, Rank-Nullity Theorem
 
+\begin{subbox}{Norm}
+  Norm in Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\lVert \cdot \rVert: V \mapsto \mathbb{R}$ mit:
+  \begin{itemize}
+    \item positiv definit: $\forall x \in V$, $\lVert x \rVert \geq 0$ und $\lVert x \rVert = 0 \Leftrightarrow x = 0$
+    \item homogen: $\lVert \alpha x \rVert = \lvert \alpha \rvert \cdot \lVert x \rVert$ $\forall x \in V, \forall \alpha \in \mathbb{E}$
+    \item Dreiecksungleichung: $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
+  \end{itemize}
+  Ein Vektorraum mit einer Norm heisst normierter Vektorraum.
+\end{subbox}
+
+\begin{subbox}{Skalarprodukt}
+  Skalarprodukt in einem Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\langle \cdot, \cdot \rangle : V \times V \mapsto \mathbb{E}$ mit folgenden Eigenschaften:
+  \begin{itemize}
+    \item Linear im zweiten Faktor: $\langle x, y + z \rangle = \langle x, y \rangle + \langle x, z \rangle$ und $\langle x, \alpha y \rangle = \alpha \langle x, y \rangle$. Für reelle Skalare auch linear im ersten Faktor.
+    \item  Symmetrisch wenn $\mathbb{E} = \mathbb{R}$ und hermitesch wenn $\mathbb{E} = \mathbb{C}$: $\langle x, y \rangle = \overbar{\langle y, x \rangle}$
+    \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \Leftrightarrow x = 0$
+  \end{itemize}
+  Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vekotrraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum.
+\end{subbox}
+
+\begin{subbox}{Euklidisches Skalarprodukt}
+  $$\langle x, y \rangle := x^Ty$$
+\end{subbox}
+
+\begin{subbox}{Euklidische 2-Norm}
+  $$\lVert x \rVert_2 = \sqrt[]{x^T x}$$
+\end{subbox}
+
 \section{Tabellen}
 
 \begin{mainbox}{Wichtige Werte}
