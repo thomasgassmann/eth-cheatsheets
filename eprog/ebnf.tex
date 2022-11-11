@@ -1,5 +1,5 @@
-\documentclass[UTF8]{ctexart}
-\usepackage[UTF8]{ctex}
+\documentclass[UTF8]{article}
+\usepackage[]{url}
 
 \begin{document}
 
@@ -12,7 +12,7 @@
 \section{Operator Precedence}
 
 \begin{itemize}
-    \item Check http://web.deu.edu.tr/doc/oreily/java/langref/ch04_14.htm#:~:text=In%20an%20expression%20that%20contains,before%20operators%20with%20lower%20precedence.
+    \item Check \url{http://web.deu.edu.tr/doc/oreily/java/langref/ch04_14.htm}
 \end{itemize}
 
 \section{More}
@@ -20,8 +20,17 @@
 \begin{itemize}
     \item Multi-line string with """..."""
     \item a = 0; a = a++; then a = 0 => a = 0; tmp = a; a = a + 1; a = tmp;
-    \item with booleans: & does not short-circuit, && does short-circuit
+    \item with booleans: \& does not short-circuit, \&\& does short-circuit
     \item https://stackoverflow.com/a/25182306/13445631
+\end{itemize}
+
+\section{Imports}
+
+Importieren einer einzelnen Klasse gibt der Klasse einenhohen Stellenwert:
+
+\begin{itemize}
+    \item Mit import foo.* gilt: eine Klasse mit dem selben Name in dieser Package verdeckt die importierte Klasse
+    \item Mit import foo.className gilt: die Klasse mit dem selben Namen verdeckt nicht die importierte Klasse
 \end{itemize}
 
 \end{document}
