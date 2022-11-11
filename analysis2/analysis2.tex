@@ -608,6 +608,13 @@ Sei \(f,g : A \subset R \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes
 \end{subbox}
 
 \subsection{Variablenwechsel}
+
+$f: X \mapsto \R$ differenzierbar mit $X \subseteq \R^n$ offen ist ein Variablenwechsel um $x_0 \in X$ falls es $r > 0$ gibt so dass für $B_r := \{x \in \R^n | ||x-x_0|| < r \}$ gilt dass $Y = f(B_r(x_0))$ offen ist und eine differenzierbare Abbildung $g: Y \mapsto B$ existiert so dass $f \circ g = \mathrm{id}$ bzw. $g \circ f = \mathrm{id}$.
+
+\begin{subbox}{Inverse}
+  Sei $X \subseteq \R^n$ offen, $f: X \mapsto \R^n$ differenzierbar. Wenn für $x_0 \in X$ gilt $det(J_f(x_0)) \neq 0$ ($J_f(x_0)$ ist invertierbar), dann ist $f$ ein Variablenwechsel um $x_0$. Dann gilt $J_g(f(x_0)) = J_f(x_0)^{-1}$.
+\end{subbox}
+
 Sei \(\partial A\) der Rand einer Menge \(A\):
 \begin{align*}
     \partial A = \Big\{ &(x,y) \in \R^2 \mid \forall \delta > 0, \\ &R = (x - \delta, x + \delta) \times (y - \delta, y + \delta), \\
