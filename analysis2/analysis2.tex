@@ -374,6 +374,9 @@ Sei \(k \le 1\) und \(f: \X \mapsto \R\) ist eine Funktion der Klasse \(C^k\) au
   &+ \sum_{m_1 + \cdots + m_n = k} \frac{1}{m_1! \cdots m_n!} \pdv{^k f(x_0) }{x_1^{m_1} \cdots \partial x_n^{m_n}} \cdot y_1^{m_1} \cdots y_n^{m_n}
 \end{align*}
 
+Es gilt $f(x) = T_k f(x - x_0; x_0) + E_k(f, x, x_0)$ mit \\
+$\lim_{x \to x_0} \frac{E_k(f, x, x_0)}{\lVert x - x_0 \rVert^k}$.
+
 \subsubsection*{Beispiele}
 \begin{align*}
   T_1 f(\vec{x}; x_0) &:= f(x_0) + \nabla f(x_0) \cdot \vec{x} \\
