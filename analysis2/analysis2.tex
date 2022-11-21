@@ -420,6 +420,9 @@ Eigenwerte können mit dem charakteristischen Polynom gefunden werden:
   &\Rightarrow ad - (a + d) \lambda + \lambda^2 - bc = 0
 \end{align*}
 Für nichtsymmetrische Matrizen müssen wir für jeden Vektor \(v\) testen, ob \(v^\top A v > 0\) (bzw. \(< 0\)) gilt.
+
+Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt.
+
 \subsubsection*{Marlene Trick}
 
 Sei $M$ eine symmetrische Matrix und $A_k$ die $k \times k$ Blockmatrix der oberen, linken Ecke. Mit $\Delta_k$ bezeichnen wir die Determinante von $A_k$. Nun ist $M$ pos. def. wenn $\Delta_k$ > 0 für alle $k$, weiter ist $M$ neg. def.
@@ -449,8 +452,10 @@ Sei \(f: \X \subset \R^n \mapsto \R\) differenzierbar und \(\X\) eine offene Men
 \[\forall x \in B_r(x_0): f(x) \le (\ge) f(x_0)\]
 Wenn \(x_0 \in \X\) ein lokales Extrema ist, dann gilt ausserdem \(\nabla f(x_0) = 0\).
 
+Wenn $f$ nach $\R$ geht und falls $g$ streng monoton ist, können wir auch die Funktion $g \circ f$ betrachten. Bspw. $g = \ln$ um ein Produkt in eine Summe zu verwandeln.
+
 \subsubsection*{Kritische Punkte}
-Ein Punkt \(x_0 \in \X\) wo \(\nabla f(x_0) = 0\) gilt ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert.
+Ein Punkt \(x_0 \in \X\) wo \(\nabla f(x_0) = 0\) gilt ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
 
 \subsubsection*{Sattelpunkt}
 Wenn ein kritischer Punkt weder Maximum noch Minimum ist, dann nennen wir ihn Sattelpunkt.
@@ -470,9 +475,9 @@ Dies funktioniert nicht, wenn \(x_0\) ein degenerierter kritischer Punkt ist. In
 \subsubsection*{Kritische Punkte mit Nebenbedingungen}
 Wenn wir Minimas/Maximas einer Funktion \(f: \X \mapsto \R\) mit einer Nebenbedingung \(g(x) = 0, g: \X \mapsto \R\) bestimmen wollen, können wir dafür Lagrange-Multiplikatoren verwenden.
 \begin{subbox}{Lagrange-Multiplikator}
-  Sei \(\X \subset \R^n\) offen und \(f,g: \X \mapsto \R\) Funktionen der Klasse \(C^1\). Wenn \(Y = \{x \in \X \mid g(x) = 0\) ist, dann ist \(x_0 \in Y\) ein lokales Extrema, welches die Nebenbedingung erfüllt, falls 
+  Sei \(\X \subset \R^n\) offen und \(f,g: \X \mapsto \R\) Funktionen der Klasse \(C^1\). Wenn \(Y = \{x \in \X \mid g(x) = 0\}\) ist, dann ist \(x_0 \in Y\) ein lokales Extrema, welches die Nebenbedingung erfüllt, falls 
   \[\exists \delta > 0, f(y) \le (\ge) f(x_0), \quad \forall y \in B_\delta(x_0) \cap Y\]
-  gilt. Nun ist entweder \(\nabla g(x_0) = 0\) oder \(\exists \lambda \in \R, \nabla f(x_0) = \lambda \cdot \nabla g(x_0)\), wobei \(\lambda\) dann Lagrange-Multiplikator gennant wird.
+  gilt. Nun ist entweder \(\nabla g(x_0) = 0\) oder \(\exists \lambda \in \R, \nabla f(x_0) = \lambda \cdot \nabla g(x_0)\), wobei \(\lambda\) dann Lagrange-Multiplikator genannt wird.
 \end{subbox}
 \section{Integrale in \texorpdfstring{\(\R^n\)}{Rⁿ}}
 \subsection{Einfache Integrale}
