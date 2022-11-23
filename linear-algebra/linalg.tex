@@ -200,6 +200,14 @@ Eine Matrix ist \textbf{symmetrisch} falls $A^T = A$ und hermitesch falls $A^H =
 
 TODO: Korollar 2.8, Satz 2.4, Rank-Nullity Theorem, matrix orthogonal iff. column vectors are all orthonormal
 
+\section{Vektorräume}
+
+Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine eindeutige Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
+
+Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
+
+\section{Vektorräume mit Skalarprodukt}
+
 \begin{subbox}{Norm}
   Norm in Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\lVert \cdot \rVert: V \mapsto \mathbb{R}$ mit:
   \begin{itemize}
@@ -249,18 +257,16 @@ Orthogonale Matrizen sind für euklidische Normen längentreu, denn $\langle Qx,
   $$\varphi := \arccos \frac{Re \langle x, y \rangle}{\lVert x \rVert \lVert y \rVert}$$
 \end{subbox}
 
-\section{Vektorräume}
-
-Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine eindeutige Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
-
-Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
-
 \begin{mainbox}{Parsevalsche Formel}
   Seien $x, y \in V$, $\{ b_1, \cdots, b_n \}$ eine Orthonormalbasis, so dass $\xi_k := \langle b_k, x \rangle$ und $\eta_k := \langle b_k, y \rangle$. Für $k = 1, \cdots, n$ sind $\xi_k$ und $\eta_k$ die Koordinatenvektoren. 
 
   $$\langle x, y \rangle = \Sigma_{k=1}^n \overbar{\xi_k} \eta_k = \xi^H \eta = \langle \xi, \eta \rangle$$
 
 \end{mainbox}
+
+\begin{subbox}{Orthogonales Komplement}
+  Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
+\end{subbox}
 
 \section{Tabellen}
 

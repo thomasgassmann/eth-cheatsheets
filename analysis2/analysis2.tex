@@ -270,7 +270,8 @@ Sei \(f: \X \subset \R^n \to \R^m\)  und \(x_0 \in \X\). \(f\) ist stetig in \(x
 Eine Menge \(\X \subset \R^n \) ist
 \begin{itemize}
   \item \textbf{beschränkt}, falls die Menge \(\{ ||x|| \mid x \in \X \}\) in \(\R\) beschränkt ist (d.h. \(\exists R \ge 0, \forall x \in \X: ||x|| \le R\)).
-  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subset \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(y \in \X\) konvergiert. Dies kann mit einem Ball visualisiert werden. Urbilder von offenen (resp. geschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. geschlossen). Die Umkehrung ist im Allgemeinen falsch. Gegenbeispiele: \(\frac{1}{k}, <\).
+  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subset \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(y \in \X\) konvergiert. Dies kann mit einem Ball visualisiert werden. Urbilder von offenen (resp. geschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. geschlossen). Die Umkehrung ist im Allgemeinen falsch.\\
+  Gegenbeispiele: \(\frac{1}{k}, <\).
   \item \textbf{kompakt}, falls sie beschränkt und abgeschlossen ist.
   \item \textbf{offen}, falls ihr Komplement \(\R^n \setminus \X\) abgeschlossen ist. Alternativ: für jedes $x \in \X$ gibt es ein $\delta > 0$ so dass $B_\delta(x_0) \subseteq \X$.
   \item \textbf{konvex}, falls \(\forall x, y \in \X: \lambda x + (1 - \lambda)y \in \X\) gilt (die Linie zwischen \(x, y\) ist in \(\X\)).
@@ -419,9 +420,10 @@ Eigenwerte können mit dem charakteristischen Polynom gefunden werden:
   \end{pmatrix}\\
   &\Rightarrow ad - (a + d) \lambda + \lambda^2 - bc = 0
 \end{align*}
-Für nichtsymmetrische Matrizen müssen wir für jeden Vektor \(v\) testen, ob \(v^\top A v > 0\) (bzw. \(< 0\)) gilt.
+Für nichtsymmetrische Matrizen müssen wir für jeden Vektor \(v\) testen, ob \(v^\top A v > 0\) (bzw. \(< 0\)) gilt.\\
+Das Produkt der Eigenwerte entspricht der Determinante von $A$ (doppelte Eigenwerte entsprechend Potenzieren). Die Summe aller Eigenwerte (doppelte Eigenwerte entsprechend Multiplizieren) entspricht der Spur von $A$.
 
-Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt.
+Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt (vorrausgesetzt $\det(A) \neq 0$).
 
 \subsubsection*{Marlene Trick}
 
