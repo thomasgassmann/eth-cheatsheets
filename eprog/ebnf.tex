@@ -48,4 +48,10 @@ Importieren einer einzelnen Klasse gibt der Klasse einenhohen Stellenwert:
     \item Mit import foo.className gilt: die Klasse mit dem selben Namen verdeckt nicht die importierte Klasse
 \end{itemize}
 
+\section{Interfaces}
+
+Alle Methoden in einem Interface sind public. Auch implementierte Interface-Methoden müssen public sein. Man kann aber die Sichtbarkeit des Interfaces selber ändern.
+
+All interface methods are public by default (even if you don't specify it explicitly in the interface definition), so all implementing methods must be public too, since you can't reduce the visibility of the interface method.
+
 \end{document}
