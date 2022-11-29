@@ -608,6 +608,10 @@ Sei \(f,g : A \subset R \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes
   Für eine Region \(D \subset \R^2 := \{ \left(x,y\right) \mid c \le y \le d, G(y) < x < H(y)\) gilt:
   \[\int_D f(x,y) \mathop{dx} \mathop{dy} = \int_c^d \left(\int_{G(y)}^{H(y)} f(x,y)\mathop{dx}\right) \mathop{dy}\]
 \end{mainbox}
+\begin{subbox}{Linienintegral}
+  Das Integral entlang einer Kurve (Kurvenlänge) $\gamma: [0, 1] \mapsto \R^n$ wird berechnet als:
+  $$\int_0^1 \lVert \gamma'(t) \rVert dt$$
+\end{subbox}
 \begin{subbox}{Satz von Stolz}
   Sei \(f: R \mapsto \R\) integrierbar auf \(R = \left[a,b\right] \times \left[c,d\right]\). Sei \(y \mapsto f(x,y)\) integrierbar auf \(\left[c,d\right]\) für jedes \(x \in \left[a,b\right]\). Dann folgt:
   \[\int_R f(x,y) \mathop(d(x,y)) = \int_a^b \left(\int_c^d f(x,y) \mathop{dy}\right) \mathop{dx}\]
