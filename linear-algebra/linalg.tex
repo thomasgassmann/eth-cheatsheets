@@ -14,7 +14,7 @@
 \usepackage{floatrow}
 \usepackage{amsmath}
 
-\changefontsizes[8pt]{8pt}
+\changefontsizes[10pt]{8pt}
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 \Ncolumn{3}
@@ -203,6 +203,8 @@ TODO: Korollar 2.8, Satz 2.4, Rank-Nullity Theorem, matrix orthogonal iff. colum
 \section{Vektorräume}
 
 Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine eindeutige Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
+
+Falls  $f: U \rightarrow V$ und $g: V \rightarrow W$ lineare Abbildungen zwischen Vektorräumen sind so dass $ g \circ f$ ein Isomorphismus ist, dann gilt $V = \operatorname{Im}f \oplus \operatorname{Ker} g$.
 
 Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
 
