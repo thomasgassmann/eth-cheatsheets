@@ -567,6 +567,13 @@ Die Implikation gilt, da $\nabla g = f$ und dem Satz von Schwarz.\\
   \partial_y f_1 - \partial_x f_3 \\
   \partial_x f_2 - \partial_y f_1
 \end{pmatrix}\]
+Man kann sich dies folgendermassen merken:\\
+$$\begin{vmatrix}
+  e_1 & e_2 & e_3\\
+  \partial_x & \partial_y & \partial_z\\
+  f_1 & f_2 & f_3
+\end{vmatrix}$$
+Bildet man die Determinante ist die $j$-te Reihe der Kofaktor von $e_j$.
 \subsection{Riemann-Integral in \texorpdfstring{\(\R^2\)}{R²}}
 \begin{subbox}{Partition in zwei Dimensionen}
   Eine Partition \(P\) eines abgeschlossenen Rechtecks \(R = \left[a,b\right] \times \left[c,d\right]\) ist eine Menge von Rechtecken. Für jede Partition \(P_x : a = x_0 < \ldots < x_n = b\) von \(\left[a,b\right]\) und \(P_y\) (analog) erhalten wir eine Partition \(P_{i,j} = \left[x_{i-1}, x_i\right] \times \left[y_{j-1},y_j\right]\) von \(R\) mit der Fläche \(\mu({P_{i,j}} = (x_i - x_{i-1})(y_j - y_{j-1}))\).
