@@ -270,9 +270,10 @@ Sei \(f: \X \subset \R^n \to \R^m\)  und \(x_0 \in \X\). \(f\) ist stetig in \(x
 Eine Menge \(\X \subset \R^n \) ist
 \begin{itemize}
   \item \textbf{beschränkt}, falls die Menge \(\{ ||x|| \mid x \in \X \}\) in \(\R\) beschränkt ist (d.h. \(\exists R \ge 0, \forall x \in \X: ||x|| \le R\)).
-  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subset \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(y \in \X\) konvergiert. Dies kann mit einem Ball visualisiert werden. Gegenbeispiele: \(\frac{1}{k}, <\).
+  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subset \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(y \in \X\) konvergiert. Dies kann mit einem Ball visualisiert werden. Urbilder von offenen (resp. geschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. geschlossen). Die Umkehrung ist im Allgemeinen falsch.\\
+  Gegenbeispiele: \(\frac{1}{k}, <\).
   \item \textbf{kompakt}, falls sie beschränkt und abgeschlossen ist.
-  \item \textbf{offen}, falls ihr Komplement \(\R^n \setminus \X\) abgeschlossen ist.
+  \item \textbf{offen}, falls ihr Komplement \(\R^n \setminus \X\) abgeschlossen ist. Alternativ: für jedes $x \in \X$ gibt es ein $\delta > 0$ so dass $B_\delta(x_0) \subseteq \X$.
   \item \textbf{konvex}, falls \(\forall x, y \in \X: \lambda x + (1 - \lambda)y \in \X\) gilt (die Linie zwischen \(x, y\) ist in \(\X\)).
 \end{itemize}
 Beispiele:
@@ -281,7 +282,6 @@ Beispiele:
   \item \(\left[a,b\right) \subset \R\) ist weder offen noch abgeschlossen.
   \item \(\R^n\) und \(\varnothing\) sind offen.
   \item \((a_1, b_1) \times (a_2,b_2) \subset \R^2\) ist offen.
-  \item Urbilder von offenen Mengen sind unter stetigen Abbildungen offen. Urbilder von geschlossenen Mengen sind unter stetigen Abbildungen geschlossen. Die Umkehrung ist im Allgemeinen falsch.
 \end{itemize}
 \begin{subbox}{Bolzano-Weierstrass}
   Jede beschränkte Folge in \(\R^n\) hat eine konvergente Teilfolge.
@@ -306,7 +306,6 @@ Partielle Ableitungen haben folgende Eigenschaften:
   \item \(\partial_j(f + g) = \partial_j (f) + \partial_j g\)
   \item \(\partial_j(f \cdot g) = \partial_j (f) \cdot g + \partial_j (g) \cdot f\)
   \item \(\partial_j(f / g) = \frac{\partial_j (f) \cdot g - \partial_j (g) \cdot f}{g^2}\) für \(g \ne 0\)
-  \item Ist $f \in C^k$ ($k \geq 2$), dann spielt die Reihenfolge beim Differenzieren von partiellen Ableitungen der Ordnung $\leq k$ keine Rolle.
 \end{enumerate}
 \begin{mainbox}{Jacobi-Matrix}
 Sei \(f: \X \subset \R^n \to \R^m\) und \(\X\) eine offene Menge. Die Jacobi-Matrix ist eine Matrix mit \(m\) Zeilen und \(n\) Spalten:
@@ -366,15 +365,21 @@ Partielle Ableitungen bis zur Ordnung \(k\) sind kommutativ:
 $$\pdv{f}{x_i, x_j} = \pdv{f}{ x_j, x_i}$$
 
 \begin{mainbox}{Hesse-Matrix}
-  Die Hesse-Matrix ist eine \(n \times n\) symmetrische Matrix, welche die zweite Ableitung definiert:
+  Die Hesse-Matrix ist eine \(n \times n\) symmetrische Matrix, welche die zweite Ableitung für $f: X \subset \mathbb{R}^n \mapsto \mathbb{R}$ definiert:
   \[\text{Hess}_f(x_0) := \left(\pdv{f(x_0)}{x_i, x_j}\right)_{1\le i,j \le n}\] 
 \end{mainbox}
+
+Es gilt wegen der Symmetrie $\text{Hess}_f(x_0) = \nabla^2 f(x_0) = D(\nabla f)(x_0)$.
+
 \subsection{Taylorpolynome}
 Sei \(k \le 1\) und \(f: \X \mapsto \R\) ist eine Funktion der Klasse \(C^k\) auf \(\X\). Sei \(x_0 \in \X\) fix. Das \(k\)-te Taylorpolynom von \(f\) am Punkt \(x_0\) ist das Polynom in \(n\) Variablen vom Grad \(\le k\):
 \begin{align*}
   &T_k f(y; x_0) = f(x_0) + \sum_{i=1}^n \partial_i f(x_0) \cdot y_i + \dots \\
   &+ \sum_{m_1 + \cdots + m_n = k} \frac{1}{m_1! \cdots m_n!} \pdv{^k f(x_0) }{x_1^{m_1} \cdots \partial x_n^{m_n}} \cdot y_1^{m_1} \cdots y_n^{m_n}
 \end{align*}
+
+Es gilt $f(x) = T_k f(x - x_0; x_0) + E_k(f, x, x_0)$ mit \\
+$\lim_{x \to x_0} \frac{E_k(f, x, x_0)}{\lVert x - x_0 \rVert^k}$.
 
 \subsubsection*{Beispiele}
 \begin{align*}
@@ -389,6 +394,11 @@ Eine symmetrische Matrix ist
   \item \textbf{negativ definit}, falls alle Eigenwerte negativ sind.
   \item \textbf{indefinit}, falls sowohl positive als negative Eigenwerte existieren.
 \end{itemize}
+
+Positiv definite Matrizen $A$ zeichnen sich dadurch aus, dass $x^\top A x > 0$ für alle $x \neq 0$ gilt.
+
+Eine symmetrische Matrix ist genau dann positiv definit wenn alle ihre Pivots (Gauss-Elimination ohne Pivotieren) positiv sind.
+
 Eigenwerte können mit dem charakteristischen Polynom gefunden werden:
 \begin{align*}
   \text{det} \left(
@@ -410,7 +420,16 @@ Eigenwerte können mit dem charakteristischen Polynom gefunden werden:
   \end{pmatrix}\\
   &\Rightarrow ad - (a + d) \lambda + \lambda^2 - bc = 0
 \end{align*}
-Für nichtsymmetrische Matrizen müssen wir für jeden Vektor \(v\) testen, ob \(v^\top A v > 0\) (bzw. \(< 0\)) gilt.
+Für nichtsymmetrische Matrizen müssen wir für jeden Vektor \(v\) testen, ob \(v^\top A v > 0\) (bzw. \(< 0\)) gilt.\\
+Das Produkt der Eigenwerte entspricht der Determinante von $A$ (doppelte Eigenwerte entsprechend Potenzieren). Die Summe aller Eigenwerte (doppelte Eigenwerte entsprechend Multiplizieren) entspricht der Spur von $A$.
+
+Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt (vorrausgesetzt $\det(A) \neq 0$).
+
+\subsubsection*{Marlene Trick}
+
+Sei $M$ eine symmetrische Matrix und $A_k$ die $k \times k$ Blockmatrix der oberen, linken Ecke. Mit $\Delta_k$ bezeichnen wir die Determinante von $A_k$. Nun ist $M$ pos. def. wenn $\Delta_k$ > 0 für alle $k$, weiter ist $M$ neg. def.
+wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\Delta_k$ das keiner der beiden Regeln entspricht ein falsches Vorzeichen hat.
+
 \subsubsection*{Determinante in drei Dimensionen}
 \begin{align*}
   a \cdot \text{det}
@@ -435,8 +454,10 @@ Sei \(f: \X \subset \R^n \mapsto \R\) differenzierbar und \(\X\) eine offene Men
 \[\forall x \in B_r(x_0): f(x) \le (\ge) f(x_0)\]
 Wenn \(x_0 \in \X\) ein lokales Extrema ist, dann gilt ausserdem \(\nabla f(x_0) = 0\).
 
+Wenn $f$ nach $\R$ geht und falls $g$ streng monoton ist, können wir auch die Funktion $g \circ f$ betrachten. Bspw. $g = \ln$ um ein Produkt in eine Summe zu verwandeln.
+
 \subsubsection*{Kritische Punkte}
-Ein Punkt \(x_0 \in \X\) wo \(\nabla f(x_0) = 0\) gilt ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert.
+Ein Punkt \(x_0 \in \X\) wo \(\nabla f(x_0) = 0\) gilt ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
 
 \subsubsection*{Sattelpunkt}
 Wenn ein kritischer Punkt weder Maximum noch Minimum ist, dann nennen wir ihn Sattelpunkt.
@@ -456,9 +477,9 @@ Dies funktioniert nicht, wenn \(x_0\) ein degenerierter kritischer Punkt ist. In
 \subsubsection*{Kritische Punkte mit Nebenbedingungen}
 Wenn wir Minimas/Maximas einer Funktion \(f: \X \mapsto \R\) mit einer Nebenbedingung \(g(x) = 0, g: \X \mapsto \R\) bestimmen wollen, können wir dafür Lagrange-Multiplikatoren verwenden.
 \begin{subbox}{Lagrange-Multiplikator}
-  Sei \(\X \subset \R^n\) offen und \(f,g: \X \mapsto \R\) Funktionen der Klasse \(C^1\). Wenn \(Y = \{x \in \X \mid g(x) = 0\) ist, dann ist \(x_0 \in Y\) ein lokales Extrema, welches die Nebenbedingung erfüllt, falls 
+  Sei \(\X \subset \R^n\) offen und \(f,g: \X \mapsto \R\) Funktionen der Klasse \(C^1\). Wenn \(Y = \{x \in \X \mid g(x) = 0\}\) ist, dann ist \(x_0 \in Y\) ein lokales Extrema, welches die Nebenbedingung erfüllt, falls 
   \[\exists \delta > 0, f(y) \le (\ge) f(x_0), \quad \forall y \in B_\delta(x_0) \cap Y\]
-  gilt. Nun ist entweder \(\nabla g(x_0) = 0\) oder \(\exists \lambda \in \R, \nabla f(x_0) = \lambda \cdot \nabla g(x_0)\), wobei \(\lambda\) dann Lagrange-Multiplikator gennant wird.
+  gilt. Nun ist entweder \(\nabla g(x_0) = 0\) oder \(\exists \lambda \in \R, \nabla f(x_0) = \lambda \cdot \nabla g(x_0)\), wobei \(\lambda\) dann Lagrange-Multiplikator genannt wird.
 \end{subbox}
 \section{Integrale in \texorpdfstring{\(\R^n\)}{Rⁿ}}
 \subsection{Einfache Integrale}
@@ -488,6 +509,7 @@ Wegintegrale haben folgende Eigenschaften:
     \tilde{\gamma} &= \gamma \circ \varPhi = \gamma(\varPhi)\\
     \Rightarrow &\int_\gamma f(s) \; ds = \int_{\tilde{\gamma}} f(s) \; ds
   \end{align*}
+  Für die Reparametrisierung $\varPhi$ muss dann gelten $\varPhi(c) = a, \varPhi(d) = b, \varPhi \in C'$.
   \item Sei \(\gamma_1 + \gamma_2\) ein Pfad gegeben durch die Vereinigung zweier Kurven. Dann gilt
   \begin{align*}
     \gamma_1 + \gamma_2 &:=
@@ -509,11 +531,12 @@ Ein differenzierbares skalares Feld \(g: \X \subset \R^n \mapsto \R\) mit \(\nab
   &= \int_a^b \frac{d}{dt} (g \circ \gamma) \; dt\\
   &= (g \circ \gamma)(b) - (g \circ \gamma)(a)
 \end{align*}
+Der Wert hängt somit nur vom Start- und Endpunkt ab.
 
 \subsection{Konservative Vektorfelder}
 Sei \(\X\) offen und \(f: \X \subset \R^n \mapsto \R^n\) ein stetiges Vektorfeld. Die folgenden Aussagen sind äquivalent:
 \begin{enumerate}
-  \item Falls für irgendwelche \(x_1, x_2 \in \X\) das Wegintegral \(\int_\gamma f(s) ds\) unabhängig von der Kurve in \(\X\) von \(x_1\) nach \(x_2\) ist, dann ist das Vektorfeld \(f\) konservativ.
+  \item Falls für alle \(x_1, x_2 \in \X\) das Wegintegral \(\int_\gamma f(s) ds\) unabhängig von der Kurve in \(\X\) von \(x_1\) nach \(x_2\) ist, dann ist das Vektorfeld \(f\) konservativ.
   \item Jedes Wegintegral in \(f\) entlang einer geschlossenen Kurve (Schlaufe) ist 0.
   \item Ein Potential für \(f\) existiert.
 \end{enumerate}
@@ -537,6 +560,7 @@ Wenn \(\X\) eine sternförmige, offene Teilmenge von \(\R^n\) und \(f \in C^1\) 
   \end{pmatrix}
   \quad &\Rightarrow \quad \text{$f$ ist konservativ}
 \end{align*}
+Die Implikation gilt, da $\nabla g = f$ und dem Satz von Schwarz.\\
 \(\text{curl}(f)\) ist definiert als
 \[\text{curl}(f) := \begin{pmatrix}
   \partial_y f_3 - \partial_z f_2 \\
@@ -584,6 +608,10 @@ Sei \(f,g : A \subset R \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes
   Für eine Region \(D \subset \R^2 := \{ \left(x,y\right) \mid c \le y \le d, G(y) < x < H(y)\) gilt:
   \[\int_D f(x,y) \mathop{dx} \mathop{dy} = \int_c^d \left(\int_{G(y)}^{H(y)} f(x,y)\mathop{dx}\right) \mathop{dy}\]
 \end{mainbox}
+\begin{subbox}{Linienintegral}
+  Das Integral entlang einer Kurve (Kurvenlänge) $\gamma: [0, 1] \mapsto \R^n$ wird berechnet als:
+  $$\int_0^1 \lVert \gamma'(t) \rVert dt$$
+\end{subbox}
 \begin{subbox}{Satz von Stolz}
   Sei \(f: R \mapsto \R\) integrierbar auf \(R = \left[a,b\right] \times \left[c,d\right]\). Sei \(y \mapsto f(x,y)\) integrierbar auf \(\left[c,d\right]\) für jedes \(x \in \left[a,b\right]\). Dann folgt:
   \[\int_R f(x,y) \mathop(d(x,y)) = \int_a^b \left(\int_c^d f(x,y) \mathop{dy}\right) \mathop{dx}\]
@@ -691,6 +719,18 @@ Um Flächen mit dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit
 \end{mainbox}
 
 Für ein monisches Polynom $x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0$ muss jede Nullstelle $a_0$ teilen.
+
+\subsubsection{Potenzreihen}
+\begin{align*}
+\exp(x) &= \sumn \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots & r &= \infty \\
+\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
+\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots & r &= \infty \\
+\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots & r &= 1 \\
+\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} & r &= \infty \\
+\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} & r &= \infty \\
+\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= 1 \\
+e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
+\end{align*}
 
 \section{Trigonometrie}
 

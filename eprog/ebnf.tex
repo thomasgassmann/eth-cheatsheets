@@ -9,6 +9,21 @@
     \item wenn es keine Klammern gibt: Aufreihung bindet stärker als Auswahl
 \end{itemize}
 
+\section{Protected in Java}
+
+\begin{itemize}
+    \item Protected: Subclasses oder aktuelles Package können zugreifen
+    \item Bei Access von anderem Package: kann nur auf aktuellen Typ zugreifen (siehe protected 1 png, protected 2 png)
+\end{itemize}
+
+
+\section{Checked Exceptions}
+
+\begin{itemize}
+    \item Unchecked sind alle Errors, alle RuntimeExceptions
+    \item see exceptions.png
+\end{itemize}
+
 \section{Operator Precedence}
 
 \begin{itemize}
@@ -32,5 +47,11 @@ Importieren einer einzelnen Klasse gibt der Klasse einenhohen Stellenwert:
     \item Mit import foo.* gilt: eine Klasse mit dem selben Name in dieser Package verdeckt die importierte Klasse
     \item Mit import foo.className gilt: die Klasse mit dem selben Namen verdeckt nicht die importierte Klasse
 \end{itemize}
+
+\section{Interfaces}
+
+Alle Methoden in einem Interface sind public. Auch implementierte Interface-Methoden müssen public sein. Man kann aber die Sichtbarkeit des Interfaces selber ändern.
+
+All interface methods are public by default (even if you don't specify it explicitly in the interface definition), so all implementing methods must be public too, since you can't reduce the visibility of the interface method.
 
 \end{document}

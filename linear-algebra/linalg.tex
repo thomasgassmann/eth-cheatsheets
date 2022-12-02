@@ -14,7 +14,7 @@
 \usepackage{floatrow}
 \usepackage{amsmath}
 
-\changefontsizes[8pt]{8pt}
+\changefontsizes[10pt]{8pt}
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 \Ncolumn{3}
@@ -198,7 +198,21 @@ Eine Matrix ist \textbf{symmetrisch} falls $A^T = A$ und hermitesch falls $A^H =
   $(A^T)^T = A$, $(A^H)^H = A$, $(\alpha A)^T = \alpha A^T$, $(\alpha A)^H = \overbar{\alpha} A^H$, $(A + B)^T = A^T + B^T$, $(A + B)^H = A^H + B^H$, $(AB)^T = B^T A^T$, $(AB)^H = B^H A^H$
 \end{subbox}
 
-TODO: Korollar 2.8, Satz 2.4, Rank-Nullity Theorem
+TODO: Korollar 2.8, Satz 2.4, Rank-Nullity Theorem, matrix orthogonal iff. column vectors are all orthonormal
+
+\begin{subbox}{}
+  Seien $A := \begin{psmallmatrix} a_1 & a_2 & \cdots & a_n \end{psmallmatrix} \in \mathbb{E}^{m \times n}, B := \begin{psmallmatrix} b_1 & b_2 & \cdots & b_n \end{psmallmatrix} \in \mathbb{E}^{n \times n}$. Dann gilt $AB = \begin{psmallmatrix} \sum_{i=1}^n b_{i1} a_i & \sum_{i=1}^n b_{i2} a_i & \cdots & \sum_{i=1}^n b_{in} a_i \end{psmallmatrix} \in \mathbb{E}^{m \times n}$.
+\end{subbox}
+
+\section{Vektorräume}
+
+Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine eindeutige Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
+
+Falls  $f: U \rightarrow V$ und $g: V \rightarrow W$ lineare Abbildungen zwischen Vektorräumen sind so dass $ g \circ f$ ein Isomorphismus ist, dann gilt $V = \operatorname{Im}f \oplus \operatorname{Ker} g$.
+
+Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
+
+\section{Vektorräume mit Skalarprodukt}
 
 \begin{subbox}{Norm}
   Norm in Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\lVert \cdot \rVert: V \mapsto \mathbb{R}$ mit:
@@ -224,9 +238,43 @@ TODO: Korollar 2.8, Satz 2.4, Rank-Nullity Theorem
   $$\langle x, y \rangle := x^Ty$$
 \end{subbox}
 
+Orthogonale Matrizen sind für euklidische Normen längentreu, denn $\langle Qx, Qy \rangle = x^\top Q^\top Q y = x^\top y$.
+
+\begin{subbox}{Euklidisches Skalarprodukt}
+  $$\langle x, y \rangle := x^Ty$$
+\end{subbox}
+
 \begin{subbox}{Euklidische 2-Norm}
   $$\lVert x \rVert_2 = \sqrt[]{x^T x}$$
 \end{subbox}
+
+\begin{subbox}{Skalarprodukte über $\R^n$}
+  $\langle x, y \rangle$ ist ein Skalarprodukt über $\R^n$ genau dann wenn $\langle x, y \rangle = x^T A y$ wobei $A$ eine symmetrische Matrix mit strikt positiven Eigenwerten ist (positiv-definit).
+\end{subbox}
+
+\begin{mainbox}{Cauchy-Schwarz}
+  Sei $V$ ein Vektorraum über $\mathbb{E}$ mit Skalarprodukt.
+  $$| \langle x, y \rangle | ^2 \leq \langle x, x \rangle \langle y, y \rangle$$
+  Das Gleichheitszeichen gilt genau dann wenn $x$ und $y$ linear abhängig sind.
+\end{mainbox}
+
+\begin{subbox}{Winkel}
+  Seien $x, y, \in V$. Der Winkel zwischen $x$ und $y$ ist gegeben als:
+  $$\varphi := \arccos \frac{Re \langle x, y \rangle}{\lVert x \rVert \lVert y \rVert}$$
+\end{subbox}
+
+\begin{mainbox}{Parsevalsche Formel}
+  Seien $x, y \in V$, $\{ b_1, \cdots, b_n \}$ eine Orthonormalbasis, so dass $\xi_k := \langle b_k, x \rangle$ und $\eta_k := \langle b_k, y \rangle$. Für $k = 1, \cdots, n$ sind $\xi_k$ und $\eta_k$ die Koordinatenvektoren. 
+
+  $$\langle x, y \rangle = \Sigma_{k=1}^n \overbar{\xi_k} \eta_k = \xi^H \eta = \langle \xi, \eta \rangle$$
+
+\end{mainbox}
+
+\begin{subbox}{Orthogonales Komplement}
+  Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
+\end{subbox}
+
+\textbf{Satz 6.3:} A set $M$ of pairwise orthogonal vectors is linearly independent if $O \notin M$.
 
 \section{Tabellen}
 
