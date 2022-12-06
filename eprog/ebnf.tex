@@ -54,4 +54,20 @@ Alle Methoden in einem Interface sind public. Auch implementierte Interface-Meth
 
 All interface methods are public by default (even if you don't specify it explicitly in the interface definition), so all implementing methods must be public too, since you can't reduce the visibility of the interface method.
 
+\section{Collections}
+
+\begin{itemize}
+    \item TreeSet: sortiert nach compareTo, analog TreeMap
+    \item HashSet: nicht sortiert nach hashcode/equals, analog HashMap
+    \item LinkedHashSet: preserves insertion order, analog LinkedHashMap
+    \item ArrayList
+    \item LinkedList
+\end{itemize}
+
+\begin{itemize}
+    \item set union = set1.addAll(set2)
+    \item set intersection = set1.retainAll(set2)
+    \item set difference = set1.removeAll(set2)
+\end{itemize}
+
 \end{document}
