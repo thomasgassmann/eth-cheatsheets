@@ -665,12 +665,34 @@ Sei \(\partial A\) der Rand einer Menge \(A\):
 Sei \(\varphi : B \mapsto A\) eine stetige Abbildung, wobei \(A= A_0 \cup \partial A, \) \(B = B_0 \cup \partial B\) kompakte Mengen mit \(A_0, B_0\) offen und \(\partial A, \partial B\) Nullmengen sind. Wenn \(\varphi : B \setminus \N \mapsto A\) injektiv ist und \(N \subset B\) die Nullmenge ist, dann folgt
 \[\int_A f(x,y) \mathop{d(x,y)} = \int_B f(\varphi(u,v)) \cdot \left|\det J_\varphi (u,v)\right| \mathop{d(u,v)}\]
 \begin{enumerate}
-  \item Polarkoordinaten: \(\mathop{dx}\mathop{dy} = r \mathop{dr} \mathop{d\theta}\)
-  \item Zylindrische Koordinaten: \(\mathop{dx} \mathop{dy} \mathop{dz} = r \mathop{dr} \mathop{d\theta} \mathop{dz}\)
-  \item Kugelkoordinaten: \(\mathop{dx}\mathop{dy}\mathop{dz} = r^2 \sin(\varphi) \mathop{dr} \mathop{d\theta} \mathop{d\varphi}\)
+  \item{
+    Polarkoordinaten: \(\mathop{dx}\mathop{dy} = r \mathop{dr} \mathop{d\theta}\)\\
+    $$\varPhi: (0, R) \times (0, 2\pi) \mapsto \R^2$$
+    $$\varPhi(r, \theta) = \begin{bmatrix}
+      r \cos(\theta) \\
+      r \sin(\theta)
+    \end{bmatrix}$$
+  }
+  \item{
+    Zylindrische Koordinaten: \(\mathop{dx} \mathop{dy} \mathop{dz} = r \mathop{dr} \mathop{d\theta} \mathop{dz}\)\\
+    $$\varPhi: (0, R) \times (0, 2\pi) \times (0, L) \mapsto \R^3$$
+    $$\varPhi(r, \varphi, z) = \begin{bmatrix}
+      r \cos(\varphi) \\
+      r \sin(\varphi) \\
+      z
+    \end{bmatrix}$$
+  }
+  \item{
+    Kugelkoordinaten: \(\mathop{dx}\mathop{dy}\mathop{dz} = r^2 \sin(\varphi) \mathop{dr} \mathop{d\theta} \mathop{d\varphi}\)\\
+    $$\varPhi: (0, R) \times (0, 2\pi) \times (0, \pi) \mapsto \R^3$$
+    $$\varPhi(r, \theta, \varphi) = \begin{bmatrix}
+      r \cos(\theta) \sin(\varphi) \\
+      r \sin(\theta) \sin(\varphi) \\
+      r \cos(\varphi)
+    \end{bmatrix}$$\\
+    Da wir $\varphi$ auf $(0, \pi)$ definieren, benötigen wir keinen Absolutbetrag.
+  }
 \end{enumerate}
-
-TODO: add transformation for polar coodiantes zylidniral and  spherical
 
 \textbf{Achtung: Multiplikation mit der Determinante von Jacobi-Matrix nicht vergessen!}
 
