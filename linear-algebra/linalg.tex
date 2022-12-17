@@ -87,6 +87,8 @@
 \def\sumk{\sum_{k=1}^\infty}
 \def\sumn{\sum_{n=0}^\infty}
 \def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\E{\mathbb{E}}
 \def\dx{\text{ d}x}
 
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
@@ -191,12 +193,12 @@ Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element 
 Eine \textbf{Linearkombination} der Vektoren $a_1, \cdots, a_n$ ist $\alpha_1 a_1 + \cdots + \alpha_n a_n$.\\
 Falls $AB = 0$, so sind $A$ und $B$ \textbf{Nullteiler}.\\
 \begin{subbox}{}
-  \textbf{Transponiert}: $A^T$ wird definiert als $(A^T)_{ij} = (A)_{ji}$.\\
-  \textbf{Hermitesch}: $A^H = (\overbar{A})^T = \overbar{A^T}$.
+  \textbf{Transponiert}: $A\top$ wird definiert als $(A^\top)_{ij} = (A)_{ji}$.\\
+  \textbf{Hermitesch}: $A^H = (\overbar{A})^\top = \overbar{A^\top}$.
 \end{subbox}
-Eine Matrix ist \textbf{symmetrisch} falls $A^T = A$ und hermitesch falls $A^H = A$ (Diagonale reell). \textbf{Schiefsymmetrisch} ist sie falls $A^T = -A$. $AB$ ist genau dann symmetrisch falls $AB = BA$, $A^T A$ und $A A^T$ sind  immer symmetrisch.
+Eine Matrix ist \textbf{symmetrisch} falls $A^\top = A$ und hermitesch falls $A^H = A$ (Diagonale reell). \textbf{Schiefsymmetrisch} ist sie falls $A^\top = -A$. $AB$ ist genau dann symmetrisch falls $AB = BA$, $A^\top A$ und $A A^\top$ sind  immer symmetrisch.
 \begin{subbox}{}
-  $(A^T)^T = A$, $(A^H)^H = A$, $(\alpha A)^T = \alpha A^T$, $(\alpha A)^H = \overbar{\alpha} A^H$, $(A + B)^T = A^T + B^T$, $(A + B)^H = A^H + B^H$, $(AB)^T = B^T A^T$, $(AB)^H = B^H A^H$
+  $(A^\top)^\top = A$, $(A^H)^H = A$, $(\alpha A)^\top = \alpha A^\top$, $(\alpha A)^H = \overbar{\alpha} A^H$, $(A + B)^\top = A^\top + B^\top$, $(A + B)^H = A^H + B^H$, $(AB)^\top = B^\top A^\top$, $(AB)^H = B^H A^H$
 \end{subbox}
 
 TODO: Korollar 2.8, Satz 2.4, Rank-Nullity Theorem, matrix orthogonal iff. column vectors are all orthonormal
@@ -214,6 +216,18 @@ $A := \begin{psmallmatrix}
   \vdots \\
   b_n^\top
 \end{psmallmatrix} \in \R^{n \times k}$, dann gilt $AB = \sum_{i=0}^n a_k b_k^\top$.
+
+Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. Multipliziert man eine Diagonalmatrix von rechts, dann Multipliziert dies die Spalten.
+
+
+\begin{subbox}{Definite}
+  Eine Matrix $A$ ist positiv-definit (positiv-semidefinit), falls $\forall x \in \E^n$, $x^H A x > 0$ ($\geq 0$).
+\end{subbox}
+
+Eine symmetrische Matrix $A$ ist genau dann positiv-definit (positiv-semidefinit) falls alle Eigenwerte strikt positiv (positiv) sind.
+
+Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt (vorrausgesetzt $\det(A) \neq 0$).
+
 
 \section{Vektorräume}
 
@@ -246,21 +260,21 @@ Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle 
 \end{subbox}
 
 \begin{subbox}{Euklidisches Skalarprodukt}
-  $$\langle x, y \rangle := x^Ty$$
+  $$\langle x, y \rangle := x^\top y$$
 \end{subbox}
 
 Orthogonale Matrizen sind für euklidische Normen längentreu, denn $\langle Qx, Qy \rangle = x^\top Q^\top Q y = x^\top y$.
 
 \begin{subbox}{Euklidisches Skalarprodukt}
-  $$\langle x, y \rangle := x^Ty$$
+  $$\langle x, y \rangle := x^\top y$$
 \end{subbox}
 
 \begin{subbox}{Euklidische 2-Norm}
-  $$\lVert x \rVert_2 = \sqrt[]{x^T x}$$
+  $$\lVert x \rVert_2 = \sqrt[]{x^\top x}$$
 \end{subbox}
 
 \begin{subbox}{Skalarprodukte über $\R^n$}
-  $\langle x, y \rangle$ ist ein Skalarprodukt über $\R^n$ genau dann wenn $\langle x, y \rangle = x^T A y$ wobei $A$ eine symmetrische Matrix mit strikt positiven Eigenwerten ist (positiv-definit).
+  $\langle x, y \rangle$ ist ein Skalarprodukt über $\R^n$ genau dann wenn $\langle x, y \rangle = x^\top A y$ wobei $A$ eine hermitesche Matrix mit strikt positiven Eigenwerten ist (positiv-definit).
 \end{subbox}
 
 \begin{mainbox}{Cauchy-Schwarz}
@@ -293,12 +307,36 @@ TODO: positiv definit von ana2 summary, all eigenvlaues positive
 
 TODO: Satz 8.12
 
-\section{Eigenwerte}
+\section{Eigenwerte und Eigenvektoren}
 
 \begin{subbox}{Eigenschaften von Eigenwerten und Eigenvektoren}
   Für jede Matrix $A \in \mathbb{E}^{n \times n}$ gilt:
   $$\det(A) = \prod_{i=1}^{n} \lambda_i$$
   $$\Tr(A) = \Sigma_{i=1}^n \lambda_i$$
+\end{subbox}
+
+\section{Spektral- und Eigenwertzerlegung}
+
+Wenn $\E^n$ eine Basis aus Eigenvektoren von $A \in \E^{n \times n}$ besitzt, so ist $A$ ähnlich zu einer Diagonalmatrix $\Lambda$.
+
+$$A \underbrace{\begin{bsmallmatrix}
+  \vert & \vert & \vert \\
+  v_1   & \cdots & v_n   \\
+  \vert & \vert & \vert
+\end{bsmallmatrix}}_V = \underbrace{\begin{bsmallmatrix}
+  \vert & \vert & \vert \\
+  v_1   & \cdots & v_n   \\
+  \vert & \vert & \vert
+\end{bsmallmatrix}}_V \underbrace{\begin{bsmallmatrix}
+  \lambda_1 & \cdots & 0 \\
+  \vdots & \ddots & \vdots \\
+  0 & \cdots & \lambda_n
+\end{bsmallmatrix}}_\Lambda$$ $$ A = V \Lambda V^{-1}, Av_j = v_j \lambda_j, j = 1, \cdots, n$$
+
+$A$ wird durch $V$ diagonalisiert.
+
+\begin{subbox}{Normale Matrizen}
+  Eine Matrix $A \in \E^{n \times n}$ ist normal, falls $A^H A = A A^H$. $A$ ist genau dann diagonalisierbar durch eine unitäre Matrix über $\C$ falls $A$ normal ist. 
 \end{subbox}
 
 TODO: last chapoter, cahpter 10 missing in summary danny
