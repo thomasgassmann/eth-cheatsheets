@@ -713,10 +713,10 @@ Ein reguläres Gebiet ist eine offene, beschränkte Teilmenge \(A\subset \R^2\),
 Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) bildet, hat einen positiven Umlaufsinn, falls \((n(t), \gamma'(t))\) eine positiv orientierte Basis von \(\R^2\) bildet. Dabei ist \(n(t)\) der Einheitsvektor, welcher orthogonal zu \(\gamma'(t)\) steht und von \(A\) weg zeigt. (Intuitiv: wenn die umschlossene Menge immer ``links'' liegt.)
 
 \begin{mainbox}{Satz von Green}
-  Sei \(A \subset \R^2\) ein reguläres Gebiet und \(F: U \mapsto \R^2\) ein Vektorfeld der Klasse \(C^1\), wobei \((A \cup \partial A) \subset U \subset \R^2\). Dann gilt
-  \[\int_{\partial a} F(x) \mathop{ds} = \int \int_A \left(\partial_x f_2 - \partial_y f_1\right) \mathop{dx} \mathop{dy}\]
+  Sei \(A \subset \R^2\) ein reguläres Gebiet und \(f: U \mapsto \R^2\) ein Vektorfeld der Klasse \(C^1\), wobei \((A \cup \partial A) \subset U \subset \R^2\). Dann gilt
+  \[\int_{\partial A} f(x) \mathop{ds} = \int \int_A \left(\partial_x f_2 - \partial_y f_1\right) \mathop{dx} \mathop{dy}\]
 \end{mainbox}
-Um Flächen mit dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit \(\text{curl}(f) = 1\), beispielsweise \[f = (0,x) \text{ oder } f(-y, 0)\]
+ dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit \(\text{curl}(f) = 1\), beispielsweise \[f = (0,x) \text{, } f = (\frac{-y}{2}, \frac{x}{2}) \text{ oder } f = (-y, 0)\]
 
 \section{Themen aus Analysis I}
 \begin{mainbox}{Partielle Integration}
