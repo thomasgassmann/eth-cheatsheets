@@ -19,6 +19,11 @@
 \setlength{\columnsep}{1cm}
 \Ncolumn{3}
 \DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Rowspace}{R}
+\DeclareMathOperator{\Nullspace}{N}
+\DeclareMathOperator{\Kernel}{Ker}
 
 % define nice looking boxes
 \usepackage[most]{tcolorbox}
@@ -338,6 +343,29 @@ $A$ wird durch $V$ diagonalisiert.
 \begin{subbox}{Normale Matrizen}
   Eine Matrix $A \in \E^{n \times n}$ ist normal, falls $A^H A = A A^H$. $A$ ist genau dann diagonalisierbar durch eine unitäre Matrix über $\C$ falls $A$ normal ist. 
 \end{subbox}
+
+\section{Singulärwärtszerlegung}
+
+Die Singulärwärtszerlegung existiert für jede Matrix $A \in \E^{m \times n}$. $A^H A$ ist immer hermitesch und positiv-definit. Es existiert also eine Spektralzerlegung:
+
+\begin{align*}
+  A^H A V = V \Lambda & \xRightarrow[\text{Umordnung}]{\lambda = \sigma^2} & A^H A V_r = V_r \Sigma_r^2\\
+  & \implies & V_r^H A^H A V_r = \Sigma_r^2\\
+  & \implies & \underbrace{(\Sigma_r^{-1} V_r^H A^H)}_{U_r^{-1}} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r} = I\\
+\end{align*}
+
+$U_r$ kann zu einer unitären Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^H A$. $V$ diagonalisiert $A^H A$, $U$ diagonalisiert $A A^H$.
+
+$$A = U \Sigma V^H, AA^H = U \Sigma_m^2 U^H, A^H A = V \Sigma_n^2 V^H$$
+
+Ausserdem gilt $A^H = V \Sigma^T U^H$ und falls $A$ invertierbar ist $A^{-1} = V \Sigma^{-1} U^H$.
+
+\begin{itemize}
+  \item $\{u_1, \cdots, u_r\}$: Basis von $\Image A = \Rowspace(A)$
+  \item $\{u_{r+1}, \cdots, u_m\}$: Basis von $\Kernel A^H = \Nullspace(A^H)$
+  \item $\{v_1, \cdots, v_r\}$: Basis von $\Image A^H = \Rowspace(A^H)$
+  \item $\{v_{r+1}, \cdots, v_m\}$: Basis von $\Kernel A = \Nullspace(A)$
+\end{itemize}
 
 TODO: last chapoter, cahpter 10 missing in summary danny
 
