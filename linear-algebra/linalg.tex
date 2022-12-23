@@ -326,10 +326,6 @@ Für $A, B$ unitär (dasselbe für orthogonal) gilt:
   \item $A^{-1}$, $AB$ unitär
 \end{itemize}
 
-Falls $\langle x, y \rangle = 0$, so sind $x$ und $y$ orthogonal ($x \perp y$). 
-
-Unitäre Matrizen sind längentreu, denn $\langle Qx, Qy \rangle = x^H Q^H Q y = x^H y$.
-
 \subsection{Rotationsmatrizen}
 
 Eine Rotationsmatrix $R$ ist eine unitäre Matrix. In 2D ist $R = \begin{psmallmatrix*}
@@ -589,7 +585,7 @@ Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildun
     \item  Symmetrisch wenn $\mathbb{E} = \mathbb{R}$ und hermitesch wenn $\mathbb{E} = \mathbb{C}$: $\langle x, y \rangle = \overbar{\langle y, x \rangle}$
     \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \iff x = 0$
   \end{itemize}
-  Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vektorraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum.
+  Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vektorraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum. Für ein Skalarprodukt definiert man die induzierte Norm als $\lVert x \rVert = \sqrt[]{\langle x, x \rangle}$.
 \end{subbox}
 
 \begin{subbox}{Euklidischer Raum}
@@ -605,7 +601,7 @@ Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)
 
 \begin{mainbox}{Cauchy-Schwarz}
   Sei $V$ ein Vektorraum über $\mathbb{E}$ mit Skalarprodukt.
-  $$| \langle x, y \rangle | ^2 \leq \langle x, x \rangle \langle y, y \rangle$$
+  $$| \langle x, y \rangle | ^2 \leq \langle x, x \rangle \langle y, y \rangle = \lVert x \rVert^2 \lVert y \rVert^2$$
   Das Gleichheitszeichen gilt genau dann wenn $x$ und $y$ linear abhängig sind.
 \end{mainbox}
 
@@ -614,12 +610,15 @@ Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)
   $$\varphi := \arccos \frac{Re \langle x, y \rangle}{\lVert x \rVert \lVert y \rVert}$$
 \end{subbox}
 
-\begin{mainbox}{Parsevalsche Formel}
-  Seien $x, y \in V$, $\{ b_1, \cdots, b_n \}$ eine Orthonormalbasis, so dass $\xi_k := \langle b_k, x \rangle$ und $\eta_k := \langle b_k, y \rangle$. Für $k = 1, \cdots, n$ sind $\xi_k$ und $\eta_k$ die Koordinatenvektoren. 
+Zwei Vektoren sind \textbf{orthogonal}, falls $\langle x, y \rangle = 0$ ($x \perp y$). Zwei Teilmengen sind orthogonal, wenn $\forall x \in M, \forall y \in N$ gilt: $\langle x, y \rangle = 0$ ($M \perp N$).
 
-  $$\langle x, y \rangle = \Sigma_{k=1}^n \overbar{\xi_k} \eta_k = \xi^H \eta = \langle \xi, \eta \rangle$$
+Eine Basis ist \textbf{orthogonal} wenn $\langle b_l, b_k \rangle = 0$ für alle $b_l \neq b_k$. Gilt zusätzlich $\lVert b_i \rVert = 1$ $\forall i$ ist sie \textbf{orthonormal}.
 
-\end{mainbox}
+\begin{subbox}{Pythagoras}
+  Falls $x \perp y$, so folgt $\lVert x \pm y \rVert^2 = \lVert x \rVert^2 + \lVert y \rVert^2$.
+\end{subbox}
+
+
 
 \begin{subbox}{Orthogonales Komplement}
   Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
@@ -627,8 +626,21 @@ Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)
 
 Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
 
-\textbf{Satz 6.3:} A set $M$ of pairwise orthogonal vectors is linearly independent if $O \notin M$.
+Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{k=1}^n \langle b_k, x \rangle b_k$.
 
+\begin{mainbox}{Parsevalsche Formel}
+  Seien $x, y \in V$, $\{ b_1, \cdots, b_n \}$ eine Orthonormalbasis, so dass $\xi_k := \langle b_k, x \rangle_V$ und $\eta_k := \langle b_k, y \rangle_V$. Für $k = 1, \cdots, n$ sind $\xi_k$ und $\eta_k$ die Koordinatenvektoren. 
+
+  $$\langle x, y \rangle_V = \Sigma_{k=1}^n \overbar{\xi_k} \eta_k = \xi^H \eta = \langle \xi, \eta \rangle_{\E^n}$$
+
+  \begin{rowlist}
+    \item $\lVert x \rVert_V = \lVert \xi \rVert_{\E^n}$
+    \item $\angle (x,y)_V = \angle (\xi, \eta)_{\E^n}$
+    \item $x \perp y \iff \xi \perp \eta$
+  \end{rowlist}
+\end{mainbox}
+
+\subsection{Gram-Schmidt-Orthonormalisierungsverfahren}
 
 
 \section{Determinanten}
