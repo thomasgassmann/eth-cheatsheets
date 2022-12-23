@@ -540,8 +540,6 @@ Sei $A \in M^{m \times n}$ mit $r := \Rank A$:
 
 \subsection{Abbildungen von Koordinatentransformation}
 
-
-
 \begin{multicols}{2}
   \begin{tikzcd}
     x \in X \arrow{r}{F} \arrow[shift left=1]{d}{\kappa_X}  & y \in Y \arrow[shift left=1]{d}{\kappa_Y} \\
@@ -663,11 +661,32 @@ Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{
 
 \subsection{Basiswechsel und Koordinatentransformation von Orthonormalbasen}
 
+Wir wollen von $\mathcal{B}$ nach $\mathcal{B}'$, wobei beides Orthonormalbasen sind. Wir können $b_k' = \sum_{j=1}^n \tau_{jk} b_j$ schreiben und erhalten die Basiswechselmatrix $T$. Da $\mathcal{B}, \mathcal{B}'$ orthonormal sind gilt $T^H = T^{-1}$.
 
-\section{Determinanten}
+Daher gilt $\xi = T \xi'$ und $\xi' = T^H \xi$. Zudem ist $\mathcal{B} = \mathcal{B}' T$ und $\mathcal{B}' = \mathcal{B} T^H$, wobei alle Matrizen unitär/orthogonal sind. Die Transformationsmatrix einer Basistransformation zwischen Orthonormalbasen ist unitär/orthogonal.
 
-TODO: Satz 8.12
-TODO: positiv definit von ana2 summary, all eigenvlaues positive, TODO: 
+$T$ ist ausserdem \textbf{längen- und winkeltreu}. 
+
+\subsection{Orthogonale / unitäre Abbildungen}
+
+
+\begin{mainbox}{Definition}
+  Eine lineare Abbildung $F: X \mapsto Y$ ist unitär/orthogonal falls $\langle F(v), F(w) \rangle_Y = \langle v, w \rangle_X$.
+\end{mainbox}
+
+Es gilt dann dass \begin{rowlist}
+  \item $F$ ist längen- und winkeltreu
+  \item $\Kernel F = \{0\}$, injektiv
+\end{rowlist}.
+Haben wir zusätzlich $\dim X = \dim Y$ gilt \begin{rowlist}
+  \item $F$ ist ein Isomorphismus
+  \item $\{b_1, \cdots, b_n\}$ ist eine Orthonormalbasis von $X$ $\iff$ $\{F(b_1), \cdots, F(b_n)\}$ ist eine Orthonormalbasis von $Y$
+  \item $F^{-1}$ unitär/orthogonal
+  \item Abbildungsmatrix $A$ ist unitär/orthogonal
+\end{rowlist}.
+
+\section{Least Squares}
+
 
 \section{Eigenwerte und Eigenvektoren}
 
@@ -725,6 +744,9 @@ Ausserdem gilt $A^H = V \Sigma^T U^H$ und falls $A$ invertierbar ist $A^{-1} = V
 \end{itemize}
 
 TODO: last chapoter, cahpter 10 missing in summary danny
+
+TODO: Satz 8.12
+TODO: positiv definit von ana2 summary, all eigenvlaues positive, TODO: 
 
 \section{Tabellen}
 
