@@ -347,7 +347,9 @@ Die \textbf{LR-Zerlegung} ist ein weiteres Verfahren zum lösen von LGS. Es ist 
     0 & 1 & 0 & 0 & \frac{3}{2} & 2 & \textcolor{green}{\frac{1}{2}} & 1 & 0\\
     \undermat{P}{0 & 0 & 1} & \undermat{R}{0 & 0 & -\frac{4}{3}} & \undermat{L}{\textcolor{blue}{1} & \textcolor{cyan}{\frac{2}{3}} & 1}
   \end{bmatrix}
-\end{align*}
+\end{align*}\\
+
+Wenn wir Zeilen vertauschen, dann ändert sich $P$. Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zuerst lösen wir dazu $PA = LR$ und lösen $Lc = Pb$ nach $c$. Dann lösen wir $Rx = c$ nach $x$.
 
 \section{Vektorräume}
 
