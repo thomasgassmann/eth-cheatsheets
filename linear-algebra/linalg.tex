@@ -431,6 +431,29 @@ Falls  $f: U \rightarrow V$ und $g: V \rightarrow W$ lineare Abbildungen zwische
 
 \subsection{Basiswechsel und Koordinatentransformation}
 
+Wenn wir von einer alten Basis $\mathcal{B}$ zu einer neuen Basis $\mathcal{B}'$ wechseln, können wir die neue Basis mit der alten darstellen. Es gilt dann $b_k' = \sum_{i=1}^n \tau_{ik} b_i$ mit der \textbf{Basiswechselmatrix} $T = (\tau_{ik})$.
+
+Es gilt $\xi = T \xi'$ sowie $\xi' = T^{-1} \xi$, da $T$ regulär ist. Dabei sind $\xi'$ die Koordinaten in der Basis $\mathcal{B}'$ und $\xi$ sind die Koordinaten in der Basis $\mathcal{B}$. Es gilt dann $\mathcal{B}' = \mathcal{B} T$.
+
+\section{Lineare Abbildungen}
+
+Eine Abbildung $F: V \mapsto W$ ist linear, wenn $F(v + w) = F(v) + F(w)$ sowie $F(\alpha v) = \alpha F(v)$ für alle $v, w \in V$ und $\alpha \in \K$ gilt. Einfacher ausgedrückt ist $F$ linear falls $F(\alpha v + w) = \alpha F(v) + F(w)$. 
+
+Für eine Funktion $F: X \mapsto Y$ gilt:
+\begin{itemize}
+  \item \textbf{injektiv:} $\forall x, x' \in X$ $f(x) = f(x') \implies x = x'$
+  \item \textbf{surjektiv:} $\forall y \in Y$ gibt es $x \in X$ mit $f(x) = y$
+  \item \textbf{bijektiv:} injektiv und surjektiv, $F^{-1}$ existiert
+\end{itemize}
+
+Sei $F: X \mapsto Y$ eine lineare Abbildung ist wobei $\Span \{ b_1, \cdots, b_n \} = X$ und $\Span \{ c_1, \cdots, c_m \} = Y$ Basen sind.
+
+Dann lässt sich $F(b_l) = \sum_{k=1}^m a_{kl} c_k$ schreiben. Die Matrix $A^{m \times n}$ mit Elementen $a_{kl}$ heisst die Abbildungsmatrix bezüglich $X, Y$.
+
+Ist $F$ bijektiv ist es ein Isomorphismus, ist zusätzlich $X = Y$ so ist $F$ ein Automorphismus. Wenn $F$ ein Isomorphismus ist, existiert ein Isomorphismus $F^{-1}$.
+
+\subsection{Kern, Bild und Rang}
+
 
 
 \section{Vektorräume mit Skalarprodukt}
