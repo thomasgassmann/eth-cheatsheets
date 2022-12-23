@@ -618,12 +618,6 @@ Eine Basis ist \textbf{orthogonal} wenn $\langle b_l, b_k \rangle = 0$ für alle
   Falls $x \perp y$, so folgt $\lVert x \pm y \rVert^2 = \lVert x \rVert^2 + \lVert y \rVert^2$.
 \end{subbox}
 
-
-
-\begin{subbox}{Orthogonales Komplement}
-  Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
-\end{subbox}
-
 Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
 
 Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{k=1}^n \langle b_k, x \rangle b_k$.
@@ -641,6 +635,33 @@ Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{
 \end{mainbox}
 
 \subsection{Gram-Schmidt-Orthonormalisierungsverfahren}
+
+\begin{mainbox}{Algorithmus}
+  Sei $\{a_1, \cdots, a_n\}$ eine Menge linear unabhängiger Vektoren. Wir definieren rekursiv:
+  \begin{itemize}
+    \item $b_1 := \frac{a_1}{\lVert a_1 \rVert}$
+    \item $\widetilde{b_k} := a_k - \sum_{j=1}^{k-1} \langle b_j, a_k \rangle b_j$
+    \item $b_k := \frac{\widetilde{b_k}}{\lVert \widetilde{b_k} \rVert}$
+  \end{itemize}
+
+  Nach $k$ Schritten sind $\{b_1, \cdots b_k\}$ paarweise orthonormal. Wenn $\{a_1, \cdots, a_n\}$ eine Basis von $V$ ist, ist $\{b_1, \cdots b_n\}$ auch eine. Jeder endlichdimensionale Vektorraum hat eine Orthonormalbasis.
+\end{mainbox}
+ 
+\begin{subbox}{Orthogonales Komplement}
+  Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
+\end{subbox}
+
+\begin{mainbox}{Fundamentale Unterräume einer Matrix}
+  Sei $A \in \E^{m \times n}$ mit $r := \Rank A$.
+  \begin{align*}
+    & \Nullspace(A) = \Columnspace(A^H)^\perp \subseteq \E^n & & \Nullspace(A) \oplus \Columnspace(A^H) = \E^n\\
+    & \Nullspace(A^H) = \Columnspace(A)^\perp \subseteq \E^m & & \Nullspace(A^H) \oplus \Columnspace(A) = \E^m\\
+    & \dim \Columnspace(A) = r & & \dim \Nullspace(A) = n - r\\
+    & \dim \Columnspace(A^H) = r & & \dim \Nullspace(A^H) = m - r
+  \end{align*}
+\end{mainbox}
+
+\subsection{Basiswechsel und Koordinatentransformation von Orthonormalbasen}
 
 
 \section{Determinanten}
