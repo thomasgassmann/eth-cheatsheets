@@ -14,6 +14,10 @@
 \usepackage{floatrow}
 \usepackage{amsmath}
 \usepackage[inline]{enumitem}
+\usepackage{pst-node}
+\usepackage{auto-pst-pdf}
+\usepackage{tikz-cd} 
+
 
 \changefontsizes[10pt]{8pt}
 \ffvadjustfalse
@@ -536,6 +540,23 @@ Sei $A \in M^{m \times n}$ mit $r := \Rank A$:
     \item \textbf{Basis für $\Kernel A$}: Zuerst parameterisiert man die freien Variablen und findet dann die Lösungesmenge $\mathcal{L}_0$ von $Ax = 0$. Die Zeile $i$ des Lösungsvektors enthält dann den Wert der $i$-ten Variable. Man wählt dann die Koeffizienten der freien Variablen entsprechend um Basisvektoren zu finden (e.g. man setzt einen der Koeffizienten auf $1$ und alle anderen auf $0$ pro Basisvektor). 
   \end{itemize}
 \end{subbox}
+
+\subsection{Abbildungen von Koordinatentransformation}
+
+\[ \psset{arrows=->, arrowinset=0.25, linewidth=0.6pt, nodesep=3pt, labelsep=2pt, rowsep=0.7cm, colsep = 1.1cm, shortput =tablr}
+\everypsbox{\scriptstyle}
+\begin{psmatrix}
+x \in X & y \in Y\\
+\xi \in \E^n & \eta \in \E^m\\
+\xi' \in \E^n & \eta' \in \E^m\\ 
+\ncline{1,1}{1,2}^{F} \ncline{1,1}{2,1} <{\varrho_f }
+\ncline{1,2}{2,2} > {\varrho_g}
+\ncline{2,1}{2,2}^{\varphi_f}
+\end{psmatrix}
+\]
+
+
+
 
 \section{Vektorräume mit Skalarprodukt}
 
