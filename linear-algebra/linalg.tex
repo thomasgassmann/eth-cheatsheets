@@ -687,6 +687,24 @@ Haben wir zusätzlich $\dim X = \dim Y$ gilt \begin{rowlist}
 
 \section{Least Squares}
 
+Sei $A \in E^{m \times n}$ $Ax = b$ ein überbestimmtes LGS ($m > n$). Im Allgemeinen gibt es keine Lösung, wir möchten deshalb $\lVert Ax - b \rVert_2^2$ minimieren. Wir definieren also $x^\ast = \text{argmin}_{x \in \E^n} \lVert Ax - b \rVert_2^2$. Dies trifft für alle $x \in E^n$ für welche $Ax - b$ \textbf{senkrecht} auf $\Columnspace(A)$ steht. 
+
+\begin{align*}
+  Ax^\ast - b \perp \Columnspace(A) & \implies Ax^\ast - b \in \Nullspace(A^H)\\
+  & \implies A^H(Ax^\ast - b) = 0
+\end{align*}
+
+\begin{subbox}{Normalengleichungen}
+  Eine Lösung des Least Squares Problems findet man durch lösen der Normalengleichungen:
+  $$A^H A x = A^H b$$
+  Ist $\Rank A = \Rank A^H A = n$, so ist $A^H A$ invertierbar und $x^\ast = (A^H A)^{-1} A^H b$.
+\end{subbox}
+
+Man nennt $A^+ = (A^H A)^{-1} A^H$ auch die Pseudoinverse von $A$, da $A^+ A = I$.
+
+\section{Determinanten}
+
+
 
 \section{Eigenwerte und Eigenvektoren}
 
@@ -744,8 +762,9 @@ Ausserdem gilt $A^H = V \Sigma^T U^H$ und falls $A$ invertierbar ist $A^{-1} = V
 \end{itemize}
 
 TODO: last chapoter, cahpter 10 missing in summary danny
-
+TODO: qr zerlegung missing
 TODO: Satz 8.12
+rank A^H A = rank A
 TODO: positiv definit von ana2 summary, all eigenvlaues positive, TODO: 
 
 \section{Tabellen}
