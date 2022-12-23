@@ -22,8 +22,8 @@
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\Rank}{Rank}
 \DeclareMathOperator{\Image}{Im}
-\DeclareMathOperator{\Rowspace}{R}
-\DeclareMathOperator{\Nullspace}{N}
+\DeclareMathOperator{\Columnspace}{\mathcal{R}}
+\DeclareMathOperator{\Nullspace}{\mathcal{N}}
 \DeclareMathOperator{\Kernel}{Ker}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\Span}{span}
@@ -49,7 +49,7 @@
 
 \newcommand{\middot}{~\textperiodcentered~}
 \newlist{rowlist}{enumerate*}{1}
-\setlist[rowlist]{label={\roman*\text{: }}, afterlabel={}, itemjoin=\middot}
+\setlist[rowlist]{label={\textbf{\roman*}\text{: }}, afterlabel={}, itemjoin=\middot}
 
 \makeatletter
 \renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
@@ -141,7 +141,7 @@ $$z \overbar{z} = Re(z)^2 + Im(z)^2$$
 \end{subbox}
 
 Eine komplexe Zahl kann in Polarkoordinaten dargestellt werden. Es gilt $z = re^{i\phi} = r(\cos(\phi) + i\sin(\phi))$.
-Radizieren: $\sqrt[n]{a} = z \Leftrightarrow a = z^n \Leftrightarrow |a| e^{i\alpha} = r^n e^{i\phi n}$ wobei $r = \sqrt[n]{|a|}$ und $\phi = \frac{\alpha + 2k\pi}{n}$.
+Radizieren: $\sqrt[n]{a} = z \iff a = z^n \iff |a| e^{i\alpha} = r^n e^{i\phi n}$ wobei $r = \sqrt[n]{|a|}$ und $\phi = \frac{\alpha + 2k\pi}{n}$.
 
 \begin{mainbox}{Fundamentalsatz der Algebra}
   Sei $p(z) = a_n z^n + \cdots + a_0$ ein Polynom mit $a_n \neq 0$ und reellen oder komplexen Koeffizienten $a_i \in \mathbb{C}$. Dann hat $p(z)$ genau $n$ Nullstellen (mit ihren Vielfachen gezählt).
@@ -413,7 +413,7 @@ Um zu zeigen dass $U \subseteq V$ ein Unterraum von $V$ ist zeigt man folgende D
 
 \begin{mainbox}{Lineare Unabhängigkeit}
   Vektoren $v_1, \cdots, v_n$ sind linear unabhängig genau dann wenn:
-  $$\sum_{k=1}^n \alpha_k v_k = 0 \Leftrightarrow \alpha_1 = \cdots = \alpha_n = 0$$
+  $$\sum_{k=1}^n \alpha_k v_k = 0 \iff \alpha_1 = \cdots = \alpha_n = 0$$
   Andernfalls sind die Vektoren linear abhängig.
 \end{mainbox}
 
@@ -454,7 +454,88 @@ Ist $F$ bijektiv ist es ein Isomorphismus, ist zusätzlich $X = Y$ so ist $F$ ei
 
 \subsection{Kern, Bild und Rang}
 
+Sei $F: X \mapsto Y$ eine lineare Abbildung.
 
+\begin{mainbox}{Kern und Bild}
+
+  Wir definieren den \textbf{Kern} als $\Kernel F := \{x \in X | F(x) = 0\}$. Der Kern ist ein Unterraum von $X$ und $F$ ist injektiv genau dann wenn $\Kernel F = \{0\}$
+
+  Wir definieren das \textbf{Bild} als $\Image F := \{F(x) | x \in X\}$. Das Bild ist ein Unterraum von $Y$ und $F$ ist surjektiv genau dann wenn $\Image F = Y$.
+\end{mainbox}
+
+Es gilt $\Rank F := \dim \Image F$.
+
+\begin{mainbox}{Rangsatz}
+  $$\dim X - \dim \Kernel F = \dim \Image F = \Rank F$$
+\end{mainbox}
+
+\begin{subbox}{Foldergungen des Rangsatzes}
+  Seien $F: X \mapsto Y, G: Y \mapsto Z$ lineare Abbildungen:
+  \begin{itemize}
+    \item $F$ injektiv $\iff$ $\Rank F = \dim X$
+    \item $F$ surjektiv $\iff$ $\Rank F = \dim Y$
+    \item $F$ bijektiv $\iff$ $\Rank F = \dim X = \dim Y$
+    \item $\Rank G \circ F \leq \min(\Rank F, \Rank G)$
+    \item $G$ injektiv $\implies$ $\Rank GF = \Rank F$
+    \item $F$ surjektiv $\implies$ $\Rank GF = \Rank G$
+  \end{itemize}
+\end{subbox}
+
+\subsection{Matrizen als lineare Abbildungen}
+
+Sei $A \in \E^{m \times n}$. Der \textbf{Spaltenraum} von $A$ ist der Unterraum $\Columnspace(A) = \Image A = \Span \{ a_1, \cdots, a_n \} \subseteq \E^m$. Der \textbf{Nullraum} von $A$ ist der Unterraum $\Nullspace(A) = \Kernel A$.
+
+
+\begin{subbox}{Rangsatz für Matrizen}
+  Sei $r := \Rank A = \dim \Image A$. Dann ist $n - \dim \Kernel A = r$ und $r$ entspricht der Anzahl Pivotelemente in REF. Zusätzlich:
+  
+  $$\Rank A^T = \Rank A^H = \Rank A$$
+\end{subbox}
+
+Somit gilt für Matrizen $A \in \E^{m \times n}$ und $B \in \E^{p \times n}$ auch:
+
+\begin{itemize}
+  \item $\Rank BA \leq \min(\Rank A, \Rank B)$
+  \item $\Rank B = m \leq p \implies \Rank BA = \Rank A$
+  \item $\Rank A = m \leq n \implies \Rank BA = \Rank B$
+\end{itemize}
+
+Für quadratische Matrizen $A \in \E^{n \times n}$ sind also folgende Aussagen äquivalent:
+
+\begin{rowlist}
+  \item $A$ ist regulär
+  \item $\Rank A = n$
+  \item Spalten (und Zeilen) sind linear unabhängig
+  \item $\Kernel A = \{0\}$
+  \item $\Image A = \E^n$
+\end{rowlist}
+
+Falls $x_0$ eine Lösung für $Ax = b$ ist, so ist die Lösungsmenge $\mathcal{L}_b = x_0 + \Kernel A$ ein affiner Unterraum.
+
+\subsection{Zusammenfassende Eigenschaften von $A$}
+
+Sei $A \in M^{m \times n}$ mit $r := \Rank A$:
+
+\begin{rowlist}
+  \item $\dim \Image A = \dim \Image A^H = r$
+  \item $\dim \Kernel A = n - r$
+  \item $\dim \Kernel A^H = m - r$
+\end{rowlist}
+
+\begin{align*}
+  r = n & \Leftrightarrow \Kernel A = \{ 0 \} & r = m & \Leftrightarrow \Kernel A^H = \{ 0 \} \\
+  & \Leftrightarrow \text{Spalten von $A$ l.u.} & & \Leftrightarrow \text{Spalten von $A$ erzeugend}\\
+  & \Leftrightarrow \text{Zeilen von $A$ erzeugend} & & \Leftrightarrow \text{Zeilen von $A$ l.u.}\\
+  & \Leftrightarrow A \text{ injektiv} & & \Leftrightarrow A \text{ surjektiv}
+\end{align*}
+
+\begin{subbox}{Basis für $\Image A$ und $\Kernel A$ finden}
+  Zuerst bringt man $A$ auf Zeilenstufenform.
+  \begin{itemize}
+    \item \textbf{Basis für $\Image A$}: Die Spalten in der \textit{originalen} Matrix welche den Pivotspalten in der Zeilenstufenform entsprechen sind Basisvektoren für $\Image A$.
+    \item \textbf{Basis für $\Kernel A$}: Zuerst parameterisiert man die freien Variablen und findet dann die Lösungesmenge $\mathcal{L}_0$ von $Ax = 0$. Die Zeile $i$ des Lösungsvektors enthält dann den Wert der $i$-ten Variable. Man wählt dann die Koeffizienten der freien Variablen entsprechend um Basisvektoren zu finden (e.g. man setzt einen der Koeffizienten auf $1$ und alle anderen auf $0$ pro Basisvektor). 
+  \end{itemize}
+\end{subbox}
 
 \section{Vektorräume mit Skalarprodukt}
 
@@ -463,7 +544,7 @@ Ist $F$ bijektiv ist es ein Isomorphismus, ist zusätzlich $X = Y$ so ist $F$ ei
   \begin{itemize}
     \item Linear im zweiten Faktor: $\langle x, y + z \rangle = \langle x, y \rangle + \langle x, z \rangle$ und $\langle x, \alpha y \rangle = \alpha \langle x, y \rangle$. Für reelle Skalare auch linear im ersten Faktor.
     \item  Symmetrisch wenn $\mathbb{E} = \mathbb{R}$ und hermitesch wenn $\mathbb{E} = \mathbb{C}$: $\langle x, y \rangle = \overbar{\langle y, x \rangle}$
-    \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \Leftrightarrow x = 0$
+    \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \iff x = 0$
   \end{itemize}
   Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vektorraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum.
 \end{subbox}
@@ -471,7 +552,7 @@ Ist $F$ bijektiv ist es ein Isomorphismus, ist zusätzlich $X = Y$ so ist $F$ ei
 \begin{subbox}{Norm}
   Norm in Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\lVert \cdot \rVert: V \mapsto \mathbb{R}$ mit:
   \begin{itemize}
-    \item positiv definit: $\forall x \in V$, $\lVert x \rVert \geq 0$ und $\lVert x \rVert = 0 \Leftrightarrow x = 0$
+    \item positiv definit: $\forall x \in V$, $\lVert x \rVert \geq 0$ und $\lVert x \rVert = 0 \iff x = 0$
     \item homogen: $\lVert \alpha x \rVert = \lvert \alpha \rvert \cdot \lVert x \rVert$ $\forall x \in V, \forall \alpha \in \mathbb{E}$
     \item Dreiecksungleichung: $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
   \end{itemize}
@@ -571,9 +652,9 @@ $$A = U \Sigma V^H, AA^H = U \Sigma_m^2 U^H, A^H A = V \Sigma_n^2 V^H$$
 Ausserdem gilt $A^H = V \Sigma^T U^H$ und falls $A$ invertierbar ist $A^{-1} = V \Sigma^{-1} U^H$.
 
 \begin{itemize}
-  \item $\{u_1, \cdots, u_r\}$: Basis von $\Image A = \Rowspace(A)$
+  \item $\{u_1, \cdots, u_r\}$: Basis von $\Image A = \Columnspace(A)$
   \item $\{u_{r+1}, \cdots, u_m\}$: Basis von $\Kernel A^H = \Nullspace(A^H)$
-  \item $\{v_1, \cdots, v_r\}$: Basis von $\Image A^H = \Rowspace(A^H)$
+  \item $\{v_1, \cdots, v_r\}$: Basis von $\Image A^H = \Columnspace(A^H)$
   \item $\{v_{r+1}, \cdots, v_m\}$: Basis von $\Kernel A = \Nullspace(A)$
 \end{itemize}
 
