@@ -371,7 +371,7 @@ Wenn wir Zeilen vertauschen, dann ändert sich $P$. Haben wir eine LR-Zerlegung 
 
 \section{Vektorräume}
 
-\begin{mainbox}{Definition}
+\begin{mainbox}{}
   Eine Vektorraum $V$ über $\K$ ist eine nichtleere Menge auf dere eine Vektoraddition und Skalarmultiplikation definiert sind.
   \begin{enumerate}[label=V\arabic*]
     \item $x + y = y + x$
@@ -400,11 +400,38 @@ Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. 
   Die Menge der Linearkombinationen der Vektoren $v_1, \cdots, v_n$ ist der Unterraum aufgespannt durch diese Vektoren. Man bezeichnet ihn mit $\Span \{ v_1, \cdots, v_n \}$.
 \end{subbox}
 
+Falls $\Span {v_1, \cdots, v_n} = V$, dann sind $v_1, \cdots, v_n$ ein \textbf{Erzeugendensystem} von $V$.
+
+Um zu zeigen dass $U \subseteq V$ ein Unterraum von $V$ ist zeigt man folgende Dinge:
+\begin{itemize}
+  \item $0_V \in U$
+  \item $\forall x, y \in U$ gilt $x + y \in U$
+  \item $\forall x \in U, \forall \alpha \in \K$ gilt $\alpha x \in U$
+\end{itemize}
+
+\subsection{Lineare Abhängigkeit, Basen und Dimensionen}
+
+\begin{mainbox}{Lineare Unabhängigkeit}
+  Vektoren $v_1, \cdots, v_n$ sind linear unabhängig genau dann wenn:
+  $$\sum_{k=1}^n \alpha_k v_k = 0 \Leftrightarrow \alpha_1 = \cdots = \alpha_n = 0$$
+  Andernfalls sind die Vektoren linear abhängig.
+\end{mainbox}
+
+\begin{mainbox}{Basis}
+  Ein Erzeugendensystem $v_1, \cdots, v_n$ von $V$ ist eine Basis von $V$ genau dann wenn $v_1, \cdots, v_n$ linear unabhängig sind.
+\end{mainbox}
+
+Jede Menge $\{v_1, \cdots, v_m\} \subseteq V$ mit $\dim V < m$ ist linear abhängig. In jedem endlichen Vektorraum $V$ mit $\dim V = n$ ist eine Menge von $n$ linear unabhängigen Vektoren eine Basis.
+
+Die Koeffizienten $\xi = (\xi_1, \cdots, \xi_n)^\top$ sind \textbf{Koordinaten} von $x$ bzgl. einer Basis $\mathcal{B}$ falls $x = \sum_{i=1}^n \xi_i b_i$ gilt. Die Summe wird Koordinatendarstellung genannt.
+
 Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine eindeutige Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
 
 Falls  $f: U \rightarrow V$ und $g: V \rightarrow W$ lineare Abbildungen zwischen Vektorräumen sind so dass $ g \circ f$ ein Isomorphismus ist, dann gilt $V = \operatorname{Im}f \oplus \operatorname{Ker} g$.
 
-Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
+\subsection{Basiswechsel und Koordinatentransformation}
+
+
 
 \section{Vektorräume mit Skalarprodukt}
 
@@ -460,6 +487,8 @@ Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)
 \begin{subbox}{Orthogonales Komplement}
   Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
 \end{subbox}
+
+Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
 
 \textbf{Satz 6.3:} A set $M$ of pairwise orthogonal vectors is linearly independent if $O \notin M$.
 
