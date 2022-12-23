@@ -13,6 +13,7 @@
 \usepackage{flowfram}
 \usepackage{floatrow}
 \usepackage{amsmath}
+\usepackage[inline]{enumitem}
 
 \changefontsizes[10pt]{8pt}
 \ffvadjustfalse
@@ -25,6 +26,7 @@
 \DeclareMathOperator{\Nullspace}{N}
 \DeclareMathOperator{\Kernel}{Ker}
 \DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Span}{span}
 
 % define nice looking boxes
 \usepackage[most]{tcolorbox}
@@ -44,6 +46,10 @@
     title={#1}
   }
 }
+
+\newcommand{\middot}{~\textperiodcentered~}
+\newlist{rowlist}{enumerate*}{1}
+\setlist[rowlist]{label={\roman*\text{: }}, afterlabel={}, itemjoin=\middot}
 
 \makeatletter
 \renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
@@ -109,6 +115,7 @@
 \def\R{\mathbb{R}}
 \def\C{\mathbb{C}}
 \def\E{\mathbb{E}}
+\def\K{\mathbb{K}}
 \def\dx{\text{ d}x}
 
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
@@ -199,15 +206,17 @@ Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element 
 \end{subbox}
 
 \begin{subbox}{Rechenregeln für Matrizen}
-  $(\alpha \beta)A = \alpha(\beta A)$,
-  $(\alpha A)B = \alpha(AB) = A(\alpha B)$,
-  $(\alpha + \beta)A = \alpha A + \beta A$,
-  $\alpha(A + B) = \alpha A + \alpha B$,
-  $A + B = B + A$,
-  $A + (B + C) = (A + B) + C$,
-  $(AB)C = A(BC)$,
-  $(A + B)C = AC + BC$,
-  $A(B + C) = AB + AC$
+  \begin{rowlist}
+    \item $(\alpha \beta)A = \alpha(\beta A)$
+    \item $(\alpha A)B = \alpha(AB) = A(\alpha B)$
+    \item $(\alpha + \beta)A = \alpha A + \beta A$
+    \item $\alpha(A + B) = \alpha A + \alpha B$
+    \item $A + B = B + A$
+    \item $A + (B + C) = (A + B) + C$
+    \item $(AB)C = A(BC)$
+    \item $(A + B)C = AC + BC$
+    \item $A(B + C) = AB + AC$
+  \end{rowlist}
 \end{subbox}
 
 Eine \textbf{Linearkombination} der Vektoren $a_1, \cdots, a_n$ ist $\alpha_1 a_1 + \cdots + \alpha_n a_n$.\\
@@ -221,7 +230,16 @@ Eine Matrix ist \textbf{symmetrisch} falls $A^\top = A$ und \textbf{hermitesch} 
 Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $AB = BA$. $A^H A$ und $A A^H$ sind  immer hermitesch.
 
 \begin{subbox}{Rechenregeln für hermitesche Matrizen}
-  $(A^\top)^\top = A$, $(A^H)^H = A$, $(\alpha A)^\top = \alpha A^\top$, $(\alpha A)^H = \overbar{\alpha} A^H$, $(A + B)^\top = A^\top + B^\top$, $(A + B)^H = A^H + B^H$, $(AB)^\top = B^\top A^\top$, $(AB)^H = B^H A^H$
+  \begin{rowlist}
+    \item $(A^\top)^\top = A$
+    \item $(A^H)^H = A$
+    \item $(\alpha A)^\top = \alpha A^\top$
+    \item $(\alpha A)^H = \overbar{\alpha} A^H$
+    \item $(A + B)^\top = A^\top + B^\top$
+    \item $(A + B)^H = A^H + B^H$
+    \item $(AB)^\top = B^\top A^\top$
+    \item $(AB)^H = B^H A^H$
+  \end{rowlist}
 \end{subbox}
 
 \begin{subbox}{Spalten- und Reihensichtweise}
@@ -352,6 +370,35 @@ Die \textbf{LR-Zerlegung} ist ein weiteres Verfahren zum lösen von LGS. Es ist 
 Wenn wir Zeilen vertauschen, dann ändert sich $P$. Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zuerst lösen wir dazu $PA = LR$ und lösen $Lc = Pb$ nach $c$. Dann lösen wir $Rx = c$ nach $x$.
 
 \section{Vektorräume}
+
+\begin{mainbox}{Definition}
+  Eine Vektorraum $V$ über $\K$ ist eine nichtleere Menge auf dere eine Vektoraddition und Skalarmultiplikation definiert sind.
+  \begin{enumerate}[label=V\arabic*]
+    \item $x + y = y + x$
+    \item $(x + y) + z = x + (y + z)$
+    \item $\exists 0 \in V: x + 0 = x$ ($\forall x \in V$)
+    \item $\forall x \in V$ existiert $-x$: $x + (-x) = 0$
+    \item $\alpha(x + y) = \alpha x + \alpha y$
+    \item $(\alpha + \beta)x = \alpha x + \beta x$
+    \item $(\alpha \beta)x = \alpha (\beta x)$
+    \item $\exists 1 \in \K$ so dass $\forall x \in V: 1x = x$
+    \end{enumerate}
+\end{mainbox}
+
+\begin{rowlist}
+  \item $0x = 0$
+  \item $\alpha 0 = 0$
+  \item $\alpha x = 0 \implies x = 0 \vee \alpha = 0$
+  \item $(-\alpha)x = \alpha (-x) = -(\alpha x)$
+\end{rowlist}
+
+\subsection{Unterräume}
+
+Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. Addition und Multiplikation ist. $U$ beinhaltet immer den Nullvektor. Jeder Unterraum ist ein Vektorraum. 
+
+\begin{subbox}{Lineare Hülle}
+  Die Menge der Linearkombinationen der Vektoren $v_1, \cdots, v_n$ ist der Unterraum aufgespannt durch diese Vektoren. Man bezeichnet ihn mit $\Span \{ v_1, \cdots, v_n \}$.
+\end{subbox}
 
 Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine eindeutige Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
 
