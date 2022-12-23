@@ -17,6 +17,7 @@
 \usepackage{pst-node}
 \usepackage{auto-pst-pdf}
 \usepackage{tikz-cd} 
+\usepackage{multicol}
 
 
 \changefontsizes[10pt]{8pt}
@@ -543,32 +544,33 @@ Sei $A \in M^{m \times n}$ mit $r := \Rank A$:
 
 \subsection{Abbildungen von Koordinatentransformation}
 
-\[ \psset{arrows=->, arrowinset=0.25, linewidth=0.6pt, nodesep=3pt, labelsep=2pt, rowsep=0.7cm, colsep = 1.1cm, shortput =tablr}
-\everypsbox{\scriptstyle}
-\begin{psmatrix}
-x \in X & y \in Y\\
-\xi \in \E^n & \eta \in \E^m\\
-\xi' \in \E^n & \eta' \in \E^m\\ 
-\ncline{1,1}{1,2}^{F} \ncline{1,1}{2,1} <{\varrho_f }
-\ncline{1,2}{2,2} > {\varrho_g}
-\ncline{2,1}{2,2}^{\varphi_f}
-\end{psmatrix}
+
+
+\begin{multicols}{2}
+  \begin{tikzcd}
+    x \in X \arrow{r}{F} \arrow[shift left=1]{d}{\kappa_X}  & y \in Y \arrow[shift left=1]{d}{\kappa_Y} \\
+    \xi \in \E^n \arrow{r}{A} \arrow[shift left=1]{u}{\kappa_X^{-1}} \arrow[shift left=1]{d}{T^{-1}} & \eta \in \E^m \arrow[shift left=1]{u}{\kappa_Y^{-1}} \arrow[shift left=1]{d}{S^{-1}} \\
+    \xi' \in \E^n \arrow[shift left=1]{u}{T} \arrow{r}{B} & \eta' \in \E^m \arrow[shift left=1]{u}{S}
+  \end{tikzcd}
+  \begin{subbox}{}
+    Es gilt:
+    \begin{itemize}
+      \item $A = SBT^{-1}$
+      \item $B = S^{-1}AT$
+    \end{itemize}
+  \end{subbox}
+\end{multicols}
+
+Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildungsmatrix: 
+\[
+  \left[\begin{array}{ c | c }
+    I_r & 0 \\
+    \hline
+    0 & 0
+  \end{array}\right]
 \]
 
-
-
-
 \section{Vektorräume mit Skalarprodukt}
-
-\begin{subbox}{Skalarprodukt}
-  Skalarprodukt in einem Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\langle \cdot, \cdot \rangle : V \times V \mapsto \mathbb{E}$ mit folgenden Eigenschaften:
-  \begin{itemize}
-    \item Linear im zweiten Faktor: $\langle x, y + z \rangle = \langle x, y \rangle + \langle x, z \rangle$ und $\langle x, \alpha y \rangle = \alpha \langle x, y \rangle$. Für reelle Skalare auch linear im ersten Faktor.
-    \item  Symmetrisch wenn $\mathbb{E} = \mathbb{R}$ und hermitesch wenn $\mathbb{E} = \mathbb{C}$: $\langle x, y \rangle = \overbar{\langle y, x \rangle}$
-    \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \iff x = 0$
-  \end{itemize}
-  Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vektorraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum.
-\end{subbox}
 
 \begin{subbox}{Norm}
   Norm in Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\lVert \cdot \rVert: V \mapsto \mathbb{R}$ mit:
@@ -578,6 +580,16 @@ x \in X & y \in Y\\
     \item Dreiecksungleichung: $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
   \end{itemize}
   Ein Vektorraum mit einer Norm heisst normierter Vektorraum.
+\end{subbox}
+
+\begin{subbox}{Skalarprodukt}
+  Skalarprodukt in einem Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\langle \cdot, \cdot \rangle : V \times V \mapsto \mathbb{E}$ mit folgenden Eigenschaften:
+  \begin{itemize}
+    \item Linear im zweiten Faktor: $\langle x, y + z \rangle = \langle x, y \rangle + \langle x, z \rangle$ und $\langle x, \alpha y \rangle = \alpha \langle x, y \rangle$. Für reelle Skalare auch linear im ersten Faktor.
+    \item  Symmetrisch wenn $\mathbb{E} = \mathbb{R}$ und hermitesch wenn $\mathbb{E} = \mathbb{C}$: $\langle x, y \rangle = \overbar{\langle y, x \rangle}$
+    \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \iff x = 0$
+  \end{itemize}
+  Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vektorraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum.
 \end{subbox}
 
 \begin{subbox}{Euklidischer Raum}
