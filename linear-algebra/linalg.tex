@@ -24,6 +24,7 @@
 \DeclareMathOperator{\Rowspace}{R}
 \DeclareMathOperator{\Nullspace}{N}
 \DeclareMathOperator{\Kernel}{Ker}
+\DeclareMathOperator{\diag}{diag}
 
 % define nice looking boxes
 \usepackage[most]{tcolorbox}
@@ -44,6 +45,21 @@
   }
 }
 
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand\undermat[2]{%
+  \makebox[0pt][l]{$\smash{\underbrace{\phantom{%
+    \begin{matrix}#2\end{matrix}}}_{\text{$#1$}}}$}#2}
+
+\newcommand\overmat[2]{%
+  \makebox[0pt][l]{$\smash{\overbrace{\phantom{%
+    \begin{matrix}#2\end{matrix}}}^{\text{$#1$}}}$}#2}
+
 \definecolor{brandblue}{rgb}{0.34, 0.7, 1}
 \newtcolorbox{mainbox}[1]{
   colframe=brandblue, 
@@ -63,7 +79,6 @@
 % Tables
 \usepackage{tabularx, multirow}
 \usepackage{booktabs}
-\renewcommand*{\arraystretch}{2}
 
 % Make enumerations more compact
 \usepackage{enumitem}
@@ -138,7 +153,7 @@ $$
 
 \subsection{Polynome}
 
-Bei Polynomen mit reellen Nullstellen treten die Nullstellen als komplex konjugiertes Paar auf. Für Grad 2, verwende $z = \frac{b \pm \sqrt{b^2 - 4ac}}{2a}$ um ein Polynom $p(z) = 0$ zu lösen. Für $a z^n + c = 0$, verwende $z = \sqrt[n]{-\frac{c}{a}}$.
+Bei Polynomen mit reellen Nullstellen treten die Nullstellen als komplex konjugiertes Paar auf. Für Grad 2, verwende $z = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ um ein Polynom $p(z) = 0$ zu lösen. Für $a z^n + c = 0$, verwende $z = \sqrt[n]{-\frac{c}{a}}$.
 
 Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine reelle Nullstelle.
 
@@ -177,13 +192,13 @@ Es gilt immer $r \leq \min(m, n)$.
 
 \section{Matrizen \& Vektoren}
 
-Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element mit $a_{i,j}$ oder $(A)_{i,j}$ bezeichnet wird. Ein $m \times 1$ Vektor ist ein \textbf{Spaltenvektor} und ein $1 \times n$ Vektor ist ein \textbf{Zeilenvektor} (n-Tupel). Die Elemente $a_{jj}, j = 1,2,\cdots,\min(m,n)$ heissen \textbf{Diagonalelemente}. Für eine \textbf{Diagonalmatrix} $A$ gilt $(A)_{ij} = 0$ für $i = j$. Wir bezeichnen die Matrix dann durch die Elemente auf der Diagonale: $A = diag(d_{11}, \cdots, d_{nn})$. Für eine \textbf{obere Dreiecksmatrix} gilt: $(R)_{ij} = 0$ für $i > j$. Für eine \textbf{untere Dreiecksmatrix} gilt: $(L)_{ij} = 0$ für $i < j$.
+Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element mit $a_{i,j}$ oder $(A)_{i,j}$ bezeichnet wird. Ein $m \times 1$ Vektor ist ein \textbf{Spaltenvektor} und ein $1 \times n$ Vektor ist ein \textbf{Zeilenvektor} (n-Tupel). Die Elemente $a_{jj}, j = 1,2,\cdots,\min(m,n)$ heissen \textbf{Diagonalelemente}. Für eine \textbf{Diagonalmatrix} $A$ gilt $(A)_{ij} = 0$ für $i = j$. Wir bezeichnen die Matrix dann durch die Elemente auf der Diagonale: $A = \diag(d_{11}, \cdots, d_{nn})$. Für eine \textbf{obere Dreiecksmatrix} gilt: $(R)_{ij} = 0$ für $i > j$. Für eine \textbf{untere Dreiecksmatrix} gilt: $(L)_{ij} = 0$ für $i < j$.
 
 \begin{subbox}{Multiplikation}
   Für eine $m \times n$ Matrix $A$ und eine $n \times p$ Matrix $B$ gilt $(AB)_{ij} = \sumn a_{ik} b_{kj}$ wobei $AB$ eine $m \times p$ Matrix ist. Generell \textbf{nicht kommutativ}.
 \end{subbox}
 
-\begin{subbox}{}
+\begin{subbox}{Rechenregeln für Matrizen}
   $(\alpha \beta)A = \alpha(\beta A)$,
   $(\alpha A)B = \alpha(AB) = A(\alpha B)$,
   $(\alpha + \beta)A = \alpha A + \beta A$,
@@ -197,33 +212,44 @@ Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element 
 
 Eine \textbf{Linearkombination} der Vektoren $a_1, \cdots, a_n$ ist $\alpha_1 a_1 + \cdots + \alpha_n a_n$.\\
 Falls $AB = 0$, so sind $A$ und $B$ \textbf{Nullteiler}.\\
-\begin{subbox}{}
-  \textbf{Transponiert}: $A\top$ wird definiert als $(A^\top)_{ij} = (A)_{ji}$.\\
-  \textbf{Hermitesch}: $A^H = (\overbar{A})^\top = \overbar{A^\top}$.
+\begin{subbox}{Transponierte Matrizen}
+  \textbf{Transponiert}: $A^\top$ wird definiert als $(A^\top)_{ij} = (A)_{ji}$.\\
+  \textbf{Hermitesch-transponiert}: $A^H = (\overbar{A})^\top = \overbar{A^\top}$.
 \end{subbox}
-Eine Matrix ist \textbf{symmetrisch} falls $A^\top = A$ und hermitesch falls $A^H = A$ (Diagonale reell). \textbf{Schiefsymmetrisch} ist sie falls $A^\top = -A$. $AB$ ist genau dann symmetrisch falls $AB = BA$, $A^\top A$ und $A A^\top$ sind  immer symmetrisch.
-\begin{subbox}{}
+Eine Matrix ist \textbf{symmetrisch} falls $A^\top = A$ und \textbf{hermitesch} falls $A^H = A$ (Diagonale somit reell). \textbf{Schiefsymmetrisch} ist sie falls $A^\top = -A$. 
+
+Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $AB = BA$. $A^H A$ und $A A^H$ sind  immer hermitesch.
+
+\begin{subbox}{Rechenregeln für hermitesche Matrizen}
   $(A^\top)^\top = A$, $(A^H)^H = A$, $(\alpha A)^\top = \alpha A^\top$, $(\alpha A)^H = \overbar{\alpha} A^H$, $(A + B)^\top = A^\top + B^\top$, $(A + B)^H = A^H + B^H$, $(AB)^\top = B^\top A^\top$, $(AB)^H = B^H A^H$
 \end{subbox}
 
-TODO: Korollar 2.8, Satz 2.4, Rank-Nullity Theorem, matrix orthogonal iff. column vectors are all orthonormal
+\begin{subbox}{Spalten- und Reihensichtweise}
+  Ist $A = \begin{psmallmatrix}
+    \underline{a_1} \\
+    \cdots \\
+    \underline{a_m}
+  \end{psmallmatrix}$ eine $m \times n$ Matrix, $B = \begin{psmallmatrix}
+    b_1 & b_2 & \cdots & b_p
+  \end{psmallmatrix}$ eine $n \times p$ Matrix, dann gilt $AB = \begin{psmallmatrix}
+    A b_1 & A b_2 & \cdots & A b_p
+  \end{psmallmatrix} = \begin{psmallmatrix}
+    \underline{a_1} B \\
+    \cdots \\
+    \underline{a_m} B
+  \end{psmallmatrix}$.
 
-\begin{subbox}{}
-  Seien $A := \begin{psmallmatrix} a_1 & a_2 & \cdots & a_n \end{psmallmatrix} \in \mathbb{E}^{m \times n}, B := \begin{psmallmatrix} b_1 & b_2 & \cdots & b_n \end{psmallmatrix} \in \mathbb{E}^{n \times n}$. Dann gilt $AB = \begin{psmallmatrix} \sum_{i=1}^n b_{i1} a_i & \sum_{i=1}^n b_{i2} a_i & \cdots & \sum_{i=1}^n b_{in} a_i \end{psmallmatrix} \in \mathbb{E}^{m \times n}$.
+  Ist umgekehrt $A = \begin{psmallmatrix}
+    a_1 & a_2 & \cdots & a_n
+  \end{psmallmatrix}$ eine $m \times n$ Matrix, $B = \begin{psmallmatrix}
+    \underline{b_1} \\
+    \cdots \\
+    \underline{b_n}
+  \end{psmallmatrix}$ eine $n \times p$ Matrix, dann gilt $AB = \sum_{i=1}^n a_i \underline{b_i}$.
+
 \end{subbox}
 
-Falls 
-$A := \begin{psmallmatrix}
-  a_1 & a_2 & \cdots & a_n\\
-\end{psmallmatrix} \in \R^{m \times n}, B := \begin{psmallmatrix}
-  b_1^\top \\
-  b_2^\top \\
-  \vdots \\
-  b_n^\top
-\end{psmallmatrix} \in \R^{n \times k}$, dann gilt $AB = \sum_{i=0}^n a_k b_k^\top$.
-
-Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. Multipliziert man eine Diagonalmatrix von rechts, dann Multipliziert dies die Spalten.
-
+Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. Multipliziert man eine Diagonalmatrix von rechts, dann multipliziert dies die Spalten.
 
 \begin{subbox}{Definite}
   Eine Matrix $A$ ist positiv-definit (positiv-semidefinit), falls $\forall x \in \E^n$, $x^H A x > 0$ ($\geq 0$).
@@ -233,6 +259,95 @@ Eine symmetrische Matrix $A$ ist genau dann positiv-definit (positiv-semidefinit
 
 Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt (vorrausgesetzt $\det(A) \neq 0$).
 
+Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^T$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^H x$.
+
+\subsection{Inverse}
+
+Eine $n \times n$ Matrix ist $\textbf{invertierbar}$ wenn eine Matrix $A^{-1}$ existiert, so dass $A A^{-1} = I_n = A^{-1} A$. Die Inverse ist eindeutig bestimmt und existiert genau dann wenn $\Rank A = n$.
+
+\begin{subbox}{Rechenregeln für Inverse}
+  Sind $A, B$ regulär. Dann:
+
+  \begin{itemize}
+    \item $A^{-1}$ regulär und $(A^{-1})^{-1} = A$.
+    \item $AB$ regulär und $(AB)^{-1} = B^{-1} A^{-1}$.
+    \item $A^H$ regulär und $(A^H)^{-1} = (A^{-1})^H$.
+  \end{itemize}
+\end{subbox}
+
+Die Inverse findet man durch Gauss-Jordan Elimination.
+
+$$\begin{bmatrix*}
+  A | I_n
+\end{bmatrix*} \xRightarrow[\text{operationen}]{\text{Zeilen-}} \begin{bmatrix*}
+  I_n | A^{-1}
+\end{bmatrix*}$$
+
+Für $A = \begin{psmallmatrix*}
+  a & b \\
+  c & d
+\end{psmallmatrix*}$ und $\det(A) \neq 0$ (also $A$ invertierbar) gilt $A^{-1} = \frac{1}{ad - bc} \begin{psmallmatrix*}
+  d & -b \\
+  -c & a
+\end{psmallmatrix*}$.
+
+\subsection{Orthogonale und unitäre Matrizen}
+
+Eine $n \times n$ Matrix heisst \textbf{unitär} falls $A^H A = I_n$. Eine unitäre Matrix heisst \textbf{orthogonal} falls $A^T A = I_n$. Es gilt $\det(A) = \pm 1$. Die Matrix ist genau dann unitär/orthogonal wenn alle Spalten orthonormal sind.
+
+Für $A, B$ unitär (dasselbe für orthogonal) gilt:
+
+\begin{itemize}
+  \item $A$ regulär und $A^{-1} = A^H$
+  \item $AA^H = I_n = A^H A$
+  \item $A^{-1}$, $AB$ unitär
+\end{itemize}
+
+Falls $\langle x, y \rangle = 0$, so sind $x$ und $y$ orthogonal ($x \perp y$). 
+
+Unitäre Matrizen sind längentreu, denn $\langle Qx, Qy \rangle = x^H Q^H Q y = x^H y$.
+
+\subsection{Rotationsmatrizen}
+
+Eine Rotationsmatrix $R$ ist eine unitäre Matrix. In 2D ist $R = \begin{psmallmatrix*}
+  \cos \theta & -\sin \theta \\
+  \sin \theta & \cos \theta
+\end{psmallmatrix*}$. Verallgemeinert wird dies durch Givens-Rotationen. In 4D gilt bspw. $\begin{psmallmatrix}
+  \cos \theta & 0 & -\sin \theta & 0 \\
+  0 & 1 & 0 & 0 \\
+  \sin \theta & 0 & \cos \theta & 0 \\
+  0 & 0 & 0 & 1
+\end{psmallmatrix}$.
+
+\section{LR-Zerlegung}
+
+Die \textbf{LR-Zerlegung} ist ein weiteres Verfahren zum lösen von LGS. Es ist besonders effektiv wenn wir mehrere LGS mit gleichem $A$ haben.
+
+\begin{align*}
+  & \begin{bmatrix}[ccc|ccc|ccc]
+    \overmat{I}{1 & 0 & 0} & \overmat{A}{2 & 1 & 2} & \overmat{I}{1 & 0 & 0}\\
+    0 & 1 & 0 & \textcolor{green}{1} & 2 & 3 & 0 & 1 & 0\\
+    0 & 0 & 1 & \textcolor{blue}{2} & 2 & 2 & 0 & 0 & 1
+  \end{bmatrix} \begin{matrix}
+    \\
+    \textcolor{green}{-\frac{1}{2}}\\
+    \textcolor{blue}{-1}
+  \end{matrix}\\
+  \implies & \begin{bmatrix}[ccc|ccc|ccc]
+    1 & 0 & 0 & 2 & 1 & 2 & 1 & 0 & 0\\
+    0 & 1 & 0 & 0 & \frac{3}{2} & 2 & \textcolor{green}{\frac{1}{2}} & 1 & 0\\
+    0 & 0 & 1 & 0 & \textcolor{cyan}{1} & 0 & \textcolor{blue}{1} & 0 & 1
+  \end{bmatrix} \begin{matrix}
+    \\
+    \\
+    \textcolor{cyan}{-\frac{2}{3}}
+  \end{matrix}\\
+  \implies & \begin{bmatrix}[ccc|ccc|ccc]
+    1 & 0 & 0 & 2 & 1 & 2 & 1 & 0 & 0\\
+    0 & 1 & 0 & 0 & \frac{3}{2} & 2 & \textcolor{green}{\frac{1}{2}} & 1 & 0\\
+    \undermat{P}{0 & 0 & 1} & \undermat{R}{0 & 0 & -\frac{4}{3}} & \undermat{L}{\textcolor{blue}{1} & \textcolor{cyan}{\frac{2}{3}} & 1}
+  \end{bmatrix}
+\end{align*}
 
 \section{Vektorräume}
 
@@ -244,6 +359,16 @@ Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle 
 
 \section{Vektorräume mit Skalarprodukt}
 
+\begin{subbox}{Skalarprodukt}
+  Skalarprodukt in einem Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\langle \cdot, \cdot \rangle : V \times V \mapsto \mathbb{E}$ mit folgenden Eigenschaften:
+  \begin{itemize}
+    \item Linear im zweiten Faktor: $\langle x, y + z \rangle = \langle x, y \rangle + \langle x, z \rangle$ und $\langle x, \alpha y \rangle = \alpha \langle x, y \rangle$. Für reelle Skalare auch linear im ersten Faktor.
+    \item  Symmetrisch wenn $\mathbb{E} = \mathbb{R}$ und hermitesch wenn $\mathbb{E} = \mathbb{C}$: $\langle x, y \rangle = \overbar{\langle y, x \rangle}$
+    \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \Leftrightarrow x = 0$
+  \end{itemize}
+  Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vektorraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum.
+\end{subbox}
+
 \begin{subbox}{Norm}
   Norm in Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\lVert \cdot \rVert: V \mapsto \mathbb{R}$ mit:
   \begin{itemize}
@@ -254,29 +379,12 @@ Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle 
   Ein Vektorraum mit einer Norm heisst normierter Vektorraum.
 \end{subbox}
 
-\begin{subbox}{Skalarprodukt}
-  Skalarprodukt in einem Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\langle \cdot, \cdot \rangle : V \times V \mapsto \mathbb{E}$ mit folgenden Eigenschaften:
-  \begin{itemize}
-    \item Linear im zweiten Faktor: $\langle x, y + z \rangle = \langle x, y \rangle + \langle x, z \rangle$ und $\langle x, \alpha y \rangle = \alpha \langle x, y \rangle$. Für reelle Skalare auch linear im ersten Faktor.
-    \item  Symmetrisch wenn $\mathbb{E} = \mathbb{R}$ und hermitesch wenn $\mathbb{E} = \mathbb{C}$: $\langle x, y \rangle = \overbar{\langle y, x \rangle}$
-    \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \Leftrightarrow x = 0$
-  \end{itemize}
-  Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vekotrraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum.
+\begin{subbox}{Euklidischer Raum}
+  Das euklidische Skalarprodukt ist definiert als: $$\langle x, y \rangle := x^H y$$
+  Die euklidische 2-Norm ist entsprechend definiert als: $$\lVert x \rVert_2 = \sqrt[]{x^\top x}$$
 \end{subbox}
 
-\begin{subbox}{Euklidisches Skalarprodukt}
-  $$\langle x, y \rangle := x^\top y$$
-\end{subbox}
-
-Orthogonale Matrizen sind für euklidische Normen längentreu, denn $\langle Qx, Qy \rangle = x^\top Q^\top Q y = x^\top y$.
-
-\begin{subbox}{Euklidisches Skalarprodukt}
-  $$\langle x, y \rangle := x^\top y$$
-\end{subbox}
-
-\begin{subbox}{Euklidische 2-Norm}
-  $$\lVert x \rVert_2 = \sqrt[]{x^\top x}$$
-\end{subbox}
+Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)^{\frac{1}{p}}$.
 
 \begin{subbox}{Skalarprodukte über $\R^n$}
   $\langle x, y \rangle$ ist ein Skalarprodukt über $\R^n$ genau dann wenn $\langle x, y \rangle = x^\top A y$ wobei $A$ eine hermitesche Matrix mit strikt positiven Eigenwerten ist (positiv-definit).
@@ -306,11 +414,12 @@ Orthogonale Matrizen sind für euklidische Normen längentreu, denn $\langle Qx,
 
 \textbf{Satz 6.3:} A set $M$ of pairwise orthogonal vectors is linearly independent if $O \notin M$.
 
-TODO: positiv definit von ana2 summary, all eigenvlaues positive
+
 
 \section{Determinanten}
 
 TODO: Satz 8.12
+TODO: positiv definit von ana2 summary, all eigenvlaues positive, TODO: 
 
 \section{Eigenwerte und Eigenvektoren}
 
