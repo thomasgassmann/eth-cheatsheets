@@ -16,15 +16,18 @@
 \usepackage[inline]{enumitem}
 \usepackage{pst-node}
 \usepackage{auto-pst-pdf}
+\usepackage{tikz}
 \usepackage{tikz-cd} 
 \usepackage{multicol}
 
+\usetikzlibrary{calc,matrix}
 
 \changefontsizes[10pt]{8pt}
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 \Ncolumn{3}
 \DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Sign}{sign}
 \DeclareMathOperator{\Rank}{Rank}
 \DeclareMathOperator{\Image}{Im}
 \DeclareMathOperator{\Columnspace}{\mathcal{R}}
@@ -704,7 +707,105 @@ Man nennt $A^+ = (A^H A)^{-1} A^H$ auch die Pseudoinverse von $A$, da $A^+ A = I
 
 \section{Determinanten}
 
+\begin{mainbox}{Determinante}
+  Die Determinante einer quadratischen Matrix $A \in \E^{n \times n}$ ist definiert als:
+  $$\det A = \sum_{p \in S_n} \Sign(p) a_{1,p(1)} \cdots a_{n,p(n)}$$
+  $S_n$ ist dabei die symmetrische Gruppe $n$ mit Ordnung $n!$. Jede Permutation $p$ kann als Produkt von Transpositionen (Permutation bei welcher nur zwei Elemente vertauscht werden) dargestellt werden.
+  $$\Sign(p) = \begin{cases}
+    1 & \text{$p$ Produkt gerader Anzahl Transpositionen} \\
+    -1 & \text{$p$ Produkt ungerader Anzahl Transpositionen}
+  \end{cases}$$
+\end{mainbox}
 
+Für $3 \times 3$ Matrizen gilt:
+% https://tex.stackexchange.com/a/32981/184539
+$$\begin{tikzpicture}[>=stealth]
+  \matrix [%
+    matrix of math nodes,
+    column sep=1em,
+    row sep=1em
+  ] (sarrus) {%
+    a_{11} & a_{12} & a_{13} & a_{11} & a_{12} \\
+    a_{21} & a_{22} & a_{23} & a_{21} & a_{22} \\
+    a_{31} & a_{32} & a_{33} & a_{31} & a_{32} \\
+  };
+
+  \path ($(sarrus-1-1.north west)-(0.5em,0)$) edge ($(sarrus-3-1.south west)-(0.5em,0)$)
+        ($(sarrus-1-3.north east)+(0.5em,0)$) edge ($(sarrus-3-3.south east)+(0.5em,0)$)
+        (sarrus-1-1)                          edge            (sarrus-2-2)
+        (sarrus-2-2)                          edge[->]        (sarrus-3-3)
+        (sarrus-1-2)                          edge            (sarrus-2-3)
+        (sarrus-2-3)                          edge[->]        (sarrus-3-4)
+        (sarrus-1-3)                          edge            (sarrus-2-4)
+        (sarrus-2-4)                          edge[->]        (sarrus-3-5)
+        (sarrus-3-1)                          edge[dashed]    (sarrus-2-2)
+        (sarrus-2-2)                          edge[->,dashed] (sarrus-1-3)
+        (sarrus-3-2)                          edge[dashed]    (sarrus-2-3)
+        (sarrus-2-3)                          edge[->,dashed] (sarrus-1-4)
+        (sarrus-3-3)                          edge[dashed]    (sarrus-2-4)
+        (sarrus-2-4)                          edge[->,dashed] (sarrus-1-5);
+
+  \foreach \c in {1,2,3} {\node[anchor=south] at (sarrus-1-\c.north) {$+$};};
+  \foreach \c in {1,2,3} {\node[anchor=north] at (sarrus-3-\c.south) {$-$};};
+\end{tikzpicture}$$
+
+Für $1 \times 1$ Matrizen gilt $\det(a_{11}) = a_{11}$ und für $2 \times 2$ Matrizen gilt $\det \begin{psmallmatrix}
+  a_{11} & a_{12} \\
+  a_{21} & a_{22}
+\end{psmallmatrix} = a_{11} a_{22} - a_{12} a_{21}$.
+
+\begin{subbox}{Eigenschaften der Determinante}
+  Für die Determinante einer Matrix $A \in \E^{n \times n}$ gilt:
+  \begin{itemize}
+    \item {
+      $\det A = 0 \iff A$ ist singulär
+      \begin{itemize}
+        \item hat $A$ also eine Nullzeile oder Nullspalte, so ist $\det A = 0$
+        \item hat $A$ zwei gleiche Spalten oder zwei gleiche Zeilen, so ist $\det A = 0$
+      \end{itemize}
+    }
+    \item{
+      $\det$ ist eine \textbf{lineare Funktion} in jeder \textbf{Zeile}.\\
+      $$\det \begin{psmallmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        \gamma a_{l1} + \gamma' a_{l1}' & \gamma a_{l2} + \gamma' a_{l2}' & \cdots & \gamma a_{ln} + \gamma' a_{ln}' \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+      \end{psmallmatrix}$$
+      $$ = \gamma \begin{psmallmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{l1} & a_{l2} & \cdots & a_{ln} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+      \end{psmallmatrix} + \gamma' \begin{psmallmatrix}
+        a_{11} & a_{12} & \cdots & a_{1n} \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{l1}' & a_{l2}' & \cdots & a_{ln}' \\
+        \vdots & \vdots & \ddots & \vdots \\
+        a_{n1} & a_{n2} & \cdots & a_{nn}
+      \end{psmallmatrix}$$
+    }
+    \item Vertauscht man zwei Zeilen (oder Spalten), dann wechselt $\det(A)$ das Vorzeichen
+    \item Addiert man zu einer Zeile (oder Spalte) eine andere Zeile (oder Spalte) multipliziert mit einem Skalar, dann ändert sich $\det(A)$ nicht
+    \item $\det(\gamma A) = \gamma^n \det(A)$
+    \item ist $A$ eine Diagonalmatrix oder Dreiecksmatrix, so ist $\det(A) = \prod_{i=1}^n a_{ii}$
+    \item wenden wir Gauss auf $A$ an so gilt $\det A = (-1)^v \prod_{k=1}^n r_{kk}$ wobei $v$ die Anzahl Zeilenvertauschungen ist und $r_{kk}$ die Pivotwerte der REF sind
+    \item $\det(I) = 1$
+    \item $\det(A^H) = \overbar{\det(A)}$ sowie $\det(A^T) = \det(A)$
+    \item $\det(AB) = \det(A) \det(B)$ und $\det(A^{-1}) = \frac{1}{\det(A)}$ falls $A^{-1}$ existiert
+  \end{itemize}
+\end{subbox}
+
+Für \textbf{Blockdreiecksmatrizen} gilt:
+
+$$
+  \det \left[\begin{array}{ c | c }
+    A & C \\
+    \hline
+    0 & B
+  \end{array}\right] = \det(A) \det(B)$$
 
 \section{Eigenwerte und Eigenvektoren}
 
@@ -761,13 +862,12 @@ Ausserdem gilt $A^H = V \Sigma^T U^H$ und falls $A$ invertierbar ist $A^{-1} = V
   \item $\{v_{r+1}, \cdots, v_m\}$: Basis von $\Kernel A = \Nullspace(A)$
 \end{itemize}
 
-TODO: last chapoter, cahpter 10 missing in summary danny
-TODO: qr zerlegung missing
-TODO: Satz 8.12
-rank A^H A = rank A
-TODO: positiv definit von ana2 summary, all eigenvlaues positive, TODO: 
-TODO: things from exericses, e.g. 12.5 minimization with different norm
-reduced form svd vs full-form
+% TODO: last chapoter, cahpter 10 missing in summary danny
+% TODO: qr zerlegung missing
+% TODO: Satz 8.12 rank A^H A = rank A
+% TODO: positiv definit von ana2 summary, all eigenvlaues positive, TODO: 
+% TODO: things from exericses, e.g. 12.5 minimization with different norm
+% reduced form svd vs full-form
 
 \section{Tabellen}
 
