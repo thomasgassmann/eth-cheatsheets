@@ -754,6 +754,16 @@ Für $1 \times 1$ Matrizen gilt $\det(a_{11}) = a_{11}$ und für $2 \times 2$ Ma
   a_{21} & a_{22}
 \end{psmallmatrix} = a_{11} a_{22} - a_{12} a_{21}$.
 
+Für \textbf{Blockdreiecksmatrizen} gilt:
+
+$$
+  \det \left[\begin{array}{ c | c }
+    A & C \\
+    \hline
+    0 & B
+  \end{array}\right] = \det(A) \det(B)$$
+
+
 \begin{subbox}{Eigenschaften der Determinante}
   Für die Determinante einer Matrix $A \in \E^{n \times n}$ gilt:
   \begin{itemize}
@@ -798,16 +808,19 @@ Für $1 \times 1$ Matrizen gilt $\det(a_{11}) = a_{11}$ und für $2 \times 2$ Ma
   \end{itemize}
 \end{subbox}
 
-Für \textbf{Blockdreiecksmatrizen} gilt:
-
-$$
-  \det \left[\begin{array}{ c | c }
-    A & C \\
-    \hline
-    0 & B
-  \end{array}\right] = \det(A) \det(B)$$
-
 \section{Eigenwerte und Eigenvektoren}
+
+\begin{mainbox}{Definition}
+  Eine Zahl $\lambda \in \K$ heisst Eigenwert der linearen Abbildung $F: V \mapsto V$ falls es $v \in V$ mit $v \neq 0$ gibt so dass $F(v) = \lambda v$. $v$ ist dabei ein Eigenvektor. 
+\end{mainbox}
+
+Eine lineare Abbildung $F$ und ihre Matrixdarstellung haben die gleichen Eigenwerte und die Eigenvektoren sind über die Koordinatenabbildung $\kappa_v$ verbunden.
+
+\begin{subbox}{Spektrum}
+  Die Menge aller Eigenwerte von $F$ heisst \textbf{Spektrum} von $F$ und wird mit $\sigma(F)$ bezeichnet.
+\end{subbox}
+
+Die Menge aller Eigenvektoren die zu einem Eigenwert $\lambda$ gehören bilden einen Unterraum $E_\lambda = \{ v \in V | F(v) = \lambda v \}$.
 
 \begin{subbox}{Eigenschaften von Eigenwerten und Eigenvektoren}
   Für jede Matrix $A \in \mathbb{E}^{n \times n}$ gilt:
