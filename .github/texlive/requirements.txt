@@ -1,0 +1,3 @@
+texlive-lang-german
+texlive-lang-chinese
+texlive-xetex
