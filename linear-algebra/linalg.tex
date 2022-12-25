@@ -255,8 +255,6 @@ Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $
   \end{rowlist}
 \end{subbox}
 
-Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. Multipliziert man eine Diagonalmatrix von rechts, dann multipliziert dies die Spalten.
-
 \begin{subbox}{Spalten- und Reihensichtweise}
   Ist $A = \begin{psmallmatrix}
     \underline{a_1} \\
@@ -279,8 +277,9 @@ Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. 
     \cdots \\
     \underline{b_n}
   \end{psmallmatrix}$ eine $n \times p$ Matrix, dann gilt $AB = \sum_{i=1}^n a_i \underline{b_i}$.
-
 \end{subbox}
+
+Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. Multipliziert man eine Diagonalmatrix von rechts, dann multipliziert dies die Spalten.
 
 \begin{subbox}{Definite}
   Eine Matrix $A$ ist positiv-definit (positiv-semidefinit), falls $\forall x \in \E^n$, $x^H A x > 0$ ($\geq 0$).
@@ -294,6 +293,10 @@ Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit
 wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\Delta_k$ das keiner der beiden Regeln entspricht ein falsches Vorzeichen hat.
 
 Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^T$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^H x$.
+
+Entsprechend ist die Orthogonalprojektion $P_Q := QQ^H$ (mit $Q \in \E^{m \times n}$ bestehend aus orthogonalen Spalten) die Projektion auf den Kolonnenraum $\Columnspace(Q)$. Für diese Orthogonalprojektion gilt $\lVert y - Py \rVert_2 = \min_{z \in \Image P} \lVert y - z \rVert_2$ (siehe \textbf{Least Squares}).
+
+Eine Matrix $P$ heisst \textbf{Projektor} falls $P^2 = P$.
 
 \subsection{Inverse}
 
@@ -706,6 +709,7 @@ Es gilt dann dass \begin{rowlist}
   \item $F$ ist längen- und winkeltreu
   \item $\Kernel F = \{0\}$, injektiv
 \end{rowlist}.
+
 Haben wir zusätzlich $\dim X = \dim Y$ gilt \begin{rowlist}
   \item $F$ ist ein Isomorphismus
   \item $\{b_1, \cdots, b_n\}$ ist eine Orthonormalbasis von $X$ $\iff$ $\{F(b_1), \cdots, F(b_n)\}$ ist eine Orthonormalbasis von $Y$
@@ -940,7 +944,7 @@ Die Singulärwärtszerlegung existiert für jede Matrix $A \in \E^{m \times n}$.
   & \implies & \underbrace{(\Sigma_r^{-1} V_r^H A^H)}_{U_r^{-1}} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r} = I\\
 \end{align*}
 
-$U_r$ kann zu einer unitären Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^H A$. $V$ diagonalisiert $A^H A$, $U$ diagonalisiert $A A^H$.
+$U_r$ kann zu einer unitären Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^H A = \Rank A A^H$. $V$ diagonalisiert $A^H A$, $U$ diagonalisiert $A A^H$.
 
 $$A = U \Sigma V^H, AA^H = U \Sigma_m^2 U^H, A^H A = V \Sigma_n^2 V^H$$
 
@@ -958,8 +962,8 @@ $$A = U \Sigma V^H = V \underbrace{V^H U}_R \Sigma V^H = V R \Sigma V^H$$
 wobei $R$ eine Rotation/Spiegelung ist und $\Sigma$ die Hauptachsen skaliert.
 
 % TODO: last chapoter, cahpter 10 missing in summary danny
-% TODO: Satz 8.12 rank A^H A = rank A
 % TODO: things from exericses, e.g. 12.5 minimization with different norm
+% merge matrixform and linear abbildung
 % synthetische division
 % cosine and sine laws
 % reduced form svd vs full-form
