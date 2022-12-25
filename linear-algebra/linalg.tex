@@ -837,13 +837,17 @@ Sei $A \in \E^{2 \times 2}$. Dann ist das charakteristische Polynom $\chi_A(\lam
 Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder imaginär.
 
 \begin{subbox}{Eigenschaften von Eigenwerten und Eigenvektoren}
-  Für jede Matrix $A \in \mathbb{E}^{n \times n}$ gilt:
-  \begin{align*}
-    & \det(A) = \prod_{i=1}^{n} \lambda_i & & \Tr(A) = \Sigma_{i=1}^n \lambda_i
-  \end{align*}
-  $\lambda$ ist ein Eigenwert von $A$ genau dann wenn $\lambda$ eine Nullstelle von $\chi_A$ ist.
-  
-  Die geometrische Vielfachheit eines Eigenwertes ist immer kleiner oder gleich der algebraischen Vielfachheit des Eigenwertes.
+  \begin{itemize}
+    \item{
+      Für jede Matrix $A \in \mathbb{E}^{n \times n}$ gilt:
+      \begin{align*}
+        & \det(A) = \prod_{i=1}^{n} \lambda_i & & \Tr(A) = \Sigma_{i=1}^n \lambda_i
+      \end{align*}
+    }
+    \item $\lambda$ ist ein Eigenwert von $A$ genau dann wenn $\lambda$ eine Nullstelle von $\chi_A$ ist
+    \item Die geometrische Vielfachheit eines Eigenwertes ist immer kleiner oder gleich der algebraischen Vielfachheit des Eigenwertes
+    \item Eigenvektoren zu verschiedenen Eigenwerten sind linear unabhängig
+  \end{itemize}
 \end{subbox}
 
 \begin{subbox}{Eigenwerte und Eigenvektoren finden}
@@ -852,6 +856,12 @@ Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder
     \item Bestimme die Nullstellen $\lambda_1, \lambda_2, \cdots, \lambda_n$ von $\chi_A$ (Eigenwerte)
     \item Für jedes $\lambda_k$ bestimme die Menge an Lösungen für $(A - \lambda_k I)x = 0$ (Eigenvektoren)
   \end{enumerate}
+\end{subbox}
+
+\begin{subbox}{Ähnliche Matrizen}
+  Zwei Matrizen $A, C \in \E^{n \times n}$ sind ähnlich falls es ein $T \in \E^{n \times n}$ gibt so dass $C = T^{-1} A T$.
+
+  Ähnliche Matrizen haben das gleiche charakteristische Polynom, die gleiche Spur, die gleiche Determinante und die gleichen Eigenwerte.
 \end{subbox}
 
 \section{Spektral- und Eigenwertzerlegung}
