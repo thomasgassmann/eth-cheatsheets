@@ -697,6 +697,11 @@ Haben wir zusätzlich $\dim X = \dim Y$ gilt \begin{rowlist}
 
 Eine Matrix kann dargestellt werden als $A = QR$ wobei $Q$ orthogonal und $R$ eine obere Dreiecksmatrix ist.
 
+\begin{itemize}
+  \item Wende Gram-Schmidt auf den Spalten von $A$ an ($\implies Q$)
+  \item $R = Q^\top A$ lösen und $R$ zu erhalten (alternativ $r_{11} = \lVert a_1 \rVert, r_{jk} = \langle q_j, a_k \rangle, r_{kk} = \lVert \widetilde{q_k} \rVert$)
+\end{itemize}
+
 \section{Least Squares}
 
 Sei $A \in E^{m \times n}$ $Ax = b$ ein überbestimmtes LGS ($m > n$). Im Allgemeinen gibt es keine Lösung, wir möchten deshalb $\lVert Ax - b \rVert_2^2$ minimieren. Wir definieren also $x^\ast = \text{argmin}_{x \in \E^n} \lVert Ax - b \rVert_2^2$. Dies trifft für alle $x \in E^n$ für welche $Ax - b$ \textbf{senkrecht} auf $\Columnspace(A)$ steht. 
