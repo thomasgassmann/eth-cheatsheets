@@ -137,7 +137,7 @@
 
 \begin{center}
   Lizenziert unter CC BY-SA 4.0. Für Urheber, Quellen und Lizenzinformationen, siehe:\\
-  \href{https://github.com/thomasgassmann/eth-summaries}{thomasgassmann/eth-summaries}
+  \href{https://github.com/thomasgassmann/eth-summaries}{github.com/thomasgassmann/eth-summaries}
 \end{center}
 
 \section{Vorwissen}
@@ -189,7 +189,7 @@ Ein homogenes LGS hat die Form $Ax = 0$.
 \end{enumerate}
 
 \begin{center}
-  \includegraphics[width=\linewidth]{gauss.png}
+  \includegraphics[width=0.8 \linewidth]{gauss.png}
 \end{center}
 
 \textbf{Verträglichkeitsbedingungen (VTB):} Falls die Verträglichkeitsbedingungen $c_{r+1} = \cdots = c_m = 0$ nicht erfüllt sind, so gibt es keine Lösung. Bei homogenen LGS sind die Verträglichkeitsbedingungen immer erfüllt. Nur wenn $r < n$ gibt es also nicht-triviale Lösungen.\\
@@ -342,11 +342,9 @@ Für $A, B$ unitär (dasselbe für orthogonal) gilt:
   \item $A^{-1}$, $AB$ unitär
 \end{itemize}
 
-Für unitäre Matrizen gilt $| \det(A) | = 1$, für orthogonale Matrizen somit $\det(A) = \pm 1$.
+Für unitäre Matrizen gilt $| \det(A) | = 1$, für orthogonale Matrizen somit $\det(A) = \pm 1$.\\
 
-\subsection{Rotationsmatrizen}
-
-Eine Rotationsmatrix $R$ ist eine unitäre Matrix. In 2D ist $R = \begin{psmallmatrix*}
+Eine \textbf{Rotationsmatrix} $R$ ist eine unitäre Matrix. In 2D ist $R = \begin{psmallmatrix*}
   \cos \theta & -\sin \theta \\
   \sin \theta & \cos \theta
 \end{psmallmatrix*}$. Verallgemeinert wird dies durch Givens-Rotationen. In 4D gilt bspw. $\begin{psmallmatrix}
@@ -354,11 +352,9 @@ Eine Rotationsmatrix $R$ ist eine unitäre Matrix. In 2D ist $R = \begin{psmallm
   0 & 1 & 0 & 0 \\
   \sin \theta & 0 & \cos \theta & 0 \\
   0 & 0 & 0 & 1
-\end{psmallmatrix}$.
+\end{psmallmatrix}$.\\
 
-\subsection{Householder-Matrizen}
-
-Die Matrix $Q_u = I - 2uu^\top$ stellt eine Spiegelung an der Hyperebene welche orthogonal zu $u$ ist dar.
+Die \textbf{Householder-Matrix} $Q_u = I - 2uu^\top$ stellt eine Spiegelung an der Hyperebene welche orthogonal zu $u$ ist dar.
 
 \section{LR-Zerlegung}
 
@@ -396,7 +392,7 @@ Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zue
 
 \section{Vektorräume}
 
-\begin{mainbox}{Axiome}
+\begin{mainbox}{}
   Eine Vektorraum $V$ über $\K$ ist eine nichtleere Menge auf dere eine Vektoraddition und Skalarmultiplikation definiert sind.
   \begin{vaxioms}
     \item $x + y = y + x$
@@ -477,7 +473,7 @@ Für eine Funktion $F: X \mapsto Y$ gilt:
 
 Sei $F: X \mapsto Y$ eine lineare Abbildung ist wobei $\Span \{ b_1, \cdots, b_n \} = X$ und $\Span \{ c_1, \cdots, c_m \} = Y$ Basen sind.
 
-Dann lässt sich $F(b_l) = \sum_{k=1}^m a_{kl} c_k$ schreiben. Die Matrix $A^{m \times n}$ mit Elementen $a_{kl}$ heisst die Abbildungsmatrix bezüglich $X, Y$.
+Dann lässt sich $F(b_l) = \sum_{k=1}^m a_{kl} c_k$ schreiben. Die Matrix $A^{m \times n}$ mit Elementen $a_{kl}$ heisst die Abbildungsmatrix bezüglich $X, Y$. Jede lineare Abbildung lässt sich also durch eine Matrix darstellen.
 
 Ist $F$ bijektiv ist es ein Isomorphismus, ist zusätzlich $X = Y$ so ist $F$ ein Automorphismus. Wenn $F$ ein Isomorphismus ist, existiert ein Isomorphismus $F^{-1}$.
 
@@ -497,6 +493,8 @@ Sei $F: X \mapsto Y$ eine lineare Abbildung. Es gilt $\Rank F \coloneqq \dim \Im
   Wir definieren das \textbf{Bild} als $\Image F \coloneqq \{F(x) | x \in X\}$. Das Bild ist ein Unterraum von $Y$ und $F$ ist surjektiv genau dann wenn $\Image F = Y$.
 \end{mainbox}
 
+Zwei Vektorräume endlicher Dimension sind genau dann isomorph wenn sie die gleiche Dimension haben.
+
 \begin{subbox}{Foldergungen des Rangsatzes}
   Seien $F: X \mapsto Y, G: Y \mapsto Z$ lineare Abbildungen:
   \begin{itemize}
@@ -508,8 +506,6 @@ Sei $F: X \mapsto Y$ eine lineare Abbildung. Es gilt $\Rank F \coloneqq \dim \Im
     \item $F$ surjektiv $\implies$ $\Rank GF = \Rank G$
   \end{itemize}
 \end{subbox}
-
-Zwei Vektorräume endlicher Dimension sind genau dann isomorph wenn sie die gleiche Dimension haben.
 
 \subsection{Matrizen als lineare Abbildungen}
 
@@ -595,16 +591,6 @@ Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildun
 
 \section{Vektorräume mit Skalarprodukt}
 
-\begin{subbox}{Norm}
-  Norm in Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\lVert \cdot \rVert: V \mapsto \mathbb{R}$ mit:
-  \begin{itemize}
-    \item positiv definit: $\forall x \in V$, $\lVert x \rVert \geq 0$ und $\lVert x \rVert = 0 \iff x = 0$
-    \item homogen: $\lVert \alpha x \rVert = \lvert \alpha \rvert \cdot \lVert x \rVert$ $\forall x \in V, \forall \alpha \in \mathbb{E}$
-    \item Dreiecksungleichung: $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
-  \end{itemize}
-  Ein Vektorraum mit einer Norm heisst normierter Vektorraum.
-\end{subbox}
-
 \begin{subbox}{Skalarprodukt}
   Skalarprodukt in einem Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\langle \cdot, \cdot \rangle : V \times V \mapsto \mathbb{E}$ mit folgenden Eigenschaften:
   \begin{itemize}
@@ -613,6 +599,16 @@ Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildun
     \item Positiv definit: $\forall x \in V$, $\langle x, x \rangle \in \mathbb{R}$ (auch für komplexe Vektorräume!), $\langle x, x \rangle \geq 0$, $\langle x, x \rangle = 0 \iff x = 0$
   \end{itemize}
   Falls $\mathbb{E} = \mathbb{C}$, nennt man $V$ auch einen unitären Vektorraum, für $\mathbb{E} = \mathbb{R}$ auch euklidischer oder orthogonaler Vektorraum. Für ein Skalarprodukt definiert man die induzierte Norm als $\lVert x \rVert = \sqrt[]{\langle x, x \rangle}$.
+\end{subbox}
+
+\begin{subbox}{Norm}
+  Norm in Vektorraum $V$ über $\mathbb{E}$ ist eine Funktion $\lVert \cdot \rVert: V \mapsto \mathbb{R}$ mit:
+  \begin{itemize}
+    \item positiv definit: $\forall x \in V$, $\lVert x \rVert \geq 0$ und $\lVert x \rVert = 0 \iff x = 0$
+    \item homogen: $\lVert \alpha x \rVert = \lvert \alpha \rvert \cdot \lVert x \rVert$ $\forall x \in V, \forall \alpha \in \mathbb{E}$
+    \item Dreiecksungleichung: $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
+  \end{itemize}
+  Ein Vektorraum mit einer Norm heisst normierter Vektorraum.
 \end{subbox}
 
 \begin{subbox}{Euklidischer Raum}
@@ -701,9 +697,6 @@ Wir wollen von $\mathcal{B}$ nach $\mathcal{B}'$, wobei beides Orthonormalbasen 
 Daher gilt $\xi = T \xi'$ und $\xi' = T^\hermconj \xi$. Zudem ist $\mathcal{B} = \mathcal{B}' T$ und $\mathcal{B}' = \mathcal{B} T^\hermconj$, wobei alle Matrizen unitär/orthogonal sind. Die Transformationsmatrix einer Basistransformation zwischen Orthonormalbasen ist unitär/orthogonal.
 
 $T$ ist ausserdem \textbf{längen- und winkeltreu}. 
-
-\subsection{Orthogonale / unitäre Abbildungen}
-
 
 \begin{mainbox}{Definition}
   Eine lineare Abbildung $F: X \mapsto Y$ ist unitär/orthogonal falls $\langle F(v), F(w) \rangle_Y = \langle v, w \rangle_X$.
@@ -994,12 +987,16 @@ $A V_r = U_r \Sigma_r$ ist die reduzierte Form der Singulärwärtszerlegung. Es 
 Aus der Singulärwärtszerlegung folgt auch dass die $r$ positiven \textbf{Eigenwerte von $A^\hermconj A$ und $AA^\hermconj$} gleich sind, die Vielfachheit des Eigenwertes $0$ aber $n-r$ respektive $m-r$ ist.
 
 % TODO: things from exericses, e.g. 12.5 minimization with different norm
-% merge matrixform and linear abbildung
-% synthetische division
 % cosine and sine laws
 % least squares svd/qr (also see dcamenisch cheatsheet)
 
-\section{Tabellen}
+\section{Synthetische Division}
+Berechne $\frac{6x^3 + 5x^2 - 7}{3x^2 - 2x - 1} = 2x + 3 + \frac{8x - 4}{3x^2 -2x - 1}$:\\
+\begin{center}
+  \includegraphics[width=0.4 \linewidth]{synthetic-division.png}
+\end{center}
+
+\section{Trigonometrie}
 
 \begin{mainbox}{Wichtige Werte}
   \begin{center} 
@@ -1013,9 +1010,5 @@ Aus der Singulärwärtszerlegung folgt auch dass die $r$ positiven \textbf{Eigen
    \end{tabular}
   \end{center}
 \end{mainbox}
-
-\begin{center}
-  \includegraphics[width=\linewidth]{degrees_circle.pdf}
-\end{center}
 
 \end{document}
