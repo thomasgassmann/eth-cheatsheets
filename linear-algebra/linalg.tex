@@ -22,7 +22,7 @@
 
 \usetikzlibrary{calc,matrix}
 
-\changefontsizes[10pt]{8pt}
+\changefontsizes[9pt]{8pt}
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 \Ncolumn{3}
@@ -286,9 +286,12 @@ Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. 
   Eine Matrix $A$ ist positiv-definit (positiv-semidefinit), falls $\forall x \in \E^n$, $x^H A x > 0$ ($\geq 0$).
 \end{subbox}
 
-Eine symmetrische Matrix $A$ ist genau dann positiv-definit (positiv-semidefinit) falls alle Eigenwerte strikt positiv (positiv) sind.
+Eine symmetrische Matrix $A$ ist genau dann \textbf{positiv-definit (positiv-semidefinit)} falls alle Eigenwerte strikt positiv (positiv) sind.
 
 Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt (vorrausgesetzt $\det(A) \neq 0$).
+
+\textbf{Marlene Trick}: Sei $M$ eine symmetrische Matrix und $A_k$ die $k \times k$ Blockmatrix der oberen, linken Ecke. Mit $\Delta_k$ bezeichnen wir die Determinante von $A_k$. Nun ist $M$ pos. def. wenn $\Delta_k$ > 0 für alle $k$, weiter ist $M$ neg. def.
+wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\Delta_k$ das keiner der beiden Regeln entspricht ein falsches Vorzeichen hat.
 
 Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^T$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^H x$.
 
@@ -498,7 +501,7 @@ Sei $A \in \E^{m \times n}$. Der \textbf{Spaltenraum} von $A$ ist der Unterraum 
 \begin{subbox}{Rangsatz für Matrizen}
   Sei $r := \Rank A = \dim \Image A$. Dann ist $n - \dim \Kernel A = r$ und $r$ entspricht der Anzahl Pivotelemente in REF. Zusätzlich:
   
-  $$\Rank A^T = \Rank A^H = \Rank A$$
+  $$\Rank A^\top = \Rank A^H = \Rank A$$
 \end{subbox}
 
 Somit gilt für Matrizen $A \in \E^{m \times n}$ und $B \in \E^{p \times n}$ auch:
@@ -579,7 +582,7 @@ Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildun
   \begin{itemize}
     \item positiv definit: $\forall x \in V$, $\lVert x \rVert \geq 0$ und $\lVert x \rVert = 0 \iff x = 0$
     \item homogen: $\lVert \alpha x \rVert = \lvert \alpha \rvert \cdot \lVert x \rVert$ $\forall x \in V, \forall \alpha \in \mathbb{E}$
-    \item Dreiecksungleichung: $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
+    \item Dreiecksungleichung: $\lVert x \pm y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
   \end{itemize}
   Ein Vektorraum mit einer Norm heisst normierter Vektorraum.
 \end{subbox}
@@ -606,8 +609,8 @@ Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)
 \end{subbox}
 
 \begin{mainbox}{Cauchy-Schwarz}
-  Sei $V$ ein Vektorraum über $\mathbb{E}$ mit Skalarprodukt.
-  $$| \langle x, y \rangle | ^2 \leq \langle x, x \rangle \langle y, y \rangle = \lVert x \rVert^2 \lVert y \rVert^2$$
+  Sei $V$ ein Vektorraum über $\mathbb{E}$ mit beliebigem Skalarprodukt.
+  $$| \langle x, y \rangle | \leq \lVert x \rVert \lVert y \rVert \iff | \langle x, y \rangle |^2 \leq \langle x, x \rangle \langle y, y \rangle$$
   Das Gleichheitszeichen gilt genau dann wenn $x$ und $y$ linear abhängig sind.
 \end{mainbox}
 
@@ -621,7 +624,7 @@ Zwei Vektoren sind \textbf{orthogonal}, falls $\langle x, y \rangle = 0$ ($x \pe
 Eine Basis ist \textbf{orthogonal} wenn $\langle b_l, b_k \rangle = 0$ für alle $b_l \neq b_k$. Gilt zusätzlich $\lVert b_i \rVert = 1$ $\forall i$ ist sie \textbf{orthonormal}.
 
 \begin{subbox}{Pythagoras}
-  Falls $x \perp y$, so folgt $\lVert x \pm y \rVert^2 = \lVert x \rVert^2 + \lVert y \rVert^2$.
+  Falls $x \perp y$, so folgt $\lVert x \pm y \rVert^2 = \lVert x \rVert^2 + \lVert y \rVert^2$. Allgemein gilt $\lVert x - y \rVert^2 = \lVert x \rVert^2 + \lVert y \rVert^2 - 2 \lVert x \rVert \lVert y \rVert \cos (\varphi)$.
 \end{subbox}
 
 Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
@@ -642,6 +645,10 @@ Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{
 
 \subsection{Gram-Schmidt-Orthonormalisierungsverfahren}
 
+\begin{subbox}{Orthogonales Komplement}
+  Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
+\end{subbox}
+
 \begin{mainbox}{Algorithmus}
   Sei $\{a_1, \cdots, a_n\}$ eine Menge linear unabhängiger Vektoren. Wir definieren rekursiv:
   \begin{itemize}
@@ -652,10 +659,6 @@ Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{
 
   Nach $k$ Schritten sind $\{b_1, \cdots b_k\}$ paarweise orthonormal. Wenn $\{a_1, \cdots, a_n\}$ eine Basis von $V$ ist, ist $\{b_1, \cdots b_n\}$ auch eine. Jeder endlichdimensionale Vektorraum hat eine Orthonormalbasis.
 \end{mainbox}
- 
-\begin{subbox}{Orthogonales Komplement}
-  Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
-\end{subbox}
 
 \begin{mainbox}{Fundamentale Unterräume einer Matrix}
   Sei $A \in \E^{m \times n}$ mit $r := \Rank A$.
@@ -938,9 +941,7 @@ $$A = U \Sigma V^H = V \underbrace{V^H U}_R \Sigma V^H = V R \Sigma V^H$$
 wobei $R$ eine Rotation/Spiegelung ist und $\Sigma$ die Hauptachsen skaliert.
 
 % TODO: last chapoter, cahpter 10 missing in summary danny
-% TODO: qr zerlegung missing
 % TODO: Satz 8.12 rank A^H A = rank A
-% TODO: positiv definit von ana2 summary, all eigenvlaues positive, TODO: 
 % TODO: things from exericses, e.g. 12.5 minimization with different norm
 % synthetische division
 % reduced form svd vs full-form
