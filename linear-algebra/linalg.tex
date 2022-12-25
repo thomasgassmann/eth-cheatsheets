@@ -987,7 +987,6 @@ $A V_r = U_r \Sigma_r$ ist die reduzierte Form der Singulärwärtszerlegung. Es 
 Aus der Singulärwärtszerlegung folgt auch dass die $r$ positiven \textbf{Eigenwerte von $A^\hermconj A$ und $AA^\hermconj$} gleich sind, die Vielfachheit des Eigenwertes $0$ aber $n-r$ respektive $m-r$ ist.
 
 % TODO: things from exericses, e.g. 12.5 minimization with different norm
-% cosine and sine laws
 % least squares svd/qr (also see dcamenisch cheatsheet)
 
 \section{Synthetische Division}
@@ -998,7 +997,16 @@ Berechne $\frac{6x^3 + 5x^2 - 7}{3x^2 - 2x - 1} = 2x + 3 + \frac{8x - 4}{3x^2 -2
 
 \section{Trigonometrie}
 
-\begin{mainbox}{Wichtige Werte}
+\begin{itemize}
+  \item $\sin(z) = \frac{e^{iz} - e^{-iz}}{2}$
+  \item $\cos(z) = \frac{e^{iz} + e^{-iz}}{2}$
+  \item $\sin(x) - \sin(y) = 2\sin(\frac{x - y}{2})\cos(\frac{x + y}{2})$
+  \item $\cos(x) - \cos(y) = -2\sin(\frac{x - y}{2})\sin(\frac{x + y}{2})$
+  \item $\sin(\alpha + \beta) = \sin(\alpha) \cos(\beta) + \cos(\alpha) \sin(\beta)$
+  \item $\cos(\alpha + \beta) = \cos(\alpha) \cos(\beta) - \sin(\alpha) \sin(\beta)$
+\end{itemize}
+
+\begin{mainbox}{}
   \begin{center} 
    \begin{tabular}{c|cccccc}
     deg & 0° & 30° & 45° & 60° & 90° & 180° \\
