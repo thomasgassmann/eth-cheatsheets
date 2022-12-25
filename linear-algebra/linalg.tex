@@ -207,7 +207,9 @@ Es gilt immer $r \leq \min(m, n)$.
 
 \section{Matrizen \& Vektoren}
 
-Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element mit $a_{i,j}$ oder $(A)_{i,j}$ bezeichnet wird. Ein $m \times 1$ Vektor ist ein \textbf{Spaltenvektor} und ein $1 \times n$ Vektor ist ein \textbf{Zeilenvektor} (n-Tupel). Die Elemente $a_{jj}, j = 1,2,\cdots,\min(m,n)$ heissen \textbf{Diagonalelemente}. Für eine \textbf{Diagonalmatrix} $A$ gilt $(A)_{ij} = 0$ für $i = j$. Wir bezeichnen die Matrix dann durch die Elemente auf der Diagonale: $A = \diag(d_{11}, \cdots, d_{nn})$. Für eine \textbf{obere Dreiecksmatrix} gilt: $(R)_{ij} = 0$ für $i > j$. Für eine \textbf{untere Dreiecksmatrix} gilt: $(L)_{ij} = 0$ für $i < j$.
+Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element mit $a_{i,j}$ oder $(A)_{i,j}$ bezeichnet wird. Ein $m \times 1$ Vektor ist ein \textbf{Spaltenvektor} und ein $1 \times n$ Vektor ist ein \textbf{Zeilenvektor} (n-Tupel). Die Elemente $a_{jj}, j = 1,2,\cdots,\min(m,n)$ heissen \textbf{Diagonalelemente}. Für eine \textbf{Diagonalmatrix} $A$ gilt $(A)_{ij} = 0$ für $i = j$. Wir bezeichnen die Matrix dann durch die Elemente auf der Diagonale: $A = \diag(d_{11}, \cdots, d_{nn})$. Für eine \textbf{obere Dreiecksmatrix} gilt: $(R)_{ij} = 0$ für $i > j$. Für eine \textbf{untere Dreiecksmatrix} gilt: $(L)_{ij} = 0$ für $i < j$. 
+
+Wir definieren als $\Tr A$ die Summe der Diagonalelemente.
 
 \begin{subbox}{Multiplikation}
   Für eine $m \times n$ Matrix $A$ und eine $n \times p$ Matrix $B$ gilt $(AB)_{ij} = \sum_{k=1}^n a_{ik} b_{kj}$ wobei $AB$ eine $m \times p$ Matrix ist. Generell \textbf{nicht kommutativ}.
@@ -250,6 +252,8 @@ Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $
   \end{rowlist}
 \end{subbox}
 
+Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. Multipliziert man eine Diagonalmatrix von rechts, dann multipliziert dies die Spalten.
+
 \begin{subbox}{Spalten- und Reihensichtweise}
   Ist $A = \begin{psmallmatrix}
     \underline{a_1} \\
@@ -274,8 +278,6 @@ Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $
   \end{psmallmatrix}$ eine $n \times p$ Matrix, dann gilt $AB = \sum_{i=1}^n a_i \underline{b_i}$.
 
 \end{subbox}
-
-Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. Multipliziert man eine Diagonalmatrix von rechts, dann multipliziert dies die Spalten.
 
 \begin{subbox}{Definite}
   Eine Matrix $A$ ist positiv-definit (positiv-semidefinit), falls $\forall x \in \E^n$, $x^H A x > 0$ ($\geq 0$).
@@ -822,10 +824,34 @@ Eine lineare Abbildung $F$ und ihre Matrixdarstellung haben die gleichen Eigenwe
 
 Die Menge aller Eigenvektoren die zu einem Eigenwert $\lambda$ gehören bilden einen Unterraum $E_\lambda = \{ v \in V | F(v) = \lambda v \}$.
 
+$\lambda$ ist ein Eigenwert von $A$ genau dann wenn $A - \lambda I$ einen nicht-trivialen Nullraum hat. Es gilt dann $E_\lambda = \Kernel(A - \lambda I)$. Die \textbf{geometrische Vielfachheit} von $\lambda$ entspricht dann $\dim E_\lambda$.
+
+\begin{subbox}{Charakteristisches Polynom}
+  Das charakteristische Polynom von $A$ ist das Polynom $\chi_A(\lambda) = \det(A - \lambda I)$. $\chi_A(\lambda) = 0$ ist dabei die charakteristische Gleichung.
+  $$\chi_A(\lambda) = (-1)^n \lambda^n + (-1)^{n-1} \Tr(A) \lambda^{n-1} + \cdots + \det(A)$$
+  Die \textbf{algebraische Vielfachheit} eines Eigenwertes $\lambda$ ist die Vielfachheit von $\lambda$ als Nullstelle von $\chi_A$ über $\C$.
+\end{subbox}
+
+Sei $A \in \E^{2 \times 2}$. Dann ist das charakteristische Polynom $\chi_A(\lambda) = \lambda^2 - \Tr(A) \lambda + \det(A)$.
+
+Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder imaginär.
+
 \begin{subbox}{Eigenschaften von Eigenwerten und Eigenvektoren}
   Für jede Matrix $A \in \mathbb{E}^{n \times n}$ gilt:
-  $$\det(A) = \prod_{i=1}^{n} \lambda_i$$
-  $$\Tr(A) = \Sigma_{i=1}^n \lambda_i$$
+  \begin{align*}
+    & \det(A) = \prod_{i=1}^{n} \lambda_i & & \Tr(A) = \Sigma_{i=1}^n \lambda_i
+  \end{align*}
+  $\lambda$ ist ein Eigenwert von $A$ genau dann wenn $\lambda$ eine Nullstelle von $\chi_A$ ist.
+  
+  Die geometrische Vielfachheit eines Eigenwertes ist immer kleiner oder gleich der algebraischen Vielfachheit des Eigenwertes.
+\end{subbox}
+
+\begin{subbox}{Eigenwerte und Eigenvektoren finden}
+  \begin{enumerate}
+    \item Bestimmte das charakteristische Polynom $\chi_A(\lambda) = \det(A - \lambda I)$
+    \item Bestimme die Nullstellen $\lambda_1, \lambda_2, \cdots, \lambda_n$ von $\chi_A$ (Eigenwerte)
+    \item Für jedes $\lambda_k$ bestimme die Menge an Lösungen für $(A - \lambda_k I)x = 0$ (Eigenvektoren)
+  \end{enumerate}
 \end{subbox}
 
 \section{Spektral- und Eigenwertzerlegung}
