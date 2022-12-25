@@ -967,34 +967,37 @@ Die Singulärwärtszerlegung existiert für jede Matrix $A \in \E^{m \times n}$.
 \begin{align*}
   A^\hermconj A V = V \Lambda & \xRightarrow[\text{Umordnung}]{\lambda = \sigma^2} & A^\hermconj A V_r = V_r \Sigma_r^2\\
   & \implies & V_r^\hermconj A^\hermconj A V_r = \Sigma_r^2\\
-  & \implies & \underbrace{(\Sigma_r^{-1} V_r^\hermconj A^\hermconj)}_{U_r^{-1}} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r} = I\\
+  & \implies & \underbrace{(\Sigma_r^{-1} V_r^\hermconj A^\hermconj)}_{U_r^{-1} = U_r^\hermconj} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r} = I\\
 \end{align*}
 
 $U_r$ kann zu einer unitären Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^\hermconj A = \Rank A A^\hermconj$. $V$ diagonalisiert $A^\hermconj A$, $U$ diagonalisiert $A A^\hermconj$.
 
-$$A = U \Sigma V^\hermconj, AA^\hermconj = U \Sigma_m^2 U^\hermconj, A^\hermconj A = V \Sigma_n^2 V^\hermconj$$
+$$A = U \Sigma V^\hermconj = \sum_{k=1}^r u_k \sigma_k v_k^\hermconj$$
 
-Ausserdem gilt $A^\hermconj = V \Sigma^\top U^\hermconj$ und falls $A$ invertierbar ist $A^{-1} = V \Sigma^{-1} U^\hermconj$.
+$$AA^\hermconj = U \Sigma_m^2 U^\hermconj, A^\hermconj A = V \Sigma_n^2 V^\hermconj$$
+
+Ausserdem gilt $A^\hermconj = V \Sigma^\top U^\hermconj$ und falls $A$ invertierbar ist $A^{-1} = V \Sigma^{-1} U^\hermconj$. Aus $AV = U \Sigma$ und $A^\hermconj U = V \Sigma^\top$ folgt:
 
 \begin{itemize}
-  \item $\{u_1, \cdots, u_r\}$: Basis von $\Image A = \Columnspace(A)$
-  \item $\{u_{r+1}, \cdots, u_m\}$: Basis von $\Kernel A^\hermconj = \Nullspace(A^\hermconj)$
-  \item $\{v_1, \cdots, v_r\}$: Basis von $\Image A^\hermconj = \Columnspace(A^\hermconj)$
-  \item $\{v_{r+1}, \cdots, v_m\}$: Basis von $\Kernel A = \Nullspace(A)$
+  \item $\{u_1, \cdots, u_r\}$: Orthonormalbasis von $\Image A = \Columnspace(A)$
+  \item $\{u_{r+1}, \cdots, u_m\}$: Orthonormalbasis von $\Kernel A^\hermconj = \Nullspace(A^\hermconj)$
+  \item $\{v_1, \cdots, v_r\}$: Orthonormalbasis von $\Image A^\hermconj = \Columnspace(A^\hermconj)$
+  \item $\{v_{r+1}, \cdots, v_m\}$: Orthonormalbasis von $\Kernel A = \Nullspace(A)$
 \end{itemize}
 
 Bei einer \textbf{Selbstabbildung} gilt:
 $$A = U \Sigma V^\hermconj = V \underbrace{V^\hermconj U}_R \Sigma V^\hermconj = V R \Sigma V^\hermconj$$
 wobei $R$ eine Rotation/Spiegelung ist und $\Sigma$ die Hauptachsen skaliert.
 
-% TODO: last chapoter, cahpter 10 missing in summary danny
+$A V_r = U_r \Sigma_r$ ist die reduzierte Form der Singulärwärtszerlegung. Es gilt dabei $U_r U_r = I$ sowie $V_r^\hermconj V_r = I$.
+
+Aus der Singulärwärtszerlegung folgt auch dass die $r$ positiven \textbf{Eigenwerte von $A^\hermconj A$ und $AA^\hermconj$} gleich sind, die Vielfachheit des Eigenwertes $0$ aber $n-r$ respektive $m-r$ ist.
+
 % TODO: things from exericses, e.g. 12.5 minimization with different norm
 % merge matrixform and linear abbildung
 % synthetische division
 % cosine and sine laws
-% reduced form svd vs full-form
 % least squares svd/qr (also see dcamenisch cheatsheet)
-% determinant of a matrix by expansion
 
 \section{Tabellen}
 
