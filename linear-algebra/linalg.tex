@@ -36,6 +36,8 @@
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\Span}{span}
 
+\newcommand*{\hermconj}{\mathsf{H}}
+
 % define nice looking boxes
 \usepackage[most]{tcolorbox}
 
@@ -236,22 +238,22 @@ Eine \textbf{Linearkombination} der Vektoren $a_1, \cdots, a_n$ ist $\alpha_1 a_
 Falls $AB = 0$, so sind $A$ und $B$ \textbf{Nullteiler}.\\
 \begin{subbox}{Transponierte Matrizen}
   \textbf{Transponiert}: $A^\top$ wird definiert als $(A^\top)_{ij} = (A)_{ji}$.\\
-  \textbf{Hermitesch-transponiert}: $A^H = (\overbar{A})^\top = \overbar{A^\top}$.
+  \textbf{Hermitesch-transponiert}: $A^\hermconj = (\overbar{A})^\top = \overbar{A^\top}$.
 \end{subbox}
-Eine Matrix ist \textbf{symmetrisch} falls $A^\top = A$ und \textbf{hermitesch} falls $A^H = A$ (Diagonale somit reell). \textbf{Schiefsymmetrisch} ist sie falls $A^\top = -A$. 
+Eine Matrix ist \textbf{symmetrisch} falls $A^\top = A$ und \textbf{hermitesch} falls $A^\hermconj = A$ (Diagonale somit reell). \textbf{Schiefsymmetrisch} ist sie falls $A^\top = -A$. 
 
-Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $AB = BA$. $A^H A$ und $A A^H$ sind  immer hermitesch.
+Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $AB = BA$. $A^\hermconj A$ und $A A^\hermconj$ sind  immer hermitesch.
 
 \begin{subbox}{Rechenregeln für hermitesche Matrizen}
   \begin{rowlist}
     \item $(A^\top)^\top = A$
-    \item $(A^H)^H = A$
+    \item $(A^\hermconj)^\hermconj = A$
     \item $(\alpha A)^\top = \alpha A^\top$
-    \item $(\alpha A)^H = \overbar{\alpha} A^H$
+    \item $(\alpha A)^\hermconj = \overbar{\alpha} A^\hermconj$
     \item $(A + B)^\top = A^\top + B^\top$
-    \item $(A + B)^H = A^H + B^H$
+    \item $(A + B)^\hermconj = A^\hermconj + B^\hermconj$
     \item $(AB)^\top = B^\top A^\top$
-    \item $(AB)^H = B^H A^H$
+    \item $(AB)^\hermconj = B^\hermconj A^\hermconj$
   \end{rowlist}
 \end{subbox}
 
@@ -282,7 +284,7 @@ Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $
 Multipliziert man eine Diagonalmatrix von links, dann skaliert dies die Zeilen. Multipliziert man eine Diagonalmatrix von rechts, dann multipliziert dies die Spalten.
 
 \begin{subbox}{Definite}
-  Eine Matrix $A$ ist positiv-definit (positiv-semidefinit), falls $\forall x \in \E^n$, $x^H A x > 0$ ($\geq 0$).
+  Eine Matrix $A$ ist positiv-definit (positiv-semidefinit), falls $\forall x \in \E^n$, $x^\hermconj A x > 0$ ($\geq 0$).
 \end{subbox}
 
 Eine symmetrische Matrix $A$ ist genau dann \textbf{positiv-definit (positiv-semidefinit)} falls alle Eigenwerte strikt positiv (positiv) sind.
@@ -292,9 +294,9 @@ Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit
 \textbf{Marlene Trick}: Sei $M$ eine symmetrische Matrix und $A_k$ die $k \times k$ Blockmatrix der oberen, linken Ecke. Mit $\Delta_k$ bezeichnen wir die Determinante von $A_k$. Nun ist $M$ pos. def. wenn $\Delta_k$ > 0 für alle $k$, weiter ist $M$ neg. def.
 wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\Delta_k$ das keiner der beiden Regeln entspricht ein falsches Vorzeichen hat.
 
-Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^\top$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^H x$.
+Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^\top$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^\hermconj x$.
 
-Entsprechend ist die Orthogonalprojektion $P_Q := QQ^H$ (mit $Q \in \E^{m \times n}$ bestehend aus orthogonalen Spalten) die Projektion auf den Kolonnenraum $\Columnspace(Q)$. Für diese Orthogonalprojektion gilt $\lVert y - Py \rVert_2 = \min_{z \in \Image P} \lVert y - z \rVert_2$ (siehe \textbf{Least Squares}).
+Entsprechend ist die Orthogonalprojektion $P_Q \coloneqq QQ^\hermconj$ (mit $Q \in \E^{m \times n}$ bestehend aus orthogonalen Spalten) die Projektion auf den Kolonnenraum $\Columnspace(Q)$. Für diese Orthogonalprojektion gilt $\lVert y - Py \rVert_2 = \min_{z \in \Image P} \lVert y - z \rVert_2$ (siehe \textbf{Least Squares}).
 
 Eine Matrix $P$ heisst \textbf{Projektor} falls $P^2 = P$.
 
@@ -308,7 +310,7 @@ Eine $n \times n$ Matrix ist $\textbf{invertierbar}$ wenn eine Matrix $A^{-1}$ e
   \begin{itemize}
     \item $A^{-1}$ regulär und $(A^{-1})^{-1} = A$.
     \item $AB$ regulär und $(AB)^{-1} = B^{-1} A^{-1}$.
-    \item $A^H$ regulär und $(A^H)^{-1} = (A^{-1})^H$.
+    \item $A^\hermconj$ regulär und $(A^\hermconj)^{-1} = (A^{-1})^\hermconj$.
   \end{itemize}
 \end{subbox}
 
@@ -330,13 +332,13 @@ Für $A = \begin{psmallmatrix*}
 
 \subsection{Orthogonale und unitäre Matrizen}
 
-Eine $n \times n$ Matrix heisst \textbf{unitär} falls $A^H A = I_n$. Eine Matrix heisst \textbf{orthogonal} falls $A^\top A = I_n$. Die Matrix ist genau dann unitär/orthogonal wenn alle Spalten orthonormal sind.
+Eine $n \times n$ Matrix heisst \textbf{unitär} falls $A^\hermconj A = I_n$. Eine Matrix heisst \textbf{orthogonal} falls $A^\top A = I_n$. Die Matrix ist genau dann unitär/orthogonal wenn alle Spalten orthonormal sind.
 
 Für $A, B$ unitär (dasselbe für orthogonal) gilt:
 
 \begin{itemize}
-  \item $A$ regulär und $A^{-1} = A^H$
-  \item $AA^H = I_n = A^H A$
+  \item $A$ regulär und $A^{-1} = A^\hermconj$
+  \item $AA^\hermconj = I_n = A^\hermconj A$
   \item $A^{-1}$, $AB$ unitär
 \end{itemize}
 
@@ -482,7 +484,7 @@ Ist $F$ bijektiv ist es ein Isomorphismus, ist zusätzlich $X = Y$ so ist $F$ ei
 \subsection{Kern, Bild und Rang}
 
 
-Sei $F: X \mapsto Y$ eine lineare Abbildung. Es gilt $\Rank F := \dim \Image F$.
+Sei $F: X \mapsto Y$ eine lineare Abbildung. Es gilt $\Rank F \coloneqq \dim \Image F$.
 
 \begin{mainbox}{Rangsatz}
   $$\dim X - \dim \Kernel F = \dim \Image F = \Rank F$$
@@ -490,9 +492,9 @@ Sei $F: X \mapsto Y$ eine lineare Abbildung. Es gilt $\Rank F := \dim \Image F$.
 
 \begin{mainbox}{Kern und Bild}
 
-  Wir definieren den \textbf{Kern} als $\Kernel F := \{x \in X | F(x) = 0\}$. Der Kern ist ein Unterraum von $X$ und $F$ ist injektiv genau dann wenn $\Kernel F = \{0\}$
+  Wir definieren den \textbf{Kern} als $\Kernel F \coloneqq \{x \in X | F(x) = 0\}$. Der Kern ist ein Unterraum von $X$ und $F$ ist injektiv genau dann wenn $\Kernel F = \{0\}$
 
-  Wir definieren das \textbf{Bild} als $\Image F := \{F(x) | x \in X\}$. Das Bild ist ein Unterraum von $Y$ und $F$ ist surjektiv genau dann wenn $\Image F = Y$.
+  Wir definieren das \textbf{Bild} als $\Image F \coloneqq \{F(x) | x \in X\}$. Das Bild ist ein Unterraum von $Y$ und $F$ ist surjektiv genau dann wenn $\Image F = Y$.
 \end{mainbox}
 
 \begin{subbox}{Foldergungen des Rangsatzes}
@@ -515,9 +517,9 @@ Sei $A \in \E^{m \times n}$. Der \textbf{Spaltenraum} von $A$ ist der Unterraum 
 
 
 \begin{subbox}{Rangsatz für Matrizen}
-  Sei $r := \Rank A = \dim \Image A$. Dann ist $\dim \Kernel A = n - r$ und $r$ entspricht der Anzahl Pivotelemente in REF. Zusätzlich:
+  Sei $r \coloneqq \Rank A = \dim \Image A$. Dann ist $\dim \Kernel A = n - r$ und $r$ entspricht der Anzahl Pivotelemente in REF. Zusätzlich:
   
-  $$\Rank A^\top = \Rank A^H = \Rank A$$
+  $$\Rank A^\top = \Rank A^\hermconj = \Rank A$$
 \end{subbox}
 
 Somit gilt für Matrizen $A \in \E^{m \times n}$ und $B \in \E^{p \times n}$ auch:
@@ -542,16 +544,16 @@ Falls $x_0$ eine Lösung für $Ax = b$ ist, so ist die Lösungsmenge $\mathcal{L
 
 \subsection{Zusammenfassende Eigenschaften von $A$}
 
-Sei $A \in M^{m \times n}$ mit $r := \Rank A$:
+Sei $A \in M^{m \times n}$ mit $r \coloneqq \Rank A$:
 
 \begin{rowlist}
-  \item $\dim \Image A = \dim \Image A^H = r$
+  \item $\dim \Image A = \dim \Image A^\hermconj = r$
   \item $\dim \Kernel A = n - r$
-  \item $\dim \Kernel A^H = m - r$
+  \item $\dim \Kernel A^\hermconj = m - r$
 \end{rowlist}
 
 \begin{align*}
-  r = n & \Leftrightarrow \Kernel A = \{ 0 \} & r = m & \Leftrightarrow \Kernel A^H = \{ 0 \} \\
+  r = n & \Leftrightarrow \Kernel A = \{ 0 \} & r = m & \Leftrightarrow \Kernel A^\hermconj = \{ 0 \} \\
   & \Leftrightarrow \text{Spalten von $A$ l.u.} & & \Leftrightarrow \text{Spalten von $A$ erzeugend}\\
   & \Leftrightarrow \text{Zeilen von $A$ erzeugend} & & \Leftrightarrow \text{Zeilen von $A$ l.u.}\\
   & \Leftrightarrow A \text{ injektiv} & & \Leftrightarrow A \text{ surjektiv}
@@ -614,8 +616,8 @@ Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildun
 \end{subbox}
 
 \begin{subbox}{Euklidischer Raum}
-  Das euklidische Skalarprodukt ist definiert als: $$\langle x, y \rangle := x^H y$$
-  Die euklidische 2-Norm ist entsprechend definiert als: $$\lVert x \rVert_2 = \sqrt[]{x^H x}$$
+  Das euklidische Skalarprodukt ist definiert als: $$\langle x, y \rangle \coloneqq x^\hermconj y$$
+  Die euklidische 2-Norm ist entsprechend definiert als: $$\lVert x \rVert_2 = \sqrt[]{x^\hermconj x}$$
 \end{subbox}
 
 Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)^{\frac{1}{p}}$.
@@ -632,7 +634,7 @@ Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)
 
 \begin{subbox}{Winkel}
   Seien $x, y, \in V$. Der Winkel zwischen $x$ und $y$ ist gegeben als:
-  $$\varphi := \arccos \frac{Re \langle x, y \rangle}{\lVert x \rVert \lVert y \rVert}$$
+  $$\varphi \coloneqq \arccos \frac{Re \langle x, y \rangle}{\lVert x \rVert \lVert y \rVert}$$
 \end{subbox}
 
 Zwei Vektoren sind \textbf{orthogonal}, falls $\langle x, y \rangle = 0$ ($x \perp y$). Zwei Teilmengen sind orthogonal, wenn $\forall x \in M, \forall y \in N$ gilt: $\langle x, y \rangle = 0$ ($M \perp N$).
@@ -654,9 +656,9 @@ Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle 
 Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{k=1}^n \langle b_k, x \rangle b_k$.
 
 \begin{mainbox}{Parsevalsche Formel}
-  Seien $x, y \in V$, $\{ b_1, \cdots, b_n \}$ eine Orthonormalbasis, so dass $\xi_k := \langle b_k, x \rangle_V$ und $\eta_k := \langle b_k, y \rangle_V$. Für $k = 1, \cdots, n$ sind $\xi_k$ und $\eta_k$ die Koordinatenvektoren. 
+  Seien $x, y \in V$, $\{ b_1, \cdots, b_n \}$ eine Orthonormalbasis, so dass $\xi_k \coloneqq \langle b_k, x \rangle_V$ und $\eta_k \coloneqq \langle b_k, y \rangle_V$. Für $k = 1, \cdots, n$ sind $\xi_k$ und $\eta_k$ die Koordinatenvektoren. 
 
-  $$\langle x, y \rangle_V = \Sigma_{k=1}^n \overbar{\xi_k} \eta_k = \xi^H \eta = \langle \xi, \eta \rangle_{\E^n}$$
+  $$\langle x, y \rangle_V = \Sigma_{k=1}^n \overbar{\xi_k} \eta_k = \xi^\hermconj \eta = \langle \xi, \eta \rangle_{\E^n}$$
 
   \begin{rowlist}
     \item $\lVert x \rVert_V = \lVert \xi \rVert_{\E^n}$
@@ -668,35 +670,35 @@ Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{
 \subsection{Gram-Schmidt-Orthonormalisierungsverfahren}
 
 \begin{subbox}{Orthogonales Komplement}
-  Für einen Unterraum $U$ von $V$ ist $U^\bot := \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
+  Für einen Unterraum $U$ von $V$ ist $U^\bot \coloneqq \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
 \end{subbox}
 
 \begin{mainbox}{Algorithmus}
   Sei $\{a_1, \cdots, a_n\}$ eine Menge linear unabhängiger Vektoren. Wir definieren rekursiv:
   \begin{itemize}
-    \item $b_1 := \frac{a_1}{\lVert a_1 \rVert}$
-    \item $\widetilde{b_k} := a_k - \sum_{j=1}^{k-1} \langle b_j, a_k \rangle b_j$
-    \item $b_k := \frac{\widetilde{b_k}}{\lVert \widetilde{b_k} \rVert}$
+    \item $b_1 \coloneqq \frac{a_1}{\lVert a_1 \rVert}$
+    \item $\widetilde{b_k} \coloneqq a_k - \sum_{j=1}^{k-1} \langle b_j, a_k \rangle b_j$
+    \item $b_k \coloneqq \frac{\widetilde{b_k}}{\lVert \widetilde{b_k} \rVert}$
   \end{itemize}
 
   Nach $k$ Schritten sind $\{b_1, \cdots b_k\}$ paarweise orthonormal und $\Span \{a_1, \cdots, a_k\} = \Span \{b_1, \cdots, b_k\}$. Wenn $\{a_1, \cdots, a_n\}$ eine Basis von $V$ ist, ist $\{b_1, \cdots b_n\}$ auch eine. Jeder endlichdimensionale Vektorraum hat eine Orthonormalbasis.
 \end{mainbox}
 
 \begin{mainbox}{Fundamentale Unterräume einer Matrix}
-  Sei $A \in \E^{m \times n}$ mit $r := \Rank A$.
+  Sei $A \in \E^{m \times n}$ mit $r \coloneqq \Rank A$.
   \begin{align*}
-    & \Nullspace(A) = \Columnspace(A^H)^\perp \subseteq \E^n & & \Nullspace(A) \oplus \Columnspace(A^H) = \E^n\\
-    & \Nullspace(A^H) = \Columnspace(A)^\perp \subseteq \E^m & & \Nullspace(A^H) \oplus \Columnspace(A) = \E^m\\
+    & \Nullspace(A) = \Columnspace(A^\hermconj)^\perp \subseteq \E^n & & \Nullspace(A) \oplus \Columnspace(A^\hermconj) = \E^n\\
+    & \Nullspace(A^\hermconj) = \Columnspace(A)^\perp \subseteq \E^m & & \Nullspace(A^\hermconj) \oplus \Columnspace(A) = \E^m\\
     & \dim \Columnspace(A) = r & & \dim \Nullspace(A) = n - r\\
-    & \dim \Columnspace(A^H) = r & & \dim \Nullspace(A^H) = m - r
+    & \dim \Columnspace(A^\hermconj) = r & & \dim \Nullspace(A^\hermconj) = m - r
   \end{align*}
 \end{mainbox}
 
 \subsection{Basiswechsel und Koordinatentransformation von Orthonormalbasen}
 
-Wir wollen von $\mathcal{B}$ nach $\mathcal{B}'$, wobei beides Orthonormalbasen sind. Wir können $b_k' = \sum_{j=1}^n \tau_{jk} b_j$ schreiben und erhalten die Basiswechselmatrix $T$. Da $\mathcal{B}, \mathcal{B}'$ orthonormal sind gilt $T^H = T^{-1}$.
+Wir wollen von $\mathcal{B}$ nach $\mathcal{B}'$, wobei beides Orthonormalbasen sind. Wir können $b_k' = \sum_{j=1}^n \tau_{jk} b_j$ schreiben und erhalten die Basiswechselmatrix $T$. Da $\mathcal{B}, \mathcal{B}'$ orthonormal sind gilt $T^\hermconj = T^{-1}$.
 
-Daher gilt $\xi = T \xi'$ und $\xi' = T^H \xi$. Zudem ist $\mathcal{B} = \mathcal{B}' T$ und $\mathcal{B}' = \mathcal{B} T^H$, wobei alle Matrizen unitär/orthogonal sind. Die Transformationsmatrix einer Basistransformation zwischen Orthonormalbasen ist unitär/orthogonal.
+Daher gilt $\xi = T \xi'$ und $\xi' = T^\hermconj \xi$. Zudem ist $\mathcal{B} = \mathcal{B}' T$ und $\mathcal{B}' = \mathcal{B} T^\hermconj$, wobei alle Matrizen unitär/orthogonal sind. Die Transformationsmatrix einer Basistransformation zwischen Orthonormalbasen ist unitär/orthogonal.
 
 $T$ ist ausserdem \textbf{längen- und winkeltreu}. 
 
@@ -733,17 +735,17 @@ Eine Matrix kann dargestellt werden als $A = QR$ wobei $Q$ orthogonal und $R$ ei
 Sei $A \in E^{m \times n}$ $Ax = b$ ein überbestimmtes LGS ($m > n$). Im Allgemeinen gibt es keine Lösung, wir möchten deshalb $\lVert Ax - b \rVert_2^2$ minimieren. Wir definieren also $x^\ast = \text{argmin}_{x \in \E^n} \lVert Ax - b \rVert_2^2$. Dies trifft für alle $x \in E^n$ für welche $Ax - b$ \textbf{senkrecht} auf $\Columnspace(A)$ steht. 
 
 \begin{align*}
-  Ax^\ast - b \perp \Columnspace(A) & \implies Ax^\ast - b \in \Nullspace(A^H)\\
-  & \implies A^H(Ax^\ast - b) = 0
+  Ax^\ast - b \perp \Columnspace(A) & \implies Ax^\ast - b \in \Nullspace(A^\hermconj)\\
+  & \implies A^\hermconj(Ax^\ast - b) = 0
 \end{align*}
 
 \begin{subbox}{Normalengleichungen}
   Eine Lösung des Least Squares Problems findet man durch lösen der Normalengleichungen:
-  $$A^H A x = A^H b$$
-  Ist $\Rank A = \Rank A^H A = n$, so ist $A^H A$ invertierbar und $x^\ast = (A^H A)^{-1} A^H b$.
+  $$A^\hermconj A x = A^\hermconj b$$
+  Ist $\Rank A = \Rank A^\hermconj A = n$, so ist $A^\hermconj A$ invertierbar und $x^\ast = (A^\hermconj A)^{-1} A^\hermconj b$.
 \end{subbox}
 
-Man nennt $A^+ = (A^H A)^{-1} A^H$ auch die Pseudoinverse von $A$, da $A^+ A = I$.
+Man nennt $A^+ = (A^\hermconj A)^{-1} A^\hermconj$ auch die Pseudoinverse von $A$, da $A^+ A = I$.
 
 \section{Determinanten}
 
@@ -850,7 +852,7 @@ $$
     \item ist $A$ eine Diagonalmatrix oder Dreiecksmatrix, so ist $\det(A) = \prod_{i=1}^n a_{ii}$
     \item wenden wir Gauss auf $A$ an so gilt $\det(A) = (-1)^v \prod_{k=1}^n r_{kk}$ wobei $v$ die Anzahl Zeilenvertauschungen ist und $r_{kk}$ die Pivotwerte der REF sind
     \item{
-      $\det(A^H) = \overbar{\det(A)}$ sowie $\det(A^\top) = \det(A)$ (auch für komplexe Matrizen)
+      $\det(A^\hermconj) = \overbar{\det(A)}$ sowie $\det(A^\top) = \det(A)$ (auch für komplexe Matrizen)
       \begin{itemize}
         \item wenn man zwei Spalten vertauscht, dann wechselt $\det(A)$ das Vorzeichen
         \item $\det$ ist eine lineare Funktion in jeder Spalte
@@ -942,47 +944,47 @@ $$A \underbrace{\begin{bsmallmatrix}
   0 & \cdots & \lambda_n
 \end{bsmallmatrix}}_\Lambda$$ $$ A = V \Lambda V^{-1}, Av_j = v_j \lambda_j, j = 1, \cdots, n$$
 
-$A$ wird durch $V$ diagonalisiert. Die Kolonnen von $V$ sind Eigenvektoren, die Diagonalelemente von $\Lambda$ Eigenwerte. Eine Matrix ist genau dann diagonalisierbar wenn für alle Eigenwerte \textbf{die geometrische Vielfachheit der algebraischen Vielfachheit entspricht}.
+$A$ wird durch $V$ diagonalisiert. Die Kolonnen von $V$ sind Eigenvektoren, die Diagonalelemente von $\Lambda$ Eigenwerte. Eine Matrix ist genau dann diagonalisierbar wenn für alle Eigenwerte \textbf{die geometrische Vielfachheit der algebraischen Vielfachheit entspricht}. Dies trifft immer zu wenn alle $n$ Eigenwerte verschieden sind.
 
 \begin{subbox}{Spektralsatz}
-  Sei $A \in \E^{n \times n}$ hermitesch ($A^H = A$). Dann gilt:
+  Sei $A \in \E^{n \times n}$ hermitesch ($A^\hermconj = A$). Dann gilt:
   \begin{itemize}
     \item Alle Eigenwerte sind reell
     \item Die Eigenvektoren sind paarweise orthogonal
-    \item Es gibt eine orthonormale Basis aus Eigenvektoren $U$ so dass $A = U \Lambda U^H$
+    \item Es gibt eine orthonormale Basis aus Eigenvektoren $U$ so dass $A = U \Lambda U^\hermconj$
   \end{itemize}
   Dasselbe gilt für reell-symmetrische Matrizen.
 \end{subbox}
 
 \begin{subbox}{Normale Matrizen}
-  Eine Matrix $A \in \E^{n \times n}$ ist normal, falls $A^H A = A A^H$. $A$ ist genau dann diagonalisierbar durch eine unitäre Matrix über $\C$ falls $A$ normal ist. 
+  Eine Matrix $A \in \E^{n \times n}$ ist normal, falls $A^\hermconj A = A A^\hermconj$. $A$ ist genau dann diagonalisierbar durch eine unitäre Matrix über $\C$ falls $A$ normal ist. 
 \end{subbox}
 
 \section{Singulärwärtszerlegung}
 
-Die Singulärwärtszerlegung existiert für jede Matrix $A \in \E^{m \times n}$. $A^H A$ ist immer hermitesch und positiv-definit. Es existiert also eine Spektralzerlegung:
+Die Singulärwärtszerlegung existiert für jede Matrix $A \in \E^{m \times n}$. $A^\hermconj A$ ist immer hermitesch und positiv-definit. Es existiert also eine Spektralzerlegung:
 
 \begin{align*}
-  A^H A V = V \Lambda & \xRightarrow[\text{Umordnung}]{\lambda = \sigma^2} & A^H A V_r = V_r \Sigma_r^2\\
-  & \implies & V_r^H A^H A V_r = \Sigma_r^2\\
-  & \implies & \underbrace{(\Sigma_r^{-1} V_r^H A^H)}_{U_r^{-1}} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r} = I\\
+  A^\hermconj A V = V \Lambda & \xRightarrow[\text{Umordnung}]{\lambda = \sigma^2} & A^\hermconj A V_r = V_r \Sigma_r^2\\
+  & \implies & V_r^\hermconj A^\hermconj A V_r = \Sigma_r^2\\
+  & \implies & \underbrace{(\Sigma_r^{-1} V_r^\hermconj A^\hermconj)}_{U_r^{-1}} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r} = I\\
 \end{align*}
 
-$U_r$ kann zu einer unitären Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^H A = \Rank A A^H$. $V$ diagonalisiert $A^H A$, $U$ diagonalisiert $A A^H$.
+$U_r$ kann zu einer unitären Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^\hermconj A = \Rank A A^\hermconj$. $V$ diagonalisiert $A^\hermconj A$, $U$ diagonalisiert $A A^\hermconj$.
 
-$$A = U \Sigma V^H, AA^H = U \Sigma_m^2 U^H, A^H A = V \Sigma_n^2 V^H$$
+$$A = U \Sigma V^\hermconj, AA^\hermconj = U \Sigma_m^2 U^\hermconj, A^\hermconj A = V \Sigma_n^2 V^\hermconj$$
 
-Ausserdem gilt $A^H = V \Sigma^\top U^H$ und falls $A$ invertierbar ist $A^{-1} = V \Sigma^{-1} U^H$.
+Ausserdem gilt $A^\hermconj = V \Sigma^\top U^\hermconj$ und falls $A$ invertierbar ist $A^{-1} = V \Sigma^{-1} U^\hermconj$.
 
 \begin{itemize}
   \item $\{u_1, \cdots, u_r\}$: Basis von $\Image A = \Columnspace(A)$
-  \item $\{u_{r+1}, \cdots, u_m\}$: Basis von $\Kernel A^H = \Nullspace(A^H)$
-  \item $\{v_1, \cdots, v_r\}$: Basis von $\Image A^H = \Columnspace(A^H)$
+  \item $\{u_{r+1}, \cdots, u_m\}$: Basis von $\Kernel A^\hermconj = \Nullspace(A^\hermconj)$
+  \item $\{v_1, \cdots, v_r\}$: Basis von $\Image A^\hermconj = \Columnspace(A^\hermconj)$
   \item $\{v_{r+1}, \cdots, v_m\}$: Basis von $\Kernel A = \Nullspace(A)$
 \end{itemize}
 
 Bei einer \textbf{Selbstabbildung} gilt:
-$$A = U \Sigma V^H = V \underbrace{V^H U}_R \Sigma V^H = V R \Sigma V^H$$
+$$A = U \Sigma V^\hermconj = V \underbrace{V^\hermconj U}_R \Sigma V^\hermconj = V R \Sigma V^\hermconj$$
 wobei $R$ eine Rotation/Spiegelung ist und $\Sigma$ die Hauptachsen skaliert.
 
 % TODO: last chapoter, cahpter 10 missing in summary danny
