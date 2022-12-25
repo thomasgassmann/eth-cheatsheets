@@ -327,7 +327,7 @@ Für $A = \begin{psmallmatrix*}
 
 \subsection{Orthogonale und unitäre Matrizen}
 
-Eine $n \times n$ Matrix heisst \textbf{unitär} falls $A^H A = I_n$. Eine unitäre Matrix heisst \textbf{orthogonal} falls $A^T A = I_n$. Es gilt $\det(A) = \pm 1$. Die Matrix ist genau dann unitär/orthogonal wenn alle Spalten orthonormal sind.
+Eine $n \times n$ Matrix heisst \textbf{unitär} falls $A^H A = I_n$. Eine Matrix heisst \textbf{orthogonal} falls $A^T A = I_n$. Es gilt $\det(A) = \pm 1$. Die Matrix ist genau dann unitär/orthogonal wenn alle Spalten orthonormal sind.
 
 Für $A, B$ unitär (dasselbe für orthogonal) gilt:
 
@@ -349,9 +349,13 @@ Eine Rotationsmatrix $R$ ist eine unitäre Matrix. In 2D ist $R = \begin{psmallm
   0 & 0 & 0 & 1
 \end{psmallmatrix}$.
 
+\subsection{Householder-Matrizen}
+
+Die Matrix $Q_u = I - 2uu^\top$ stellt eine Spiegelung an der Hyperebene welche orthogonal zu $u$ ist dar.
+
 \section{LR-Zerlegung}
 
-Die \textbf{LR-Zerlegung} ist ein weiteres Verfahren zum lösen von LGS. Es ist besonders effektiv wenn wir mehrere LGS mit gleichem $A$ haben.
+Die \textbf{LR-Zerlegung} ist ein weiteres Verfahren zum lösen von LGS. Wir erhalten dadurch $PA = LR$. Es ist besonders effektiv wenn wir mehrere LGS mit gleichem $A$ haben.
 
 \begin{align*}
   & \begin{bmatrix}[ccc|ccc|ccc]
@@ -379,7 +383,9 @@ Die \textbf{LR-Zerlegung} ist ein weiteres Verfahren zum lösen von LGS. Es ist 
   \end{bmatrix}
 \end{align*}\\
 
-Wenn wir Zeilen vertauschen, dann ändert sich $P$. Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zuerst lösen wir dazu $PA = LR$ und lösen $Lc = Pb$ nach $c$. Dann lösen wir $Rx = c$ nach $x$.
+Wenn wir Zeilen vertauschen, dann vertauschen wir auch die selben Zeilein in $P$. Im Allgemeinen gilt $A \in \E^{m \times n}$ sowie $P, L \in \E^{m \times m}$ und $R \in \E^{m \times n}$. Die Matrix $L$ hat immer $1$ auf der Diagonalen und Einträge unten links sind nur ungleich $0$ für Spalten kleiner oder gleich $\Rank A$.
+
+Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zuerst lösen wir dazu $PA = LR$ und lösen $Lc = Pb$ nach $c$. Dann lösen wir $Rx = c$ nach $x$.
 
 \section{Vektorräume}
 
@@ -412,32 +418,36 @@ Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. 
   Die Menge der Linearkombinationen der Vektoren $v_1, \cdots, v_n$ ist der Unterraum aufgespannt durch diese Vektoren. Man bezeichnet ihn mit $\Span \{ v_1, \cdots, v_n \}$.
 \end{subbox}
 
-Falls $\Span {v_1, \cdots, v_n} = V$, dann sind $v_1, \cdots, v_n$ ein \textbf{Erzeugendensystem} von $V$.
+Falls $\Span \{v_1, \cdots, v_n\} = V$, dann sind $v_1, \cdots, v_n$ ein \textbf{Erzeugendensystem} von $V$.
 
-Um zu zeigen dass $U \subseteq V$ ein Unterraum von $V$ ist zeigt man folgende Dinge:
-\begin{itemize}
+Um zu zeigen dass $U \subseteq V$ ein Unterraum von $V$ ist zeigt man 
+\begin{rowlist}
   \item $0_V \in U$
   \item $\forall x, y \in U$ gilt $x + y \in U$
   \item $\forall x \in U, \forall \alpha \in \K$ gilt $\alpha x \in U$
-\end{itemize}
+\end{rowlist}.
+
+Unterräume sind bspw. auch $\Kernel(A)$ und $\Image(A)$.
 
 \subsection{Lineare Abhängigkeit, Basen und Dimensionen}
 
 \begin{mainbox}{Lineare Unabhängigkeit}
   Vektoren $v_1, \cdots, v_n$ sind linear unabhängig genau dann wenn:
-  $$\sum_{k=1}^n \alpha_k v_k = 0 \iff \alpha_1 = \cdots = \alpha_n = 0$$
-  Andernfalls sind die Vektoren linear abhängig.
+  $$\sum_{k=1}^n \alpha_k v_k = 0 \implies \alpha_1 = \cdots = \alpha_n = 0$$
+  Andernfalls sind die Vektoren linear abhängig, d.h. es existiert eine nicht-triviale Nullsumme bzw. ein Vektor lässt sich als Linearkombination der anderen schreiben.
 \end{mainbox}
 
 \begin{mainbox}{Basis}
-  Ein Erzeugendensystem $v_1, \cdots, v_n$ von $V$ ist eine Basis von $V$ genau dann wenn $v_1, \cdots, v_n$ linear unabhängig sind.
+  Ein Erzeugendensystem $v_1, \cdots, v_n$ von $V$ ist eine Basis von $V$ genau dann wenn $v_1, \cdots, v_n$ linear unabhängig sind. Jeder Vektor in $V$ lässt sich eindeutig als Linearkombination der Basisvektoren schreiben.
 \end{mainbox}
 
 Jede Menge $\{v_1, \cdots, v_m\} \subseteq V$ mit $\dim V < m$ ist linear abhängig. In jedem endlichen Vektorraum $V$ mit $\dim V = n$ ist eine Menge von $n$ linear unabhängigen Vektoren eine Basis.
 
+In einem Vektorraum $V$ beeinflusst die Wahl der Skalare die Dimension. $\C^n$ über $\C$ hat Dimension $n$, $\C^n$ über $\R$ hat Dimension $2n$.
+
 Die Koeffizienten $\xi = (\xi_1, \cdots, \xi_n)^\top$ sind \textbf{Koordinaten} von $x$ bzgl. einer Basis $\mathcal{B}$ falls $x = \sum_{i=1}^n \xi_i b_i$ gilt. Die Summe wird Koordinatendarstellung genannt.
 
-Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine eindeutige Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
+Zwei Unterräume $U, W \subseteq V$ heissen \textbf{komplementär} falls jedes $x \in V$ eine \textbf{eindeutige} Darstellung $x = u + w$ mit $u \in U$ und $w \in W$ hat ($V$ ist dann direkte Summe von $U$ und $W$). Man schreibt $V = U \oplus W$. Falls zwei Unterräume komplementär sind, folgt $U \cap W = \{0_V\}$.
 
 Falls  $f: U \rightarrow V$ und $g: V \rightarrow W$ lineare Abbildungen zwischen Vektorräumen sind so dass $ g \circ f$ ein Isomorphismus ist, dann gilt $V = \operatorname{Im}f \oplus \operatorname{Ker} g$.
 
@@ -445,7 +455,7 @@ Falls  $f: U \rightarrow V$ und $g: V \rightarrow W$ lineare Abbildungen zwische
 
 Wenn wir von einer alten Basis $\mathcal{B}$ zu einer neuen Basis $\mathcal{B}'$ wechseln, können wir die neue Basis mit der alten darstellen. Es gilt dann $b_k' = \sum_{i=1}^n \tau_{ik} b_i$ mit der \textbf{Basiswechselmatrix} $T = (\tau_{ik})$.
 
-Es gilt $\xi = T \xi'$ sowie $\xi' = T^{-1} \xi$, da $T$ regulär ist. Dabei sind $\xi'$ die Koordinaten in der Basis $\mathcal{B}'$ und $\xi$ sind die Koordinaten in der Basis $\mathcal{B}$. Es gilt dann $\mathcal{B}' = \mathcal{B} T$.
+Es gilt $\xi = T \xi'$ sowie $\xi' = T^{-1} \xi$, da $T$ regulär ist. Dabei sind $\xi'$ die Koordinaten in der Basis $\mathcal{B}'$ und $\xi$ sind die Koordinaten in der Basis $\mathcal{B}$. Es gilt dann $\mathcal{B}' = \mathcal{B} T$, was aus $B \xi = x = B' \xi'$ und $\xi = T \xi'$ folgt.
 
 \section{Lineare Abbildungen}
 
@@ -466,19 +476,18 @@ Ist $F$ bijektiv ist es ein Isomorphismus, ist zusätzlich $X = Y$ so ist $F$ ei
 
 \subsection{Kern, Bild und Rang}
 
-Sei $F: X \mapsto Y$ eine lineare Abbildung.
+
+Sei $F: X \mapsto Y$ eine lineare Abbildung. Es gilt $\Rank F := \dim \Image F$.
+
+\begin{mainbox}{Rangsatz}
+  $$\dim X - \dim \Kernel F = \dim \Image F = \Rank F$$
+\end{mainbox}
 
 \begin{mainbox}{Kern und Bild}
 
   Wir definieren den \textbf{Kern} als $\Kernel F := \{x \in X | F(x) = 0\}$. Der Kern ist ein Unterraum von $X$ und $F$ ist injektiv genau dann wenn $\Kernel F = \{0\}$
 
   Wir definieren das \textbf{Bild} als $\Image F := \{F(x) | x \in X\}$. Das Bild ist ein Unterraum von $Y$ und $F$ ist surjektiv genau dann wenn $\Image F = Y$.
-\end{mainbox}
-
-Es gilt $\Rank F := \dim \Image F$.
-
-\begin{mainbox}{Rangsatz}
-  $$\dim X - \dim \Kernel F = \dim \Image F = \Rank F$$
 \end{mainbox}
 
 \begin{subbox}{Foldergungen des Rangsatzes}
@@ -493,13 +502,15 @@ Es gilt $\Rank F := \dim \Image F$.
   \end{itemize}
 \end{subbox}
 
+Zwei Vektorräume endlicher Dimension sind genau dann isomorph wenn sie die gleiche Dimension haben.
+
 \subsection{Matrizen als lineare Abbildungen}
 
-Sei $A \in \E^{m \times n}$. Der \textbf{Spaltenraum} von $A$ ist der Unterraum $\Columnspace(A) = \Image A = \Span \{ a_1, \cdots, a_n \} \subseteq \E^m$. Der \textbf{Nullraum} von $A$ ist der Unterraum $\Nullspace(A) = \Kernel A$.
+Sei $A \in \E^{m \times n}$. Der \textbf{Spaltenraum} von $A$ ist der Unterraum $\Columnspace(A) = \Image A = \Span \{ a_1, \cdots, a_n \} \subseteq \E^m$. Der \textbf{Nullraum} von $A$ ist der Unterraum $\Nullspace(A) = \Kernel A$ und der \textbf{Kolonnenraum} oder Wertebereich von $A$ ist der Unterraum $\Columnspace(A) = \Image A$.
 
 
 \begin{subbox}{Rangsatz für Matrizen}
-  Sei $r := \Rank A = \dim \Image A$. Dann ist $n - \dim \Kernel A = r$ und $r$ entspricht der Anzahl Pivotelemente in REF. Zusätzlich:
+  Sei $r := \Rank A = \dim \Image A$. Dann ist $\dim \Kernel A = n - r$ und $r$ entspricht der Anzahl Pivotelemente in REF. Zusätzlich:
   
   $$\Rank A^\top = \Rank A^H = \Rank A$$
 \end{subbox}
@@ -507,7 +518,7 @@ Sei $A \in \E^{m \times n}$. Der \textbf{Spaltenraum} von $A$ ist der Unterraum 
 Somit gilt für Matrizen $A \in \E^{m \times n}$ und $B \in \E^{p \times n}$ auch:
 
 \begin{itemize}
-  \item $\Rank BA \leq \min(\Rank A, \Rank B)$
+  \item $\Rank BA \leq \min(\Rank B, \Rank A)$
   \item $\Rank B = m \leq p \implies \Rank BA = \Rank A$
   \item $\Rank A = m \leq n \implies \Rank BA = \Rank B$
 \end{itemize}
@@ -517,7 +528,7 @@ Für quadratische Matrizen $A \in \E^{n \times n}$ sind also folgende Aussagen �
 \begin{rowlist}
   \item $A$ ist regulär
   \item $\Rank A = n$
-  \item Spalten (und Zeilen) sind linear unabhängig
+  \item Spalten (oder Zeilen) sind linear unabhängig
   \item $\Kernel A = \{0\}$
   \item $\Image A = \E^n$
 \end{rowlist}
@@ -558,10 +569,10 @@ Sei $A \in M^{m \times n}$ mit $r := \Rank A$:
     \xi' \in \E^n \arrow[shift left=1]{u}{T} \arrow{r}{B} & \eta' \in \E^m \arrow[shift left=1]{u}{S}
   \end{tikzcd}
   \begin{subbox}{}
-    Es gilt:
     \begin{itemize}
       \item $A = SBT^{-1}$
       \item $B = S^{-1}AT$
+      \item $\Rank F = \Rank A = \Rank B$
     \end{itemize}
   \end{subbox}
 \end{multicols}
@@ -582,7 +593,7 @@ Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildun
   \begin{itemize}
     \item positiv definit: $\forall x \in V$, $\lVert x \rVert \geq 0$ und $\lVert x \rVert = 0 \iff x = 0$
     \item homogen: $\lVert \alpha x \rVert = \lvert \alpha \rvert \cdot \lVert x \rVert$ $\forall x \in V, \forall \alpha \in \mathbb{E}$
-    \item Dreiecksungleichung: $\lVert x \pm y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
+    \item Dreiecksungleichung: $\lVert x + y \rVert \leq \lVert x \rVert + \lVert y \rVert$ $\forall x, y \in V$
   \end{itemize}
   Ein Vektorraum mit einer Norm heisst normierter Vektorraum.
 \end{subbox}
@@ -599,7 +610,7 @@ Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildun
 
 \begin{subbox}{Euklidischer Raum}
   Das euklidische Skalarprodukt ist definiert als: $$\langle x, y \rangle := x^H y$$
-  Die euklidische 2-Norm ist entsprechend definiert als: $$\lVert x \rVert_2 = \sqrt[]{x^\top x}$$
+  Die euklidische 2-Norm ist entsprechend definiert als: $$\lVert x \rVert_2 = \sqrt[]{x^H x}$$
 \end{subbox}
 
 Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)^{\frac{1}{p}}$.
@@ -621,13 +632,19 @@ Die $p$-Norm ist definiert als $\lVert x \rVert_p = (|x_1|^p + \cdots + |x_n|^p)
 
 Zwei Vektoren sind \textbf{orthogonal}, falls $\langle x, y \rangle = 0$ ($x \perp y$). Zwei Teilmengen sind orthogonal, wenn $\forall x \in M, \forall y \in N$ gilt: $\langle x, y \rangle = 0$ ($M \perp N$).
 
-Eine Basis ist \textbf{orthogonal} wenn $\langle b_l, b_k \rangle = 0$ für alle $b_l \neq b_k$. Gilt zusätzlich $\lVert b_i \rVert = 1$ $\forall i$ ist sie \textbf{orthonormal}.
+Eine Basis ist \textbf{orthogonal} wenn $\langle b_k, b_l \rangle = \delta_{kl}$ für alle $k, l$, wobei das Kroneckerdelta definiert ist als
+$\delta_{kl} = \begin{cases}
+  0\text{ falls }k \neq l \\
+  1\text{ falls }k = l
+\end{cases}$.
+
+Gilt zusätzlich $\lVert b_i \rVert = 1$ $\forall i$ ist sie \textbf{orthonormal}.
 
 \begin{subbox}{Pythagoras}
   Falls $x \perp y$, so folgt $\lVert x \pm y \rVert^2 = \lVert x \rVert^2 + \lVert y \rVert^2$. Allgemein gilt $\lVert x - y \rVert^2 = \lVert x \rVert^2 + \lVert y \rVert^2 - 2 \lVert x \rVert \lVert y \rVert \cos (\varphi)$.
 \end{subbox}
 
-Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind.
+Eine Menge von paarweise orthogonalen Vektoren ist linear unabhängig wenn alle Vektoren ungleich null sind. Der Nullvektor ist orthogonal zu allen Vektoren.
 
 Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{k=1}^n \langle b_k, x \rangle b_k$.
 
@@ -657,7 +674,7 @@ Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{
     \item $b_k := \frac{\widetilde{b_k}}{\lVert \widetilde{b_k} \rVert}$
   \end{itemize}
 
-  Nach $k$ Schritten sind $\{b_1, \cdots b_k\}$ paarweise orthonormal. Wenn $\{a_1, \cdots, a_n\}$ eine Basis von $V$ ist, ist $\{b_1, \cdots b_n\}$ auch eine. Jeder endlichdimensionale Vektorraum hat eine Orthonormalbasis.
+  Nach $k$ Schritten sind $\{b_1, \cdots b_k\}$ paarweise orthonormal und $\Span \{a_1, \cdots, a_k\} = \Span \{b_1, \cdots, b_k\}$. Wenn $\{a_1, \cdots, a_n\}$ eine Basis von $V$ ist, ist $\{b_1, \cdots b_n\}$ auch eine. Jeder endlichdimensionale Vektorraum hat eine Orthonormalbasis.
 \end{mainbox}
 
 \begin{mainbox}{Fundamentale Unterräume einer Matrix}
@@ -944,6 +961,7 @@ wobei $R$ eine Rotation/Spiegelung ist und $\Sigma$ die Hauptachsen skaliert.
 % TODO: Satz 8.12 rank A^H A = rank A
 % TODO: things from exericses, e.g. 12.5 minimization with different norm
 % synthetische division
+% cosine and sine laws
 % reduced form svd vs full-form
 % least squares svd/qr (also see dcamenisch cheatsheet)
 % determinant of a matrix by expansion
