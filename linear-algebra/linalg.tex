@@ -212,7 +212,7 @@ Es gilt immer $r \leq \min(m, n)$.
 
 Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element mit $a_{i,j}$ oder $(A)_{i,j}$ bezeichnet wird. Ein $m \times 1$ Vektor ist ein \textbf{Spaltenvektor} und ein $1 \times n$ Vektor ist ein \textbf{Zeilenvektor} (n-Tupel). Die Elemente $a_{jj}, j = 1,2,\cdots,\min(m,n)$ heissen \textbf{Diagonalelemente}. Für eine \textbf{Diagonalmatrix} $A$ gilt $(A)_{ij} = 0$ für $i = j$. Wir bezeichnen die Matrix dann durch die Elemente auf der Diagonale: $A = \diag(d_{11}, \cdots, d_{nn})$. Für eine \textbf{obere Dreiecksmatrix} gilt: $(R)_{ij} = 0$ für $i > j$. Für eine \textbf{untere Dreiecksmatrix} gilt: $(L)_{ij} = 0$ für $i < j$. 
 
-Wir definieren als $\Tr A$ die Summe der Diagonalelemente.
+Wir definieren als $\Tr(A)$ die Summe der Diagonalelemente.
 
 \begin{subbox}{Multiplikation}
   Für eine $m \times n$ Matrix $A$ und eine $n \times p$ Matrix $B$ gilt $(AB)_{ij} = \sum_{k=1}^n a_{ik} b_{kj}$ wobei $AB$ eine $m \times p$ Matrix ist. Generell \textbf{nicht kommutativ}.
@@ -340,7 +340,7 @@ Für $A, B$ unitär (dasselbe für orthogonal) gilt:
   \item $A^{-1}$, $AB$ unitär
 \end{itemize}
 
-Für unitäre Matrizen gilt $| \det A | = 1$, für orthogonale Matrizen somit $\det(A) = \pm 1$.
+Für unitäre Matrizen gilt $| \det(A) | = 1$, für orthogonale Matrizen somit $\det(A) = \pm 1$.
 
 \subsection{Rotationsmatrizen}
 
@@ -749,7 +749,7 @@ Man nennt $A^+ = (A^H A)^{-1} A^H$ auch die Pseudoinverse von $A$, da $A^+ A = I
 
 \begin{mainbox}{Determinante}
   Die Determinante einer quadratischen Matrix $A \in \E^{n \times n}$ ist definiert als:
-  $$\det A = \sum_{p \in S_n} \Sign(p) a_{1,p(1)} \cdots a_{n,p(n)}$$
+  $$\det(A) = \sum_{p \in S_n} \Sign(p) a_{1,p(1)} \cdots a_{n,p(n)}$$
   $S_n$ ist dabei die symmetrische Gruppe $n$ mit Ordnung $n!$. Jede Permutation $p$ kann als Produkt von Transpositionen (Permutation bei welcher nur zwei Elemente vertauscht werden) dargestellt werden.
   $$\Sign(p) = \begin{cases}
     1 & \text{$p$ Produkt gerader Anzahl Transpositionen} \\
@@ -836,19 +836,19 @@ $$
   Die Determinante ist die einzige auf $\E^{n \times n}$ definierte Funktion mit den obigen drei Eigenschaften.
 \end{subbox}
 
-\begin{subbox}{Folgerungen für $\det A, A \in \E^{n \times n}$}
+\begin{subbox}{Folgerungen für $\det(A), A \in \E^{n \times n}$}
   \begin{itemize}
     \item {
-      $\det A = 0 \iff A$ ist singulär
+      $\det(A) = 0 \iff A$ ist singulär
       \begin{itemize}
-        \item hat $A$ also eine Nullzeile oder Nullspalte, so ist $\det A = 0$
-        \item hat $A$ zwei gleiche Spalten oder zwei gleiche Zeilen, so ist $\det A = 0$
+        \item hat $A$ also eine Nullzeile oder Nullspalte, so ist $\det(A) = 0$
+        \item hat $A$ zwei gleiche Spalten oder zwei gleiche Zeilen, so ist $\det(A) = 0$
       \end{itemize}
     }
     \item Addiert man zu einer Zeile (oder Spalte) eine andere Zeile (oder Spalte) multipliziert mit einem Skalar, dann ändert sich $\det(A)$ nicht
     \item $\det(\gamma A) = \gamma^n \det(A)$
     \item ist $A$ eine Diagonalmatrix oder Dreiecksmatrix, so ist $\det(A) = \prod_{i=1}^n a_{ii}$
-    \item wenden wir Gauss auf $A$ an so gilt $\det A = (-1)^v \prod_{k=1}^n r_{kk}$ wobei $v$ die Anzahl Zeilenvertauschungen ist und $r_{kk}$ die Pivotwerte der REF sind
+    \item wenden wir Gauss auf $A$ an so gilt $\det(A) = (-1)^v \prod_{k=1}^n r_{kk}$ wobei $v$ die Anzahl Zeilenvertauschungen ist und $r_{kk}$ die Pivotwerte der REF sind
     \item{
       $\det(A^H) = \overbar{\det(A)}$ sowie $\det(A^\top) = \det(A)$ (auch für komplexe Matrizen)
       \begin{itemize}
@@ -858,6 +858,15 @@ $$
     }
     \item $\det(AB) = \det(A) \det(B)$ und $\det(A^{-1}) = \frac{1}{\det(A)}$ falls $A^{-1}$ existiert
   \end{itemize}
+\end{subbox}
+
+\begin{subbox}{Kofaktor }
+  Zu jedem Element $a_{kl}$ einer $n \times n$ Matrix $A$ ist $A_{[k,l]}$ definiert als die $(n-1) \times (n-1)$ Matrix mit der Zeile $k$ und Spalte $l$ gestrichen. Für den Kofaktor $\kappa_{kl}$ von $a_{kl}$ gilt dann:
+  $$\kappa_{kl} = (-1)^{k+l} \det(A_{[k,l]})$$
+  Dann gilt für jedes feste $k, l$ (Entwicklung nach $k$ Zeile bzw. $l$ Spalte):
+  \begin{align*}
+    & \det(A) = \sum_{i=1}^n a_{ki} \kappa_{ki} & \det(A) = \sum_{i=1}^n a_{il} \kappa_{il} &
+  \end{align*}
 \end{subbox}
 
 \section{Eigenwerte und Eigenvektoren}
@@ -897,6 +906,7 @@ Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder
     \item $\lambda$ ist ein Eigenwert von $A$ genau dann wenn $\lambda$ eine Nullstelle von $\chi_A$ ist
     \item Die geometrische Vielfachheit eines Eigenwertes ist immer kleiner oder gleich der algebraischen Vielfachheit des Eigenwertes
     \item Eigenvektoren zu verschiedenen Eigenwerten sind linear unabhängig
+    \item Eine Matrix ist genau dann singulär wenn sie $0$ als Eigenwert hat
   \end{itemize}
 \end{subbox}
 
@@ -904,7 +914,7 @@ Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder
   \begin{enumerate}
     \item Bestimmte das charakteristische Polynom $\chi_A(\lambda) = \det(A - \lambda I)$
     \item Bestimme die Nullstellen $\lambda_1, \lambda_2, \cdots, \lambda_n$ von $\chi_A$ (Eigenwerte)
-    \item Für jedes $\lambda_k$ bestimme die Menge an Lösungen für $(A - \lambda_k I)x = 0$ (Eigenvektoren)
+    \item Für jedes $\lambda_k$ bestimme eine Basis für $\Kernel(A - \lambda_k I)$ (Eigenvektoren)
   \end{enumerate}
 \end{subbox}
 
@@ -916,7 +926,7 @@ Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder
 
 \section{Spektral- und Eigenwertzerlegung}
 
-Wenn $\E^n$ eine Basis aus Eigenvektoren von $A \in \E^{n \times n}$ besitzt, so ist $A$ ähnlich zu einer Diagonalmatrix $\Lambda$.
+Eine Matrix $A \in \E^{n \times n}$ besitzt genau dann eine Eigenbasis wenn es eine ähnliche Diagonalmatrix $\Lambda$ gibt.
 
 $$A \underbrace{\begin{bsmallmatrix}
   \vert & \vert & \vert \\
@@ -932,7 +942,7 @@ $$A \underbrace{\begin{bsmallmatrix}
   0 & \cdots & \lambda_n
 \end{bsmallmatrix}}_\Lambda$$ $$ A = V \Lambda V^{-1}, Av_j = v_j \lambda_j, j = 1, \cdots, n$$
 
-$A$ wird durch $V$ diagonalisiert. Eine Matrix ist genau dann diagonalisierbar wenn für alle Eigenwerte \textbf{die geometrische Vielfachheit der algebraischen Vielfachheit entspricht}.
+$A$ wird durch $V$ diagonalisiert. Die Kolonnen von $V$ sind Eigenvektoren, die Diagonalelemente von $\Lambda$ Eigenwerte. Eine Matrix ist genau dann diagonalisierbar wenn für alle Eigenwerte \textbf{die geometrische Vielfachheit der algebraischen Vielfachheit entspricht}. Man nennt die Matrix nennt man dann diagonalisierbar.
 
 \begin{subbox}{Spektralsatz}
   Sei $A \in \E^{n \times n}$ hermitesch ($A^H = A$). Dann gilt:
