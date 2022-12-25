@@ -292,7 +292,7 @@ Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit
 \textbf{Marlene Trick}: Sei $M$ eine symmetrische Matrix und $A_k$ die $k \times k$ Blockmatrix der oberen, linken Ecke. Mit $\Delta_k$ bezeichnen wir die Determinante von $A_k$. Nun ist $M$ pos. def. wenn $\Delta_k$ > 0 für alle $k$, weiter ist $M$ neg. def.
 wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\Delta_k$ das keiner der beiden Regeln entspricht ein falsches Vorzeichen hat.
 
-Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^T$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^H x$.
+Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^\top$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^H x$.
 
 Entsprechend ist die Orthogonalprojektion $P_Q := QQ^H$ (mit $Q \in \E^{m \times n}$ bestehend aus orthogonalen Spalten) die Projektion auf den Kolonnenraum $\Columnspace(Q)$. Für diese Orthogonalprojektion gilt $\lVert y - Py \rVert_2 = \min_{z \in \Image P} \lVert y - z \rVert_2$ (siehe \textbf{Least Squares}).
 
@@ -330,7 +330,7 @@ Für $A = \begin{psmallmatrix*}
 
 \subsection{Orthogonale und unitäre Matrizen}
 
-Eine $n \times n$ Matrix heisst \textbf{unitär} falls $A^H A = I_n$. Eine Matrix heisst \textbf{orthogonal} falls $A^T A = I_n$. Es gilt $\det(A) = \pm 1$. Die Matrix ist genau dann unitär/orthogonal wenn alle Spalten orthonormal sind.
+Eine $n \times n$ Matrix heisst \textbf{unitär} falls $A^H A = I_n$. Eine Matrix heisst \textbf{orthogonal} falls $A^\top A = I_n$. Die Matrix ist genau dann unitär/orthogonal wenn alle Spalten orthonormal sind.
 
 Für $A, B$ unitär (dasselbe für orthogonal) gilt:
 
@@ -339,6 +339,8 @@ Für $A, B$ unitär (dasselbe für orthogonal) gilt:
   \item $AA^H = I_n = A^H A$
   \item $A^{-1}$, $AB$ unitär
 \end{itemize}
+
+Für unitäre Matrizen gilt $| \det A | = 1$, für orthogonale Matrizen somit $\det(A) = \pm 1$.
 
 \subsection{Rotationsmatrizen}
 
@@ -804,14 +806,7 @@ $$
 
 \begin{subbox}{Eigenschaften der Determinante}
   Für die Determinante einer Matrix $A \in \E^{n \times n}$ gilt:
-  \begin{itemize}
-    \item {
-      $\det A = 0 \iff A$ ist singulär
-      \begin{itemize}
-        \item hat $A$ also eine Nullzeile oder Nullspalte, so ist $\det A = 0$
-        \item hat $A$ zwei gleiche Spalten oder zwei gleiche Zeilen, so ist $\det A = 0$
-      \end{itemize}
-    }
+  \begin{enumerate}
     \item{
       $\det$ ist eine \textbf{lineare Funktion} in jeder \textbf{Zeile}.\\
       $$\det \begin{psmallmatrix}
@@ -835,13 +830,32 @@ $$
         a_{n1} & a_{n2} & \cdots & a_{nn}
       \end{psmallmatrix}$$
     }
-    \item Vertauscht man zwei Zeilen (oder Spalten), dann wechselt $\det(A)$ das Vorzeichen
+    \item Vertauscht man zwei Zeilen, dann wechselt $\det(A)$ das Vorzeichen
+    \item $\det(I) = 1$
+  \end{enumerate}
+  Die Determinante ist die einzige auf $\E^{n \times n}$ definierte Funktion mit den obigen drei Eigenschaften.
+\end{subbox}
+
+\begin{subbox}{Folgerungen für $\det A, A \in \E^{n \times n}$}
+  \begin{itemize}
+    \item {
+      $\det A = 0 \iff A$ ist singulär
+      \begin{itemize}
+        \item hat $A$ also eine Nullzeile oder Nullspalte, so ist $\det A = 0$
+        \item hat $A$ zwei gleiche Spalten oder zwei gleiche Zeilen, so ist $\det A = 0$
+      \end{itemize}
+    }
     \item Addiert man zu einer Zeile (oder Spalte) eine andere Zeile (oder Spalte) multipliziert mit einem Skalar, dann ändert sich $\det(A)$ nicht
     \item $\det(\gamma A) = \gamma^n \det(A)$
     \item ist $A$ eine Diagonalmatrix oder Dreiecksmatrix, so ist $\det(A) = \prod_{i=1}^n a_{ii}$
     \item wenden wir Gauss auf $A$ an so gilt $\det A = (-1)^v \prod_{k=1}^n r_{kk}$ wobei $v$ die Anzahl Zeilenvertauschungen ist und $r_{kk}$ die Pivotwerte der REF sind
-    \item $\det(I) = 1$
-    \item $\det(A^H) = \overbar{\det(A)}$ sowie $\det(A^T) = \det(A)$
+    \item{
+      $\det(A^H) = \overbar{\det(A)}$ sowie $\det(A^\top) = \det(A)$ (auch für komplexe Matrizen)
+      \begin{itemize}
+        \item wenn man zwei Spalten vertauscht, dann wechselt $\det(A)$ das Vorzeichen
+        \item $\det$ ist eine lineare Funktion in jeder Spalte
+      \end{itemize}
+    }
     \item $\det(AB) = \det(A) \det(B)$ und $\det(A^{-1}) = \frac{1}{\det(A)}$ falls $A^{-1}$ existiert
   \end{itemize}
 \end{subbox}
