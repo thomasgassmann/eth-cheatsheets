@@ -415,7 +415,7 @@ Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zue
 
 \subsection{Unterräume}
 
-Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. Addition und Multiplikation ist. $U$ beinhaltet immer den Nullvektor. Jeder Unterraum ist ein Vektorraum. 
+Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. Addition und Multiplikation ist. $U$ beinhaltet immer den Nullvektor. Jeder Unterraum ist ein Vektorraum. Für zwei Unterräume $U, W \subseteq V$ ist $U \cup W$ genau dann ein Unterraum von $V$ falls $U = W$. 
 
 \begin{subbox}{Lineare Hülle}
   Die Menge der Linearkombinationen der Vektoren $v_1, \cdots, v_n$ ist der Unterraum aufgespannt durch diese Vektoren. Man bezeichnet ihn mit $\Span \{ v_1, \cdots, v_n \}$.
@@ -565,20 +565,20 @@ Sei $A \in M^{m \times n}$ mit $r \coloneqq \Rank A$:
 
 \subsection{Abbildungen von Koordinatentransformation}
 
-\begin{multicols}{2}
-  \begin{tikzcd}
-    x \in X \arrow{r}{F} \arrow[shift left=1]{d}{\kappa_X}  & y \in Y \arrow[shift left=1]{d}{\kappa_Y} \\
-    \xi \in \E^n \arrow{r}{A} \arrow[shift left=1]{u}{\kappa_X^{-1}} \arrow[shift left=1]{d}{T^{-1}} & \eta \in \E^m \arrow[shift left=1]{u}{\kappa_Y^{-1}} \arrow[shift left=1]{d}{S^{-1}} \\
-    \xi' \in \E^n \arrow[shift left=1]{u}{T} \arrow{r}{B} & \eta' \in \E^m \arrow[shift left=1]{u}{S}
-  \end{tikzcd}
-  \begin{subbox}{}
+\begin{subbox}{}
+  \begin{multicols}{2}
+    \begin{tikzcd}
+      x \in X \arrow{r}{F} \arrow[shift left=1]{d}{\kappa_X}  & y \in Y \arrow[shift left=1]{d}{\kappa_Y} \\
+      \xi \in \E^n \arrow{r}{A} \arrow[shift left=1]{u}{\kappa_X^{-1}} \arrow[shift left=1]{d}{T^{-1}} & \eta \in \E^m \arrow[shift left=1]{u}{\kappa_Y^{-1}} \arrow[shift left=1]{d}{S^{-1}} \\
+      \xi' \in \E^n \arrow[shift left=1]{u}{T} \arrow{r}{B} & \eta' \in \E^m \arrow[shift left=1]{u}{S}
+    \end{tikzcd}
     \begin{itemize}
       \item $A = SBT^{-1}$
       \item $B = S^{-1}AT$
       \item $\Rank F = \Rank A = \Rank B$
     \end{itemize}
-  \end{subbox}
-\end{multicols}
+  \end{multicols}
+\end{subbox}
 
 Ist $F$ $\Rank F = r$, so besitzt $F$ bzgl. geeigneten Basen $X, Y$ die Abbildungsmatrix: 
 \[
@@ -738,7 +738,7 @@ Sei $A \in E^{m \times n}$ $Ax = b$ ein überbestimmtes LGS ($m > n$). Im Allgem
   Ist $\Rank A = \Rank A^\hermconj A = n$, so ist $A^\hermconj A$ invertierbar und $x^\ast = (A^\hermconj A)^{-1} A^\hermconj b$.
 \end{subbox}
 
-Man nennt $A^+ = (A^\hermconj A)^{-1} A^\hermconj$ auch die Pseudoinverse von $A$, da $A^+ A = I$.
+Man nennt $A^+ = (A^\hermconj A)^{-1} A^\hermconj$ auch die Pseudoinverse von $A$, da $A^+ A = I$. Haben wir eine QR-Zerlegung von $A$, gilt $R x^\ast = Q^T b$ für $A = QR$.
 
 \section{Determinanten}
 
@@ -985,9 +985,6 @@ wobei $R$ eine Rotation/Spiegelung ist und $\Sigma$ die Hauptachsen skaliert.
 $A V_r = U_r \Sigma_r$ ist die reduzierte Form der Singulärwärtszerlegung. Es gilt dabei $U_r U_r = I$ sowie $V_r^\hermconj V_r = I$.
 
 Aus der Singulärwärtszerlegung folgt auch dass die $r$ positiven \textbf{Eigenwerte von $A^\hermconj A$ und $AA^\hermconj$} gleich sind, die Vielfachheit des Eigenwertes $0$ aber $n-r$ respektive $m-r$ ist.
-
-% TODO: things from exericses, e.g. 12.5 minimization with different norm
-% least squares svd/qr (also see dcamenisch cheatsheet)
 
 \section{Synthetische Division}
 Berechne $\frac{6x^3 + 5x^2 - 7}{3x^2 - 2x - 1} = 2x + 3 + \frac{8x - 4}{3x^2 -2x - 1}$:\\
