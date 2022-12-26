@@ -1,53 +1,51 @@
 # adapted from https://github.com/XYQuadrat/eth-cheatsheets
 
-# This is a basic workflow to help you get started with Actions
-
 name: Build LaTeX documents
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the main branch
   push:
     branches: [ main ]
   pull_request:
     branches: [ main ]
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set up Git repository
         uses: actions/checkout@v2
+      
+        with:
+          fetch-depth: 0
       - name: Fetch tags
         shell: bash
         run: git fetch --tags -f
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v2
-        with:
-          root_file: "*/*.tex"
-          work_in_root_file_dir: true
-          glob_root_file: true
-          latexmk_use_xelatex: true
+      - name: Install XeLaTeX
+        shell: bash
+        run: sudo apt-get install -y latexmk texlive-xetex texlive-science texlive-lang-german texlive-lang-chinese
+      - name: Build LaTeX documents
+        shell: bash
+        run: |
+          mkdir $GITHUB_WORKSPACE/latex-output
+          find . -name '*.tex' \( -exec latexmk -synctex=1 -xelatex -interaction=nonstopmode -outdir=$GITHUB_WORKSPACE/latex-output -cd "$PWD"/{} \; -o -print \)
       - name: Deploy
+        if: ${{ github.event_name == 'push' }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          TAG="ci"
+          TAG="nightly"
           git tag -f "$TAG"
-          hub release create -m "CI PDF build
+          hub release delete "$TAG"
+          hub release create -m "Nightly PDF build
           
           This release always contains the PDFs built from the latest .tex source. It is advised to only use the latest versions for actual exams, as old versions might contain factual errors." "$TAG" || true
-          find -iname '*pdf' -not -path '**/*degrees_circle*' -print0 | while IFS= read -r -d $'\0' file; do
-            pdf="${file%.*}.pdf"
-            echo "Delivering file $pdf"
-            hub release edit -m '' -a "$pdf" "$TAG"
+          for file in $GITHUB_WORKSPACE/latex-output/*.pdf; do
+            echo "Delivering file $file"
+            gh release upload "$TAG" "$file" --clobber
           done
