@@ -27,17 +27,13 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Set up Git repository
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-      - name: Install xmllint
-        run: sudo apt-get install -y texlive-lang-chinese
       - name: Fetch tags
         shell: bash
         run: git fetch --tags -f
-      - name: Install minimal TeXLive
-        uses: DanySK/setup-texlive-action@master
-      - name: Compile LaTeX
-        uses: DanySK/compile-latex-action@master
+      - name: Compile LaTeX document
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: *.tex
       - name: Deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
