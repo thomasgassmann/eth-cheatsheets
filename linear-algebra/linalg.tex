@@ -855,7 +855,7 @@ $$
 \begin{subbox}{Kofaktor }
   Zu jedem Element $a_{kl}$ einer $n \times n$ Matrix $A$ ist $A_{[k,l]}$ definiert als die $(n-1) \times (n-1)$ Matrix mit der Zeile $k$ und Spalte $l$ gestrichen. Für den Kofaktor $\kappa_{kl}$ von $a_{kl}$ gilt dann:
   $$\kappa_{kl} = (-1)^{k+l} \det(A_{[k,l]})$$
-  Dann gilt für jedes feste $k, l$ (Entwicklung nach $k$ Zeile bzw. $l$ Spalte):
+  Dann gilt für jedes feste $k, l$ (Entwicklung nach Zeile $k$ bzw. Spalte $l$):
   \begin{align*}
     & \det(A) = \sum_{i=1}^n a_{ki} \kappa_{ki} & \det(A) = \sum_{i=1}^n a_{il} \kappa_{il} &
   \end{align*}
@@ -867,7 +867,7 @@ $$
   Eine Zahl $\lambda \in \K$ heisst Eigenwert der linearen Abbildung $F: V \mapsto V$ falls es $v \in V$ mit $v \neq 0$ gibt so dass $F(v) = \lambda v$. $v$ ist dabei ein Eigenvektor. 
 \end{mainbox}
 
-Eine lineare Abbildung $F$ und ihre Matrixdarstellung haben die gleichen Eigenwerte und die Eigenvektoren sind über die Koordinatenabbildung $\kappa_v$ verbunden.
+Eine lineare Abbildung $F$ und ihre Matrixdarstellung haben die gleichen Eigenwerte und die Eigenvektoren sind über die Koordinatenabbildung $\kappa_V$ verbunden.
 
 \begin{subbox}{Spektrum}
   Die Menge aller Eigenwerte von $F$ heisst \textbf{Spektrum} von $F$ und wird mit $\sigma(F)$ bezeichnet.
@@ -957,7 +957,7 @@ Die Singulärwertszerlegung existiert für jede Matrix $A \in \E^{m \times n}$. 
 \begin{align*}
   A^\hermconj A V = V \Lambda & \xRightarrow[\text{Umordnung}]{\lambda = \sigma^2} & A^\hermconj A V_r = V_r \Sigma_r^2\\
   & \implies & V_r^\hermconj A^\hermconj A V_r = \Sigma_r^2\\
-  & \implies & \underbrace{(\Sigma_r^{-1} V_r^\hermconj A^\hermconj)}_{U_r^{-1} = U_r^\hermconj} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r} = I\\
+  & \implies & \underbrace{(\Sigma_r^{-1} V_r^\hermconj A^\hermconj)}_{U_r^\hermconj (r \times m)} \underbrace{(A V_r \Sigma_r^{-1})}_{U_r (m \times r)} = I\\
 \end{align*}
 
 $U_r$ kann zu einer unitären Matrix $U$ ergänzt werden. $U, V$ sind unitär, $\Sigma$ ist nicht-negativ und diagonal mit $\sigma_1 \geq \cdots \sigma_r > \sigma_{r+1} = \cdots = \sigma_n = 0$ wobei $r = \Rank A = \Rank A^\hermconj A = \Rank A A^\hermconj$. $V$ diagonalisiert $A^\hermconj A$, $U$ diagonalisiert $A A^\hermconj$.
@@ -981,7 +981,7 @@ Bei einer \textbf{Selbstabbildung} gilt:
 $$A = U \Sigma V^\hermconj = V \underbrace{V^\hermconj U}_R \Sigma V^\hermconj = V R \Sigma V^\hermconj$$
 wobei $R$ eine Rotation/Spiegelung ist und $\Sigma$ die Hauptachsen skaliert.
 
-$A V_r = U_r \Sigma_r$ ist die reduzierte Form der Singulärwertszerlegung. Es gilt dabei $U_r U_r = I$ sowie $V_r^\hermconj V_r = I$.
+$A V_r = U_r \Sigma_r$ ist die reduzierte Form der Singulärwertszerlegung. Es gilt dabei $U_r^\hermconj U_r = I$ sowie $V_r^\hermconj V_r = I$.
 
 Aus der Singulärwertszerlegung folgt auch dass die $r$ positiven \textbf{Eigenwerte von $A^\hermconj A$ und $AA^\hermconj$} gleich sind, die Vielfachheit des Eigenwertes $0$ aber $n-r$ respektive $m-r$ ist.
 
