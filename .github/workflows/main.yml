@@ -50,4 +50,4 @@ jobs:
             pdf="${file%.*}.pdf"
             echo "Delivering file $pdf"
             hub release edit -m '' -a "$pdf" "$TAG"
-          done < "success-list"
+          done < find -iname '*.pdf'
