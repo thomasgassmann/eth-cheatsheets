@@ -35,6 +35,7 @@ jobs:
         with:
           root_file: "**/*.tex"
           work_in_root_file_dir: true
+          glob_root_file: true
       - name: Deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
