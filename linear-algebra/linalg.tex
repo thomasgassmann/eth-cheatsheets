@@ -179,7 +179,7 @@ Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine 
 Ein homogenes LGS hat die Form $Ax = 0$.
 
 \begin{enumerate}
-  \item Wir können Zeilen austauschen, eine Zeile mit $a \in \mathbb{R}\setminus \{0\}$ multiplizieren und Zeilen voneinander subtrahieren bzw. addieren.
+  \item Wir können Zeilen vertauschen, eine Zeile mit $a \in \mathbb{R}\setminus \{0\}$ multiplizieren und Zeilen voneinander subtrahieren bzw. addieren.
   \item Wir schreiben das lineare Gleichungssystem (LGS) in Matrixform.
   \item Wir transformieren das LGS in die Zeilenstufenform.
   \item Wir lösen das LGS von unten nach oben.
@@ -189,7 +189,7 @@ Ein homogenes LGS hat die Form $Ax = 0$.
   \includegraphics[width=0.8 \linewidth]{gauss.png}
 \end{center}
 
-\textbf{Verträglichkeitsbedingungen (VTB):} Falls die Verträglichkeitsbedingungen $c_{r+1} = \cdots = c_m = 0$ nicht erfüllt sind, so gibt es keine Lösung. Bei homogenen LGS sind die Verträglichkeitsbedingungen immer erfüllt. Nur wenn $r < n$ gibt es also nicht-triviale Lösungen.\\
+\textbf{Verträglichkeitsbedingungen (VTB):} Falls die Verträglichkeitsbedingungen $c_{r+1} = \cdots = c_m = 0$ nicht erfüllt sind, so gibt es keine Lösung. Bei homogenen LGS sind die Verträglichkeitsbedingungen immer erfüllt. Nur wenn $r < n$ gibt es also nicht-triviale Lösungen für das homogene LGS.\\
 
 \begin{subbox}{Lösungen}
   $Ax = b$ hat mindestens eine Lösung gdw. ($r = m$) oder ($r < m$ und VTB sind erfüllt). In diesem Fall gibt es 1 Lösung falls $r = n$, andernfalls eine $n - r$ Schar an Lösungen.
@@ -209,7 +209,7 @@ Es gilt immer $r \leq \min(m, n)$.
 
 \section{Matrizen \& Vektoren}
 
-Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element mit $a_{i,j}$ oder $(A)_{i,j}$ bezeichnet wird. Ein $m \times 1$ Vektor ist ein \textbf{Spaltenvektor} und ein $1 \times n$ Vektor ist ein \textbf{Zeilenvektor} (n-Tupel). Die Elemente $a_{jj}, j = 1,2,\cdots,\min(m,n)$ heissen \textbf{Diagonalelemente}. Für eine \textbf{Diagonalmatrix} $A$ gilt $(A)_{ij} = 0$ für $i = j$. Wir bezeichnen die Matrix dann durch die Elemente auf der Diagonale: $A = \diag(d_{11}, \cdots, d_{nn})$. Für eine \textbf{obere Dreiecksmatrix} gilt: $(R)_{ij} = 0$ für $i > j$. Für eine \textbf{untere Dreiecksmatrix} gilt: $(L)_{ij} = 0$ für $i < j$. 
+Eine $m \times n$ Matrix hat $m$ Zeilen und $n$ Spalten wobei das $i,j$ Element mit $a_{i,j}$ oder $(A)_{i,j}$ bezeichnet wird. Ein $m \times 1$ Vektor ist ein \textbf{Spaltenvektor} und ein $1 \times n$ Vektor ist ein \textbf{Zeilenvektor} (n-Tupel). Die Elemente $a_{jj}, j = 1,2,\cdots,\min(m,n)$ heissen \textbf{Diagonalelemente}. Für eine \textbf{Diagonalmatrix} $A$ gilt $(A)_{ij} = 0$ für $i \neq j$. Wir bezeichnen die Matrix dann durch die Elemente auf der Diagonale: $A = \diag(d_{11}, \cdots, d_{nn})$. Für eine \textbf{obere Dreiecksmatrix} gilt: $(R)_{ij} = 0$ für $i > j$. Für eine \textbf{untere Dreiecksmatrix} gilt: $(L)_{ij} = 0$ für $i < j$. 
 
 Wir definieren als $\Tr(A)$ die Summe der Diagonalelemente.
 
@@ -239,7 +239,7 @@ Falls $AB = 0$, so sind $A$ und $B$ \textbf{Nullteiler}.\\
 \end{subbox}
 Eine Matrix ist \textbf{symmetrisch} falls $A^\top = A$ und \textbf{hermitesch} falls $A^\hermconj = A$ (Diagonale somit reell). \textbf{Schiefsymmetrisch} ist sie falls $A^\top = -A$. 
 
-Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $AB = BA$. $A^\hermconj A$ und $A A^\hermconj$ sind  immer hermitesch.
+Sind $A$ und $B$ hermitesche Matrizen, so ist $AB$ genau dann hermitesch falls $AB = BA$. $A^\hermconj A$ und $A A^\hermconj$ sind für alle Matrizen $A$ hermitesch.
 
 \begin{subbox}{Rechenregeln für hermitesche Matrizen}
   \begin{rowlist}
@@ -289,7 +289,7 @@ Eine symmetrische Matrix $A$ ist genau dann \textbf{positiv-definit (positiv-sem
 Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt (vorrausgesetzt $\det(A) \neq 0$).
 
 \textbf{Marlene Trick}: Sei $M$ eine symmetrische Matrix und $A_k$ die $k \times k$ Blockmatrix der oberen, linken Ecke. Mit $\Delta_k$ bezeichnen wir die Determinante von $A_k$. Nun ist $M$ pos. def. wenn $\Delta_k$ > 0 für alle $k$, weiter ist $M$ neg. def.
-wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\Delta_k$ das keiner der beiden Regeln entspricht ein falsches Vorzeichen hat.
+wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\Delta_k$ das keiner der beiden Regeln entspricht ein falsches Vorzeichen hat.\\
 
 Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^\top$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^\hermconj x$.
 
@@ -383,14 +383,14 @@ Die \textbf{LR-Zerlegung} ist ein weiteres Verfahren zum lösen von LGS. Wir erh
   \end{bmatrix}
 \end{align*}\\
 
-Wenn wir Zeilen vertauschen, dann vertauschen wir auch die selben Zeilein in $P$. Im Allgemeinen gilt $A \in \E^{m \times n}$ sowie $P, L \in \E^{m \times m}$ und $R \in \E^{m \times n}$. Die Matrix $L$ hat immer $1$ auf der Diagonalen und Einträge unten links sind nur ungleich $0$ für Spalten kleiner oder gleich $\Rank A$.
+Wenn wir Zeilen vertauschen, dann vertauschen wir auch die selben Zeilen in $P$. Im Allgemeinen gilt $A \in \E^{m \times n}$ sowie $P, L \in \E^{m \times m}$ und $R \in \E^{m \times n}$. Die Matrix $L$ hat immer $1$ auf der Diagonalen und Einträge unten links sind nur ungleich $0$ für Spalten kleiner oder gleich $\Rank A$. Die $i$-te Spalte in $L$ entspricht also dem $i$-ten Pivot von $A$.
 
 Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zuerst lösen wir dazu $PA = LR$ und lösen $Lc = Pb$ nach $c$. Dann lösen wir $Rx = c$ nach $x$.
 
 \section{Vektorräume}
 
 \begin{mainbox}{}
-  Eine Vektorraum $V$ über $\K$ ist eine nichtleere Menge auf dere eine Vektoraddition und Skalarmultiplikation definiert sind.
+  Eine Vektorraum $V$ über $\K$ ist eine nichtleere Menge auf der eine Vektoraddition und Skalarmultiplikation definiert sind.
   \begin{vaxioms}
     \item $x + y = y + x$
     \item $(x + y) + z = x + (y + z)$
@@ -414,7 +414,7 @@ Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zue
 
 Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. Addition und Multiplikation ist. $U$ beinhaltet immer den Nullvektor. Jeder Unterraum ist ein Vektorraum. Für zwei Unterräume $U, W \subseteq V$ ist $U \cup W$ genau dann ein Unterraum von $V$ falls $U = W$. 
 
-\begin{subbox}{Lineare Hülle}
+\begin{subbox}{Lineare Hülle ($\Span$)}
   Die Menge der Linearkombinationen der Vektoren $v_1, \cdots, v_n$ ist der Unterraum aufgespannt durch diese Vektoren. Man bezeichnet ihn mit $\Span \{ v_1, \cdots, v_n \}$.
 \end{subbox}
 
@@ -506,7 +506,7 @@ Zwei Vektorräume endlicher Dimension sind genau dann isomorph wenn sie die glei
 
 \subsection{Matrizen als lineare Abbildungen}
 
-Sei $A \in \E^{m \times n}$. Der \textbf{Spaltenraum} von $A$ ist der Unterraum $\Columnspace(A) = \Image A = \Span \{ a_1, \cdots, a_n \} \subseteq \E^m$. Der \textbf{Nullraum} von $A$ ist der Unterraum $\Nullspace(A) = \Kernel A$ und der \textbf{Kolonnenraum} oder Wertebereich von $A$ ist der Unterraum $\Columnspace(A) = \Image A$.
+Sei $A \in \E^{m \times n}$. Der \textbf{Kolonnenraum} oder Wertebereich von $A$ ist der Unterraum $\Columnspace(A) = \Image A = \Span \{ a_1, \cdots, a_n \} \subseteq \E^m$. Der \textbf{Nullraum} von $A$ ist der Unterraum $\Nullspace(A) = \Kernel A \subseteq \E^n$.
 
 
 \begin{subbox}{Rangsatz für Matrizen}
@@ -515,7 +515,7 @@ Sei $A \in \E^{m \times n}$. Der \textbf{Spaltenraum} von $A$ ist der Unterraum 
   $$\Rank A^\top = \Rank A^\hermconj = \Rank A$$
 \end{subbox}
 
-Somit gilt für Matrizen $A \in \E^{m \times n}$ und $B \in \E^{p \times n}$ auch:
+Somit gilt für Matrizen $A \in \E^{m \times n}$ und $B \in \E^{p \times m}$ auch:
 
 \begin{itemize}
   \item $\Rank BA \leq \min(\Rank B, \Rank A)$
