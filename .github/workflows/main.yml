@@ -34,6 +34,7 @@ jobs:
         uses: xu-cheng/latex-action@v2
         with:
           root_file: "**/*.tex"
+          working_directory: .
           glob_root_file: true
       - name: Deploy
         env:
