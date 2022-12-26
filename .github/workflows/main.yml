@@ -46,8 +46,8 @@ jobs:
           hub release create -m "Nightly PDF build
           
           This release always contains the PDFs built from the latest .tex source. It is advised to only use the latest versions for actual exams, as old versions might contain factual errors." "$TAG" || true
-          while IFS= read -r file; do
+          find -iname '*pdf' -print0 | while IFS= read -r -d $'\0' file; do
             pdf="${file%.*}.pdf"
             echo "Delivering file $pdf"
             hub release edit -m '' -a "$pdf" "$TAG"
-          done < find -iname '*.pdf'
+          done
