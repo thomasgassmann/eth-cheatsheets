@@ -101,7 +101,6 @@ Die Menge $S$ an Lösungen ist eine Untermenge des Raums der komplexen Funktione
 
 \subsubsection*{Lineare DGL erkennen}
 \begin{itemize}
-  \item keine Koeffizienten vor der höchsten Ableitung
   \item alle Koeffizienten sind stetige Funktionen
   \item keine Produkte von $y$ oder deren Ableitungen
   \item keine Potenzen von $y$ oder deren Ableitungen
@@ -312,7 +311,7 @@ Sei \(f: \X \subset \R^n \to \R^m\) und \(\X\) eine offene Menge. Die Jacobi-Mat
 Sei \(f: \X \subset \R^n \to \R^m, x_0 \in \X\). \(f\) ist differenzierbar an der Stelle \(x_0\), falls eine lineare Abbildung \(L: \R^n \to \R^m\) (d.h. eine \(m \times n\)-Matrix \(L\)) existiert, so dass \(\forall x_0 + v \in \X\):
 \[f(x_0 + v) = f(x_0) + L(v) + R(x_0,v)\]
 wobei für den Fehlerterm \(R\) folgendes gilt: 
-\[\lim_{v \to 0} \frac{||R(x_0,v)||}{||v||} = 0\]
+$$\lim_{v \to 0} \frac{||R(x_0,v)||}{||v||} = 0 \iff R(x_0, v) \in o(||v||)$$
 Wir schreiben \(df(x_0) = L\). Wenn \(f\) für alle \(x_0 \in \X\) differenzierbar ist, dann ist \(f\) auf \(\X\) differenzierbar. \\
 Wenn alle partiellen Ableitungen existieren und stetig sind, dann ist \(f\) differenzierbar.\\
 Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
@@ -365,15 +364,23 @@ $$\pdv{f}{x_i, x_j} = \pdv{f}{ x_j, x_i}$$
 Es gilt wegen der Symmetrie $\text{Hess}_f(x_0) = \nabla^2 f(x_0) = D(\nabla f)(x_0)$.
 
 \subsection{Taylorpolynome}
-Sei \(k \le 1\) und \(f: \X \mapsto \R\) ist eine Funktion der Klasse \(C^k\) auf \(\X\). Sei \(x_0 \in \X\) fix. Das \(k\)-te Taylorpolynom von \(f\) am Punkt \(x_0\) ist das Polynom in \(n\) Variablen vom Grad \(\le k\):
+Sei \(k \le 1\) und \(f: \X \mapsto \R\) ist eine Funktion der Klasse \(C^k\) auf \(\X\). Sei \(x \in \X\) fix. Das \(k\)-te Taylorpolynom von \(f\) am Punkt \(x\) ist das Polynom in \(n\) Variablen vom Grad \(\le k\):
 \begin{align*}
-  &T_k f(y; x_0) = f(x_0) + \sum_{i=1}^n \partial_i f(x_0) \cdot y_i + \dots \\
-  &+ \sum_{m_1 + \cdots + m_n = k} \frac{1}{m_1! \cdots m_n!} \pdv{^k f(x_0) }{x_1^{m_1} \cdots \partial x_n^{m_n}} \cdot y_1^{m_1} \cdots y_n^{m_n}
+  &T_k f(h; x) = f(x) + \sum_{i=1}^n \partial_i f(x) \cdot h_i + \dots \\
+  &+ \sum_{m_1 + \cdots + m_n = k} \frac{1}{m_1! \cdots m_n!} \pdv{^k f(x) }{x_1^{m_1} \cdots \partial x_n^{m_n}} \cdot h_1^{m_1} \cdots h_n^{m_n}
 \end{align*}
 
-Es gilt $f(x) = T_k f(x - x_0; x_0) + E_k(f, x, x_0)$ mit \\
-$\lim_{x \to x_0} \frac{E_k(f, x, x_0)}{\lVert x - x_0 \rVert^k}$.
+Mit vereinfachter Notation erhält man:
 
+\begin{mainbox}{Taylorpolynom}
+  Allgemein gilt für $f: \X \mapsto \R$ in $C^{k+1}$ und für ein $\xi$ auf dem Liniensegment von $x$ zu $x + h$.
+  $$f(x + h) = \sum_{0 \leq | \mathbf{m} | \leq k} \frac{1}{\mathbf{m}!} \partial^\mathbf{m} f(x) h^\mathbf{m} + \sum_{| \mathbf{m}| = k + 1} \frac{1}{\mathbf{m}!} \partial^\mathbf{m} f(\xi) h^\mathbf{m}$$
+\end{mainbox}
+
+Gibt es ein Polynom $P(h)$ mit Grad $\leq m$ welches folgende Eigenschaft hat, ist $P$ das eindeutig bestimmte $m$-te Taylorpolynom:
+$$f(x + h) = P(h) + o(\lVert h \rVert_2^m)$$
+
+Wir können diese Eindeutigkeit verwenden um Taylorpolynome mit bekannten Funktionen zu finden (vorrausgesetzt der Fehlerterm passt). Dies kann beispielsweise auf $exp(x^2 + y^2)$ angewendet werden, indem man $x^2 + y^2$ in das Taylorpolynom von $e^x$ einsetzt und dann den Fehlerterm überprüft.
 
 \subsubsection*{Beispiele}
 \begin{align*}
@@ -708,23 +715,6 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
  \item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
 \end{itemize}
 
-\begin{mainbox}{Partialbruchzerlegung}
- Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)}$ wird wie folgend berechnet:
- \begin{enumerate}
-  \item Falls $\deg(p) \ge \deg(q)$, führe eine Polynomdivision durch. Dies führt zum Integral $\int a(x) + \frac{r(x)}{q(x)}$.
-  \item Berechne die Nullstellen von $q(x)$.
-  \item Pro Nullstelle: Einen Partialbruch erstellen.
-  \begin{itemize}[left=0pt]
-   \item Einfach, reell: $x_1 \to \frac{A}{x - x_1}$
-   \item $n$-fach, reell: $x_1 \to \frac{A_1}{x - x_1} + \ldots + \frac{A_r}{(x-x_1)^r}$ 
-   \item Einfach, komplex: $x^2 + px + q \to \frac{Ax + B} {x^2 + px + q}$
-   \item $n$-fach, komplex: $x^2 + px + q \to \frac{A_1x+b_1}{x^2+px+q} + \ldots$
-  \end{itemize}
-  \item Parameter $A_1, \ldots, A_n$ (bzw. $B_1, \ldots, B_n$) bestimmen. ($x$ jeweils gleich Nullstelle setzen, umformen und lösen).
-
- \end{enumerate}
-\end{mainbox}
-
 \begin{subbox}{Satz von Rolle}
   Sei $f: [a,b] \to \R$ stetig und in $]a,b[$ differenzierbar. Wenn $f(a) = f(b)$, dann gibt es ein $\xi \in ]a,b[$ mit $f'(\xi) = 0$.
  \end{subbox}
@@ -738,6 +728,23 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
    Seien $f, g: [a, b] \to \mathbb{R}$ stetig und in $]a, b[$ differenzierbar. Dann gibt es $\xi \in ]a, b[$ mit $g'(\xi)(f(b) - f(a)) = f'(\xi)(g(b) - g(a))$. Falls $g'(x) \neq 0 \ \forall x \in ]a, b[$ folgt $g(a) \neq g(b)$ und $\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(\xi)}{g'(\xi)}$.
  \end{subbox}
 
+ \begin{mainbox}{Partialbruchzerlegung}
+  Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)}$ wird wie folgend berechnet:
+  \begin{enumerate}
+   \item Falls $\deg(p) \ge \deg(q)$, führe eine Polynomdivision durch. Dies führt zum Integral $\int a(x) + \frac{r(x)}{q(x)}$.
+   \item Berechne die Nullstellen von $q(x)$.
+   \item Pro Nullstelle: Einen Partialbruch erstellen.
+   \begin{itemize}[left=0pt]
+    \item Einfach, reell: $x_1 \to \frac{A}{x - x_1}$
+    \item $n$-fach, reell: $x_1 \to \frac{A_1}{x - x_1} + \ldots + \frac{A_r}{(x-x_1)^r}$ 
+    \item Einfach, komplex: $x^2 + px + q \to \frac{Ax + B} {x^2 + px + q}$
+    \item $n$-fach, komplex: $x^2 + px + q \to \frac{A_1x+b_1}{x^2+px+q} + \ldots$
+   \end{itemize}
+   \item Parameter $A_1, \ldots, A_n$ (bzw. $B_1, \ldots, B_n$) bestimmen. ($x$ jeweils gleich Nullstelle setzen, umformen und lösen).
+ 
+  \end{enumerate}
+ \end{mainbox}
+
 Für ein monisches Polynom $x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0$ muss jede Nullstelle $a_0$ teilen.\\
 
 Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{1}{q} - \frac{1}{q + 1}$ oder $\frac{1}{q(q-1)(q+1)} = \frac{-1}{q} + \frac{1}{2(q+1)} + \frac{1}{2(q-1)}$.
@@ -747,8 +754,12 @@ Die Stirling'sche Formel ist eine Abschätzung der Fakultät. Mit der Euler-McLa
 $$n! = \frac{\sqrt{2\pi n} \cdot n^n}{e^n} \cdot \exp(\frac{1}{12n}+R_3(n))$$
 wobei $|R_3(n)| \le \frac{\sqrt{3}}{216}\cdot\frac{1}{n^2} \ \forall n \ge 1$
 
+\subsection{Extrema in 1D}
 
-\subsubsection{Potenzreihen}
+Sei $x_0$ ein kritischer Punkt. Falls $f''(x_0) > 0$ ist $x_0$ ein Minimum, falls $f''(x_0) < 0$ ist $x_0$ ein Maximum. Ist $f''(x_0) = 0$, leiten wir ab bis $f^{(k)}(x_0) \neq 0$. Ist $f^{(k)}(x_0) > 0$ für $k$ gerade, so ist $x_0$ ein Minimum, ist $f^{(k)}(x_0) < 0$ für $k$ gerade, so ist $x_0$ ein Maximum. Ist $k$ ungerade, so ist $x_0$ ein Sattelpunkt.
+
+
+\subsection{Potenzreihen}
 \begin{align*}
 \exp(x) &= \sumn \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots & r &= \infty \\
 \sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
@@ -1026,9 +1037,8 @@ Berechne $\frac{6x^3 + 5x^2 - 7}{3x^2 - 2x - 1} = 2x + 3 + \frac{8x - 4}{3x^2 -2
 \end{center}
 
 \subsection{Partielle Integration - DI Method}
-Berechne:
-$$\int x^2 \cos(x) dx = x^2 (-\frac{1}{3}\cos(3x)) - 2x(-\frac{1}{9}\sin(3x))$$
-$$ + 2\frac{1}{27}\cos(3x) - \int 0 \cdot \frac{1}{27} \cos(3x) dx$$.
+Berechne $\int x^2 \cos(x) dx = x^2 (-\frac{1}{3}\cos(3x)) - 2x(-\frac{1}{9}\sin(3x)) + 2\frac{1}{27}\cos(3x) - \int 0 \cdot \frac{1}{27} \cos(3x) dx$.
+
 Multipliziere Diagonal wie im Beispiel.
 
 \begin{table}[h]
