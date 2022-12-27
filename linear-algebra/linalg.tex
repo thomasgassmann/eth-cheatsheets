@@ -734,10 +734,13 @@ Sei $A \in E^{m \times n}$ $Ax = b$ ein überbestimmtes LGS ($m > n$). Im Allgem
 \begin{subbox}{Normalengleichungen}
   Eine Lösung des Least Squares Problems findet man durch lösen der Normalengleichungen:
   $$A^\hermconj A x = A^\hermconj b$$
-  Ist $\Rank A = \Rank A^\hermconj A = n$, so ist $A^\hermconj A$ invertierbar und $x^\ast = (A^\hermconj A)^{-1} A^\hermconj b$.
+  Ist $\Rank A = \Rank A^\hermconj A = n \leq m$, so ist $A^\hermconj A$ invertierbar und $x^\ast = (A^\hermconj A)^{-1} A^\hermconj b$.
 \end{subbox}
 
-Man nennt $A^+ = (A^\hermconj A)^{-1} A^\hermconj$ auch die Pseudoinverse von $A$, da $A^+ A = I$. Haben wir eine QR-Zerlegung von $A$, gilt $R x^\ast = Q^T b$ für $A = QR$.
+Man nennt $A^+ = (A^\hermconj A)^{-1} A^\hermconj$ auch die Pseudoinverse von $A$, da $A^+ A = I$. Haben wir eine QR-Zerlegung von $A$, gilt $R x^\ast = Q^T b$ für $A = QR$.\\
+
+Für $A \in \E^{m \times n}$ mit $\Rank A = n \leq m$ ist die Least Squares Lösung eindeutig bestimmt. Wenden wir Gram-Schmidt auf die Spalten von $A$ $a_1, \cdots, a_n$ und den Vektor $a_{n+1} = y$ an ergibt sich die eindeutige Lösung $Ax^\ast = y - \widetilde{q}_{n+1}$ durch das Lot $\widetilde{q}_{n+1} = y - Ax^\ast \perp \Columnspace(A)$.
+
 
 \section{Determinanten}
 
