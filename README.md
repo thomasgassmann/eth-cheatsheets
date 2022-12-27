@@ -7,3 +7,4 @@ Overview:
 - Chinesisch 1
 - Linear Algebra (6 pages): template based on Analysis 1 cheatsheet (from [xyquadrat](https://github.com/xyQuadrat)) above, see respective references, a lot of the content is based on [Danny Camenisch's cheatsheet](https://n.ethz.ch/~dcamenisch/uploads/LinAlg-Summary.pdf)
 - Eprog: nothing of great value or importance
+- DiskMath: cheatsheet used in HS21 based in large part on [Ruben Schenk's cheatsheet](https://n.ethz.ch/~rschenk/pdfs/summaries/first-year-courses/Diskrete_Mathematik_ExamCheatsheet_HS19.pdf)
