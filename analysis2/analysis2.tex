@@ -1,6 +1,7 @@
 % Basic stuff
 \documentclass[a4paper,10pt]{article}
 \usepackage[nswissgerman]{babel}
+\usepackage{scrextend}
 
 % 3 column landscape layout with fewer margins
 \usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
@@ -730,11 +731,13 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
  \item Teils ist es nötig, mit $1$ zu multiplizieren, um partielle Integration anwenden zu können (z.B. im Fall von $\int \log(x) \dx$)
  \item Muss eventuell mehrmals angewendet werden
 \end{itemize}
+
 \begin{mainbox}{Substitution}
- Um $\int_a^b f(g(x)) \dx$ zu berechnen: Ersetze $g(x)$ durch $u$ und integriere $\int_{g(a)}^{g(b)} f(u) \frac{\text{d}u}{g'(x)}$.
+  Sei $g: [a, b] \to \mathbb{R}$ stetig differenzierbar. $f: I \to \mathbb{R}$ ($g([a, b]) \subset I$) eine stetige Funktion. Dann gilt:
+  $$\int_{g(a)}^{g(b)} f(x)dx = \int_{a}^{b} f(g(x))g'(x)dt$$
 \end{mainbox}
+
 \begin{itemize}
- \item $g'(x)$ muss sich irgendwie herauskürzen, sonst nutzlos.
  \item Grenzen substituieren nicht vergessen.
  \item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
 \end{itemize}
@@ -756,7 +759,15 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
  \end{enumerate}
 \end{mainbox}
 
-Für ein monisches Polynom $x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0$ muss jede Nullstelle $a_0$ teilen.
+Für ein monisches Polynom $x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0$ muss jede Nullstelle $a_0$ teilen.\\
+
+Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{1}{q} - \frac{1}{q + 1}$ oder $\frac{1}{q(q-1)(q+1)} = \frac{-1}{q} + \frac{1}{2(q+1)} + \frac{1}{2(q-1)}$.
+
+\subsection{Stirling'sche Formel}
+Die Stirling'sche Formel ist eine Abschätzung der Fakultät. Mit der Euler-McLaurin-Formel kombiniert folgt
+$$n! = \frac{\sqrt{2\pi n} \cdot n^n}{e^n} \cdot \exp(\frac{1}{12n}+R_3(n))$$
+wobei $|R_3(n)| \le \frac{\sqrt{3}}{216}\cdot\frac{1}{n^2} \ \forall n \ge 1$
+
 
 \subsubsection{Potenzreihen}
 \begin{align*}
@@ -836,21 +847,6 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
 \begingroup
 \renewcommand*{\arraystretch}{2}
 
-\subsection{Uneigentliche Integrale}
-$$\int_1^\infty \frac{1}{x^\alpha} dx = \begin{cases}
-  \text{divergiert, } & \alpha \leq 1\\
-  \frac{1}{\alpha - 1} & \alpha > 1
-\end{cases}$$
-$$\int_0^1 \frac{1}{x^\alpha} dx = \begin{cases}
-  \text{divergiert, } & \alpha \geq 1\\
-  \frac{1}{1- \alpha} & \alpha < 1
-\end{cases}$$
-$$\int_0^\infty e^{-x}dx = 1$$
-$$\int_0^\infty e^{-x}x^{s-1}\dx = \begin{cases}
-  \text{divergiert, } & s \leq 0\\
-  (s-1)! & s > 0
-\end{cases}$$
-
 \begin{mainbox}{Wichtige Werte}
   \begin{center} 
     \begin{tabular}{c|cccccc}
@@ -869,67 +865,181 @@ $$\int_0^\infty e^{-x}x^{s-1}\dx = \begin{cases}
 \end{center}
 
 \section{Tabellen}
-\subsection{Ableitungen}
+
+
+\subsection{Trigonometrische Identitäten}
+\begin{center}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f(x)}$ \\
+  \midrule
+  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
+  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
+  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
+  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
+  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
+  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
+  \bottomrule
+ \end{tabularx}
+\end{center}
+
+\subsection{Grenzwerte}
+\begin{center}
+  \begin{tabularx}{\linewidth}{XX}
+    \toprule
+    $\limxi \frac{1}{x} = 0$ & $\limxi 1 + \frac{1}{x} = 1$ \\
+    $\limxi e^x = \infty$ & $\limxn e^x = 0$ \\
+    $\limxi e^{-x} = 0$ & $\limxn e^{-x} = \infty$ \\
+    $\limxi \frac{e^x}{x^m} = \infty$ & $\limxn xe^x = 0$ \\
+    $\limxi \ln(x) = \infty$ & $\limxo \ln(x) = -\infty$ \\
+    $\limxi (1+x)^{\frac{1}{x}} = 1$ & $\limxo (1+x)^{\frac{1}{x}} = e$ \\
+    $\limxi (1+\frac{1}{x})^b = 1$ & $\limxi n^{\frac{1}{n}} = 1$ \\
+    $\lim_{x\to\pm\infty} (1 + \frac{1}{x})^x = e$ & $\limxi (1-\frac{1}{x})^x = \frac{1}{e}$ \\
+    $\lim_{x\to\pm\infty} (1 + \frac{k}{x})^{mx} = e^{km}$ & $\limxi (\frac{x}{x+k})^x = e^{-k}$ \\
+    $\limxo \frac{a^x -1}{x} = \ln(a), \newline \forall a > 0$ &
+    $\limxi x^a q^x = 0, \newline \forall 0 \le q < 1$ \\
+  \end{tabularx}
+  \begin{tabularx}{\linewidth}{XX}
+    $\limxo \frac{\sin x}{x} = 1$ & $\limxo \frac{\sin kx}{x} = k$\\
+    $\limxo \frac{1}{\cos x} = 1$ & $\limxo \frac{\cos x -1}{x} = 0$ \\
+    $\limxo x \sin(\frac{1}{x}) = 0$ & $\limxo x \log x = 0$\\
+    $\limxo \frac{1 - \cos x}{x^2} = \frac{1}{2}$ & $\limxo \frac{e^x-1}{x} = 1$ \\
+    $\limxo \frac{x}{\arctan x} = 1$ & $\limxi \arctan x = \frac{\pi}{2}$ \\
+    $\limxo \frac{e^{ax}-1}{x} = a$ & $\limxo \frac{\ln(x+1)}{x} = 1$ \\
+    $\lim_{x\to 1} \frac{\ln(x)}{x-1} = 1$ & $\limxi \sqrt{x^2 + c} - x = 0$ \\
+    $\limxi \sqrt[x]{x} = 1$ & $\limxi x(\sqrt[x]{n} - 1) = \ln(n)$ \\
+    \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsection{Ableitungen (I)}
 \begin{center}
   % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
   \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
-    \toprule
-    $\mathbf{F(x)}$ & $\mathbf{f(x)}$ & $\mathbf{f'(x)}$ \\
-    \midrule
-    $\frac{x^{-a+1}}{-a+1}$ & $\frac{1}{x^a}$ & $\frac{a}{x^{a+1}}$ \\
-    $\frac{x^{a+1}}{a+1}$ & $x^a \ (a \ne 1)$ & $a \cdot x^{a-1}$ \\
-    $\frac{1}{k \ln(a)}a^{kx}$ & $a^{kx}$ & $ka^{kx} \ln(a)$ \\
-    $\ln |x|$ & $\frac{1}{x}$ & $-\frac{1}{x^2}$ \\
-    $\frac{2}{3}x^{3/2}$ & $\sqrt{x}$ & $\frac{1}{2\sqrt{x}}$\\
-    $-\cos(x)$ & $\sin(x)$ & $\cos(x)$ \\
-    $\sin(x)$ & $\cos(x)$ & $-\sin(x)$ \\
-    $\frac{1}{2}(x-\frac{1}{2}\sin(2x))$ & $\sin^2(x)$ & $2 \sin(x)\cos(x)$ \\
-    $\frac{1}{2}(x + \frac{1}{2}\sin(2x))$ & $\cos^2(x)$ & $-2\sin(x)\cos(x)$ \\
-    \multirow{2}*{$-\ln|\cos(x)|$} & \multirow{2}*{$\tan(x)$} & $\frac{1}{\cos^2(x)}$  \\
-    & & $1 + \tan^2(x)$ \\
-    $\cosh(x)$ & $\sinh(x)$ & $\cosh(x)$ \\
-    $\log(\cosh(x))$ & $\tanh(x)$ & $\frac{1}{\cosh^2(x)}$ \\
-    $\ln | \sin(x)|$ & $\cot(x)$ & $-\frac{1}{\sin^2(x)}$ \\
-    $\frac{1}{c} \cdot e^{cx}$ & $e^{cx}$ & $c \cdot e^{cx}$ \\
-    $x(\ln |x| - 1)$ & $\ln |x|$ & $\frac{1}{x}$ \\
-    $\frac{1}{2}(\ln(x))^2$ & $\frac{\ln(x)}{x}$ & $\frac{1 - \ln(x)}{x^2}$ \\
-    $\frac{x}{\ln(a)} (\ln|x| -1)$ & $\log_a |x|$ & $\frac{1}{\ln(a)x}$ \\
-    \bottomrule
+  \toprule
+  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ & $\mathbf{f'(x)}$ \\
+  \midrule
+  $\frac{x^{-a+1}}{-a+1}$ & $\frac{1}{x^a}$ & $\frac{a}{x^{a+1}}$ \\
+  $\frac{x^{a+1}}{a+1}$ & $x^a \ (a \ne -1)$ & $a \cdot x^{a-1}$ \\
+  $\frac{1}{k \ln(a)}a^{kx}$ & $a^{kx}$ & $ka^{kx} \ln(a)$ \\
+  $\ln |x|$ & $\frac{1}{x}$ & $-\frac{1}{x^2}$ \\
+  $\frac{2}{3}x^{3/2}$ & $\sqrt{x}$ & $\frac{1}{2\sqrt{x}}$\\
+  $-\cos(x)$ & $\sin(x)$ & $\cos(x)$ \\
+  $\sin(x)$ & $\cos(x)$ & $-\sin(x)$ \\
+  $\frac{1}{2}(x-\frac{1}{2}\sin(2x))$ & $\sin^2(x)$ & $2 \sin(x)\cos(x)$ \\
+  $\frac{1}{2}(x + \frac{1}{2}\sin(2x))$ & $\cos^2(x)$ & $-2\sin(x)\cos(x)$ \\
+  $-\ln|\cos(x)|$ & $\tan(x)$ & $\frac{1}{\cos^2(x)} = 1 + \tan^2(x)$  \\
+  $\cosh(x)$ & $\sinh(x)$ & $\cosh(x)$ \\
+  $\log(\cosh(x))$ & $\tanh(x)$ & $\frac{1}{\cosh^2(x)} = 1 - \tanh^2(x)$ \\
+  $\ln | \sin(x)|$ & $\cot(x)$ & $-\frac{1}{\sin^2(x)}$ \\
+  $\frac{1}{c} \cdot e^{cx}$ & $e^{cx}$ & $c \cdot e^{cx}$ \\
+  $x(\ln |x| - 1)$ & $\ln |x|$ & $\frac{1}{x}$ \\
+  $\frac{1}{2}(\ln(x))^2$ & $\frac{\ln(x)}{x}$ & $\frac{1 - \ln(x)}{x^2}$ \\
+  $\frac{x}{\ln(a)} (\ln|x| -1)$ & $\log_a |x|$ & $\frac{1}{\ln(a)x}$ \\
+  \bottomrule
   \end{tabularx}
 \end{center}
+
+\subsection{Weitere Integrale}
+\begin{center}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{F(x)}$ \\
+  \midrule
+  $\int f'(x) f(x) \dx$ & $\frac{1}{2}(f(x))^2$ \\
+  $\int \frac{f'(x)}{f(x)} \dx$ & $\ln|f(x)|$ \\
+  $\int_{-\infty}^\infty e^{-x^2} \dx$ & $\sqrt{\pi}$ \\
+  $\int (ax+b)^n \dx$ & $\frac{1}{a(n+1)}(ax+b)^{n+1}$ \\
+  $\int x(ax+b)^n \dx$ & $\frac{(ax+b)^{n+2}}{(n+2)a^2} - \frac{b(ax+b)^{n+1}}{(n+1)a^2}$ \\
+  $\int (ax^p+b)^n x^{p-1} \dx$ & $\frac{(ax^p+b)^{n+1}}{ap(n+1)}$ \\
+  $\int (ax^p + b)^{-1} x^{p-1} \dx$ & $\frac{1}{ap} \ln |ax^p + b|$ \\
+  $\int \frac{ax+b}{cx+d} \dx$ & $\frac{ax}{c} - \frac{ad-bc}{c^2} \ln |cx +d|$ \\
+  $\int \frac{1}{x^2+a^2} \dx$ & $\frac{1}{a} \arctan \frac{x}{a}$ \\
+  $\int \frac{1}{x^2 - a^2} \dx$ & $\frac{1}{2a} \ln\left| \frac{x-a}{x+a} \right|$ \\
+  $\int \sqrt{a^2 - x^2} \dx $ & $\frac{a^2}{2} \arcsin(\frac{x}{a}) + \frac{x}{2} \sqrt{a^2 - x^2}$ \\
+  $\int \csc(x) \dx $ & $\ln|\csc(x) + \cot(x)|$ \\
+  $\int \sec(x) \dx $ & $\ln|\sec(x) + \tan(x)|$ \\
+  $\int \cot(x) \dx $ & $\ln|\sin(x)|$ \\
+  \bottomrule
+ \end{tabularx} 
+\end{center}
+
+\subsection{Ableitungen (II)}
+\begin{center}
+  % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
+  \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
+  \toprule
+  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ & $\mathbf{f'(x)}$ \\
+  \midrule
+  $\frac{1}{2}(\cosh(x)\sinh(x)+1)$ & $\cosh(x)^2$ & $2\sinh(x)\cosh(x)$\\
+  $\frac{1}{2}(\sinh(x)\cosh(x) + x)$ & $\sinh(x)^2$ & $2\sinh(x)\cosh(x)$\\
+  \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsection{$n$-te Ableitungen}
+\begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f^{(n)}(x)}$ \\
+  \midrule
+  $\sin(x)$ & $\sin(\frac{n\pi}{2} + x)$\\
+  $f + g$ & $f^{(n)} + g^{(n)}$\\
+  $f \cdot g$ & $\sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$\\
+  \bottomrule
+  \end{tabularx}
+\end{center}
+
 \subsection{Weitere Ableitungen}
 \begin{center}
   \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-    \toprule
-    $\mathbf{F(x)}$ & $\mathbf{f(x)}$ \\
-    \midrule
-    $\arcsin(x)$ & $\frac{1}{\sqrt{1 - x^2}}$ \\
-    $\arccos(x)$ & $\frac{-1}{\sqrt{1 - x^2}}$ \\
-    $\arctan(x)$ & $\frac{1}{1 + x^2}$ \\ 
-    $x^x \ (x > 0)$ & $x^x \cdot (1 + \ln x)$ \\
-    \bottomrule
+  \toprule
+  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ \\
+  \midrule
+  $\arcsin(x)$ & $\frac{1}{\sqrt{1 - x^2}}$ \\
+  $\arccos(x)$ & $\frac{-1}{\sqrt{1 - x^2}}$ \\
+  $\arctan(x)$ & $\frac{1}{1 + x^2}$ \\ 
+  $\text{arsinh}(x)$ & $\frac{1}{\sqrt{1 + x^2}}$ \\
+  $\text{arcosh}(x)$ & $\frac{1}{\sqrt{x^2 - 1}}$ \\
+  $\text{artanh}(x)$ & $\frac{1}{1 - x^2}$ \\
+  $\text{arccot}(x)$ & $-\frac{1}{1 + x^2}$ \\
+  $x^x \ (x > 0)$ & $x^x \cdot (1 + \ln x)$ \\
+  $\cosh(x)$ & $\sinh(x)$ \\
+  $\sinh(x)$ & $\cosh(x)$ \\
+  \bottomrule
   \end{tabularx}
 \end{center}
-\subsection{Integrale}
+
+\subsection{Rekursive Integrale}
+
+$J_n = \int \frac{1}{(1 + x^2)^n} dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
+
+\subsection{Ungleichungen}
 \begin{center}
   \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-    \toprule
-    $\mathbf{f(x)}$ & $\mathbf{F(x)}$ \\
-    \midrule
-    $\int f'(x) f(x) \dx$ & $\frac{1}{2}(f(x))^2$ \\
-    $\int \frac{f'(x)}{f(x)} \dx$ & $\ln|f(x)|$ \\
-    $\int_{-\infty}^\infty e^{-x^2} \dx$ & $\sqrt{\pi}$ \\
-    $\int (ax+b)^n \dx$ & $\frac{1}{a(n+1)}(ax+b)^{n+1}$ \\
-    $\int x(ax+b)^n \dx$ & $\frac{(ax+b)^{n+2}}{(n+2)a^2} - \frac{b(ax+b)^{n+1}}{(n+1)a^2}$ \\
-    $\int (ax^p+b)^n x^{p-1} \dx$ & $\frac{(ax^p+b)^{n+1}}{ap(n+1)}$ \\
-    $\int (ax^p + b)^{-1} x^{p-1} \dx$ & $\frac{1}{ap} \ln |ax^p + b|$ \\
-    $\int \frac{ax+b}{cx+d} \dx$ & $\frac{ax}{c} - \frac{ad-bc}{c^2} \ln |cx +d|$ \\
-    $\int \frac{1}{x^2+a^2} \dx$ & $\frac{1}{a} \arctan \frac{x}{a}$ \\
-    $\int \frac{1}{x^2 - a^2} \dx$ & $\frac{1}{2a} \ln\left| \frac{x-a}{x+a} \right|$ \\
-    $\int \sqrt{a^2+x^2} \dx $ & $\frac{x}{2}f(x) + \frac{a^2}{2}\ln(x+f(x))$ \\
-    \bottomrule
+    $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \mathbb{N}, x > -1$\\
+    $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$\\
+    $2|xy| \leq \epsilon x^2 + \frac{1}{\epsilon} y^2$ für $\forall \epsilon > 0$ und $\forall x,y \in \mathbb{R}$\\
+    $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$\\
+    $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
   \end{tabularx}
 \end{center}
+
+\subsection{Uneigentliche Integrale}
+$$\int_1^\infty \frac{1}{x^\alpha} dx = \begin{cases}
+  \text{divergiert, } & \alpha \leq 1\\
+  \frac{1}{\alpha - 1} & \alpha > 1
+\end{cases}$$
+$$\int_0^1 \frac{1}{x^\alpha} dx = \begin{cases}
+  \text{divergiert, } & \alpha \geq 1\\
+  \frac{1}{1- \alpha} & \alpha < 1
+\end{cases}$$
+$$\int_0^\infty e^{-x}dx = 1$$
+$$\int_0^\infty e^{-x}x^{s-1}\dx = \begin{cases}
+  \text{divergiert, } & s \leq 0\\
+  (s-1)! & s > 0
+\end{cases}$$
+
 
 % end of larger array spacing
 \endgroup

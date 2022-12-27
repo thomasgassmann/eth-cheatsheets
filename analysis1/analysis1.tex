@@ -581,19 +581,23 @@ $$
 \end{subbox}
 
 Ausserdem $\int_{a}^{b} f(x) dx = -\int_{b}^{a} f(x) dx$.
+
 \begin{mainbox}{Partielle Integration}
  \vspace{-12pt}
  $$\int f'(x) g(x) \dx = f(x)g(x) - \int f(x) g'(x) \dx$$
 \end{mainbox}
+
 \begin{itemize}
  \item Grundsätzlich gilt: Polynome ableiten ($g(x)$), wo das Integral periodisch ist ($\sin, \cos, e^x$,...) integrieren ($f'(x)$)
  \item Teils ist es nötig, mit $1$ zu multiplizieren, um partielle Integration anwenden zu können (z.B. im Fall von $\int \log(x) \dx$)
  \item Muss eventuell mehrmals angewendet werden
 \end{itemize}
+
 \begin{mainbox}{Substitution}
   Sei $g: [a, b] \to \mathbb{R}$ stetig differenzierbar. $f: I \to \mathbb{R}$ ($g([a, b]) \subset I$) eine stetige Funktion. Dann gilt:
   $$\int_{g(a)}^{g(b)} f(x)dx = \int_{a}^{b} f(g(x))g'(x)dt$$
 \end{mainbox}
+
 \begin{itemize}
  \item Grenzen substituieren nicht vergessen.
  \item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
