@@ -293,7 +293,7 @@ wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\De
 
 Das $\textbf{äussere Produkt}$ für zwei Vektoren $x$ und $y$ ist definiert als $xy^\top$. Die \textbf{orthogonale Projektion} von $x$ auf $y$ ist $P_y x = \frac{1}{\lVert y \rVert^2} y y^\hermconj x$.
 
-Entsprechend ist die Orthogonalprojektion $P_Q \coloneqq QQ^\hermconj$ (mit $Q \in \E^{m \times n}$ bestehend aus orthogonalen Spalten) die Projektion auf den Kolonnenraum $\Columnspace(Q)$. Für diese Orthogonalprojektion gilt $\lVert y - Py \rVert_2 = \min_{z \in \Image P} \lVert y - z \rVert_2$ (siehe \textbf{Least Squares}).
+Entsprechend ist die \textbf{Orthogonalprojektion} $P_A \coloneqq A(A^\hermconj A)^{-1} A^\hermconj$ (mit $A \in \E^{m \times n}$ und $\Rank A = n$) die Projektion auf den Kolonnenraum $\Columnspace(A)$. Für diese Orthogonalprojektion gilt $\lVert y - Py \rVert_2 = \min_{z \in \Image P} \lVert y - z \rVert_2$ (siehe \textbf{Least Squares}).
 
 Eine Matrix $P$ heisst \textbf{Projektor} falls $P^2 = P$.
 
@@ -412,7 +412,9 @@ Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zue
 
 \subsection{Unterräume}
 
-Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. Addition und Multiplikation ist. $U$ beinhaltet immer den Nullvektor. Jeder Unterraum ist ein Vektorraum. Für zwei Unterräume $U, W \subseteq V$ ist $U \cup W$ genau dann ein Unterraum von $V$ falls $U = W$. 
+Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. Addition und Multiplikation ist. $U$ beinhaltet immer den Nullvektor. Jeder Unterraum ist ein Vektorraum. Für zwei Unterräume $U, W \subseteq V$ ist $U \cup W$ genau dann ein Unterraum von $V$ falls $U = W$.\\
+
+Für eine lineare Abbildung $F: X \mapsto Y$ und einen Unterraum $U \subseteq X$ ist $FU \subseteq Y$ auch ein Unterraum. Ist $W \subseteq \Image F$ ein Unterraum so ist auch $F^{-1}W \subseteq X$ ein Unterraum.
 
 \begin{subbox}{Lineare Hülle ($\Span$)}
   Die Menge der Linearkombinationen der Vektoren $v_1, \cdots, v_n$ ist der Unterraum aufgespannt durch diese Vektoren. Man bezeichnet ihn mit $\Span \{ v_1, \cdots, v_n \}$.
