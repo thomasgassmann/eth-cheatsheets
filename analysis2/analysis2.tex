@@ -13,6 +13,8 @@
 % define nice looking boxes
 \usepackage[many]{tcolorbox}
 
+\changefontsizes[9pt]{9pt}
+
 % a base set, that is then customised
 \tcbset {
   base/.style={
@@ -340,9 +342,11 @@ Die Ableitung einer Funktion ist gegeben durch
 
 \begin{mainbox}{Level sets}
   $L_c = \{ x \in \mathbb{R}^n | f(x) = c \}$ nennt man ein Level set.
+  Für eine Kurve $\gamma$ im Level set ($f(\gamma(t)) = c$) gilt:
+  $$(f(\gamma(t)))' = 0 \implies \nabla f(\gamma(t)) \gamma'(t) = 0$$
 \end{mainbox}
 
-Der Gradient an einem Punkt $x_0$ ist immer orthogonal zum Tangentenvektor $\gamma'(t_0)$ (für $\gamma(t_0) = x_0$) wobei $\gamma$ eine Kurve auf dem Level set ist. 
+Das heisst der Gradient ist immer orthogonal zum Tangentenvektor auf der Kurve.
 
 \subsection{Höhere Ableitungen}
 Sei \(\X \subset \R^n\) offen, \(f: \X \mapsto \R^m\). \(f\) ist eine Funktion der Klasse \(C^1\) falls \(f\) auf \(\X\) differenzierbar ist und alle partiellen Ableitungen stetig sind. \\
@@ -368,6 +372,7 @@ Sei \(k \le 1\) und \(f: \X \mapsto \R\) ist eine Funktion der Klasse \(C^k\) au
 
 Es gilt $f(x) = T_k f(x - x_0; x_0) + E_k(f, x, x_0)$ mit \\
 $\lim_{x \to x_0} \frac{E_k(f, x, x_0)}{\lVert x - x_0 \rVert^k}$.
+
 
 \subsubsection*{Beispiele}
 \begin{align*}
@@ -693,7 +698,6 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
 
 \section{Themen aus Analysis I}
 \begin{mainbox}{Partielle Integration}
- \vspace{-12pt}
  $$\int f'(x) g(x) \dx = f(x)g(x) - \int f(x) g'(x) \dx$$
 \end{mainbox}
 \begin{itemize}
