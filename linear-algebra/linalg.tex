@@ -663,16 +663,15 @@ Für eine Orthonormalbasis $\{b_1, \cdots, b_n\}$ und $x \in V$ gilt $x = \sum_{
 
 \subsection{Gram-Schmidt-Orthonormalisierungsverfahren}
 
-\begin{subbox}{Orthogonales Komplement}
-  Für einen Unterraum $U$ von $V$ ist $U^\bot \coloneqq \{ y \in V | \{y\} \bot U \}$ das orthogonale Komplement. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
+\begin{subbox}{}
+  Für einen Unterraum $U$ von $V$ ist $U^\bot \coloneqq \{ y \in V | \{y\} \bot U \}$ das \textbf{orthogonale Komplement}. $U$ und $U^\bot$ sind komplementäre Unterräume in direkter Summe zu $V$.
 \end{subbox}
 
 \begin{mainbox}{Algorithmus}
   Sei $\{a_1, \cdots, a_n\}$ eine Menge linear unabhängiger Vektoren. Wir definieren rekursiv:
   \begin{itemize}
     \item $b_1 \coloneqq \frac{a_1}{\lVert a_1 \rVert}$
-    \item $\widetilde{b_k} \coloneqq a_k - \sum_{j=1}^{k-1} \langle b_j, a_k \rangle b_j$
-    \item $b_k \coloneqq \frac{\widetilde{b_k}}{\lVert \widetilde{b_k} \rVert}$
+    \item $\widetilde{b_k} \coloneqq a_k - \sum_{j=1}^{k-1} \langle b_j, a_k \rangle b_j$ \hfill $b_k \coloneqq \frac{\widetilde{b_k}}{\lVert \widetilde{b_k} \rVert}$
   \end{itemize}
 
   Nach $k$ Schritten sind $\{b_1, \cdots b_k\}$ paarweise orthonormal und $\Span \{a_1, \cdots, a_k\} = \Span \{b_1, \cdots, b_k\}$. Wenn $\{a_1, \cdots, a_n\}$ eine Basis von $V$ ist, ist $\{b_1, \cdots b_n\}$ auch eine. Jeder endlichdimensionale Vektorraum hat eine Orthonormalbasis.
@@ -720,6 +719,18 @@ Eine Matrix kann dargestellt werden als $A = QR$ wobei $Q$ orthogonal und $R$ ei
   \item Wende Gram-Schmidt auf den Spalten von $A$ an ($\implies Q$)
   \item $R = Q^\top A$ lösen und $R$ zu erhalten (alternativ $r_{11} = \lVert a_1 \rVert, r_{jk} = \langle q_j, a_k \rangle, r_{kk} = \lVert \widetilde{q_k} \rVert$)
 \end{itemize}
+
+Im allgemeinen Fall ist dabei für $A \in \E^{m \times n}$ $Q \in \E^{m \times m}$ und $R \in \E^{m \times n}$. Man definiert dann:
+
+$$A = QR = \begin{bmatrix}
+  \widetilde{Q} | \widetilde{Q}_\perp\\
+\end{bmatrix} \begin{bmatrix}
+  \widetilde{R}\\
+  \hline
+  \mathbf{0}
+\end{bmatrix} = \widetilde{Q} \widetilde{R}$$
+
+wobei $\widetilde{Q} \in \E^{m \times r}, \widetilde{R} \in \E^{r \times n}$.
 
 \section{Least Squares}
 
@@ -889,7 +900,7 @@ $\lambda$ ist ein Eigenwert von $A$ genau dann wenn $A - \lambda I$ einen nicht-
 
 Sei $A \in \E^{2 \times 2}$. Dann ist das charakteristische Polynom $\chi_A(\lambda) = \lambda^2 - \Tr(A) \lambda + \det(A)$.
 
-Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder imaginär.
+Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder imaginär. Bei \textbf{Dreiecksmatrizen} entsprechen die Eigenwerte den Werten auf der Diagonalen.
 
 \begin{subbox}{Eigenschaften von Eigenwerten und Eigenvektoren}
   \begin{itemize}
@@ -900,7 +911,9 @@ Für \textbf{schiefsymmetrische Matrizen} sind alle Eigenwerte entweder $0$ oder
       \end{align*}
     }
     \item $\lambda$ ist ein Eigenwert von $A$ genau dann wenn $\lambda$ eine Nullstelle von $\chi_A$ ist
-    \item Die geometrische Vielfachheit eines Eigenwertes ist immer kleiner oder gleich der algebraischen Vielfachheit des Eigenwertes
+    \item Für einen Eigenwert $\lambda$ gilt:{
+      $$1 \leq \text{geo. Vfh. von } \lambda \leq \text{alg. Vfh. von } \lambda \leq n$$
+    }
     \item Eigenvektoren zu verschiedenen Eigenwerten sind linear unabhängig
     \item Eine Matrix ist genau dann singulär wenn sie $0$ als Eigenwert hat
   \end{itemize}
