@@ -93,17 +93,7 @@
   wo die Koeffizienten \(a_0, \ldots, a_{n-1}\) komplexe Funktionen auf \(I \subset \R\) sind, welche von \(y\) abhängig sein können. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
 \end{mainbox}
 
-\begin{subbox}{Hauptresultat über Lineare ODEs}
-  Sei $I \subseteq \mathbb{R}$ ein offenes Intervall und $y^{(k)} + a_{k-1} y^{(k-1)} + \cdots + a_0 y = b$ eine lineare ODE über $I$ mit stetigen Koeffizienten.
-  \begin{itemize}
-    \item Sei $S_0$ die Menge der Lösungen für $b = 0$ (assoziierte homogene ODE). Dann ist $S_0$ ein Vektorraum der Dimension $k$. Wenn $f_1, \cdots, f_k$ Lösungen sind, dann auch $\alpha_1 f_1 + \cdots \alpha_k f_k$ Lösungen.
-    \item Für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in \mathbb{C}^k$ gibt es ein eindeutiges $f \in S_0$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots$.
-    \item Für jedes $b(x)$ ist die Menge der Lösungen $S_b = \{f + f_p | f \in S_0\}$ wobei $f_p$ eine partikuläre Lösung ist.
-    \item Für jedes $x_0 \in I$ und jedes $(y_0, \cdots, y_{k-1}) \in \mathbb{C}^k$ gibt es ein eindeutiges $f \in S_b$ mit $f(x_0) = y_0, f'(x_0) = y_1, \cdots$.
-  \end{itemize}
-\end{subbox}
-
-Die Menge $S$ an Lösungen ist eine Untermenge des Raums der komplexen Funktionen auf $I$ mit Dimension $n$.\\
+Die Menge $S$ an Lösungen ist eine Untermenge des Raums der komplexen Funktionen auf $I$ und bildet einen Vektorraum der Dimension $n$.\\
 \(S_0\) ist das Set der Lösungen zu einer homogenen DGL.
 
 \subsubsection*{Lineare DGL erkennen}
@@ -138,7 +128,7 @@ Wir nehmen an, dass die partikuläre Lösung $b$ imitiert. Wenn $b(x)$ von einer
   \renewcommand*{\arraystretch}{1.1}
   \begin{tabular}{cc}
     \toprule
-    $b(x)$ & Raten \\ 
+    $\mathbf{b(x)}$ & \textbf{Raten} \\ 
     \midrule
     $a \cdot e^{\alpha x}$ & $b \cdot e^{\alpha x}$\\
     \hline
@@ -421,31 +411,11 @@ Eigenwerte können mit dem charakteristischen Polynom gefunden werden:
 Für nichtsymmetrische Matrizen müssen wir für jeden Vektor \(v\) testen, ob \(v^\top A v > 0\) (bzw. \(< 0\)) gilt.\\
 Das Produkt der Eigenwerte entspricht der Determinante von $A$ (doppelte Eigenwerte entsprechend Potenzieren). Die Summe aller Eigenwerte (doppelte Eigenwerte entsprechend Multiplizieren) entspricht der Spur von $A$.
 
-Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt (vorrausgesetzt $\det(A) \neq 0$).
+Um zu zeigen, dass eine Matrix $A$ indefinit ist, zeigt man, dass es ein $x$ mit $x^\top A x > 0$ und ein $y$ mit $y^\top A y < 0$ gibt. Es gilt $e_i^\top A e_j = a_{ij}$. Folglich ist $A$ indefinit, falls es auf der Diagonalen von $A$ verschiedene Vorzeichen gibt (vorrausgesetzt $\det(A) \neq 0$).\\
 
-\subsubsection*{Marlene Trick}
-
-Sei $M$ eine symmetrische Matrix und $A_k$ die $k \times k$ Blockmatrix der oberen, linken Ecke. Mit $\Delta_k$ bezeichnen wir die Determinante von $A_k$. Nun ist $M$ pos. def. wenn $\Delta_k$ > 0 für alle $k$, weiter ist $M$ neg. def.
+\textbf{Marlene Trick:} Sei $M$ eine symmetrische Matrix und $A_k$ die $k \times k$ Blockmatrix der oberen, linken Ecke. Mit $\Delta_k$ bezeichnen wir die Determinante von $A_k$. Nun ist $M$ pos. def. wenn $\Delta_k$ > 0 für alle $k$, weiter ist $M$ neg. def.
 wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\Delta_k$ das keiner der beiden Regeln entspricht ein falsches Vorzeichen hat.
 
-\subsubsection*{Determinante in drei Dimensionen}
-\begin{align*}
-  a \cdot \text{det}
-  \begin{pmatrix}
-    e & f\\
-    h & i
-  \end{pmatrix}
-  - b \cdot \text{det}
-  \begin{pmatrix}
-    d & f\\
-    g & i
-  \end{pmatrix}
-  + c \cdot \text{det}
-  \begin{pmatrix}
-    d & e\\
-    g & h
-  \end{pmatrix}
-\end{align*}
 \subsection{Extrema}
 \subsubsection*{Lokale Extrema}
 Sei \(f: \X \subset \R^n \mapsto \R\) differenzierbar und \(\X\) eine offene Menge. Dann ist \(x_0 \in \X\) ein lokales Maximum (Minimum) falls wir eine Umgebung \(B_r(x_0) = \{x\in \R^n \mid ||x-x_0|| < r \} \subset \X\) finden können, wo gilt:
