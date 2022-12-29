@@ -728,7 +728,39 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
    Seien $f, g: [a, b] \to \mathbb{R}$ stetig und in $]a, b[$ differenzierbar. Dann gibt es $\xi \in ]a, b[$ mit $g'(\xi)(f(b) - f(a)) = f'(\xi)(g(b) - g(a))$. Falls $g'(x) \neq 0 \ \forall x \in ]a, b[$ folgt $g(a) \neq g(b)$ und $\frac{f(b)-f(a)}{g(b)-g(a)} = \frac{f'(\xi)}{g'(\xi)}$.
  \end{subbox}
 
- \begin{mainbox}{Partialbruchzerlegung}
+ \begin{mainbox}{Gleichmässige Konvergenz}
+  Die Folge $(f_n)$ konvergiert gleichmässig in $D$ gegen $f$ falls gilt $\forall \epsilon > 0 \ \exists N \ge 1$, so dass $\forall n \ge N, \ \forall x \in D: | f_n(x) - f(x) | < \epsilon$. \\
+  Die Funktionenfolge $(g_n)$ ist gleichmässig konvergent, falls für alle $x\in D$ der Grenzwert $\limn g_n(x) = g(x)$ existiert und die Folge $(g_n)$ gleichmässig gegen $g$ konvergiert. $N$ hängt nicht von $x$ ab.
+ \end{mainbox}
+ 
+ Die Funktionenfolge $(f_n)_{n \geq 0}$ konvergiert gleichmässig gegen eine Funktion $f: D \rightarrow \mathbb{R}$ falls $\lim_{n \rightarrow \infty} \sup_{x \in D} |f_n(x) - f(x)| = 0$.\\
+ 
+ Gleichmässige Konvergenz bewahrt Stetigkeit und Beschränktheit.
+ 
+\subsection{Stirling'sche Formel}
+Die Stirling'sche Formel ist eine Abschätzung der Fakultät. Mit der Euler-McLaurin-Formel kombiniert folgt
+$$n! = \frac{\sqrt{2\pi n} \cdot n^n}{e^n} \cdot \exp(\frac{1}{12n}+R_3(n))$$
+wobei $|R_3(n)| \le \frac{\sqrt{3}}{216}\cdot\frac{1}{n^2} \ \forall n \ge 1$
+
+\begin{subbox}{Leibnizkriterium}
+  Wenn $a_n \ge 0, \ \forall n \ge 1$ monoton fallend (ab gewissen $n_0$) ist und $\limn a_n = 0$ gilt, dann konvergiert $S = \sumk (-1)^{k+1} a_k$ und $a_1 - a_2 \le S \le a_1$.
+  \end{subbox}
+  
+  \begin{mainbox}{Quotientenkriterium}
+  Sei $(a_n)$ eine Folge mit $a_n \ne 0, \forall n \ge 1$. \\ Falls $\limn \sup \frac{|a_{n+1}|}{|a_n|} < 1 \implies \sum_{n=1}^\infty a_n$ konvergiert absolut. \\Falls $\limn \inf \frac{|a_{n+1}|}{|a_n|} > 1 \implies \sum_{n=1}^\infty a_n$ divergiert.  
+  \end{mainbox}
+  
+  \begin{mainbox}{Wurzelkriterium}
+  Sei $(a_n)$ eine Folge mit $a_n \ne 0, \forall n \ge 1$. Sei $q = \limn \sup \sqrt[n]{|a_n|}$. 
+  \begin{itemize}
+   \item $q < 1 \implies \sum_{n=1}^\infty a_n$ konvergiert absolut.
+   \item $q = 1 \implies$ keine Aussage.
+   \item $q > 1 \implies \sum_{n=1}^\infty a_n$ und $\sum_{n=1}^\infty |a_n|$ divergieren.
+  \end{itemize}
+\end{mainbox}
+  
+
+\begin{mainbox}{Partialbruchzerlegung}
   Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)}$ wird wie folgend berechnet:
   \begin{enumerate}
    \item Falls $\deg(p) \ge \deg(q)$, führe eine Polynomdivision durch. Dies führt zum Integral $\int a(x) + \frac{r(x)}{q(x)}$.
@@ -748,11 +780,6 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
 Für ein monisches Polynom $x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0$ muss jede Nullstelle $a_0$ teilen.\\
 
 Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{1}{q} - \frac{1}{q + 1}$ oder $\frac{1}{q(q-1)(q+1)} = \frac{-1}{q} + \frac{1}{2(q+1)} + \frac{1}{2(q-1)}$.
-
-\subsection{Stirling'sche Formel}
-Die Stirling'sche Formel ist eine Abschätzung der Fakultät. Mit der Euler-McLaurin-Formel kombiniert folgt
-$$n! = \frac{\sqrt{2\pi n} \cdot n^n}{e^n} \cdot \exp(\frac{1}{12n}+R_3(n))$$
-wobei $|R_3(n)| \le \frac{\sqrt{3}}{216}\cdot\frac{1}{n^2} \ \forall n \ge 1$
 
 \subsection{Extrema in 1D}
 
