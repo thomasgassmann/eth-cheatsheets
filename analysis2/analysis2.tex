@@ -308,6 +308,13 @@ Sei \(f: \X \subset \R^n \to \R^m\) und \(\X\) eine offene Menge. Die Jacobi-Mat
 \begin{subbox}{Divergenz}
   Die Divergenz einer Funktion \(f\) ist die Spur der Jacobi-Matrix von \(f\). \[\text{div}(f)(x_0) = \text{Tr}(J_f(x_0)) = \sum_{i=0}(J_f)_{i,i}\]
 \end{subbox}
+
+Allgemeiner als die partiellen Ableitungen kann man auch die Richtungsableitung definieren. Für $v \in \R^n$ und $f: \R^n \to \R^m$ ist die Richtungsableitung $D_v f$ definiert als:
+
+$$D_v f(x) = \lim_{h \rightarrow 0} \frac{f(x + hv) - f(x)}{h}$$
+
+ Die Richtungsableitung $D_v f(x)$ existiert, wenn $t \mapsto f(x + hv)$ in $h = 0$ differenzierbar ist. Es gilt $D_v f(x) = D f(x) v$. Für die $k$-te partielle Ableitungen gilt dann $\frac{\partial f}{\partial x_k} = D_{e_k} f$.
+
 \subsection{Differenzierbarkeit}
 Sei \(f: \X \subset \R^n \to \R^m, x_0 \in \X\). \(f\) ist differenzierbar an der Stelle \(x_0\), falls eine lineare Abbildung \(L: \R^n \to \R^m\) (d.h. eine \(m \times n\)-Matrix \(L\)) existiert, so dass \(\forall x_0 + v \in \X\):
 \[f(x_0 + v) = f(x_0) + L(v) + R(x_0,v)\]
@@ -316,7 +323,7 @@ $$\lim_{v \to 0} \frac{||R(x_0,v)||}{||v||} = 0 \iff R(x_0, v) \in o(||v||)$$
 
 Äquivalent dazu gilt also dass $f$ differenzierbar in $x_0$ ist falls $\lim_{v \rightarrow 0} \frac{f(x_0 + v) - (f(x_0) + L(v))}{||v||} = 0$.
 
-Wir schreiben \(Df(x_0) = L\). Wenn \(f\) für alle \(x_0 \in \X\) differenzierbar ist, dann ist \(f\) auf \(\X\) differenzierbar. \\
+Wir schreiben \(Df(x_0) = L\). $L$ ist dabei eindeutig bestimmt. Wenn \(f\) für alle \(x_0 \in \X\) differenzierbar ist, dann ist \(f\) auf \(\X\) differenzierbar. \\
 
 Wenn alle partiellen Ableitungen existieren und stetig sind, dann ist \(f\) differenzierbar.\\
 Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
@@ -327,7 +334,6 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
   \item Wenn \(m = 1\) ist, dann ist \(f\cdot g\) differenzierbar. Wenn ausserdem \(g \ne 0\) gilt, dann ist es \(f/g\) auch.
   \item Wenn \(f: \X \to Y, g: Y \to \R^m\) beide differenzierbar sind, so gilt \(D(g \circ f)(x_0) = Dg(f(x_0)) \circ Df(x_0)\). 
   Weiter ist \(J_{g \circ f}(x_0) = J_g(f(x_0)) \cdot J_f(x_0)\).
-  \item Die Richtungsableitung $D_u f(a)$ existiert, wenn $t \mapsto f(a + tu)$ in $t = 0$ differenzierbar ist.
 \end{enumerate}
 
 \begin{subbox}{Tangentialraum}
