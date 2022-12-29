@@ -352,10 +352,10 @@ Das heisst der Gradient ist immer orthogonal zum Tangentenvektor auf der Kurve.
 
 \subsection{Höhere Ableitungen}
 Sei \(\X \subset \R^n\) offen, \(f: \X \mapsto \R^m\). \(f\) ist eine Funktion der Klasse \(C^1\) falls \(f\) auf \(\X\) differenzierbar ist und alle partiellen Ableitungen stetig sind. \\
-Allgemein gilt \(f \in \C^k\) für \(k \ge 2\) wenn \(f\) differenzierbar ist und für alle partiellen Ableitungen \(\partial_{x_i} f \in C^{k-1}\) gilt. \\
+Allgemein gilt \(f \in C^k\) für \(k \ge 2\) wenn \(f\) differenzierbar ist und für alle partiellen Ableitungen \(\partial_{x_i} f \in C^{k-1}\) gilt. \\
 \(f\) ist glatt oder in \(C^\infty\) falls \(\forall k: f \in C^k \). Alle Polynome sind glatt.
 
-Partielle Ableitungen bis zur Ordnung \(k\) ($f \in C^k$, es ist ausreichend wenn nur die partiellen Ableitungen existieren, aber $f$ nicht differenzierbar ist) sind kommutativ:
+Sei $f$ zwei mal stetig partiell differenzierbar. Dann gilt (Satz von Schwarz):
 $$\pdv{f}{x_i, x_j} = \pdv{f}{ x_j, x_i}$$
 
 \begin{mainbox}{Hesse-Matrix}
@@ -440,7 +440,7 @@ Wenn \(x_0 \in \X\) ein lokales Extrema ist, dann gilt ausserdem \(\nabla f(x_0)
 Wenn $f$ nach $\R$ geht und falls $g$ streng monoton ist, können wir auch die Funktion $g \circ f$ betrachten. Bspw. $g = \ln$ um ein Produkt in eine Summe zu verwandeln.
 
 \subsubsection*{Kritische Punkte}
-Ein Punkt \(x_0 \in \X\) wo \(\nabla f(x_0) = 0\) gilt ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
+Ein Punkt \(x_0 \in \X\) mit \(\nabla f(x_0) = 0\) ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
 
 \subsubsection*{Sattelpunkt}
 Wenn ein kritischer Punkt weder Maximum noch Minimum ist, dann nennen wir ihn Sattelpunkt.
