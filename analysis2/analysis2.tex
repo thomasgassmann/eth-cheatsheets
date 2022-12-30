@@ -241,8 +241,8 @@ Variation der Konstanten funktioniert wie folgt (hier 2D):
 \subsection{Stetigkeit}
 Sei \(f: \X \subset \R^n \to \R^m\)  und \(x_0 \in \X\). \(f\) ist stetig in \(x_0\), falls eine der folgenden Bedingungen erfüllt ist:
 \begin{enumerate}
-  \item \(\forall \epsilon > 0 \exists \delta > 0\) so dass \(x \in \X ||x - x_0|| < \delta \implies ||f(x) - f(x_0)|| < \epsilon\).
-  \item \(\forall\) Folgen \((x_k)\) in \(X\) mit \(\lim x_k = x_0\) gilt \(\lim f(x_k) = f(\lim x_k)\).
+  \item \(\forall \epsilon > 0 \exists \delta > 0\) so dass \(\forall x \in \X \) \(||x - x_0|| < \delta \implies ||f(x) - f(x_0)|| < \epsilon\).
+  \item \(\forall\) Folgen \((x_k)\) in \(X\) mit \(\lim x_k = x_0\) gilt \(\lim f(x_k) = f(x_0)\).
 \end{enumerate}
 \(f\) ist stetig in \(\X\) falls \(f\) für jeden Punkt \(x_0 \in \X\) stetig ist. Es gilt:
 \begin{enumerate}
@@ -263,7 +263,7 @@ Eine Menge \(\X \subset \R^n \) ist
   \item \textbf{beschränkt}, falls die Menge \(\{ ||x|| \mid x \in \X \}\) in \(\R\) beschränkt ist (d.h. \(\exists R \ge 0, \forall x \in \X: ||x|| \le R\)).
   \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subset \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(y \in \X\) konvergiert. Dies kann mit einem Ball visualisiert werden. Urbilder von offenen (resp. geschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. geschlossen). Die Umkehrung ist im Allgemeinen falsch.\\
   Gegenbeispiele: \(\frac{1}{k}, <\).
-  \item \textbf{kompakt}, falls sie beschränkt und abgeschlossen ist.
+  \item \textbf{kompakt}, falls sie beschränkt und abgeschlossen ist. Bilder von kompakten Mengen sind unter stetigen Abbildungen kompakt.
   \item \textbf{offen}, falls ihr Komplement \(\R^n \setminus \X\) abgeschlossen ist. Alternativ: für jedes $x \in \X$ gibt es ein $\delta > 0$ so dass $B_\delta(x_0) \subseteq \X$.
   \item \textbf{konvex}, falls \(\forall x, y \in \X: \lambda x + (1 - \lambda)y \in \X\) gilt (die Linie zwischen \(x, y\) ist in \(\X\)).
 \end{itemize}
@@ -303,40 +303,41 @@ Sei \(f: \X \subset \R^n \to \R^m\) und \(\X\) eine offene Menge. Die Jacobi-Mat
 \[J_f = \left( \pdv{f_i}{x_j} \right)_{\substack{1 \leq j \leq n \\ 1 \leq i \leq m}}\]
 \end{mainbox}
 \begin{mainbox}{Gradient}
-  Die Jacobi-Matrix einer Funktion \(f: \X \subset \R^n \to \R\) ist ein Spaltenvektor, der mit \(\nabla f\) bezeichnet wird. Die geometrische Interpretation ist ein Vektorfeld, definiert durch \(\nabla f\), welches die Richtung und Magnitude des grössten Wachstums von \(f\) angibt.
+  Die transponierte Jacobi-Matrix einer Funktion \(f: \X \subset \R^n \to \R\) ist ein Spaltenvektor, der mit \(\nabla f\) bezeichnet wird. Die geometrische Interpretation ist ein Vektorfeld, definiert durch \(\nabla f\), welches die Richtung und Magnitude des grössten Wachstums von \(f\) angibt.
 \end{mainbox}
 \begin{subbox}{Divergenz}
   Die Divergenz einer Funktion \(f\) ist die Spur der Jacobi-Matrix von \(f\). \[\text{div}(f)(x_0) = \text{Tr}(J_f(x_0)) = \sum_{i=0}(J_f)_{i,i}\]
 \end{subbox}
+
+Allgemeiner als die partiellen Ableitungen kann man auch die Richtungsableitung definieren. Für $v \in \R^n$ und $f: \R^n \to \R^m$ ist die Richtungsableitung $D_v f$ definiert als:
+
+$$D_v f(x) = \lim_{h \rightarrow 0} \frac{f(x + hv) - f(x)}{h}$$
+
+ Die Richtungsableitung $D_v f(x)$ existiert, wenn $t \mapsto f(x + hv)$ in $h = 0$ differenzierbar ist. Es gilt $D_v f(x) = D f(x) v$. Für die $k$-te partielle Ableitungen gilt dann $\frac{\partial f}{\partial x_k} = D_{e_k} f$.
+
 \subsection{Differenzierbarkeit}
 Sei \(f: \X \subset \R^n \to \R^m, x_0 \in \X\). \(f\) ist differenzierbar an der Stelle \(x_0\), falls eine lineare Abbildung \(L: \R^n \to \R^m\) (d.h. eine \(m \times n\)-Matrix \(L\)) existiert, so dass \(\forall x_0 + v \in \X\):
 \[f(x_0 + v) = f(x_0) + L(v) + R(x_0,v)\]
 wobei für den Fehlerterm \(R\) folgendes gilt: 
 $$\lim_{v \to 0} \frac{||R(x_0,v)||}{||v||} = 0 \iff R(x_0, v) \in o(||v||)$$
-Wir schreiben \(df(x_0) = L\). Wenn \(f\) für alle \(x_0 \in \X\) differenzierbar ist, dann ist \(f\) auf \(\X\) differenzierbar. \\
+
+Äquivalent dazu gilt also dass $f$ differenzierbar in $x_0$ ist falls $\lim_{v \rightarrow 0} \frac{f(x_0 + v) - (f(x_0) + L(v))}{||v||} = 0$.
+
+Wir schreiben \(Df(x_0) = L\). $L$ ist dabei eindeutig bestimmt. Wenn \(f\) für alle \(x_0 \in \X\) differenzierbar ist, dann ist \(f\) auf \(\X\) differenzierbar. \\
+
 Wenn alle partiellen Ableitungen existieren und stetig sind, dann ist \(f\) differenzierbar.\\
 Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
 \begin{enumerate}
   \item \(f\) ist stetig im Punkt \(x_0\)
-  \item \(f\) hat alle partiellen Ableitungen am Punkt \(x_0\) und die Matrix, welche \(df(x_0): x \mapsto Ax\) repräsentiert, ist die Jacobi-Matrix von \(f\) am Punkt \(x_0\), d.h. \(A = J_f(x_0)\)
-  \item \(d(f+g)(x_0) = df(x_0) + dg(x_0)\)
+  \item \(f\) hat alle partiellen Ableitungen am Punkt \(x_0\) und die Matrix, welche \(Df(x_0): x \mapsto Ax\) repräsentiert, ist die Jacobi-Matrix von \(f\) am Punkt \(x_0\), d.h. \(A = J_f(x_0)\)
+  \item \(d(f+g)(x_0) = Df(x_0) + Dg(x_0)\)
   \item Wenn \(m = 1\) ist, dann ist \(f\cdot g\) differenzierbar. Wenn ausserdem \(g \ne 0\) gilt, dann ist es \(f/g\) auch.
-  \item Wenn \(f: \X \to Y, g: Y \to \R^m\) beide differenzierbar sind, so gilt \(d(g \circ f)(x_0) = dg(f(x_0)) \circ df(x_0)\). 
+  \item Wenn \(f: \X \to Y, g: Y \to \R^m\) beide differenzierbar sind, so gilt \(D(g \circ f)(x_0) = Dg(f(x_0)) \circ Df(x_0)\). 
   Weiter ist \(J_{g \circ f}(x_0) = J_g(f(x_0)) \cdot J_f(x_0)\).
-  \item Äquivalent dazu: $f$ differenzierbar in $x_0$\\
-  falls $\lim_{x \rightarrow x_0} \frac{f(x) - (f(x_0) + u(x - x_0))}{||x - x_0||} = 0$ für eine lineare Abbildung $u: \mathbb{R}^n \rightarrow \mathbb{R}^m$.
-  \item Die Richtungsableitung $D_u f(a)$ existiert, wenn $t \mapsto f(a + tu)$ in $t = 0$ differenzierbar ist.
 \end{enumerate}
-Die Ableitung einer Funktion ist gegeben durch
-\begin{align*}
-  f'(x_0) &= \begin{pmatrix}
-    f_1'(x_0)\\
-    \vdots\\
-    f_n'(x_0)
-  \end{pmatrix}
-\end{align*}
-\begin{subbox}{Tagentialraum}
-  Der Tangentialraum eines Graphen \(f\) am Punkt \(x_0\) ist gegeben durch \(g(x) = f(x_0) + df(x_0)(x-x_0)\).
+
+\begin{subbox}{Tangentialraum}
+  Der Tangentialraum eines Graphen \(f\) am Punkt \(x_0\) ist gegeben durch \(g(x) = f(x_0) + Df(x_0)(x-x_0)\).
 \end{subbox}
 
 \subsection{Level sets}
@@ -351,10 +352,10 @@ Das heisst der Gradient ist immer orthogonal zum Tangentenvektor auf der Kurve.
 
 \subsection{Höhere Ableitungen}
 Sei \(\X \subset \R^n\) offen, \(f: \X \mapsto \R^m\). \(f\) ist eine Funktion der Klasse \(C^1\) falls \(f\) auf \(\X\) differenzierbar ist und alle partiellen Ableitungen stetig sind. \\
-Allgemein gilt \(f \in \C^k\) für \(k \ge 2\) wenn \(f\) differenzierbar ist und für alle partiellen Ableitungen \(\partial_{x_i} f \in C^{k-1}\) gilt. \\
+Allgemein gilt \(f \in C^k\) für \(k \ge 2\) wenn \(f\) differenzierbar ist und für alle partiellen Ableitungen \(\partial_{x_i} f \in C^{k-1}\) gilt. \\
 \(f\) ist glatt oder in \(C^\infty\) falls \(\forall k: f \in C^k \). Alle Polynome sind glatt.
 
-Partielle Ableitungen bis zur Ordnung \(k\) ($f \in C^k$, es ist ausreichend wenn nur die partiellen Ableitungen existieren, aber $f$ nicht differenzierbar ist) sind kommutativ:
+Sei $f$ zwei mal stetig partiell differenzierbar. Dann gilt (Satz von Schwarz):
 $$\pdv{f}{x_i, x_j} = \pdv{f}{ x_j, x_i}$$
 
 \begin{mainbox}{Hesse-Matrix}
@@ -439,7 +440,7 @@ Wenn \(x_0 \in \X\) ein lokales Extrema ist, dann gilt ausserdem \(\nabla f(x_0)
 Wenn $f$ nach $\R$ geht und falls $g$ streng monoton ist, können wir auch die Funktion $g \circ f$ betrachten. Bspw. $g = \ln$ um ein Produkt in eine Summe zu verwandeln.
 
 \subsubsection*{Kritische Punkte}
-Ein Punkt \(x_0 \in \X\) wo \(\nabla f(x_0) = 0\) gilt ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
+Ein Punkt \(x_0 \in \X\) mit \(\nabla f(x_0) = 0\) ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
 
 \subsubsection*{Sattelpunkt}
 Wenn ein kritischer Punkt weder Maximum noch Minimum ist, dann nennen wir ihn Sattelpunkt.
@@ -557,7 +558,7 @@ Entsprechend gilt für $\text{curl}(f)$ einer zweidimensionalen Funktion $\text{
 
 \subsection{Riemann-Integral in \texorpdfstring{\(\R^2\)}{R²}}
 \begin{subbox}{Partition in zwei Dimensionen}
-  Eine Partition \(P\) eines abgeschlossenen Rechtecks \(R = \left[a,b\right] \times \left[c,d\right]\) ist eine Menge von Rechtecken. Für jede Partition \(P_x : a = x_0 < \ldots < x_n = b\) von \(\left[a,b\right]\) und \(P_y\) (analog) erhalten wir eine Partition \(P_{i,j} = \left[x_{i-1}, x_i\right] \times \left[y_{j-1},y_j\right]\) von \(R\) mit der Fläche \(\mu({P_{i,j}} = (x_i - x_{i-1})(y_j - y_{j-1}))\).
+  Eine Partition \(P\) eines abgeschlossenen Rechtecks \(R = \left[a,b\right] \times \left[c,d\right]\) ist eine Menge von Rechtecken. Für jede Partition \(P_x : a = x_0 < \ldots < x_n = b\) von \(\left[a,b\right]\) und \(P_y\) (analog) erhalten wir eine Partition \(P_{i,j} = \left[x_{i-1}, x_i\right] \times \left[y_{j-1},y_j\right]\) von \(R\) mit der Fläche \(\mu({P_{i,j}}) = (x_i - x_{i-1})(y_j - y_{j-1})\).
 \end{subbox}
 Mit den Hilfsdefinitionen
 \[f_{i,j} = \inf_{P_{i,j}} f(x,y), \quad F_{i,j} = \sup_{P_{i,j}} f(x,y)\]
