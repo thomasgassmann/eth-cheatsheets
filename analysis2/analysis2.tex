@@ -583,23 +583,23 @@ Falls die Ober- und Untersumme von $f$ gleich sind, so ist $f$ Riemann-integrier
 $$ \int_Q f dx = L(f) = U(f) $$
 
 \subsubsection*{Nicht-Quadratische Flächen}
-Sei \(A \subset R\) eine Fläche. \(f : A \subset R \mapsto \R\) ist auf \(A\) integrierbar, falls \(f \cdot \X_A\) auf \(R\) integrierbar ist. 
-\[\int_R f(x,y) \cdot \X_A(x,y) \mathop{d(x,y)} \text{ oder } \int_A f(x,y) \mathop{d(x,y)}\]
+Sei \(A \subseteq R\) eine Menge. \(f : A \subseteq R \mapsto \R\) ist auf \(A\) integrierbar, falls \(f \cdot \X_A\) auf \(R\) integrierbar ist. 
+\[\int_R f(x) \cdot \X_A(x) \mathop{dx} \text{ oder } \int_A f(x) \mathop{dx}\]
 \(\X_A\) ist die charakteristische Funktion von \(A\).
 
 \subsubsection*{Eigenschaften des Integrals}
-Sei \(f,g : A \subset R \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes:
+Sei \(f,g : A \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes:
 \begin{enumerate}
   \item \(\alpha, \beta \in \R: \alpha f + \beta g\) ist integrierbar:
-  \[\int_A \alpha f + \beta g \mathop{d(x,y)} = \alpha \int_A f \mathop{d(x,y)} + \beta \int_A g \mathop{d(x,y)}\]
-  \item Falls \(\forall (x,y) \in A: f(x,y) \le g(x,y)\), dann gilt:
-  \[\int_A f(x,y) \mathop{d(x,y)} \le \int_A g(x,y) \mathop{d(x,y)}\]
-  \item Falls \(f(x,y) \ge 0\) und \(B \subset A\), dann gilt:
-  \[\int_B f(x,y) \mathop{d(x,y)} \le \int_A f(x,y) \mathop{d(x,y)}\]
+  \[\int_A \alpha f + \beta g \mathop{dx} = \alpha \int_A f \mathop{dx} + \beta \int_A g \mathop{dx}\]
+  \item Falls \(\forall x \in A: f(x) \le g(x)\), dann gilt:
+  \[\int_A f(x) \mathop{dx} \le \int_A g(x) \mathop{dx}\]
+  \item Falls \(f(x) \ge 0\) und \(B \subseteq A\), dann gilt:
+  \[\int_B f(x) \mathop{dx} \le \int_A f(x) \mathop{dx}\]
   \item Dreiecksungleichung:
-    \[\left| \int_A f(x,y) \mathop{d(x,y)}\right| \le \int_A \left|f(x,y)\right| \mathop{d(x,y)}\]
+    \[\left| \int_A f(x) \mathop{dx}\right| \le \int_A \left|f(x)\right| \mathop{dx}\]
   \item Falls \(f = 1\), dann gilt:
-  \[\int_A f(x,y) \mathop{d(x,y)} = \int_A 1 \mathop{d(x,y)} = \gamma(A)\]
+  \[\int_A f(x) \mathop{dx} = \int_A 1 \mathop{dx} = \vol(A)\]
 \end{enumerate}
 
 
