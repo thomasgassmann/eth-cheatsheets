@@ -96,7 +96,7 @@
 \section{Differentialgleichungen}
 \begin{mainbox}{Definition lineare DGL}
   Eine gewöhnliche lineare Differentialgleichung ist eine Gleichung, welche Ableitungen enthält. Sie hat die Form \[y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_0y = b(x)\]
-  wo die Koeffizienten \(a_0, \ldots, a_{n-1}\) komplexe Funktionen auf \(I \subset \R\) sind, welche von \(y\) abhängig sein können. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
+  wo die Koeffizienten \(a_0, \ldots, a_{n-1}\) komplexe Funktionen auf \(I \subseteq \R\) sind, welche von \(y\) abhängig sein können. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
 \end{mainbox}
 
 Die Menge $S$ an Lösungen ist eine Untermenge des Raums der komplexen Funktionen auf $I$ und bildet einen Vektorraum der Dimension $n$.\\
@@ -242,7 +242,7 @@ Variation der Konstanten funktioniert wie folgt (hier 2D):
   \end{enumerate}
 \end{mainbox}
 \subsection{Stetigkeit}
-Sei \(f: \X \subset \R^n \to \R^m\)  und \(x_0 \in \X\). \(f\) ist stetig in \(x_0\), falls eine der folgenden Bedingungen erfüllt ist:
+Sei \(f: \X \subseteq \R^n \to \R^m\)  und \(x_0 \in \X\). \(f\) ist stetig in \(x_0\), falls eine der folgenden Bedingungen erfüllt ist:
 \begin{enumerate}
   \item \(\forall \epsilon > 0 \exists \delta > 0\) so dass \(\forall x \in \X \) \(||x - x_0|| < \delta \implies ||f(x) - f(x_0)|| < \epsilon\).
   \item \(\forall\) Folgen \((x_k)\) in \(X\) mit \(\lim x_k = x_0\) gilt \(\lim f(x_k) = f(x_0)\).
@@ -261,10 +261,10 @@ Sei \(f: \X \subset \R^n \to \R^m\)  und \(x_0 \in \X\). \(f\) ist stetig in \(x
   \[\lim_{x\to a} f(x) = \lim_{x \to a} h(x) = L \implies \lim_{x\to a} g(x) = L\]
 \end{mainbox}
 \subsection{Eigenschaften von Mengen}
-Eine Menge \(\X \subset \R^n \) ist
+Eine Menge \(\X \subseteq \R^n \) ist
 \begin{itemize}
   \item \textbf{beschränkt}, falls die Menge \(\{ ||x|| \mid x \in \X \}\) in \(\R\) beschränkt ist (d.h. \(\exists R \ge 0, \forall x \in \X: ||x|| \le R\)).
-  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subset \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(y \in \X\) konvergiert. Dies kann mit einem Ball visualisiert werden. Urbilder von offenen (resp. geschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. geschlossen). Die Umkehrung ist im Allgemeinen falsch.\\
+  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subseteq \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(y \in \X\) konvergiert. Dies kann mit einem Ball visualisiert werden. Urbilder von offenen (resp. geschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. geschlossen). Die Umkehrung ist im Allgemeinen falsch.\\
   Gegenbeispiele: \(\frac{1}{k}, <\).
   \item \textbf{kompakt}, falls sie beschränkt und abgeschlossen ist. Bilder von kompakten Mengen sind unter stetigen Abbildungen kompakt.
   \item \textbf{offen}, falls ihr Komplement \(\R^n \setminus \X\) abgeschlossen ist. Alternativ: für jedes $x \in \X$ gibt es ein $\delta > 0$ so dass $B_\delta(x_0) \subseteq \X$.
@@ -272,20 +272,20 @@ Eine Menge \(\X \subset \R^n \) ist
 \end{itemize}
 Beispiele:
 \begin{itemize}
-  \item \((a,b) \subset \R\) ist offen.
-  \item \(\left[a,b\right) \subset \R\) ist weder offen noch abgeschlossen.
+  \item \((a,b) \subseteq \R\) ist offen.
+  \item \(\left[a,b\right) \subseteq \R\) ist weder offen noch abgeschlossen.
   \item \(\R^n\) und \(\varnothing\) sind offen.
-  \item \((a_1, b_1) \times (a_2,b_2) \subset \R^2\) ist offen.
+  \item \((a_1, b_1) \times (a_2,b_2) \subseteq \R^2\) ist offen.
 \end{itemize}
 \begin{subbox}{Bolzano-Weierstrass}
   Jede beschränkte Folge in \(\R^n\) hat eine konvergente Teilfolge.
 \end{subbox}
 \begin{subbox}{Min-Max-Theorem}
-  Sei \(\X \subset \R^n, \X \ne \varnothing\) eine kompakte Menge und \(f: \X \to \R\) eine stetige Funktion. Dann ist \(f\) beschränkt und ein Maximum \(x^+\)/Minimum \(x^-\)existieren, so dass
+  Sei \(\X \subseteq \R^n, \X \ne \varnothing\) eine kompakte Menge und \(f: \X \to \R\) eine stetige Funktion. Dann ist \(f\) beschränkt und ein Maximum \(x^+\)/Minimum \(x^-\)existieren, so dass
   \[f(x^+) = \sup_{x\in \X} f(x) \quad f(x^-) = \inf_{x \in \X} f(x)\]
 \end{subbox}
 \subsection{Partielle Ableitungen}
-Um eine partielle Ableitung von \(f: \X \subset \R^n \to \R\) (wobei \(\X\) offen) zu finden, betrachten wir alle Variablen bis auf eine als konstant und leiten nach dieser ab.
+Um eine partielle Ableitung von \(f: \X \subseteq \R^n \to \R\) (wobei \(\X\) offen) zu finden, betrachten wir alle Variablen bis auf eine als konstant und leiten nach dieser ab.
 \[\pdv{f}{x_{0,j}} = \lim_{h \to 0} \frac{f(x_{0,1}, \ldots, x_{0,j} + h, \ldots, x_{0,n}) - f(x_0)}{h}\]
 Für \(f: \R^n \to \R^m, x_0 \in \R^n\) gilt
 \begin{align*}
@@ -302,11 +302,11 @@ Partielle Ableitungen haben folgende Eigenschaften:
   \item \(\partial_j(f / g) = \frac{\partial_j (f) \cdot g - \partial_j (g) \cdot f}{g^2}\) für \(g \ne 0\)
 \end{enumerate}
 \begin{mainbox}{Jacobi-Matrix}
-Sei \(f: \X \subset \R^n \to \R^m\) und \(\X\) eine offene Menge. Die Jacobi-Matrix ist eine Matrix mit \(m\) Zeilen und \(n\) Spalten:
+Sei \(f: \X \subseteq \R^n \to \R^m\) und \(\X\) eine offene Menge. Die Jacobi-Matrix ist eine Matrix mit \(m\) Zeilen und \(n\) Spalten:
 \[J_f = \left( \pdv{f_i}{x_j} \right)_{\substack{1 \leq j \leq n \\ 1 \leq i \leq m}}\]
 \end{mainbox}
 \begin{mainbox}{Gradient}
-  Die transponierte Jacobi-Matrix einer Funktion \(f: \X \subset \R^n \to \R\) ist ein Spaltenvektor, der mit \(\nabla f\) bezeichnet wird. Die geometrische Interpretation ist ein Vektorfeld, definiert durch \(\nabla f\), welches die Richtung und Magnitude des grössten Wachstums von \(f\) angibt.
+  Die transponierte Jacobi-Matrix einer Funktion \(f: \X \subseteq \R^n \to \R\) ist ein Spaltenvektor, der mit \(\nabla f\) bezeichnet wird. Die geometrische Interpretation ist ein Vektorfeld, definiert durch \(\nabla f\), welches die Richtung und Magnitude des grössten Wachstums von \(f\) angibt.
 \end{mainbox}
 \begin{subbox}{Divergenz}
   Die Divergenz einer Funktion \(f\) ist die Spur der Jacobi-Matrix von \(f\). \[\text{div}(f)(x_0) = \text{Tr}(J_f(x_0)) = \sum_{i=0}(J_f)_{i,i}\]
@@ -319,7 +319,7 @@ $$D_v f(x) = \lim_{h \rightarrow 0} \frac{f(x + hv) - f(x)}{h}$$
  Die Richtungsableitung $D_v f(x)$ existiert, wenn $t \mapsto f(x + hv)$ in $h = 0$ differenzierbar ist. Es gilt $D_v f(x) = D f(x) v$. Für die $k$-te partielle Ableitungen gilt dann $\frac{\partial f}{\partial x_k} = D_{e_k} f$.
 
 \subsection{Differenzierbarkeit}
-Sei \(f: \X \subset \R^n \to \R^m, x_0 \in \X\). \(f\) ist differenzierbar an der Stelle \(x_0\), falls eine lineare Abbildung \(L: \R^n \to \R^m\) (d.h. eine \(m \times n\)-Matrix \(L\)) existiert, so dass \(\forall x_0 + v \in \X\):
+Sei \(f: \X \subseteq \R^n \to \R^m, x_0 \in \X\). \(f\) ist differenzierbar an der Stelle \(x_0\), falls eine lineare Abbildung \(L: \R^n \to \R^m\) (d.h. eine \(m \times n\)-Matrix \(L\)) existiert, so dass \(\forall x_0 + v \in \X\):
 \[f(x_0 + v) = f(x_0) + L(v) + R(x_0,v)\]
 wobei für den Fehlerterm \(R\) folgendes gilt: 
 $$\lim_{v \to 0} \frac{||R(x_0,v)||}{||v||} = 0 \iff R(x_0, v) \in o(||v||)$$
@@ -354,7 +354,7 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
 Das heisst der Gradient ist immer orthogonal zum Tangentenvektor auf der Kurve.
 
 \subsection{Höhere Ableitungen}
-Sei \(\X \subset \R^n\) offen, \(f: \X \mapsto \R^m\). \(f\) ist eine Funktion der Klasse \(C^1\) falls \(f\) auf \(\X\) differenzierbar ist und alle partiellen Ableitungen stetig sind. \\
+Sei \(\X \subseteq \R^n\) offen, \(f: \X \mapsto \R^m\). \(f\) ist eine Funktion der Klasse \(C^1\) falls \(f\) auf \(\X\) differenzierbar ist und alle partiellen Ableitungen stetig sind. \\
 Allgemein gilt \(f \in C^k\) für \(k \ge 2\) wenn \(f\) differenzierbar ist und für alle partiellen Ableitungen \(\partial_{x_i} f \in C^{k-1}\) gilt. \\
 \(f\) ist glatt oder in \(C^\infty\) falls \(\forall k: f \in C^k \). Alle Polynome sind glatt.
 
@@ -362,7 +362,7 @@ Sei $f$ zwei mal stetig partiell differenzierbar. Dann gilt (Satz von Schwarz):
 $$\pdv{f}{x_i, x_j} = \pdv{f}{ x_j, x_i}$$
 
 \begin{mainbox}{Hesse-Matrix}
-  Die Hesse-Matrix ist eine \(n \times n\) symmetrische Matrix, welche die zweite Ableitung für $f: X \subset \mathbb{R}^n \mapsto \mathbb{R}$ definiert:
+  Die Hesse-Matrix ist eine \(n \times n\) symmetrische Matrix, welche die zweite Ableitung für $f: X \subseteq \mathbb{R}^n \mapsto \mathbb{R}$ definiert:
   \[\text{Hess}_f(x_0) := \left(\pdv{f(x_0)}{x_i, x_j}\right)_{1\le i,j \le n}\] 
 \end{mainbox}
 
@@ -436,7 +436,7 @@ wenn $(-1)^k \Delta_k > 0$ für alle $k$. $A$ ist indefinit falls das erste $\De
 
 \subsection{Extrema}
 \subsubsection*{Lokale Extrema}
-Sei \(f: \X \subset \R^n \mapsto \R\) differenzierbar und \(\X\) eine offene Menge. Dann ist \(x_0 \in \X\) ein lokales Maximum (Minimum) falls wir eine Umgebung \(B_r(x_0) = \{x\in \R^n \mid ||x-x_0|| < r \} \subset \X\) finden können, wo gilt:
+Sei \(f: \X \subseteq \R^n \mapsto \R\) differenzierbar und \(\X\) eine offene Menge. Dann ist \(x_0 \in \X\) ein lokales Maximum (Minimum) falls wir eine Umgebung \(B_r(x_0) = \{x\in \R^n \mid ||x-x_0|| < r \} \subseteq \X\) finden können, wo gilt:
 \[\forall x \in B_r(x_0): f(x) \le (\ge) f(x_0)\]
 Wenn \(x_0 \in \X\) ein lokales Extrema ist, dann gilt ausserdem \(\nabla f(x_0) = 0\).
 
@@ -476,7 +476,7 @@ Für \(f: \R \mapsto \R^n\) ist das Integral definiert als
   Eine parametrisierte Kurve in \(\R^n\) ist eine stetige Ableitung \(\gamma: \left[a,b\right] \mapsto \R^n\) wobei \(\gamma\) stückweise in \(C^1\) ist, d.h. wir können \(\gamma\) so partitionieren, das alle Partitionen in \(C^1\) sind. Eine parametrisierte Kurve muss nicht injektiv sein.
 \end{mainbox}
 \subsection{Wegintegrale}
-Sei \(\gamma : \left[a,b\right] \mapsto \R^n\) eine parametrisierte Kurve und \(\X \subset \R^n\) eine Menge, welche das Bild von \(\gamma\) beinhaltet. Sei \(f : \X \mapsto \R^n\) eine stetige Funktion. Dann ist ein Wegintegral (auch: Kurvenintegral) definiert als:
+Sei \(\gamma : \left[a,b\right] \mapsto \R^n\) eine parametrisierte Kurve und \(\X \subseteq \R^n\) eine Menge, welche das Bild von \(\gamma\) beinhaltet. Sei \(f : \X \mapsto \R^n\) eine stetige Funktion. Dann ist ein Wegintegral (auch: Kurvenintegral) definiert als:
 \[\int_\gamma f(s) ds = \int_a^b f(\gamma(t)) \cdot \gamma'(t) dt\]
 
 Wegintegrale haben folgende Eigenschaften:
@@ -504,7 +504,7 @@ Wegintegrale haben folgende Eigenschaften:
 \end{enumerate}
 
 \subsection{Potential}
-Ein differenzierbares skalares Feld \(g: \X \subset \R^n \mapsto \R\) mit \(\nabla g = f, f: \X \mapsto \R^n\) wird ein \textbf{Potential} von \(f\) genannt. Dies kann wie folgt verwendet werden:
+Ein differenzierbares skalares Feld \(g: \X \subseteq \R^n \mapsto \R\) mit \(\nabla g = f, f: \X \mapsto \R^n\) wird ein \textbf{Potential} von \(f\) genannt. Dies kann wie folgt verwendet werden:
 \begin{align*}
   \int_\gamma f \; ds &= \int_a^b f(\gamma(t)) \cdot \gamma'(t) \; dt\\
   &= \int_a^b \nabla g(\gamma(t)) \cdot \gamma'(t) \; dt\\
@@ -514,7 +514,7 @@ Ein differenzierbares skalares Feld \(g: \X \subset \R^n \mapsto \R\) mit \(\nab
 Der Wert hängt somit nur vom Start- und Endpunkt ab.
 
 \subsection{Konservative Vektorfelder}
-Sei \(\X\) offen und \(f: \X \subset \R^n \mapsto \R^n\) ein stetiges Vektorfeld. Die folgenden Aussagen sind äquivalent:
+Sei \(\X\) offen und \(f: \X \subseteq \R^n \mapsto \R^n\) ein stetiges Vektorfeld. Die folgenden Aussagen sind äquivalent:
 \begin{enumerate}
   \item Falls für alle \(x_1, x_2 \in \X\) das Wegintegral \(\int_\gamma f(s) ds\) unabhängig von der Kurve in \(\X\) von \(x_1\) nach \(x_2\) ist, dann ist das Vektorfeld \(f\) konservativ.
   \item Jedes Wegintegral in \(f\) entlang einer geschlossenen Kurve (Schlaufe) ist 0.
@@ -524,11 +524,11 @@ Es gilt ausserdem folgende notwendige, aber nicht ausreichende Bedingung:
 \[f \text{ ist konservativ }\implies \pdv{f_i}{x_j} = \pdv{f_j}{x_i}\]
 
 \begin{subbox}{Wegzusammenhängend}
-  Sei \(\X \subset \R^n\) offen. \(\X\) ist wegzusammenhängend, falls für jedes Paar an Punkten \(x, y \in \X\) ein Pfad \(\gamma : \left(0,1\right] \mapsto \X\) existiert, der in \(C^1\) ist und \(\gamma(0) = x, \gamma(1) = y\) hält.
+  Sei \(\X \subseteq \R^n\) offen. \(\X\) ist wegzusammenhängend, falls für jedes Paar an Punkten \(x, y \in \X\) ein Pfad \(\gamma : \left(0,1\right] \mapsto \X\) existiert, der in \(C^1\) ist und \(\gamma(0) = x, \gamma(1) = y\) hält.
 \end{subbox}
 
 \begin{subbox}{Sternförmig}
-  Eine Teilmenge \(\X \subset \R^n\) wird sternförmig genannt, falls \(\exists x_0 \in \X\) so dass \(\forall x \in \X\) eine Linie \(x_0\) nach \(x\) existiert, die komplett in \(\X\) enthalten ist. 
+  Eine Teilmenge \(\X \subseteq \R^n\) wird sternförmig genannt, falls \(\exists x_0 \in \X\) so dass \(\forall x \in \X\) eine Linie \(x_0\) nach \(x\) existiert, die komplett in \(\X\) enthalten ist. 
   \[\X \text{ ist konvex} \implies \X \text{ ist sternförmig}\]
 \end{subbox}
 Wenn \(\X\) eine sternförmige, offene Teilmenge von \(\R^n\) und \(f \in C^1\) ein Vektorfeld ist, dann gilt:
@@ -604,10 +604,11 @@ Sei \(f,g : A \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes:
 
 
 \begin{mainbox}{Satz von Fubini}
-  Für eine Region \(D \subset \R^2 := \{\left(x,y\right) \mid a \le x \le b, g(x) < y < h(x)\}\) gilt:
+  Für eine Region \(D \subseteq \R^2 := \{\left(x,y\right) \mid a \le x \le b, g(x) < y < h(x)\}\) gilt:
   \[\int_D f(x,y)\mathop{dx} \mathop{xy} = \int_a^b \left(\int_{g(x)}^{h(x)} f(x,y) \mathop{dy}\right)\mathop{dx}\]
-  Für eine Region \(D \subset \R^2 := \{ \left(x,y\right) \mid c \le y \le d, G(y) < x < H(y)\) gilt:
-  \[\int_D f(x,y) \mathop{dx} \mathop{dy} = \int_c^d \left(\int_{G(y)}^{H(y)} f(x,y)\mathop{dx}\right) \mathop{dy}\]
+  Allgemein gilt für $X \subseteq \R^n$ und $Y \subseteq \R^m$ und eine Riemann-integrierbare Funktion $f: X \times Y \mapsto \R$:
+  $$\int_{X \times Y} f(x, y) d(x, y) = \int_X \left( \int_Y f(x,y) dy \right) dx$$
+  $$= \int_Y \left( \int_X f(x,y)dx \right) dy$$
 \end{mainbox}
 
 Ein parametrisiertes $m$-Set ist eine Funktion $\phi: [a_1, b_1] \times \cdots \times [a_m, b_m] \mapsto \R^n$ das $C'$ in $(a_1, b_1) \times \cdots \times (a_m, b_m)$ ist ($m = 1$ ist eine parametrisierte Kurve). Eine Menge $Y \subseteq \R^n$ ist vernachlässigbar falls $k \in \N$ viele $\phi_i$ mit $m_i < n$ existieren sodass $Y \subseteq \cup_{i=1}^k \phi(X_i)$ wobei $\phi_i: X_i \mapsto \R^n$. In $n = 1$ sind bspw. Vereinigungen von endlichen vielen Punkten vernachlässigbar.
@@ -620,8 +621,8 @@ Falls eine Menge vernachlässigbar und kompakt ist so ist das Integral einer ste
 \end{subbox}
 
 \begin{mainbox}{Nullmenge}
-  Eine Nullmenge \(X \subset R \subset \R^2\) ist eine Menge, so dass für alle \(\epsilon > 0\) eine endliche Menge an Rechtecken \(R_k, 1 \le k \le n\) existiert, so dass:
-  \[X \subset \bigcup_{k = 1}^n R_k, \; \sum_{k = 1}^n \mu (R_k) < \epsilon\]
+  Eine Nullmenge \(X \subseteq R \subseteq \R^2\) ist eine Menge, so dass für alle \(\epsilon > 0\) eine endliche Menge an Rechtecken \(R_k, 1 \le k \le n\) existiert, so dass:
+  \[X \subseteq \bigcup_{k = 1}^n R_k, \; \sum_{k = 1}^n \mu (R_k) < \epsilon\]
   (Informell: Wir können die ganze Menge mit einer endlichen Menge an Rechtecken beliebiger Grösse überdecken.)
 \end{mainbox}
 
@@ -647,7 +648,7 @@ Sei \(\partial A\) der Rand einer Menge \(A\):
     &A \cap R \neq \emptyset \text{ und } \R^2 \backslash A \cap R \neq \emptyset \Big\}
 \end{align*}
 
-Sei \(\varphi : B \mapsto A\) eine stetige Abbildung, wobei \(A= A_0 \cup \partial A, \) \(B = B_0 \cup \partial B\) kompakte Mengen mit \(A_0, B_0\) offen und \(\partial A, \partial B\) Nullmengen sind. Wenn \(\varphi : B \setminus \N \mapsto A\) injektiv ist und \(N \subset B\) die Nullmenge ist, dann folgt
+Sei \(\varphi : B \mapsto A\) eine stetige Abbildung, wobei \(A= A_0 \cup \partial A, \) \(B = B_0 \cup \partial B\) kompakte Mengen mit \(A_0, B_0\) offen und \(\partial A, \partial B\) Nullmengen sind. Wenn \(\varphi : B \setminus \N \mapsto A\) injektiv ist und \(N \subseteq B\) die Nullmenge ist, dann folgt
 \[\int_A f(x,y) \mathop{d(x,y)} = \int_B f(\varphi(u,v)) \cdot \left|\det J_\varphi (u,v)\right| \mathop{d(u,v)}\]
 \begin{enumerate}
   \item{
@@ -693,12 +694,12 @@ Eine parametrisierte Jordan-Kurve ist eine geschlossene parametrisierte Kurve \(
 
 Seien \(b_1, b_2\) die Basisvektoren von \(\R^2\). Dann ist die Orientierung genau dann positiv, wenn die Matrix \(\left[b_1, b_2\right]\) eine positive Determinante hat.
 
-Ein reguläres Gebiet ist eine offene, beschränkte Teilmenge \(A\subset \R^2\), deren Rand \(\partial A\) endliche Vereinungen von disjunkten Jordan-Kurven ist.
+Ein reguläres Gebiet ist eine offene, beschränkte Teilmenge \(A\subseteq \R^2\), deren Rand \(\partial A\) endliche Vereinungen von disjunkten Jordan-Kurven ist.
 
 Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) bildet, hat einen positiven Umlaufsinn, falls \((n(t), \gamma'(t))\) eine positiv orientierte Basis von \(\R^2\) bildet. Dabei ist \(n(t)\) der Einheitsvektor, welcher orthogonal zu \(\gamma'(t)\) steht und von \(A\) weg zeigt. (Intuitiv: wenn die umschlossene Menge immer ``links'' liegt.)
 
 \begin{mainbox}{Satz von Green}
-  Sei \(A \subset \R^2\) ein reguläres Gebiet und \(f: U \mapsto \R^2\) ein Vektorfeld der Klasse \(C^1\), wobei \((A \cup \partial A) \subset U \subset \R^2\). Dann gilt
+  Sei \(A \subseteq \R^2\) ein reguläres Gebiet und \(f: U \mapsto \R^2\) ein Vektorfeld der Klasse \(C^1\), wobei \((A \cup \partial A) \subseteq U \subseteq \R^2\). Dann gilt
   \[\int_{\partial A} f(x) \mathop{ds} = \int \int_A \left(\partial_x f_2 - \partial_y f_1\right) \mathop{dx} \mathop{dy}\]
 \end{mainbox}
  dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit \(\text{curl}(f) = 1\), beispielsweise \[f = (0,x) \text{, } f = (\frac{-y}{2}, \frac{x}{2}) \text{ oder } f = (-y, 0)\]
@@ -714,7 +715,7 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
 \end{itemize}
 
 \begin{mainbox}{Substitution}
-  Sei $g: [a, b] \to \mathbb{R}$ stetig differenzierbar. $f: I \to \mathbb{R}$ ($g([a, b]) \subset I$) eine stetige Funktion. Dann gilt:
+  Sei $g: [a, b] \to \mathbb{R}$ stetig differenzierbar. $f: I \to \mathbb{R}$ ($g([a, b]) \subseteq I$) eine stetige Funktion. Dann gilt:
   $$\int_{g(a)}^{g(b)} f(x)dx = \int_{a}^{b} f(g(x))g'(x)dt$$
 \end{mainbox}
 
