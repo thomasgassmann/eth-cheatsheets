@@ -604,27 +604,30 @@ Sei \(f,g : A \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes:
 
 
 \begin{mainbox}{Satz von Fubini}
-  Für eine Region \(D \subseteq \R^2 := \{\left(x,y\right) \mid a \le x \le b, g(x) < y < h(x)\}\) gilt:
-  \[\int_D f(x,y)\mathop{dx} \mathop{xy} = \int_a^b \left(\int_{g(x)}^{h(x)} f(x,y) \mathop{dy}\right)\mathop{dx}\]
-  Allgemein gilt für $X \subseteq \R^n$ und $Y \subseteq \R^m$ und eine Riemann-integrierbare Funktion $f: X \times Y \mapsto \R$:
+  Sei $X \subseteq \R^n$, $Y \subseteq \R^m$ und $f: X \times Y \mapsto \R$ eine Riemann-integrierbare Funktion:
   $$\int_{X \times Y} f(x, y) d(x, y) = \int_X \left( \int_Y f(x,y) dy \right) dx$$
   $$= \int_Y \left( \int_X f(x,y)dx \right) dy$$
+  Daraus folgt, dass für eine Region \(D \subseteq \R^2 := \{\left(x,y\right) \mid a \le x \le b, g(x) < y < h(x)\}\) gilt:
+  \[\int_D f(x,y)\mathop{dx} \mathop{xy} = \int_a^b \left(\int_{g(x)}^{h(x)} f(x,y) \mathop{dy}\right)\mathop{dx}\]
 \end{mainbox}
-
-Ein parametrisiertes $m$-Set ist eine Funktion $\phi: [a_1, b_1] \times \cdots \times [a_m, b_m] \mapsto \R^n$ das $C'$ in $(a_1, b_1) \times \cdots \times (a_m, b_m)$ ist ($m = 1$ ist eine parametrisierte Kurve). Eine Menge $Y \subseteq \R^n$ ist vernachlässigbar falls $k \in \N$ viele $\phi_i$ mit $m_i < n$ existieren sodass $Y \subseteq \cup_{i=1}^k \phi(X_i)$ wobei $\phi_i: X_i \mapsto \R^n$. In $n = 1$ sind bspw. Vereinigungen von endlichen vielen Punkten vernachlässigbar.
-
-Falls eine Menge vernachlässigbar und kompakt ist so ist das Integral einer stetigen Funktion über dieser Menge gleich $0$.
 
 \begin{subbox}{Linienintegral}
   Das Integral entlang einer Kurve (Kurvenlänge) $\gamma: [0, 1] \mapsto \R^n$ wird berechnet als:
   $$\int_0^1 \lVert \gamma'(t) \rVert dt$$
 \end{subbox}
 
+Sei $1 \leq m \leq n$. Eine parameterisierte $m$-Menge in $\R^n$ ist eine stetige Funktion $f: [a_1, b_1] \times \cdots \times [a_m, b_m] \mapsto \R^n$ welche für $(a_1, b_1) \times \cdots \times (a_m, b_m)$ in $C^1$ ist. 
+
 \begin{mainbox}{Nullmenge}
-  Eine Nullmenge \(X \subseteq R \subseteq \R^2\) ist eine Menge, so dass für alle \(\epsilon > 0\) eine endliche Menge an Rechtecken \(R_k, 1 \le k \le n\) existiert, so dass:
-  \[X \subseteq \bigcup_{k = 1}^n R_k, \; \sum_{k = 1}^n \mu (R_k) < \epsilon\]
-  (Informell: Wir können die ganze Menge mit einer endlichen Menge an Rechtecken beliebiger Grösse überdecken.)
+  Eine Teilmenge $X \subseteq \R^n$ ist eine Nullmenge falls ein $k \geq 0$ existiert und es parameterisierte $m_i$-Mengen $f_i: X_i \mapsto \R^n$ mit $1 \leq i \leq k$ und $m_i < n$ gibt sodass:
+  $$X \subseteq f_1(X_1) \cup \cdots \cup f_k(X_k)$$
+
+  Falls eine Menge vernachlässigbar und kompakt ist so ist das Integral einer stetigen Funktion über dieser Menge gleich $0$.
 \end{mainbox}
+
+Für $n=1$ ist eine Union von endlichen vielen Punkten eine Nullmenge.\\
+Für $n=2$ ist eine Union von endlich vielen Bildern von parameterisierten Kurven eine Nullmenge.\\
+In $n=3$ ist eine Union von endlich vielen Bildern von parameterisierten Flächen eine Nullmenge.
 
 \subsubsection*{Weitere Integrationskriterien}
 \begin{enumerate}
