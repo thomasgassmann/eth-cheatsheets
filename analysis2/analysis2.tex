@@ -86,6 +86,9 @@
 \def\X{\mathcal{X}}
 \def\dx{\text{ d}x}
 
+\DeclareMathOperator{\vol}{\text{vol}}
+\DeclareMathOperator{\interior}{\text{int}}
+
 \begin{document}
 
 \input{../header.tex}
@@ -556,19 +559,28 @@ Bildet man die Determinante ist die $j$-te Reihe der Kofaktor von $e_j$.
 
 Entsprechend gilt für $\text{curl}(f)$ einer zweidimensionalen Funktion $\text{curl}(f) = \partial_x f_2 - \partial_y f_1$.
 
-\subsection{Riemann-Integral in \texorpdfstring{\(\R^2\)}{R²}}
-\begin{subbox}{Partition in zwei Dimensionen}
-  Eine Partition \(P\) eines abgeschlossenen Rechtecks \(R = \left[a,b\right] \times \left[c,d\right]\) ist eine Menge von Rechtecken. Für jede Partition \(P_x : a = x_0 < \ldots < x_n = b\) von \(\left[a,b\right]\) und \(P_y\) (analog) erhalten wir eine Partition \(P_{i,j} = \left[x_{i-1}, x_i\right] \times \left[y_{j-1},y_j\right]\) von \(R\) mit der Fläche \(\mu({P_{i,j}}) = (x_i - x_{i-1})(y_j - y_{j-1})\).
+\subsection{Riemann-Integral in \texorpdfstring{\(\R^n\)}{R^n}}
+\begin{subbox}{Partition}
+  Ein Quader oder Box $Q \subseteq \R^n$ ist eine Menge der Form  $Q = [a_1, b_1] \times \cdots \times [a_n, b_n]$ mit $a_k, b_k \in \R$. Man definiert dann das Volumen $\vol(Q) = \Pi_{k=1}^n (b_k - a_k)$. Wir nennen $\mathcal{P} = \{ Q_1, \cdots, Q_m \}$ eine Partition von $Q$ falls $Q = \cup_{k=1}^m Q_k$ gilt und für alle $1 \leq k, l \leq m$ gilt dass $\interior(Q_k) \cap \interior(Q_l) = \emptyset$.
 \end{subbox}
-Mit den Hilfsdefinitionen
-\[f_{i,j} = \inf_{P_{i,j}} f(x,y), \quad F_{i,j} = \sup_{P_{i,j}} f(x,y)\]
-können wir die Unter- und Obersumme bestimmen:
+
+Sei $f: Q \mapsto \R$ für ein Quader $Q \subseteq \R^n$. Sei $\mathcal{P} = \{Q_1, \cdots, Q_m\}$ eine Partition. Wir definieren die Ober- und Untersumme (in Abhängigkeit von $\mathcal{P}$) als:
+
 \begin{align*}
-  s(P_x \times P_y) &= \sum_{i=1}^n \sum_{j=1}^m f_{i,j} \cdot \mu(P_{i,j}) \\
-  S(P_x \times P_y) &= \sum_{i=1}^n \sum_{j=1}^m F_{i,j} \cdot \mu(P_{i,j})
+  U(f, \mathcal{P}) = \sum_{k=1}^m \sup_{x \in Q_k} f(x) \vol(Q_k)\\
+  L(f, \mathcal{P}) = \sum_{k=1}^m \inf_{x \in Q_k} f(x) \vol(Q_k)
 \end{align*}
-Sei \(f: R \mapsto \R\) beschränkt. \(f\) ist auf \(R\) integrierbar, falls \(\sup_{(P_x, P_y)} s(P_x, P_y) = \inf_{(P_x, P_y)} S(P_x, P_y)\) gilt. Dieser Wert ist dann definiert als:
-\[\int_R f(x,y) \mathop{d(x,y)} \text{ oder } \int\int_R f(x,y) \mathop{d(x,y)}\]
+\\
+Für die Unter- und Obersumme von $f$ gilt dann:
+
+\begin{align*}
+  U(f) = \inf \{ U(f, \mathcal{P}) | \mathcal{P}\text{ ist eine Partition von }Q \}\\
+  L(f) = \sup \{ L(f, \mathcal{P}) | \mathcal{P}\text{ ist eine Partition von }Q \}
+\end{align*}
+\\
+Falls die Ober- und Untersumme von $f$ gleich sind, so ist $f$ Riemann-integrierbar und wir schreiben:
+
+$$ \int_Q f dx = L(f) = U(f) $$
 
 \subsubsection*{Nicht-Quadratische Flächen}
 Sei \(A \subset R\) eine Fläche. \(f : A \subset R \mapsto \R\) ist auf \(A\) integrierbar, falls \(f \cdot \X_A\) auf \(R\) integrierbar ist. 
