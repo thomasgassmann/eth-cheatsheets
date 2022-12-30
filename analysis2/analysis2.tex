@@ -621,12 +621,6 @@ Falls eine Menge vernachlässigbar und kompakt ist so ist das Integral einer ste
   \[\int_A f(x,y) \mathop{d(x,y)} = \int_a^b \left(\int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) \mathop{dy}\right) \mathop{dx}\]
 \end{enumerate}
 
-\begin{subbox}{Lipschitz-Kurve}
-  Eine Kurve \(\varphi : \left[0, 1\right] \mapsto \R^2\) ist Lipschitz, falls
-  \[||\varphi(s) - \varphi(t)|| \le M \cdot |s-t| \ \forall s,t \in \left[0,1\right]\]
-  Es folgt ausserdem, dass \(\varphi(\left[0,1\right]) \subset \R^2\) eine Nullmenge ist.
-\end{subbox}
-
 \subsection{Variablenwechsel}
 
 $f: X \mapsto \R$ differenzierbar mit $X \subseteq \R^n$ offen ist ein Variablenwechsel um $x_0 \in X$ falls es $r > 0$ gibt so dass für $B_r := \{x \in \R^n | ||x-x_0|| < r \}$ gilt dass $Y = f(B_r(x_0))$ offen ist und eine differenzierbare Abbildung $g: Y \mapsto B$ existiert so dass $f \circ g = \mathrm{id}$ bzw. $g \circ f = \mathrm{id}$.
