@@ -96,12 +96,14 @@
 
 \section{Differentialgleichungen}
 \begin{mainbox}{Definition lineare DGL}
-  Eine gewöhnliche lineare Differentialgleichung ist eine Gleichung, welche Ableitungen enthält. Sie hat die Form \[y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_0y = b(x)\]
-  wo die Koeffizienten \(a_0, \ldots, a_{n-1}\) komplexe Funktionen auf \(I \subseteq \R\) sind, welche von \(y\) abhängig sein können. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
+  Eine gewöhnliche lineare Differentialgleichung ist eine Gleichung, welche Ableitungen enthält. Sie hat die Form \[a_n y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_0y = b(x)\]
+  wobei die Koeffizienten \(a_0, \ldots, a_{n}\) komplexe Funktionen auf \(I \subseteq \R\) sind, welche von \(y\) abhängig sein können. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
 \end{mainbox}
 
-Die Menge $S$ an Lösungen ist eine Untermenge des Raums der komplexen Funktionen auf $I$ und bildet einen Vektorraum der Dimension $n$.\\
-\(S_0\) ist das Set der Lösungen zu einer homogenen DGL.
+Die Menge $S$ an Lösungen ist eine Untermenge des Raums der komplexen Funktionen auf $I$ und bildet einen Vektorraum der Dimension $n$. Linearkombinationen von Lösungen der DGL sind also auch wieder Lösungen.\\
+\(S_0\) ist das Set der Lösungen zu einer homogenen DGL.\\
+
+Die \textbf{allgemeine Lösung} einer DGL setzt sich dann aus einer homogenen Lösung und einer speziellen Lösung zusammen ($f(x) = f_h(x) + f_p(x)$).
 
 \subsubsection*{Lineare DGL erkennen}
 \begin{itemize}
@@ -110,6 +112,12 @@ Die Menge $S$ an Lösungen ist eine Untermenge des Raums der komplexen Funktione
   \item keine Potenzen von $y$ oder deren Ableitungen
   \item keine Funktionen von $y$ oder deren Ableitungen
 \end{itemize}
+
+\subsection{Separierbare DGL}
+
+Eine Separierbare ODE erster Ordnung hat die Form $y' = h(x) g(y)$. Wir können diese dann nach $y$ und $x$ separieren und erhalten dann $\frac{y'}{g(y)} = h(x)$. Durch integrieren auf beiden Seiten und einer Substitution von $y$ erhalten wir dann:
+
+$$\int \frac{1}{g(y)} \dy = \int h(x) \dx$$
 
 \subsection{Lineare DGL erster Ordnung}
 Wir betrachten DGL der Form \[y' + a(x)y = b(x)\]
@@ -125,43 +133,23 @@ Wir betrachten DGL der Form \[y' + a(x)y = b(x)\]
   \item (partikuläre Lösung) Verwende entweder ``Variation der Konstanten'' oder ``Fundiertes Raten''.
 \end{enumerate}
 \subsection{Variation der Konstanten}
-Wir nehmen an, dass die partikuläre Lösung die homogene Lösung imitiert. Sei \(f_p = z(x)e^{-A(x)}\) für eine Funktion \(z: I \to \C\). Dann ist \(z'(x) = b(x) e^{A(x)}\) (einsetzen in DGL!) und somit \[z(x) = \int_{x_0}^x b(t) e^{A(t)} \mathop{dt}\] Daraus erhalten wir \[f_p = \int_{x_0}^x b(t) e^{A(t)} \mathop{dt} \cdot e^{-A(t)}\]
+Wir nehmen an, dass die partikuläre Lösung die homogene Lösung imitiert. Sei \(f_p = z(x)e^{-A(x)}\) für eine Funktion \(z: I \to \C\). Dann ist \(z'(x) = b(x) e^{A(x)}\) (einsetzen in DGL!) und somit \[z(x) = \int_{x_0}^x b(t) e^{A(t)} \mathop{dt}\] Daraus erhalten wir \[f_p = e^{-A(t)} \int_{x_0}^x b(t) e^{A(t)} \mathop{dt}\]
 
 \subsection{Fundiertes Raten}
 
 Wir nehmen an, dass die partikuläre Lösung $b$ imitiert. Wenn $b(x)$ von einer bestimmten Form ist, versuchen wir folgende $f_p$, wobei wir unseren Versuch in die DGL einsetzen, was uns dann ein Gleichungssystem für die Konstanten gibt:
 
 \begin{center}
-  \renewcommand*{\arraystretch}{1.1}
+  \renewcommand*{\arraystretch}{1.5} 
   \begin{tabular}{cc}
     \toprule
     $\mathbf{b(x)}$ & \textbf{Raten} \\ 
     \midrule
-    $a \cdot e^{\alpha x}$ & $b \cdot e^{\alpha x}$\\
+    $P_n(x) \cdot e^{\alpha x}$ & $R_n(x) \cdot e^{\alpha x}$\\
     \hline
-    $a \sin(\beta x)$ & $c \sin(\beta x) + d \cos(\beta x)$\\
+    \begin{tabular}{@{}c@{}}$P_n(x) \sin(\beta x)\text{ or }$ \\ $P_n(x) \cos(\beta x)$\end{tabular} & $R_n(x) \sin(\beta x) + S_n(x) \cos(\beta x)$\\
     \hline
-    $b \cos(\beta x)$ & $c \sin(\beta x) + d \cos(\beta x)$\\
-    \hline
-    $a e^{\alpha x} \sin(\beta x)$ & $e^{\alpha x} \Big( c \sin(\beta x) + d \cos(\beta x) \Big)$\\
-    \hline
-    $b e^{\alpha x} \cos(\beta x)$ & $e^{\alpha x} \Big( c \sin(\beta x) + d \cos(\beta x) \Big)$\\
-    \hline
-    \begin{tabular}{@{}c@{}}$P_n(x) e^{\alpha x}$ \\ $P_n(\alpha) \neq 0$\end{tabular} & $R_n(x) e^{\alpha x}$\\
-    \hline
-    \begin{tabular}{@{}c@{}}$P_n(x) e^{\alpha x}$ \\ $(x - \alpha)^m | P_n(x)$\end{tabular} & $R_n(x) x^m e^{\alpha x}$\\
-    \hline
-    \begin{tabular}{@{}c@{}}$P_n(x) \sin(\alpha x)$ \\ $P_n(i \alpha) \neq 0$\end{tabular} & $R_n(x) \sin(\alpha x) + S_n(x) \cos(\alpha x)$\\
-    \hline
-    \begin{tabular}{@{}c@{}}$P_n(x) \cos(\alpha x)$ \\ $P_n(i \alpha) \neq 0$\end{tabular} & $R_n(x) \sin(\alpha x) + S_n(x) \cos(\alpha x)$\\
-    \hline
-    \begin{tabular}{@{}c@{}}$P_n(x) \sin(\alpha x)$ \\ $(x - i \alpha)^m | P_n(x)$\end{tabular} & $R_n(x) x^m \sin(\alpha x) + S_n(x) x^m \cos(\alpha x)$\\
-    \hline
-    \begin{tabular}{@{}c@{}}$P_n(x) \cos(\alpha x)$ \\ $(x - i \alpha)^m | P_n(x)$\end{tabular} & $R_n(x) x^m \sin(\alpha x) + S_n(x) x^m \cos(\alpha x)$\\
-    \hline
-    $P_n e^{\alpha x} \sin(\beta x)$ & $e^{\alpha x} \left( R_n \sin(\beta x) + S_n \cos(\beta x) \right)$\\
-    \hline
-    $P_n e^{\alpha x} \cos(\beta x)$ & $e^{\alpha x} \left( R_n \sin(\beta x) + S_n \cos(\beta x) \right)$\\
+    \begin{tabular}{@{}c@{}}$P_n(x) e^{\alpha x} \sin(\beta x)\text{ or }$ \\ $P_n(x) e^{\alpha x} \cos(\beta x)$\end{tabular} & $e^{\alpha x}\left( R_n(x) \sin(\beta x) + S_n(x) \cos(\beta x) \right)$\\
     \bottomrule
   \end{tabular}
 \end{center}
@@ -170,24 +158,27 @@ Wir nehmen an, dass die partikuläre Lösung $b$ imitiert. Wenn $b(x)$ von einer
 
 \begin{enumerate}
   \item Wenn \(b(x)\) eine Linearkombination der Basisfunktionen ist, dann versuche eine Linearkombination. Partikuläre Lösungen können auch separat gefunden werden und danach addiert werden.
-  \item Wenn die geratene Lösung der homogenen Lösung entspricht, dann multipliziere mit \(x^m\), wobei \(m\) die Vielfachheit der Wurzel ist.
+  \item \textbf{Für DGL mit konstanten Koeffizienten:} Falls $\lambda = \alpha + i \beta$ eine Wurzel des charakteristischen Polynoms mit Vielfachheit $m$ ist, dann multiplizieren wir die geratene Lösung mit $x^m$.
 \end{enumerate}
 
 \subsection{Lineare DGL mit konstanten Koeffizienten}
 Wir betrachten DGL der Form
-\[y^{(k)} + a_{k-1} y^{(k-1)} + \ldots + a_1 y' + a_0 y = b(x)\]
+\[a_k y^{(k)} + a_{k-1} y^{(k-1)} + \ldots + a_1 y' + a_0 y = b(x)\]
 Wir suchen eine homogene Lösung der Form \(e^{\lambda x}\). Jetzt können wir das charakteristische Polynom lösen:
 \begin{align*}
-  P(\lambda) = e^{\lambda x} \left(\lambda^k + a_{k-1}\lambda^{k-1} + \ldots + a_0\right) = 0 \\ 
-  \implies 0 = \lambda^k + a_{k-1}\lambda^{k-1} + \ldots+ a_0
+  P(\lambda) = e^{\lambda x} \left(a_k \lambda^k + a_{k-1}\lambda^{k-1} + \ldots + a_0\right) = 0 \\ 
+  \implies 0 = a_k \lambda^k + a_{k-1}\lambda^{k-1} + \ldots+ a_0
 \end{align*}
 
-Die Nullstellen von \(P(\lambda)\) sind Eigenwerte \(\lambda_i\), mit dazugehöriger Multiplizität \(m_i\). Nun spannen die Funktionen \(f_{i,r} : x \to x^r e^{\lambda_i x}\) (wobei $0 \leq r < m_i$) den Raum der Lösungen \(S_0\) auf.
+Die Nullstellen von \(P(\lambda)\) sind Eigenwerte \(\lambda_i\), mit dazugehöriger Multiplizität \(m_i\). Nun spannen die folgenden Funktionen den Raum der Lösungen \(S_0\) auf:
+\begin{align*}
+  & f_{i,r} : x \to x^r e^{\lambda_i x} & 0 \leq r < m_i &
+\end{align*}
 
 Falls \(\lambda = \beta + \gamma i\) eine komplexe Nullstelle von einem Polynom mit reellen Koeffizienten \(P(\lambda)\) ist, so ist auch 
 \(\bar{\lambda} = \beta - \gamma i\) eine Nullstelle. Daher sind \(f_1 = e^{\lambda x}\) und \(f_2 = e^{\bar{\lambda} x}\) Lösungen und können durch eine Linearkombination von \(\tilde{f_1} = e^{\beta x} \cos(\gamma x)\) und \(\tilde{f_2} = e^{\beta x} \sin(\gamma x)\) ersetzt werden.
 
-Falls \(y^{(k)} + a_{k-1}y^{(k-1)} + \dots + a_0 y = 0\) reelle Koeffizienten hat, so führt jedes Paar von komplex konjugierten Nullstellen $\beta_j \pm \gamma_j i$ mit Multiplizität $m_j$ zu einer Lösung
+Falls \(a_k y^{(k)} + a_{k-1}y^{(k-1)} + \dots + a_0 y = 0\) reelle Koeffizienten hat, so führt jedes Paar von komplex konjugierten Nullstellen $\beta_j \pm \gamma_j i$ mit Multiplizität $m_j$ zu einer Lösung
 \[x^l e^{\beta_j x} \Big( c_0 \cos(\gamma_j x) + c_1 \sin(\gamma_j x) \Big) \quad \text{für }0 \leq l < m_j\]
 
 Um eine partikuläre Lösung zu finden, können wir wieder fundiertes Raten oder Variation der Konstanten verwenden. 
@@ -1054,6 +1045,10 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
 \subsection{Rekursive Integrale}
 
 $J_n = \int \frac{1}{(1 + x^2)^n} \dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
+
+\subsection{Binomischer Lehrsatz}
+
+$$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
 
 \subsection{Ungleichungen}
 \begin{center}
