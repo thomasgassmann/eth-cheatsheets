@@ -84,8 +84,8 @@
 \def\Q{\mathbb{Q}}
 \def\N{\mathbb{N}}
 \def\X{\mathcal{X}}
-\def\dx{\text{ d}x}
-\def\dy{\text{ d}y}
+\def\dx{\mathop{dx}}
+\def\dy{\mathop{dy}}
 
 \DeclareMathOperator{\vol}{\text{vol}}
 \DeclareMathOperator{\interior}{\text{int}}
@@ -714,9 +714,10 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
 
 \begin{mainbox}{Satz von Green}
   Sei \(A \subseteq \R^2\) ein reguläres Gebiet und \(f: U \mapsto \R^2\) ein Vektorfeld der Klasse \(C^1\), wobei \((A \cup \partial A) \subseteq U \subseteq \R^2\). Dann gilt
-  \[\int_{\partial A} f(x) \mathop{ds} = \int \int_A \left(\partial_x f_2 - \partial_y f_1\right) \mathop{dx} \mathop{dy}\]
+  \[\int_{\partial A} f(x) \mathop{ds} = \int \int_A \left(\partial_x f_2 - \partial_y f_1 \right) \dx \dy\]
+  wobei $\text{curl}(f) \coloneqq \partial_x f_2 - \partial_y f_1$.
 \end{mainbox}
- dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit \(\text{curl}(f) = 1\), beispielsweise \[f = (0,x) \text{, } f = (\frac{-y}{2}, \frac{x}{2}) \text{ oder } f = (-y, 0)\]
+Um Flächen mit dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit \(\text{curl}(f) = 1\), beispielsweise \[f = (0,x) \text{, } f = (\frac{-y}{2}, \frac{x}{2}) \text{ oder } f = (-y, 0)\]
 
 \section{Themen aus Analysis I}
 \begin{mainbox}{Partielle Integration}
