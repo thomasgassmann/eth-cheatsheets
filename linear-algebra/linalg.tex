@@ -456,7 +456,15 @@ Falls  $f: U \rightarrow V$ und $g: V \rightarrow W$ lineare Abbildungen zwische
 
 Wenn wir von einer alten Basis $\mathcal{B}$ zu einer neuen Basis $\mathcal{B}'$ wechseln, können wir die neue Basis mit der alten darstellen. Es gilt dann $b_k' = \sum_{i=1}^n \tau_{ik} b_i$ mit der \textbf{Basiswechselmatrix} $T = (\tau_{ik})$.
 
-Es gilt $\xi = T \xi'$ sowie $\xi' = T^{-1} \xi$, da $T$ regulär ist. Dabei sind $\xi'$ die Koordinaten in der Basis $\mathcal{B}'$ und $\xi$ sind die Koordinaten in der Basis $\mathcal{B}$. Es gilt dann $\mathcal{B}' = \mathcal{B} T$, was aus $B \xi = x = B' \xi'$ und $\xi = T \xi'$ folgt.
+Es gilt $\xi = T \xi'$ sowie $\xi' = T^{-1} \xi$, da $T$ regulär ist. Dabei sind $\xi'$ die Koordinaten in der Basis $\mathcal{B}'$ und $\xi$ sind die Koordinaten in der Basis $\mathcal{B}$. Es gilt dann $\mathcal{B}' = \mathcal{B} T$, was aus $B \xi = x = B' \xi'$ und $\xi = T \xi'$ folgt. Wir schreiben auch $T = \text{Mat}(\mathcal{B'})_{\mathcal{B}}$.
+
+Wir können $T$ zwischen $\mathcal{B}$ und $\mathcal{B}'$ auch durch Gauss-Elimination finden (denn $T = \mathcal{B}^{-1} \mathcal{B'}$):
+
+$$\begin{bmatrix*}
+  \mathcal{B} | \mathcal{B}'
+\end{bmatrix*} \xRightarrow[\text{operationen}]{\text{Zeilen-}} \begin{bmatrix*}
+  I_n | T
+\end{bmatrix*}$$
 
 \section{Lineare Abbildungen}
 
@@ -480,15 +488,15 @@ Ist $F$ bijektiv ist es ein Isomorphismus, ist zusätzlich $X = Y$ so ist $F$ ei
 
 Sei $F: X \mapsto Y$ eine lineare Abbildung. Es gilt $\Rank F \coloneqq \dim \Image F$.
 
-\begin{mainbox}{Rangsatz}
-  $$\dim X - \dim \Kernel F = \dim \Image F = \Rank F$$
-\end{mainbox}
-
 \begin{mainbox}{Kern und Bild}
 
   Wir definieren den \textbf{Kern} als $\Kernel F \coloneqq \{x \in X | F(x) = 0\}$. Der Kern ist ein Unterraum von $X$ und $F$ ist injektiv genau dann wenn $\Kernel F = \{0\}$
 
   Wir definieren das \textbf{Bild} als $\Image F \coloneqq \{F(x) | x \in X\}$. Das Bild ist ein Unterraum von $Y$ und $F$ ist surjektiv genau dann wenn $\Image F = Y$.
+\end{mainbox}
+
+\begin{mainbox}{Rangsatz}
+  $$\dim X - \dim \Kernel F = \dim \Image F = \Rank F$$
 \end{mainbox}
 
 Zwei Vektorräume endlicher Dimension sind genau dann isomorph wenn sie die gleiche Dimension haben.
