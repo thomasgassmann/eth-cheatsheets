@@ -623,8 +623,10 @@ Sei \(f,g : A \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes:
 \end{mainbox}
 
 \begin{subbox}{Linienintegral}
-  Das Integral entlang einer Kurve (Kurvenlänge) $\gamma: [0, 1] \mapsto \R^n$ wird berechnet als:
-  $$\int_0^1 \lVert \gamma'(t) \rVert dt$$
+  Das Integral entlang einer Kurve (Kurvenlänge) $\gamma: [a, b] \mapsto \R^n$ wird berechnet als:
+  $$\int_a^b \lVert \gamma'(t) \rVert dt$$
+  Für eine differenzierbare Funktion $f: [a, b] \mapsto \R$ gilt dann:
+  $$\int_a^b \sqrt{1 + f'(x)^2} dx$$
 \end{subbox}
 
 Sei $1 \leq m \leq n$. Eine parameterisierte $m$-Menge in $\R^n$ ist eine stetige Funktion $f: [a_1, b_1] \times \cdots \times [a_m, b_m] \mapsto \R^n$ welche für $(a_1, b_1) \times \cdots \times (a_m, b_m)$ in $C^1$ ist. 
