@@ -337,9 +337,18 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
   \item \(f\) hat alle partiellen Ableitungen am Punkt \(x_0\) und die Matrix, welche \(Df(x_0): x \mapsto Ax\) repräsentiert, ist die Jacobi-Matrix von \(f\) am Punkt \(x_0\), d.h. \(A = J_f(x_0)\)
   \item \(d(f+g)(x_0) = Df(x_0) + Dg(x_0)\)
   \item Wenn \(m = 1\) ist, dann ist \(f\cdot g\) differenzierbar. Wenn ausserdem \(g \ne 0\) gilt, dann ist es \(f/g\) auch.
-  \item Wenn \(f: \X \to Y, g: Y \to \R^m\) beide differenzierbar sind, so gilt \(D(g \circ f)(x_0) = Dg(f(x_0)) \circ Df(x_0)\). 
-  Weiter ist \(J_{g \circ f}(x_0) = J_g(f(x_0)) \cdot J_f(x_0)\).
 \end{enumerate}
+
+\begin{subbox}{Kettenregel}
+  Seien $f: \mathcal{X} \mapsto Y$ und $g: Y \mapsto \R^m$ differenzierbar. Dann gilt für $x_0 \in \mathcal{X}$:
+  $$D(g \circ f)(x_0) = Dg(f(x_0)) \circ Df(x_0)$$
+  Weiter ist \(J_{g \circ f}(x_0) = J_g(f(x_0)) \cdot J_f(x_0)\).
+\end{subbox}
+
+\begin{subbox}{Produktregel}
+  Seien $f, g: D \subseteq \R^n \mapsto \R$. Dann gilt für $x_0 \in D$ und $T(x) \coloneqq f(x) \cdot g(x)$:
+  $$DT(x_0) = Df(x_0) g(x_0) + f(x_0) Dg(x_0)$$
+\end{subbox}
 
 \begin{subbox}{Tangentialraum}
   Der Tangentialraum eines Graphen \(f\) am Punkt \(x_0\) ist gegeben durch \(g(x) = f(x_0) + Df(x_0)(x-x_0)\).
