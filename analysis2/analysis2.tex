@@ -96,12 +96,17 @@
 
 \section{Differentialgleichungen}
 \begin{mainbox}{Definition lineare DGL}
-  Eine gewöhnliche lineare Differentialgleichung ist eine Gleichung, welche Ableitungen enthält. Sie hat die Form \[a_n y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_0y = b(x)\]
-  wobei die Koeffizienten \(a_0, \ldots, a_{n}\) komplexe Funktionen auf \(I \subseteq \R\) sind, welche von \(y\) abhängig sein können. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
+  Eine gewöhnliche lineare Differentialgleichung $n$-ter Ordnung ist eine Gleichung, welche Ableitungen enthält. Sie hat die Form \[a_n y^{(n)} + a_{n-1} y^{(n-1)} + \cdots + a_0y = b(x)\]
+  wobei die Koeffizienten \(a_0(x), \ldots, a_{n}(x)\) stetige komplexe Funktionen auf \(I \subseteq \R\) sind. Wenn \(b(x) = 0\) gilt, ist die DGL homogen.
 \end{mainbox}
 
-Die Menge $S$ an Lösungen ist eine Untermenge des Raums der komplexen Funktionen auf $I$ und bildet einen Vektorraum der Dimension $n$. Linearkombinationen von Lösungen der DGL sind also auch wieder Lösungen.\\
-\(S_0\) ist das Set der Lösungen zu einer homogenen DGL.\\
+\(S_0\) ist das Set der Lösungen zu einer homogenen DGL und bidlet einen Vektorraum der Dimension $n$. Linearkombinationen von Lösungen der DGL sind also auch wieder Lösungen.\\
+
+Für jede Anfangsbedingung der Form
+
+$$y(x_0) = y_0, y'(x_0) = y_1, \cdots, y^{k-1}(x_0) = y_{k-1}$$
+
+gibt es eine eindeutige Lösung $y(x)$, welche die Anfangsbedingungen erfüllt.\\
 
 Die \textbf{allgemeine Lösung} einer DGL setzt sich dann aus einer homogenen Lösung und einer speziellen Lösung zusammen ($f(x) = f_h(x) + f_p(x)$).
 
@@ -115,9 +120,9 @@ Die \textbf{allgemeine Lösung} einer DGL setzt sich dann aus einer homogenen L�
 
 \subsection{Separierbare DGL}
 
-Eine Separierbare ODE erster Ordnung hat die Form $y' = h(x) g(y)$. Wir können diese dann nach $y$ und $x$ separieren und erhalten dann $\frac{y'}{g(y)} = h(x)$. Durch integrieren auf beiden Seiten und einer Substitution von $y$ erhalten wir dann:
+Eine Separierbare ODE erster Ordnung hat die Form $y' = b(x) g(y)$. Wir können diese dann nach $y$ und $x$ separieren und erhalten dann $\frac{y'}{g(y)} = b(x)$. Durch integrieren auf beiden Seiten und einer Substitution von $y$ erhalten wir dann:
 
-$$\int \frac{1}{g(y)} \dy = \int h(x) \dx$$
+$$\int \frac{1}{g(y)} \dy = \int b(x) \dx$$
 
 \subsection{Lineare DGL erster Ordnung}
 Wir betrachten DGL der Form \[y' + a(x)y = b(x)\]
