@@ -242,7 +242,7 @@ Variation der Konstanten funktioniert wie folgt (hier 2D):
 Sei \(f: \X \subseteq \R^n \to \R^m\)  und \(x_0 \in \X\). \(f\) ist stetig in \(x_0\), falls eine der folgenden Bedingungen erfüllt ist:
 \begin{enumerate}
   \item \(\forall \epsilon > 0 \exists \delta > 0\) so dass \(\forall x \in \X \) \(||x - x_0|| < \delta \implies ||f(x) - f(x_0)|| < \epsilon\).
-  \item \(\forall\) Folgen \((x_k)\) in \(X\) mit \(\lim x_k = x_0\) gilt \(\lim f(x_k) = f(x_0)\).
+  \item Für alle Folgen \((x_k)\) in \(X\) mit \(\lim_{k \to \infty} x_k = x_0\) gilt \(\lim_{k \to \infty} f(x_k) = f(x_0)\).
 \end{enumerate}
 \(f\) ist stetig in \(\X\) falls \(f\) für jeden Punkt \(x_0 \in \X\) stetig ist. Es gilt:
 \begin{enumerate}
@@ -260,8 +260,8 @@ Sei \(f: \X \subseteq \R^n \to \R^m\)  und \(x_0 \in \X\). \(f\) ist stetig in \
 \subsection{Eigenschaften von Mengen}
 Eine Menge \(\X \subseteq \R^n \) ist
 \begin{itemize}
-  \item \textbf{beschränkt}, falls die Menge \(\{ ||x|| \mid x \in \X \}\) in \(\R\) beschränkt ist (d.h. \(\exists R \ge 0, \forall x \in \X: ||x|| \le R\)).
-  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subseteq \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(\X\) konvergiert. Dies kann mit einem Ball visualisiert werden. Urbilder von offenen (resp. abgeschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. abgeschlossen). Die Umkehrung ist im Allgemeinen falsch.\\
+  \item \textbf{beschränkt}, falls \(\exists R \ge 0, \forall x \in \X: ||x|| \le R\).
+  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subseteq \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(\X\) konvergiert. Dies kann mit einem Ball visualisiert werden. \\Urbilder von offenen (resp. abgeschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. abgeschlossen). Die Umkehrung ist im Allgemeinen falsch.\\
   Gegenbeispiele: \(\frac{1}{k}, <\).
   \item \textbf{kompakt}, falls sie beschränkt und abgeschlossen ist. Bilder von kompakten Mengen sind unter stetigen Abbildungen kompakt.
   \item \textbf{offen}, falls ihr Komplement \(\R^n \setminus \X\) abgeschlossen ist. Alternativ: für jedes $x_0 \in \X$ gibt es ein $\delta > 0$ so dass $B_\delta(x_0) \subseteq \X$.
@@ -274,6 +274,7 @@ Es gilt dabei:
   \item Falls $\{X_\alpha\}_{\alpha \in I}$ eine Menge von offenen (resp. abgeschlossen) Mengen. Dann ist $\cup_{\alpha \in I} X_\alpha$ offen (respektive $\cap_{\alpha \in I} X_\alpha$ abgeschlossen).
   \item Falls $\{X_\alpha\}_{\alpha \in I}$ eine \textbf{endliche} Menge von offenen (resp. abgeschlossen) Mengen. Dann ist $\cap_{\alpha \in I} X_\alpha$ offen (respektive $\cup_{\alpha \in I} X_\alpha$ abgeschlossen).
   \item Das kartesische Produkt zweier offenen Mengen ist offen.
+  \item $\emptyset$ und $\R^n$ sind offen \textbf{und} abgeschlossen.
 \end{itemize}
 
 Beispiele:
