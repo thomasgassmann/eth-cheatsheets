@@ -419,7 +419,7 @@ $$Hess_f(0, 0, 0) = \begin{bsmallmatrix}
 \subsection{Taylorpolynome}
 Sei \(k \le 1\) und \(f: \X \mapsto \R\) ist eine Funktion der Klasse \(C^k\) auf \(\X\). Sei \(x \in \X\) fix. Das \(k\)-te Taylorpolynom von \(f\) am Punkt \(x\) ist das Polynom in \(n\) Variablen vom Grad \(\le k\):
 \begin{align*}
-  &T_k f(h; x) = f(x) + \sum_{i=1}^n \partial_i f(x) \cdot h_i + \dots \\
+  &T_k f(x; h) = f(x) + \sum_{i=1}^n \partial_i f(x) \cdot h_i + \dots \\
   &+ \sum_{m_1 + \cdots + m_n = k} \frac{1}{m_1! \cdots m_n!} \pdv{^k f(x) }{x_1^{m_1} \cdots \partial x_n^{m_n}} \cdot h_1^{m_1} \cdots h_n^{m_n}
 \end{align*}
 
