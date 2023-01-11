@@ -326,11 +326,13 @@ $$D_v f(x) = \lim_{h \rightarrow 0} \frac{f(x + hv) - f(x)}{h}$$
 
  Die Richtungsableitung $D_v f(x)$ existiert, wenn $t \mapsto f(x + hv)$ in $h = 0$ differenzierbar ist. Es gilt $D_v f(x) = D f(x) v$. Für die $k$-te partielle Ableitungen gilt dann $\frac{\partial f}{\partial x_k} = D_{e_k} f$.
 
-\subsubsection*{Little o}
+\subsubsection*{Landau Notation in der Analysis}
 
 Es gilt $f \in o(h)$ falls:
 
 $$\lim_{h \to 0} \frac{f(h)}{h} = 0$$
+
+In der Analysis betrachtet man die Landau Notation generell für $\lim_{h \to 0}$ statt $\lim_{h \to \infty}$. Es gilt deshalb bspw. $x^5 \in \mathcal{O}(x^4)$.
 
 \subsection{Differenzierbarkeit}
 Sei \(f: \X \subseteq \R^n \to \R^m, x_0 \in \X\). \(f\) ist differenzierbar an der Stelle \(x_0\), falls eine lineare Abbildung \(L: \R^n \to \R^m\) (d.h. eine \(m \times n\)-Matrix \(L\)) existiert, so dass \(\forall x_0 + v \in \X\):
@@ -865,10 +867,10 @@ Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{
 \sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
 \cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots & r &= \infty \\
 \ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots & r &= 1 \\
-\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} & r &= \infty \\
-\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} & r &= \infty \\
-\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= 1 \\
-e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
+\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} = x + \frac{x^3}{3!} + \frac{x^5}{5!} + \cdots & r &= \infty \\
+\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} = 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots & r &= \infty \\
+\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots =  & r &= 1 \\
+e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3}{3!} + \cdots & r &= \infty \\
 \sqrt{1+x} &= 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} + \mathcal{O}(x^4) & r &< 1 \\
 \end{align*}
 
