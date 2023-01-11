@@ -372,6 +372,14 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
   Der Tangentialraum eines Graphen \(f\) am Punkt \(x_0\) ist gegeben durch \(g(x) = f(x_0) + Df(x_0)(x-x_0)\).
 \end{subbox}
 
+\subsubsection*{Gegenbeispiel}
+
+Sei $f$ mit $f(0, 0) = 0$ und:
+
+$$f: \R^2 \mapsto \R, (x, y) \mapsto \frac{xy}{x^2 + y^2}$$
+
+$f$ hat alle partiellen Ableitungen aber ist nicht stetig in $(0, 0)$.
+
 \subsection{Level sets}
 
 \begin{mainbox}{Level sets}
@@ -521,7 +529,7 @@ Sei \(f: \X \subseteq \R^n \mapsto \R, \X\) offen und \(f\in C^2\). Sei \(x_0\) 
   \item $\text{Hess}_f(x_0)$ neg. def. \(\implies\) $x_0$ ist lokales Maximum.
   \item $\text{Hess}_f(x_0)$ indefinit \(\implies\) $x_0$ ist Sattelpunkt.
 \end{enumerate}
-Dies funktioniert nicht, wenn \(x_0\) ein degenerierter kritischer Punkt ist. In einem solchen Fall müssen die Vorzeichen überprüft werden.
+Dies funktioniert nicht, wenn \(x_0\) ein degenerierter kritischer Punkt ist. In einem solchen Fall müssen die Vorzeichen überprüft werden. Trotzdem ist jeder (auch degenerierte) kritische Punkt entweder ein lokales Minimum, lokales Maximum oder ein Sattelpunkt.
 
 \section{Integrale in \texorpdfstring{\(\R^n\)}{Rⁿ}}
 \subsection{Einfache Integrale}
@@ -586,7 +594,7 @@ Es gilt ausserdem folgende notwendige, aber nicht ausreichende Bedingung:
 \[f \text{ ist konservativ }\implies \pdv{f_i}{x_j} = \pdv{f_j}{x_i}\]
 
 \begin{subbox}{Wegzusammenhängend}
-  Sei \(\X \subseteq \R^n\) offen. \(\X\) ist wegzusammenhängend, falls für jedes Paar an Punkten \(x, y \in \X\) ein Pfad \(\gamma : \left(0,1\right] \mapsto \X\) existiert, der in \(C^1\) ist und \(\gamma(0) = x, \gamma(1) = y\) hält.
+  Sei \(\X \subseteq \R^n\) offen. \(\X\) ist wegzusammenhängend, falls für jedes Paar an Punkten \(x, y \in \X\) ein Pfad \(\gamma : \left[0,1\right] \mapsto \X\) existiert, der in \(C^1\) ist und \(\gamma(0) = x, \gamma(1) = y\) hält.
 \end{subbox}
 
 \begin{subbox}{Sternförmig}
@@ -620,6 +628,17 @@ $$\begin{vmatrix}
 Bildet man die Determinante ist die $j$-te Reihe der Kofaktor von $e_j$.
 
 Entsprechend gilt für $\text{curl}(f)$ einer zweidimensionalen Funktion $\text{curl}(f) = \partial_x f_2 - \partial_y f_1$.
+
+\subsubsection*{Gegenbeispiel}
+
+Gegeben sei die Funktion:
+
+$$f: \R^2 \backslash \{0\} \mapsto \R^2, (x, y) \mapsto \begin{bmatrix}
+  \frac{-y}{x^2+y^2}\\
+  \frac{x}{x^2+y^2}
+\end{bmatrix}$$
+
+Es gilt $\text{curl}(f) = 0$, aber es gibt auch geschlossene Wegintegrale welche nicht $0$ sind.
 
 \subsection{Riemann-Integral in \texorpdfstring{\(\R^n\)}{R^n}}
 \begin{subbox}{Partition}
@@ -844,6 +863,19 @@ wobei $|R_3(n)| \le \frac{\sqrt{3}}{216}\cdot\frac{1}{n^2} \ \forall n \ge 1$
 
 Sei $x_0$ ein kritischer Punkt. Falls $f''(x_0) > 0$ ist $x_0$ ein Minimum, falls $f''(x_0) < 0$ ist $x_0$ ein Maximum. Ist $f''(x_0) = 0$, leiten wir ab bis $f^{(k)}(x_0) \neq 0$. Ist $f^{(k)}(x_0) > 0$ für $k$ gerade, so ist $x_0$ ein Minimum, ist $f^{(k)}(x_0) < 0$ für $k$ gerade, so ist $x_0$ ein Maximum. Ist $k$ ungerade, so ist $x_0$ ein Sattelpunkt.
 
+\subsection{Potenzreihen}
+\begin{align*}
+\exp(x) &= \sumn \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots & r &= \infty \\
+\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
+\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots & r &= \infty \\
+\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots & r &= 1 \\
+\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} = x + \frac{x^3}{3!} + \frac{x^5}{5!} + \cdots & r &= \infty \\
+\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} = 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots & r &= \infty \\
+\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots =  & r &= 1 \\
+e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3}{3!} + \cdots & r &= \infty \\
+\sqrt{1+x} &= 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} + \mathcal{O}(x^4) & r &< 1 \\
+\end{align*}
+
 \begin{mainbox}{Partialbruchzerlegung}
   Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)}$ wird wie folgend berechnet:
   \begin{enumerate}
@@ -864,19 +896,6 @@ Sei $x_0$ ein kritischer Punkt. Falls $f''(x_0) > 0$ ist $x_0$ ein Minimum, fall
 Für ein monisches Polynom $x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0$ muss jede Nullstelle $a_0$ teilen.\\
 
 Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{1}{q} - \frac{1}{q + 1}$ oder $\frac{1}{q(q-1)(q+1)} = \frac{-1}{q} + \frac{1}{2(q+1)} + \frac{1}{2(q-1)}$.
-
-\subsection{Potenzreihen}
-\begin{align*}
-\exp(x) &= \sumn \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots & r &= \infty \\
-\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
-\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots & r &= \infty \\
-\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots & r &= 1 \\
-\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} = x + \frac{x^3}{3!} + \frac{x^5}{5!} + \cdots & r &= \infty \\
-\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} = 1 + \frac{x^2}{2!} + \frac{x^4}{4!} + \cdots & r &= \infty \\
-\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} = x - \frac{x^3}{3} + \frac{x^5}{5} - \cdots =  & r &= 1 \\
-e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3}{3!} + \cdots & r &= \infty \\
-\sqrt{1+x} &= 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} + \mathcal{O}(x^4) & r &< 1 \\
-\end{align*}
 
 \section{Parameterisierungen}
 
@@ -963,6 +982,18 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
 
 \section{Tabellen}
 
+\subsection{$n$-te Ableitungen}
+\begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f^{(n)}(x)}$ \\
+  \midrule
+  $\sin(x)$ & $\sin(\frac{n\pi}{2} + x)$\\
+  $f + g$ & $f^{(n)} + g^{(n)}$\\
+  $f \cdot g$ & $\sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$\\
+  \bottomrule
+  \end{tabularx}
+\end{center}
 
 \subsection{Trigonometrische Identitäten}
 \begin{center}
@@ -978,19 +1009,6 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
   $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
   \bottomrule
  \end{tabularx}
-\end{center}
-
-\subsection{$n$-te Ableitungen}
-\begin{center}
-  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-  \toprule
-  $\mathbf{f(x)}$ & $\mathbf{f^{(n)}(x)}$ \\
-  \midrule
-  $\sin(x)$ & $\sin(\frac{n\pi}{2} + x)$\\
-  $f + g$ & $f^{(n)} + g^{(n)}$\\
-  $f \cdot g$ & $\sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$\\
-  \bottomrule
-  \end{tabularx}
 \end{center}
 
 \subsection{Grenzwerte}
