@@ -118,6 +118,10 @@ Die \textbf{allgemeine Lösung} einer DGL setzt sich dann aus einer homogenen L�
   \item keine Funktionen von $y$ oder deren Ableitungen
 \end{itemize}
 
+\subsubsection*{Substitution}
+
+Manchmal ist es hilfreich $y(x)$ durch eine Funktion $h(x) = y(g(x))$ zu ersetzen. Betrachten wir die DGL $x^2 y''(x) - 3xy'(x) + 5y(x) = 0$. Wählen wir $h(t) = y(e^t)$ lässt sich die DGL mit konstanten Koeffizienten lösen (denn $x = e^t$).
+
 \subsection{Separierbare DGL}
 
 Eine Separierbare ODE erster Ordnung hat die Form $y' = b(x) g(y)$. Wir können diese dann nach $y$ und $x$ separieren und erhalten dann $\frac{y'}{g(y)} = b(x)$. Durch integrieren auf beiden Seiten und einer Substitution von $y$ erhalten wir dann:
@@ -940,6 +944,10 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
 \begingroup
 \renewcommand*{\arraystretch}{2}
 
+\begin{center}
+  \includegraphics[width=\linewidth]{include_degrees_circle.pdf}
+\end{center}
+
 \begin{mainbox}{Wichtige Werte}
   \begin{center} 
     \begin{tabular}{c|cccccc}
@@ -952,10 +960,6 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
     \end{tabular}
   \end{center}
 \end{mainbox}
-
-\begin{center}
-  \includegraphics[width=\linewidth]{include_degrees_circle.pdf}
-\end{center}
 
 \section{Tabellen}
 
@@ -974,6 +978,19 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
   $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
   \bottomrule
  \end{tabularx}
+\end{center}
+
+\subsection{$n$-te Ableitungen}
+\begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\mathbf{f(x)}$ & $\mathbf{f^{(n)}(x)}$ \\
+  \midrule
+  $\sin(x)$ & $\sin(\frac{n\pi}{2} + x)$\\
+  $f + g$ & $f^{(n)} + g^{(n)}$\\
+  $f \cdot g$ & $\sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$\\
+  \bottomrule
+  \end{tabularx}
 \end{center}
 
 \subsection{Grenzwerte}
@@ -1005,6 +1022,14 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
   \end{tabularx}
 \end{center}
 
+\subsection{Rekursive Integrale}
+
+$J_n = \int \frac{1}{(1 + x^2)^n} \dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
+
+\subsection{Binomischer Lehrsatz}
+
+$$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
+
 \subsection{Ableitungen (I)}
 \begin{center}
   % the c>{\centering\arraybackslash}X is a workaround to have a column fill up all space and still be centered
@@ -1030,6 +1055,18 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
   $\frac{1}{2}(\ln(x))^2$ & $\frac{\ln(x)}{x}$ & $\frac{1 - \ln(x)}{x^2}$ \\
   $\frac{x}{\ln(a)} (\ln|x| -1)$ & $\log_a |x|$ & $\frac{1}{\ln(a)x}$ \\
   \bottomrule
+  \end{tabularx}
+\end{center}
+
+
+\subsection{Ungleichungen}
+\begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+    $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \mathbb{N}, x > -1$\\
+    $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$\\
+    $2|xy| \leq \epsilon x^2 + \frac{1}{\epsilon} y^2$ für $\forall \epsilon > 0$ und $\forall x,y \in \mathbb{R}$\\
+    $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$\\
+    $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
   \end{tabularx}
 \end{center}
 
@@ -1070,19 +1107,6 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
   \end{tabularx}
 \end{center}
 
-\subsection{$n$-te Ableitungen}
-\begin{center}
-  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-  \toprule
-  $\mathbf{f(x)}$ & $\mathbf{f^{(n)}(x)}$ \\
-  \midrule
-  $\sin(x)$ & $\sin(\frac{n\pi}{2} + x)$\\
-  $f + g$ & $f^{(n)} + g^{(n)}$\\
-  $f \cdot g$ & $\sum\limits_{k=0}^{n}\binom{n}{k}f^{(k)}g^{(n-k)}$\\
-  \bottomrule
-  \end{tabularx}
-\end{center}
-
 \subsection{Weitere Ableitungen}
 \begin{center}
   \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
@@ -1100,25 +1124,6 @@ e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} = 1 - x + \frac{x^2}{2!} - \frac{x^3
   $\cosh(x)$ & $\sinh(x)$ \\
   $\sinh(x)$ & $\cosh(x)$ \\
   \bottomrule
-  \end{tabularx}
-\end{center}
-
-\subsection{Rekursive Integrale}
-
-$J_n = \int \frac{1}{(1 + x^2)^n} \dx$, dann $J_{n+1} = \frac{x}{2n(1 + x^2)^n} + (\frac{2n - 1}{2n})J_n$ mit $J_1 = \arctan(x)$.
-
-\subsection{Binomischer Lehrsatz}
-
-$$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
-
-\subsection{Ungleichungen}
-\begin{center}
-  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
-    $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \mathbb{N}, x > -1$\\
-    $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$\\
-    $2|xy| \leq \epsilon x^2 + \frac{1}{\epsilon} y^2$ für $\forall \epsilon > 0$ und $\forall x,y \in \mathbb{R}$\\
-    $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$\\
-    $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
   \end{tabularx}
 \end{center}
 
