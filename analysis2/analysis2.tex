@@ -353,8 +353,8 @@ Falls \(f,g\) im Punkt \(x_0 \in \X\) differenzierbar sind, gilt:
 \begin{enumerate}
   \item \(f\) ist stetig im Punkt \(x_0\)
   \item \(f\) hat alle partiellen Ableitungen am Punkt \(x_0\) und die Matrix, welche \(Df(x_0): x \mapsto Ax\) repräsentiert, ist die Jacobi-Matrix von \(f\) am Punkt \(x_0\), d.h. \(A = J_f(x_0)\)
-  \item \(d(f+g)(x_0) = Df(x_0) + Dg(x_0)\)
-  \item Wenn \(m = 1\) ist, dann ist \(f\cdot g\) differenzierbar. Wenn ausserdem \(g \ne 0\) gilt, dann ist es \(f/g\) auch.
+  \item \(D(f+g)(x_0) = Df(x_0) + Dg(x_0)\)
+  \item Wenn \(m = 1\) ist, dann ist \(f\cdot g\) differenzierbar. Wenn ausserdem \(g(x) \ne 0\) gilt, dann ist es \(f/g\) auch.
 \end{enumerate}
 
 \begin{subbox}{Kettenregel}
@@ -513,7 +513,7 @@ Wenn \(x_0 \in \X\) ein lokales Extrema ist, dann gilt ausserdem \(\nabla f(x_0)
 Wenn $f$ nach $\R$ geht und falls $g$ streng monoton ist, können wir auch die Funktion $g \circ f$ betrachten. Bspw. $g = \ln$ um ein Produkt in eine Summe zu verwandeln.
 
 \subsubsection*{Kritische Punkte}
-Ein Punkt \(x_0 \in \X\) mit \(\nabla f(x_0) = 0\) ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) \ne 0\), dann ist \(x_0\) nicht-degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
+Ein Punkt \(x_0 \in \X\) mit \(\nabla f(x_0) = 0\) ist ein kritischer Punkt. Wenn \(\det(\text{Hess}_f(x_0)) = 0\), dann ist \(x_0\) degeneriert. Man kann die Funktion auch quadrieren, da dies die Nullstellen nicht ändert.
 
 \subsubsection*{Sattelpunkt}
 Wenn ein kritischer Punkt weder Maximum noch Minimum ist, dann nennen wir ihn Sattelpunkt.
@@ -532,20 +532,21 @@ Sei \(f: \X \subseteq \R^n \mapsto \R, \X\) offen und \(f\in C^2\). Sei \(x_0\) 
 Dies funktioniert nicht, wenn \(x_0\) ein degenerierter kritischer Punkt ist. In einem solchen Fall müssen die Vorzeichen überprüft werden. Trotzdem ist jeder (auch degenerierte) kritische Punkt entweder ein lokales Minimum, lokales Maximum oder ein Sattelpunkt.
 
 \section{Integrale in \texorpdfstring{\(\R^n\)}{Rⁿ}}
-\subsection{Einfache Integrale}
 Für \(f: \R \mapsto \R^n\) ist das Integral definiert als
 \[\int_a^b f(t)dt = 
-\begin{pmatrix*}
+\begin{psmallmatrix*}
   \int_a^b f_1(t) dt \\
   \vdots\\
   \int_a^b f_n(t) dt
-\end{pmatrix*}
+\end{psmallmatrix*}
 \]
 
-\begin{mainbox}{Kurve}
-  Eine parametrisierte Kurve in \(\R^n\) ist eine stetige Ableitung \(\gamma: \left[a,b\right] \mapsto \R^n\) wobei \(\gamma\) stückweise in \(C^1\) ist, d.h. wir können \(\gamma\) so partitionieren, das alle Partitionen in \(C^1\) sind. Eine parametrisierte Kurve muss nicht injektiv sein.
-\end{mainbox}
 \subsection{Wegintegrale}
+
+\begin{mainbox}{Kurve}
+  Eine parametrisierte Kurve in \(\R^n\) ist eine stetige Funktion \(\gamma: \left[a,b\right] \mapsto \R^n\) wobei \(\gamma\) stückweise in \(C^1\) ist, d.h. wir können \(\gamma\) so partitionieren, das alle Partitionen in \(C^1\) sind. Eine parametrisierte Kurve muss nicht injektiv sein.
+\end{mainbox}
+
 Sei \(\gamma : \left[a,b\right] \mapsto \R^n\) eine parametrisierte Kurve und \(\X \subseteq \R^n\) eine Menge, welche das Bild von \(\gamma\) beinhaltet. Sei \(f : \X \mapsto \R^n\) eine stetige Funktion. Dann ist ein Wegintegral (auch: Kurvenintegral) definiert als:
 \[\int_\gamma f(s) ds = \int_a^b f(\gamma(t)) \cdot \gamma'(t) dt\]
 
@@ -569,7 +570,7 @@ Wegintegrale haben folgende Eigenschaften:
     \end{cases}\\
     \int_{\gamma_1 + \gamma_2} f(s) \; ds &= \int_{\gamma_1} f(s) \; ds + \int_{\gamma_2} f(s)\; ds
   \end{align*}
-  \item Sei \(\gamma : \left[a,b\right] \mapsto \R^n\) ein Pfad und \(-\gamma\) ist der Pfad in die Gegenrichtung (d.h. \((-\gamma)(t) = \gamma(a + b - t)\)). Dann gilt
+  \item Sei \(\gamma : \left[a,b\right] \mapsto \R^n\) ein Pfad und \(-\gamma\) ist der Pfad in die Gegenrichtung (d.h. \((-\gamma)(t) = \gamma(b - t)\)). Dann gilt
   \[\int_{-\gamma} f(s)ds = -\int_\gamma f(s) ds\]
 \end{enumerate}
 
@@ -663,6 +664,8 @@ Falls die Ober- und Untersumme von $f$ gleich sind, so ist $f$ Riemann-integrier
 
 $$ \int_Q f \dx = L(f) = U(f) $$
 
+Falls $f$ stetig ist, ist $f$ auch riemann-integrierbar.
+
 \subsubsection*{Nicht-Quadratische Flächen}
 Sei \(A \subseteq R\) eine Menge. \(f : A \subseteq R \mapsto \R\) ist auf \(A\) integrierbar, falls \(f \cdot \X_A\) auf \(R\) integrierbar ist. 
 \[\int_R f(x) \cdot \X_A(x) \mathop{dx} \text{ oder } \int_A f(x) \mathop{dx}\]
@@ -678,7 +681,7 @@ Sei \(f,g : A \mapsto \R\) auf \(A\) integrierbar, dann gilt folgendes:
   \item Falls \(f(x) \ge 0\) und \(B \subseteq A\), dann gilt:
   \[\int_B f(x) \mathop{dx} \le \int_A f(x) \mathop{dx}\]
   \item Dreiecksungleichung:
-    \[\left| \int_A f(x) \mathop{dx}\right| \le \int_A \left|f(x)\right| \mathop{dx}\]
+    $$\left| \int_A f(x) \mathop{dx}\right| \le \int_A \left|f(x)\right| \mathop{dx} \leq (\sup_A |f(x)|)\vol(A)$$
   \item Falls \(f = 1\), dann gilt:
   \[\int_A f(x) \mathop{dx} = \int_A 1 \mathop{dx} = \vol(A)\]
 \end{enumerate}
@@ -720,12 +723,16 @@ In $n=3$ ist eine Union von endlich vielen Bildern von parameterisierten Fläche
   \[\int_A f(x,y) \mathop{d(x,y)} = \int_a^b \left(\int_{\varphi_1(x)}^{\varphi_2(x)} f(x,y) \mathop{dy}\right) \mathop{dx}\]
 \end{enumerate}
 
+\subsubsection*{Uneigentliche Integrale}
+
+Sei $X \subseteq \R^n$ eine offene Menge und $f: X \mapsto \R$ eine Funktion so dass $\int_K f(x) \dx$ für jede kompakte Teilmenge $K \subseteq X$ existiert. Sei ausserdem eine Reihe von kompakten Mengen $X_k$ mit $X_k \subseteq X_{k+1}$ und $\cup_{k=1}^\infty X_k = X$. Falls $\lim_{n \to \infty} \int_{X_n} f(x) \dx$ existiert konvergiert $\int_X f(x) \dx := \lim_{n \to \infty} \int_{X_n} f(x) \dx$.
+
 \subsection{Variablenwechsel}
 
 $f: X \mapsto \R$ differenzierbar mit $X \subseteq \R^n$ offen ist ein Variablenwechsel um $x_0 \in X$ falls es $r > 0$ gibt so dass für $B_r := \{x \in \R^n \mid ||x-x_0|| < r \}$ gilt dass $Y = f(B_r(x_0))$ offen ist und eine differenzierbare Abbildung $g: Y \mapsto B$ existiert so dass $f \circ g = \mathrm{id}$ bzw. $g \circ f = \mathrm{id}$.
 
 \begin{subbox}{Inverse}
-  Sei $X \subseteq \R^n$ offen, $f: X \mapsto \R^n$ differenzierbar. Wenn für $x_0 \in X$ gilt $det(J_f(x_0)) \neq 0$ ($J_f(x_0)$ ist invertierbar), dann ist $f$ ein Variablenwechsel um $x_0$. Dann gilt $J_g(f(x_0)) = J_f(x_0)^{-1}$.
+  Sei $X \subseteq \R^n$ offen, $f: X \mapsto \R^n$ differenzierbar. Wenn für $x_0 \in X$ gilt $\det(J_f(x_0)) \neq 0$ ($J_f(x_0)$ ist invertierbar), dann ist $f$ ein Variablenwechsel um $x_0$. Dann gilt $J_g(f(x_0)) = J_f(x_0)^{-1}$.
 \end{subbox}
 
 Sei \(\partial A\) der Rand einer Menge \(A\):
@@ -787,7 +794,7 @@ Eine parametrisierte Jordan-Kurve \(\gamma\), die eine Randkomponente von \(A\) 
 \begin{mainbox}{Satz von Green}
   Sei \(A \subseteq \R^2\) ein reguläres Gebiet und \(f: U \mapsto \R^2\) ein Vektorfeld der Klasse \(C^1\), wobei \((A \cup \partial A) \subseteq U \subseteq \R^2\). Dann gilt
   \[\int_{\partial A} f(x) \mathop{ds} = \int \int_A \left(\partial_x f_2 - \partial_y f_1 \right) \dx \dy\]
-  wobei $\text{curl}(f) \coloneqq \partial_x f_2 - \partial_y f_1$.
+  wobei $\text{curl}(f) \coloneqq \partial_x f_2 - \partial_y f_1$ und das Linienintegral entlang einer parameterisierten Jordan-Kurve erfolgt.
 \end{mainbox}
 Um Flächen mit dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit \(\text{curl}(f) = 1\), beispielsweise (für beliebige $g(x), g(y)$):
 
@@ -964,7 +971,7 @@ Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{
 \renewcommand*{\arraystretch}{2}
 
 \begin{center}
-  \includegraphics[width=\linewidth]{include_degrees_circle.pdf}
+  \includegraphics[width=0.7 \linewidth]{include_degrees_circle.pdf}
 \end{center}
 
 \begin{mainbox}{Wichtige Werte}
