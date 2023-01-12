@@ -216,6 +216,8 @@ Wir definieren als $\Tr(A)$ die Summe der Diagonalelemente.
   Für eine $m \times n$ Matrix $A$ und eine $n \times p$ Matrix $B$ gilt $(AB)_{ij} = \sum_{k=1}^n a_{ik} b_{kj}$ wobei $AB$ eine $m \times p$ Matrix ist. Generell \textbf{nicht kommutativ}.
 \end{subbox}
 
+Falls zwei Matrizen $A, B \in \E^{n \times n}$ kommutieren ($AB = BA$), dann gilt $(AB)^k = A^k B^k$.
+
 \begin{subbox}{Rechenregeln für Matrizen}
   \begin{rowlist}
     \item $(\alpha \beta)A = \alpha(\beta A)$
@@ -411,7 +413,7 @@ Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zue
 
 \subsection{Unterräume}
 
-Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. Addition und Multiplikation ist. $U$ beinhaltet immer den Nullvektor. Jeder Unterraum ist ein Vektorraum. Für zwei Unterräume $U, W \subseteq V$ ist $U \cup W$ genau dann ein Unterraum von $V$ falls $U \subseteq W$ oder $W \subseteq U$.\\
+Ein Unterraum $U$ ist eine nichtleere Teilmenge von $V$ der abgeschlossen bzgl. Addition und Multiplikation ist. $U$ beinhaltet immer den Nullvektor. Jeder Unterraum ist ein Vektorraum. Für zwei Unterräume $U, W \subseteq V$ ist $U \cup W$ genau dann ein Unterraum von $V$ falls $U \subseteq W$ oder $W \subseteq U$. $U \cap W$ ist hingegen immer ein Unterraum.\\
 
 Für eine lineare Abbildung $F: X \mapsto Y$ und einen Unterraum $U \subseteq X$ ist $FU \subseteq Y$ auch ein Unterraum. Ist $W \subseteq \Image F$ ein Unterraum so ist auch $F^{-1}W \subseteq X$ ein Unterraum.
 
