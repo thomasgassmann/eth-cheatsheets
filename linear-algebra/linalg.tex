@@ -334,11 +334,11 @@ Eine $n \times n$ Matrix heisst \textbf{unitär} falls $A^\hermconj A = I_n$. Ei
 
 Für $A, B$ unitär (dasselbe für orthogonal) gilt:
 
-\begin{itemize}
+\begin{rowlist}
   \item $A$ regulär und $A^{-1} = A^\hermconj$
   \item $AA^\hermconj = I_n = A^\hermconj A$
   \item $A^{-1}$, $AB$ unitär
-\end{itemize}
+\end{rowlist}
 
 Für unitäre Matrizen gilt $| \det(A) | = 1$, für orthogonale Matrizen somit $\det(A) = \pm 1$. Ausserdem gilt $| \lambda | = 1$ für alle Eigenwerte $\lambda$ einer unitären Matrix. Entsprechend gilt $\lambda = \pm 1$ für alle \textbf{Eigenwerte einer orthogonalen Matrix}. 
 
@@ -384,7 +384,7 @@ Die \textbf{LR-Zerlegung} ist ein weiteres Verfahren zum lösen von LGS. Wir erh
   \end{bmatrix}
 \end{align*}\\
 
-Wenn wir Zeilen vertauschen, dann vertauschen wir auch die selben Zeilen in $P$. Im Allgemeinen gilt $A \in \E^{m \times n}$ sowie $P, L \in \E^{m \times m}$ und $R \in \E^{m \times n}$. Die Matrix $L$ hat immer $1$ auf der Diagonalen und Einträge unten links sind nur ungleich $0$ für Spalten kleiner oder gleich $\Rank A$. Die $i$-te Spalte in $L$ entspricht also dem $i$-ten Pivot von $A$.
+Wenn wir Zeilen in $R$ vertauschen, dann vertauschen wir auch die selben Zeilen in $P$ und $L$ (die $1$ Einträge auf der Diagonalen in $L$ werden nicht vertauscht!). Im Allgemeinen gilt $A \in \E^{m \times n}$ sowie $P, L \in \E^{m \times m}$ und $R \in \E^{m \times n}$. Die Matrix $L$ hat immer $1$ auf der Diagonalen und Einträge unten links sind nur ungleich $0$ für Spalten kleiner oder gleich $\Rank A$. Die $i$-te Spalte in $L$ entspricht also dem $i$-ten Pivot von $A$.
 
 Haben wir eine LR-Zerlegung von $A$ können wir $Ax = b$ effizienter lösen. Zuerst lösen wir dazu $PA = LR$ und lösen $Lc = Pb$ nach $c$. Dann lösen wir $Rx = c$ nach $x$.
 
