@@ -399,6 +399,8 @@ Allgemein gilt \(f \in C^k\) für \(k \ge 2\) wenn \(f\) differenzierbar ist und
 Sei $f$ zwei mal stetig partiell differenzierbar. Dann gilt (Satz von Schwarz):
 $$\pdv{f}{x_i, x_j} = \pdv{f}{ x_j, x_i}$$
 
+Allgemein: ist $f$ in $C^k$, dann kommutieren alle Ableitungen bis zur Ordnung $k$. Falls $f \notin C^k$ ist bspw. $f(x,y) = \frac{xy(x^2 - y^2)}{x^2 + y^2}$ mit $f(0, 0) = 0$ ein Gegenbeispiel.
+
 \begin{mainbox}{Hesse-Matrix}
   Die Hesse-Matrix ist eine \(n \times n\) symmetrische Matrix, welche die zweite Ableitung für $f: X \subseteq \mathbb{R}^n \mapsto \mathbb{R}$ definiert:
   \[\text{Hess}_f(x_0) := \left(\pdv{f(x_0)}{x_i, x_j}\right)_{1\le i,j \le n}\] 
@@ -802,6 +804,8 @@ Um Flächen mit dem Satz von Green zu berechnen, benutzen wir ein Vektorfeld mit
 \begin{align*}
   (g(x), x) \quad & \quad (\frac{-y}{2}, \frac{x}{2}) \quad & \quad (-y, g(y))\quad  & \quad (0, x) \quad & \quad (-y, 0)
 \end{align*}
+
+Allgemeiner können wir für jede Funktion $g$ ein Vektorfeld $f = (f_1, f_2)$ finden so dass $g = \partial_x f_2 - \partial_y f_1$. Bspw. $f_1 = 0$ und $f_2$ so dass $\partial_x f_2 = g$.
 
 \section{Themen aus Analysis I}
 \begin{mainbox}{Partielle Integration}
