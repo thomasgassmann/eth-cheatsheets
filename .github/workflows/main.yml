@@ -40,6 +40,7 @@ jobs:
       - name: Deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          LINALG_TOKEN: ${{ secrets.LINALG_TOKEN }}
         run: |
           TAG="nightly"
           git tag -f "$TAG"
@@ -52,3 +53,7 @@ jobs:
             echo "Delivering file $pdf"
             gh release upload "$TAG" "$file" --clobber
           done
+
+          curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-hs22/files/149/update/ \
+            -H "Authorization: $LINALG_TOKEN" \
+            -F "file=@./linear-algebra/linalg.pdf"
