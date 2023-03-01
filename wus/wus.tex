@@ -131,6 +131,12 @@ mit den Eigenschaften
 Wenn \(A_1, \ldots A_n\) paarweise disjunkt sind, gilt:
 \[\P[A_1 \cup \ldots \cup A_n] = \P[A_1] + \ldots + \P[A_n]\]
 
+Ausserdem gilt (Prinzip der Inklusion/Exklusion):
+
+$$
+\P \left[ \bigcup_{i=1}^n A_i \right] = \sum_{l=1}^n (-1)^{l+1} \left( \sum_{1 \leq i_1 < \cdots < i_l \leq n} \P \left[ A_{i_1} \cap \cdots \cap A_{i_l} \right] \right)
+$$
+
 \subsection{Bedingte Wahrscheinlichkeiten}
 Sei \((\Omega, \F, \P)\) ein Wahrscheinlichkeitsraum mit \(A, B \in \F\) und \(\P[B] > 0\). Die bedingte Wahrscheinlichkeit von \(A\) gegeben \(B\) ist definiert als:
 \[\P[A|B] = \frac{\P[A\cap B]}{\P[B]}\]
