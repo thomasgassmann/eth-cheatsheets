@@ -151,6 +151,18 @@ Sei \((\Omega, \F, \P)\) ein Wahrscheinlichkeitsraum mit \(A, B \in \F\) und \(\
 	\[\forall i = 1,\ldots, n \quad \P[B_i|A] = \frac{\P[A|B_i] \ \P[B_i]}{\sum_{k=1}^n \P[A|B_k] \ \P[B_k]}\]
 \end{mainbox}
 
+Wir definieren den bedingten Erwartungswert:
+
+$$
+\E[X \mid B] = \frac{\E[1_B X]}{\P[B]} = \sum_{x \in X(\Omega)} x \P[X = x \mid B]
+$$
+
+Für eine Partition $\mathcal{B} = (B_i)_{i \in I}$ von $\Omega$ definieren wir:
+
+$$
+\E[X \mid \mathcal{B}](\omega) = \sum_{i \in I, \P[B_i] > 0} \E[X \mid B_i] 1_{B_i}(\omega)
+$$
+
 \subsection{Unabhängigkeit}
 \begin{mainbox}{Definition Unabhängigkeit}
 	Zwei Ereignisse \(A, B\in \F\) sind unabhängig, falls gilt:
