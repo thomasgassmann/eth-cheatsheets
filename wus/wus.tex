@@ -79,6 +79,9 @@
 \def\F{\mathcal{F}}
 \def\E{\mathbb{E}}
 \DeclareMathOperator{\Var}{\text{Var}}
+\newcommand{\middot}{~\textperiodcentered~}
+\newlist{rowlist}{enumerate*}{1}
+\setlist[rowlist]{label={\textbf{\roman*}\text{: }}, afterlabel={}, itemjoin=\middot}
 
 
 \begin{document}
@@ -201,7 +204,10 @@ Die Definition der Linksstetigkeit ist
 \[F(x-) = \lim_{t\to 0} F(x-t)\]
 Es gilt allerdings \textit{nicht} immer \(F(x-) = F(x)\), d.h. nicht jede Verteilungsfunktion ist linksstetig. Allerdings gilt:
 \[\forall x \in \R \quad F(x) - F(x-) = \P[X=x]\]
-Daraus lässt sich für stetige ZV \(P[X=x] = 0\) folgern.
+Daraus lässt sich für stetige ZV \(P[X=x] = 0\) folgern.\\
+Ausserdem gilt für eine monoton steigende Folge $(A_n)$ von Mengen ($A_n \subseteq A_{n+1}$) dass $\lim_{n \to \infty} \P[A_n] = \P[\bigcup_{n=1}^\infty A_n]$.\\
+Gleichermassen für eine monoton fallende Folge $(A_n)$ ($A_{n+1} \subseteq A_n$) dass $\lim_{n \to \infty} \P[A_n] = \P[\bigcap_{n=1}^\infty A_n]$.
+
 \subsection{Unabhängigkeit}
 Die Zufallsvariablen \(X_1, \ldots, X_n\) sind unabhängig, falls:
 \begin{align*}
@@ -477,12 +483,12 @@ wobei \(Z \sim \mathcal{N}(0,1)\). Für normalverteilte ZV \(X_1, \ldots, X_n\) 
 
 \section{Schätzer}
 Wir treffen folgende Annahmen:
-\begin{itemize}
+\begin{rowlist}
 	\item Parameterraum \(\theta \subset \R\)
 	\item Familie von Wahrscheinlichkeitsmassen \((\P_\theta)_{\theta \in \Theta}\) auf \((\Omega, \F)\); für jedes Element im Parameterraum existiert ein Wahrscheinlichkeitsmodell
 	\item Zufallsvariablen \(X_1, \ldots, X_n\) auf \((\Omega, \F)\)
 	\item Wir nennen die Gesamtheit der beobachteten Daten \(x_1, \ldots, x_n\) oder der ZV \(X_1, \ldots, X_n\) Stichprobe
-\end{itemize}
+\end{rowlist}
 \begin{mainbox}{Definition Schätzer}
 	Ein Schätzer ist eine Zufallsvariable \(T: \Omega \mapsto \R\) von der Form
 	\[T = t(X_1, \ldots, X_n), \quad t: \R^n \mapsto \R\]
@@ -620,8 +626,7 @@ Der \(p\)-Wert hat folgende Eigenschaften:
 	\item Für einen \(p\)-Wert \(\gamma\) gilt, dass alle Tests mit Signifikanzniveau \(\alpha > \gamma\) die Nullhypothese verwerfen.
 \end{enumerate}
 
-Insgesamt gilt also:
-\[\text{kleiner } p\text{-Wert} \implies H_0 \text{ wird wahrscheinlich verworfen} \]
+Insgesamt gilt also kleiner $p$-Wert $\implies$ $H_0$ wird wahrscheinlich verworfen.
 
 \section{Aufgaben}
 \subsection{Multiple Choice}
