@@ -835,7 +835,7 @@ Die Dichte von \(U'\) ist also \(\frac{1}{b-a} \mathbb{I}_{y\in[a,b]}\).
 		Verteilung               & Parameter                            & \( \E[X] \)                      & \( \Var(X) \)                    & \( f_X(t) \)                                                                                                                                  & \( F_X(t) \)                                  \\
 
 		\midrule
-		Gleichverteilung         & \( [a,b] \): Intervall               & \( \frac{a+b}{2} \)              & \( \frac{1}{12}(b-a)^2 \)        & \(\begin{cases} \frac{1}{b-a} &a \le x \le b \\ 0 & \text{sonst}\end{cases}\)                                                                                                                & \(\begin{cases} 0 & x\le a \\ \frac{t-a}{b-a} & a < x < b \\ 1 & x \ge b \end{cases}\)                \\
+		Gleichverteilung         & \( [a,b] \): Intervall               & \( \frac{a+b}{2} \)              & \( \frac{1}{12}(b-a)^2 \)        & \(\begin{cases} \frac{1}{b-a} &a \le t \le b \\ 0 & \text{sonst}\end{cases}\)                                                                                                                & \(\begin{cases} 0 & t\le a \\ \frac{t-a}{b-a} & a < t < b \\ 1 & t \ge b \end{cases}\)                \\
 
 		Exponentialverteilung    & \( \lambda: \frac{1}{\E[X]} \)       & \( \frac{1}{\lambda} \)          & \( \frac{1}{\lambda^2} \)        & \( \begin{cases} \lambda e^{-\lambda t} & t \geq 0 \\ 0 & t < 0 \end{cases} \)                                                                                                              & \( \begin{cases} 1-e^{-\lambda t} & t>0 \\ 0 & t \leq 0\end{cases}\)               \\
 
