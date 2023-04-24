@@ -219,12 +219,13 @@ Die Zufallsvariablen \(X_1, \ldots, X_n\) sind unabhängig, falls:
 \end{align*}
 Eine Folge von Zufallsvariablen \(X_1, X_2, \ldots\) ist unabhängig, falls \(
 \forall n \ X_1, \ldots X_n\) unabhängig sind. Sie ist zusätzlich identisch verteilt (uiv.), falls ausserdem \(\forall i,j \quad F_{X_i} = F_{X_j}\) gilt.
-\subsection{Transformationen}
-Sei \(\varphi: \ \R \mapsto \R\) und \(X\) eine Zufallsvariable, so ist
-\[\varphi(X) = \varphi \circ X\]
-auch eine Zufallsvariable. Seien \(X_1, \ldots, X_n\) ZVs mit \(\phi: \R^n \mapsto \R\), so ist
-\[\phi(X_1, \ldots, X_n) = \phi \circ (X_1, \ldots, X_n)\]
-ebenfalls eine Zufallsvariable.
+
+\subsection{Transformationssatz}
+
+\begin{mainbox}{}
+	Sei $X = (X_1, \cdots, X_n)^\top$ eine Zufallsvariable in $\R^n$ und Dichtefunktion $f_X: \R^d \mapsto \R_+$. Sei $Y := \phi(X)$ mit $\phi: \R^d \mapsto \R^d$ invertierbar. Dann gilt:
+	$$f_Y(y) = f_X(\phi^{-1}(y)) \left| \det \left( J_{\phi^{-1}}(y) \right) \right|$$
+\end{mainbox}
 
 \subsection{Konstruktion einer Zufallsvariable}
 Gegeben eine Verteilungsfunktion \(F_X\) wollen wir die entsprechende ZV \(X\) konstruieren.
