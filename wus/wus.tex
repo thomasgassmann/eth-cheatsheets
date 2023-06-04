@@ -227,8 +227,15 @@ Eine Folge von Zufallsvariablen \(X_1, X_2, \ldots\) ist unabhängig, falls \(
 \subsection{Transformationssatz}
 
 \begin{mainbox}{}
-	Sei $X = (X_1, \cdots, X_n)^\top$ eine Zufallsvariable in $\R^n$ und Dichtefunktion $f_X: \R^d \mapsto \R_+$. Sei $Y := \phi(X)$ mit $\phi: \R^d \mapsto \R^d$ invertierbar. Dann gilt:
+	Sei $X = (X_1, \cdots, X_n)^\top$ eine Zufallsvariable in $\R^n$ und Dichtefunktion $f_X: \R^n \mapsto \R_+$. Sei $Y := \phi(X)$ mit $\phi: \R^n \mapsto \R^n$ invertierbar. Dann gilt:
 	$$f_Y(y) = f_X(\phi^{-1}(y)) \left| \det \left( J_{\phi^{-1}}(y) \right) \right|$$
+\end{mainbox}
+
+\begin{mainbox}{Linearer Fall}
+	Falls $X$ $n$-dimensional stetig und $g: \R^n \mapsto \R^n$ linear mit $g(t) = m + Bt$ ist ($\det(B) \neq 0$) erhalten wir:
+	$$
+		f_Y(t) = \frac{1}{\left| \det \left( B \right) \right|} f_X \left( B^{-1} (t - m) \right)
+	$$
 \end{mainbox}
 
 \subsection{Konstruktion einer Zufallsvariable}
@@ -307,24 +314,6 @@ Es gelten folgende Eigenschaften:
 
 \(X \sim \mathcal{N}(0,1)\) wird auch Standardnormalverteilung genannt. Für eine standardnormalverteilte ZV \(X\) gilt
 \[Z = m +\sigma \cdot X \sim \mathcal{N}(m, \sigma^2)\]
-
-\begin{mainbox}{Variablenwechsel}
-	Sei $X$ stetig, $g: \R \mapsto \R$ stetig differenzierbar mit Umkehrfunktion $g^{-1}$. Für die Dichte von $Y := g(X)$ gilt:
-	$$
-		f_Y(t) = f_X \left( g^{-1}(t) \right) \left| \frac{d}{dt} g^{-1}(t) \right|
-	$$
-
-	Falls $X$ $n$-dimensional stetig und $g: \R^n \mapsto \R^n$ linear mit $g(t) = m + Bt$ ist ($\det(B) \neq 0$) erhalten wir:
-	$$
-		f_Y(t) = \frac{1}{\left| \det \left( B \right) \right|} f_X \left( B^{-1} (t - m) \right)
-	$$
-\end{mainbox}
-
-Sei \(\varphi : X \mapsto Y\) eine stetige Abbildung, wobei \(X=  X_0 \cup \partial X, \) \(Y = Y_0 \cup \partial Y\) kompakte Mengen mit \(X_0, Y_0\) offen und \(\partial X, \partial Y\) Nullmengen sind. Sei $\varphi$ ausserdem von $X_0$ nach $Y_0$ bijektiv und $C^1$. $J_\varphi(x)$ ist alle für alle $x \in X_0$ invertierbar.
-
-\begin{subbox}{Variablenwechsel}
-	$$\int_X f(\varphi(x)) | \det(J_\varphi(x)) | dx = \int_Y f(y) dy$$
-\end{subbox}
 
 \section{Erwartungswert}
 \begin{mainbox}{Definition Erwartungswert}
@@ -492,11 +481,27 @@ Sei \(X_1, X_2, \ldots\) eine unendliche Sequenz an uiv. ZV. Wir betrachten die 
 \end{mainbox}
 Da die ZV uiv. sind, gilt \(\E[|X_i|] < \infty\) und \(m = \E[X_i]\) auch für alle \(i\).
 
+\subsubsection*{Fast sichere Konvergenz}
+
+Die Folge $X_n$ konvergiert f.s. gegen $X$ falls:
+$$
+	\P \left[ \lim_{n \to \infty} X_n = X \right] = 1
+$$
+
+\subsubsection*{Konvergenz in Wahrscheinlichkeit}
+
+Die Folge $X_n$ konvergiert in Wahrscheinlichkeit gegen $X$ falls:
+$$
+	\forall \epsilon > 0 \lim_{n \to \infty} \P \left[ \left| X_n - X \right| > \epsilon \right] = 0
+$$
+
 \subsubsection*{Konvergenz in Verteilung}
 Seien \((X_n)_{n\in \mathbb{N}}\) und \(X\) ZV. Wir schreiben
 \[X_n \approx X \quad \text{für } n \to \infty\]
 falls \(\forall x \in \R\) gilt:
 \[\lim_{n\to\infty} \P[X_n \le x] = \P[X \le x ]\]
+
+Fast sichere Konvergenz impliziert Konvergenz in Wahrscheinlichkeit, Konvergenz in Wahrscheinlichkeit impliziert Konvergenz in Verteilung.
 
 \begin{mainbox}{Zentraler Grenzwertsatz}
 	Sei \(\E[X^2_1] < \infty\) und wohldefiniert. Weiter sei \(m = \E[X_1]\) und \(\sigma^2 = \Var[X_1]\), so gilt:
@@ -663,38 +668,6 @@ Der \(p\)-Wert hat folgende Eigenschaften:
 
 Insgesamt gilt also kleiner $p$-Wert $\implies$ $H_0$ wird wahrscheinlich verworfen.
 
-\section{Konvergenz}
-
-\begin{subbox}{Fast sichere Konvergenz}
-	Die Folge $X_n$ konvergiert f.s. gegen $X$ falls:
-	$$
-		\P \left[ \lim_{n \to \infty} X_n = X \right] = 1
-	$$
-\end{subbox}
-
-\begin{subbox}{Konvergenz in Wahrscheinlichkeit}
-	Die Folge $X_n$ konvergiert in Wahrscheinlichkeit gegen $X$ falls:
-	$$
-		\forall \epsilon > 0 \lim_{n \to \infty} \P \left[ \left| X_n - X \right| > \epsilon \right] = 0
-	$$
-\end{subbox}
-
-\begin{subbox}{Konvergenz in Verteilung}
-	Die Folge $X_n$ konvergiert in Verteilung gegen $X$ falls an allen Stellen $x \in \R$:
-	$$
-		\lim_{n \to \infty} F_n(x) = F(x)
-	$$
-	Dies wird bspw. beim zentralen Grenzwertsatz verwendet.
-\end{subbox}
-
-Für die Konvergenz gilt:
-
-$$
-	\begin{matrix} \text{Fast sichere} \\ \text{Konvergenz} \end{matrix} \implies
-	\begin{matrix} \text{Konvergenz in} \\ \text{Wahrscheinlichkeit} \end{matrix} \implies
-	\begin{matrix} \text{Konvergenz in} \\ \text{Verteilung} \end{matrix}
-$$
-
 \section{Aufgaben}
 \subsection{Multiple Choice}
 
@@ -843,6 +816,12 @@ Die Dichte von \(U'\) ist also \(\frac{1}{b-a} \mathbb{I}_{y\in[a,b]}\).
 \end{mainbox}
 
 \section{Analysis}
+
+Sei \(\varphi : X \mapsto Y\) eine stetige Abbildung, wobei \(X=  X_0 \cup \partial X, \) \(Y = Y_0 \cup \partial Y\) kompakte Mengen mit \(X_0, Y_0\) offen und \(\partial X, \partial Y\) Nullmengen sind. Sei $\varphi$ ausserdem von $X_0$ nach $Y_0$ bijektiv und $C^1$. $J_\varphi(x)$ ist alle für alle $x \in X_0$ invertierbar.
+
+\begin{subbox}{Variablenwechsel}
+	$$\int_X f(\varphi(x)) | \det(J_\varphi(x)) | dx = \int_Y f(y) dy$$
+\end{subbox}
 
 \subsection{Potenzreihen}
 \begin{align*}
