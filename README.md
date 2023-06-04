@@ -1,4 +1,4 @@
-# eth-summaries
+# ETH Cheatsheets
 
 Overview:
 
