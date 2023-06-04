@@ -1,6 +1,7 @@
 % Basic stuff
 \documentclass[a4paper,10pt]{article}
 \usepackage[nswissgerman]{babel}
+\usepackage{scrextend}
 
 % 3 column landscape layout with fewer margins
 \usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
@@ -12,6 +13,7 @@
 
 % define nice looking boxes
 \usepackage[many]{tcolorbox}
+\changefontsizes[9pt]{9pt}
 
 % a base set, that is then customised
 \tcbset {
@@ -385,15 +387,17 @@ Sei \(X\) eine stetige ZV mit \(X \ge 0\) f.s., dann gilt:
 	Seien \(X, Y\) ZV sodass \(X \le Y\) f.s., dann gilt \(\E[X] \le \E[Y]\).
 \end{subbox}
 
-\begin{mainbox}{Markov-Ungleichung}
-	Sei \(X\) eine ZV mit \(X \ge 0\) f.s., dann gilt für jedes \(a > 0\):
-	\[\P[X\ge a] \le \frac{\E[X]}{a}\]
-\end{mainbox}
-
 \begin{subbox}{Jensen-Ungleichung}
 	Sei \(X\) eine ZV und \(\phi : \R \mapsto \R\) eine konvexe Funktion, dann gilt:
 	\[\phi(\E[X]) \le \E[\phi(X)]\]
 \end{subbox}
+
+\begin{mainbox}{Markov-Ungleichung}
+	Sei \(X\) eine ZV mit \(X \ge 0\) f.s., dann gilt für jedes \(a > 0\):
+	\[\P[X\ge a] \le \frac{\E[X]}{a}\]
+	Allgemeiner für eine beliebige Zufallsvariable $X$ und eine wachsende Funktion $g: \mathcal{W}(X) \mapsto [0, \infty)$ für jedes $c \in \R$ mit $g(c) > 0$ dass:
+	$$\P[X \geq c] \leq \frac{\E[g(X)]}{g(c)}$$
+\end{mainbox}
 
 \subsection{Varianz}
 Sei \(X\) eine ZV sodass \(\E[X^2] < \infty\). Die Varianz von \(X\) ist definiert durch
@@ -402,7 +406,7 @@ wobei \(m=\E[X]\). Dabei wird \(\sigma_X\) auch die Standardabweichung von \(X\)
 
 \begin{subbox}{Chebychev-Ungleichung}
 	Wenn \(X\) eine ZV mit \(\E[X^2] < \infty\) ist, dann gilt für jedes \(a \ge 0\):
-	\[\P[|X - \E[X]| \ge a] \le \frac{\sigma_X^2}{a^2}\]
+	\[\P[|X - \E[X]| \ge a] \le \frac{\Var[X]}{a^2}\]
 \end{subbox}
 
 \begin{enumerate}
@@ -914,7 +918,7 @@ Aufhören falls:
 		Gleichverteilung         & \( [a,b] \): Intervall               & \( \frac{a+b}{2} \)              & \( \frac{1}{12}(b-a)^2 \)        & \(\begin{cases} \frac{1}{b-a} &a \le t \le b \\ 0 & \text{sonst}\end{cases}\)                                                                                                                & \(\begin{cases} 0 & t\le a \\ \frac{t-a}{b-a} & a < t < b \\ 1 & t \ge b \end{cases}\)                \\
 
 		Exponentialverteilung    & \( \lambda: \frac{1}{\E[X]} \)       & \( \frac{1}{\lambda} \)          & \( \frac{1}{\lambda^2} \)        & \( \begin{cases} \lambda e^{-\lambda t} & t \geq 0 \\ 0 & t < 0 \end{cases} \)                                                                                                              & \( \begin{cases} 1-e^{-\lambda t} & t>0 \\ 0 & t \leq 0\end{cases}\) & \begin{rowlist}
-			\item gedächtnislos
+			\item gedächtnislos, $\P[X > t + s \mid X > s] = \P[X > t]$
 		\end{rowlist}               \\
 
 		Normalverteilung         & \makecell[l]{\( \mu: \E[X] \) \\                                                                                                                                                                                                                                                                        \( \sigma^2 \): Varianz} & \( \mu \) & \( \sigma ^2 \) & \( \frac{1}{\sqrt{2\pi \sigma^2} }e^{-{\frac{(t-\mu)^2}{2\sigma^2} }} \) & \( \frac{1}{ {\sqrt{2\pi \sigma^2}}} \int_{-\infty}^t e^{-\frac{(y-\mu)^2}{2\sigma^2}} \mathrm{d} y \) & \begin{rowlist}
