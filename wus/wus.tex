@@ -752,18 +752,42 @@ Die Dichte von \(U'\) ist also \(\frac{1}{b-a} \mathbb{I}_{y\in[a,b]}\).
 	\vspace{-12pt}
 	$$\int f'(x) g(x) \mathop{dx} = f(x)g(x) - \int f(x) g'(x) \mathop{dx}$$
 \end{mainbox}
+
 \begin{itemize}
 	\item Meist gilt: Polynome ableiten ($g(x)$), wo das Integral periodisch ist ($\sin, \cos, e^x$,...) integrieren ($f'(x)$)
 	\item Teils: mit $1$ multiplizieren, um partielle Integration anwenden zu können (z.B. im Fall von $\int \log(x) \mathop{dx}$)
 \end{itemize}
-\begin{mainbox}{Substitution}
-	Um $\int_a^b f(g(x)) \mathop{dx}$ zu berechnen: Ersetze $g(x)$ durch $u$ und integriere $\int_{g(a)}^{g(b)} f(u) \frac{\text{d}u}{g'(x)}$.
-\end{mainbox}
+
+\textbf{Beispiel}: Berechne $\int x^2 \cos(x) dx = x^2 (-\frac{1}{3}\cos(3x)) - 2x(-\frac{1}{9}\sin(3x)) + 2\frac{1}{27}\cos(3x) - \int 0 \cdot \frac{1}{27} \cos(3x) dx$.
+
+Multipliziere Diagonal wie im Beispiel.
+
+\begin{table}[h]
+  \begin{tabular}{lll}
+    & D & I \\
+  + & $x^2$ & $\sin(3x)$  \\
+  - & $2x$ & $-\frac{1}{3}\cos(3x)$  \\
+  + & $2$ & $-\frac{1}{9}\sin(3x)$  \\
+  - & $0$ & $\frac{1}{27}\cos(3x)$  
+  \end{tabular}
+\end{table}
+
+Aufhören falls:
 \begin{itemize}
-	\item $g'(x)$ muss sich herauskürzen, sonst nutzlos.
-	\item Grenzen substituieren nicht vergessen.
-	\item Alternativ: unbestimmtes Integral berechnet werden und dann $u$ wieder durch $x$ substituieren.
+  \item $0$ in D-Spalte.
+  \item Produkt einer Reihe einfach integrierbar. Addiere oder subtrahiere je nach Reihe das Integral des Produkts.
+  \item Eine Reihe wiederholt sich. Verwende Rekurrenz.
 \end{itemize}
+
+\begin{mainbox}{Substitution}
+	Sei $g: [a, b] \to \mathbb{R}$ stetig differenzierbar. $f: I \to \mathbb{R}$ ($g([a, b]) \subseteq I$) eine stetige Funktion. Dann gilt:
+	$$\int_{g(a)}^{g(b)} f(x)dx = \int_{a}^{b} f(g(x))g'(x)dt$$
+  \end{mainbox}
+  
+  \begin{itemize}
+   \item Grenzen substituieren nicht vergessen.
+   \item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
+  \end{itemize}
 
 \subsection{Ableitungen}
 
@@ -838,9 +862,10 @@ Die Dichte von \(U'\) ist also \(\frac{1}{b-a} \mathbb{I}_{y\in[a,b]}\).
 \renewcommand*{\arraystretch}{2.5}
 \subsection{Diskrete Verteilungen}
 \begin{center}
-	\begin{tabularx}{\textwidth}{llXXXX}
+	\small
+	\begin{tabularx}{\textwidth}{llXXXXX}
 		\toprule
-		Verteilung       & Parameter                                   & \( \E[X] \) & \( \Var[X] \)       & \( p_X(t) \)         & \( F_X(t) \)                     \\
+		Verteilung       & Parameter                                   & \( \E[X] \) & \( \Var[X] \)       & \( p_X(t) \)         & \( F_X(t) \)       & Eigenschaften              \\
 		\midrule
 		Gleichverteilung & \makecell[l]{\( n \): Anzahl Ereignisse                                                                                                   \\ \( x_i \): Ereignisse} & \( \frac{1}{n} \sum_{i=1}^{n} x_i \) & \( \frac{1}{n} \sum_{i=1}^{n} x_i^2 - \frac{1}{n^2} \left(\sum_{i=1}^{n} x_i \right)^2 \) & \( \frac{1}{n} \) & \( \frac{|\{k:x_k \leq t\}|}{n} \) \\
 
@@ -850,29 +875,35 @@ Die Dichte von \(U'\) ist also \(\frac{1}{b-a} \mathbb{I}_{y\in[a,b]}\).
 
 		Geometrisch      & \makecell[l] { \( p \): ErfolgsWK                                                                                                         \\ \( t: \) Anzahl Versuche} & \( \frac{1}{p} \) & \( \frac{1-p}{p^2} \) & \( p(1-p)^{t-1} \) & \( 1-(1-p)^t\) \\
 
-		Poisson          & \makecell[l]{ \( \lambda \): Erwartungswert                                                                                               \\ und Varianz} & \( \lambda \) & \( \lambda \) & \( \frac{\lambda^t}{t!}e^{-\lambda} \) & \( e^{-\lambda} \sum_{k=0}^{t} \frac{\lambda^{k}}{k!} \) \\
+		Poisson          & \makecell[l]{ \( \lambda > 0 \): Erwartungswert                                                                                               \\ und Varianz} & \( \lambda \) & \( \lambda \) & \( \frac{\lambda^t}{t!}e^{-\lambda} \) & \( e^{-\lambda} \sum_{k=0}^{t} \frac{\lambda^{k}}{k!} \) & \begin{rowlist}
+			\item Für $X \sim P(\lambda), Y \sim P(\mu)$ gilt $X + Y \sim P(\lambda + \mu)$
+		\end{rowlist} \\
 
 		\bottomrule
 	\end{tabularx}
 \end{center}
 
-\bigskip
 \subsection{Stetige Verteilungen}
 \begin{center}
-	\begin{tabularx}{\textwidth}{llXXXX}
+	\small
+	\begin{tabularx}{\textwidth}{llXXXXXX}
 		\toprule
-		Verteilung               & Parameter                            & \( \E[X] \)                      & \( \Var[X] \)                    & \( f_X(t) \)                                                                                                                                  & \( F_X(t) \)                                  \\
+		Verteilung               & Parameter                            & \( \E[X] \)                      & \( \Var[X] \)                    & \( f_X(t) \)                                                                                                                                  & \( F_X(t) \)                              & Eigenschaften    \\
 
 		\midrule
 		Gleichverteilung         & \( [a,b] \): Intervall               & \( \frac{a+b}{2} \)              & \( \frac{1}{12}(b-a)^2 \)        & \(\begin{cases} \frac{1}{b-a} &a \le t \le b \\ 0 & \text{sonst}\end{cases}\)                                                                                                                & \(\begin{cases} 0 & t\le a \\ \frac{t-a}{b-a} & a < t < b \\ 1 & t \ge b \end{cases}\)                \\
 
 		Exponentialverteilung    & \( \lambda: \frac{1}{\E[X]} \)       & \( \frac{1}{\lambda} \)          & \( \frac{1}{\lambda^2} \)        & \( \begin{cases} \lambda e^{-\lambda t} & t \geq 0 \\ 0 & t < 0 \end{cases} \)                                                                                                              & \( \begin{cases} 1-e^{-\lambda t} & t>0 \\ 0 & t \leq 0\end{cases}\)               \\
 
-		Normalverteilung         & \makecell[l]{\( \mu: \E[X] \) \\                                                                                                                                                                                                                                                                        \( \sigma^2 \): Varianz} & \( \mu \) & \( \sigma ^2 \) & \( \frac{1}{\sqrt{2\pi \sigma^2} }e^{-{\frac{(t-\mu)^2}{2\sigma^2} }} \) & \( \frac{1}{ {\sqrt{2\pi \sigma^2}}} \int_{-\infty}^t e^{-\frac{(y-\mu)^2}{2\sigma^2}} \mathrm{d} y \) \\
+		Normalverteilung         & \makecell[l]{\( \mu: \E[X] \) \\                                                                                                                                                                                                                                                                        \( \sigma^2 \): Varianz} & \( \mu \) & \( \sigma ^2 \) & \( \frac{1}{\sqrt{2\pi \sigma^2} }e^{-{\frac{(t-\mu)^2}{2\sigma^2} }} \) & \( \frac{1}{ {\sqrt{2\pi \sigma^2}}} \int_{-\infty}^t e^{-\frac{(y-\mu)^2}{2\sigma^2}} \mathrm{d} y \) & \begin{rowlist}
+			\item Summe von uiv. normalverteilten Zufallsvariablen ist normalverteilt
+		\end{rowlist} \\
 
 		\( \chi ^2 \)-Verteilung & \( n \): Freiheitsgrad               & \( n \)                          & \( 2n \)                         & \( \frac{1}{2^{\frac{n}{2}}\Gamma (\frac{n}{2})} t^{\frac{n}{2}-1} e^{-\frac{t}{2}} \text{ für } t>0\)                                        & \(P\left( \frac{n}{2}, \frac{t}{2}\right)  \) \\
 
-		t-Verteilung             & \( n \): Freiheitsgrad               & \( \begin{cases} 0 & n>1 \\ \text{undef.} & \text{sonst} \end{cases} \) & \( \begin{cases} \frac{n}{n-2} & n> 2 \\ \infty & 1<n \leq 2 \\ \text{undef.} & \text{sonst} \end{cases} \) & \( \frac{\Gamma \left( \frac{n+1}{2} \right) }{\sqrt{n\pi } \cdot \Gamma (\frac{n}{2})} \left( 1+ \frac{t^2}{n} \right) ^{- \frac{n+1}{2}} \) & I'd rather not                                \\
+		t-Verteilung             & \( n \): Freiheitsgrad               & \( \begin{cases} 0 & n>1 \\ \text{undef.} & \text{sonst} \end{cases} \) & \( \begin{cases} \frac{n}{n-2} & n> 2 \\ \infty & 1<n \leq 2 \\ \text{undef.} & \text{sonst} \end{cases} \) & \( \frac{\Gamma \left( \frac{n+1}{2} \right) }{\sqrt{n\pi } \cdot \Gamma (\frac{n}{2})} \left( 1+ \frac{t^2}{n} \right) ^{- \frac{n+1}{2}} \) & I'd rather not & \begin{rowlist}
+			\item $\frac{\mathcal{N}(0,1)}{\sqrt{\frac{\chi_n^2}{n}}}$ ist t-verteilt mit $n$ Freiheitsgraden
+		\end{rowlist}                               \\
 
 
 		\bottomrule
