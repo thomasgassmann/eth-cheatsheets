@@ -416,6 +416,7 @@ Wir können mit der Kovarianz die Abhängigkeit von zwei Zufallsvariablen messen
 \begin{subbox}{Definition Kovarianz}
 	Wenn \(X, Y\) zwei ZV mit \(\E[X^2] < \infty, \E[Y^2] < \infty\), dann ist die Kovarianz zwischen \(X, Y\) definiert als
 	\[\text{Cov}(X,Y) = \E[X \cdot Y] - \E[X] \cdot \E[Y]\]
+	Falls $\text{Cov}(X,Y) = 0$ nennt man $X, Y$ unkorreliert.
 \end{subbox}
 \begin{itemize}
 	\item \(\text{Cov}(X,X) = \sigma_X^2\)
@@ -782,12 +783,28 @@ Aufhören falls:
 \begin{mainbox}{Substitution}
 	Sei $g: [a, b] \to \mathbb{R}$ stetig differenzierbar. $f: I \to \mathbb{R}$ ($g([a, b]) \subseteq I$) eine stetige Funktion. Dann gilt:
 	$$\int_{g(a)}^{g(b)} f(x)dx = \int_{a}^{b} f(g(x))g'(x)dt$$
-  \end{mainbox}
-  
-  \begin{itemize}
-   \item Grenzen substituieren nicht vergessen.
-   \item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
-  \end{itemize}
+\end{mainbox}
+
+\begin{itemize}
+	\item Grenzen substituieren nicht vergessen.
+	\item Alternativ kann auch das unbestimmte Integral berechnet werden und dann $u$ wieder durch $x$ substituiert werden.
+\end{itemize}
+
+\begin{mainbox}{Cauchy-Produkt}
+	Das Cauchy-Produkt von zwei Reihen $\sum_{i = 0}^\infty a_i$ und $\sum_{j = 0}^\infty b_j$ ist definiert als
+	$$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + \ldots$$ Es konvergiert, falls beide Reihen absolut konvergieren. Dann gilt:\\
+	$$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = \left( \sum_{i=0}^\infty a_i \right) \left( \sum_{j=0}^\infty b_j \right)$$
+\end{mainbox}
+
+\begin{subbox}{Gamma-Funktion}
+	Die Gamma-Funktion ist definiert als:
+	$$\Gamma(s) := \int_0^\infty e^{-x}x^{s-1} dx = (s-1)!$$
+	\begin{rowlist}
+		\item $\Gamma(1) = 1$
+		\item $\Gamma(\frac{1}{2}) = \sqrt{\pi}$
+		\item $\Gamma(s + 1) = s \Gamma(s)$
+	\end{rowlist}
+\end{subbox}
 
 \subsection{Ableitungen}
 
@@ -860,7 +877,7 @@ Aufhören falls:
 \newpage
 
 \renewcommand*{\arraystretch}{2.5}
-\subsection{Diskrete Verteilungen}
+\subsubsection{Diskrete Verteilungen}
 \begin{center}
 	\small
 	\begin{tabularx}{\textwidth}{llXXXXX}
@@ -873,17 +890,20 @@ Aufhören falls:
 
 		Binomial         & \makecell[l] {\( n \): Anzahl Versuche                                                                                                    \\ \( p: \) ErfolgsWK } & \( np \) & \( np(1-p) \) & \( \binom{n}{t}p^t(1-p)^{n-t} \) & \( \sum_{k=0}^{t} \binom{n}{k} p^k(1-p)^{n-k} \)  \\
 
-		Geometrisch      & \makecell[l] { \( p \): ErfolgsWK                                                                                                         \\ \( t: \) Anzahl Versuche} & \( \frac{1}{p} \) & \( \frac{1-p}{p^2} \) & \( p(1-p)^{t-1} \) & \( 1-(1-p)^t\) \\
+		Geometrisch      & \makecell[l] { \( p \): ErfolgsWK                                                                                                         \\ \( t: \) Anzahl Versuche} & \( \frac{1}{p} \) & \( \frac{1-p}{p^2} \) & \( p(1-p)^{t-1} \) & \( 1-(1-p)^t\) & \begin{rowlist}
+			\item gedächtnislos, $\P[X > t + s \mid X > s] = \P[X > t]$
+		\end{rowlist} \\
 
 		Poisson          & \makecell[l]{ \( \lambda > 0 \): Erwartungswert                                                                                               \\ und Varianz} & \( \lambda \) & \( \lambda \) & \( \frac{\lambda^t}{t!}e^{-\lambda} \) & \( e^{-\lambda} \sum_{k=0}^{t} \frac{\lambda^{k}}{k!} \) & \begin{rowlist}
-			\item Für $X \sim P(\lambda), Y \sim P(\mu)$ gilt $X + Y \sim P(\lambda + \mu)$
+			\item $X \sim P(\lambda), Y \sim P(\mu)$ gilt $X + Y \sim P(\lambda + \mu)$
+			\item $X_n \sim \text{Bin}(n, p_n)$ mit $n p_n = \lambda$ dann $\lim_{n \to \infty} \P[X_n = k] = \P[X = k]$ wobei $X \sim \text{Poisson}(\lambda)$
 		\end{rowlist} \\
 
 		\bottomrule
 	\end{tabularx}
 \end{center}
 
-\subsection{Stetige Verteilungen}
+\subsubsection{Stetige Verteilungen}
 \begin{center}
 	\small
 	\begin{tabularx}{\textwidth}{llXXXXXX}
@@ -893,7 +913,9 @@ Aufhören falls:
 		\midrule
 		Gleichverteilung         & \( [a,b] \): Intervall               & \( \frac{a+b}{2} \)              & \( \frac{1}{12}(b-a)^2 \)        & \(\begin{cases} \frac{1}{b-a} &a \le t \le b \\ 0 & \text{sonst}\end{cases}\)                                                                                                                & \(\begin{cases} 0 & t\le a \\ \frac{t-a}{b-a} & a < t < b \\ 1 & t \ge b \end{cases}\)                \\
 
-		Exponentialverteilung    & \( \lambda: \frac{1}{\E[X]} \)       & \( \frac{1}{\lambda} \)          & \( \frac{1}{\lambda^2} \)        & \( \begin{cases} \lambda e^{-\lambda t} & t \geq 0 \\ 0 & t < 0 \end{cases} \)                                                                                                              & \( \begin{cases} 1-e^{-\lambda t} & t>0 \\ 0 & t \leq 0\end{cases}\)               \\
+		Exponentialverteilung    & \( \lambda: \frac{1}{\E[X]} \)       & \( \frac{1}{\lambda} \)          & \( \frac{1}{\lambda^2} \)        & \( \begin{cases} \lambda e^{-\lambda t} & t \geq 0 \\ 0 & t < 0 \end{cases} \)                                                                                                              & \( \begin{cases} 1-e^{-\lambda t} & t>0 \\ 0 & t \leq 0\end{cases}\) & \begin{rowlist}
+			\item gedächtnislos
+		\end{rowlist}               \\
 
 		Normalverteilung         & \makecell[l]{\( \mu: \E[X] \) \\                                                                                                                                                                                                                                                                        \( \sigma^2 \): Varianz} & \( \mu \) & \( \sigma ^2 \) & \( \frac{1}{\sqrt{2\pi \sigma^2} }e^{-{\frac{(t-\mu)^2}{2\sigma^2} }} \) & \( \frac{1}{ {\sqrt{2\pi \sigma^2}}} \int_{-\infty}^t e^{-\frac{(y-\mu)^2}{2\sigma^2}} \mathrm{d} y \) & \begin{rowlist}
 			\item Summe von uiv. normalverteilten Zufallsvariablen ist normalverteilt
