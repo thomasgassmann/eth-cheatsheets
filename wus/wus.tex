@@ -278,6 +278,11 @@ Die Gewichtsfunktion einer diskreten ZV ist:
 \noindent \textbf{Poisson-Verteilung} (\(X \sim \text{Poisson}(\lambda)\)): Annäherung an die Binomialverteilung für grosse \(n\) und kleine \(p\) (d.h. rare Ereignisse). Sie ist definiert als
 \[\forall k \in \mathbb{N}, \lambda > 0 \quad \P[X=k]=\frac{\lambda^k}{k!}\cdot e^{-\lambda}\]
 
+Für $X_n \sim \text{Bin}(n, p_n)$ mit $n p_n = \lambda$ gilt $\lim_{n \to \infty} \P[X_n = k] = \P[X = k]$ wobei $X \sim \text{Poisson}(\lambda)$.
+
+Ausserdem gilt für $X \sim P(\lambda), Y \sim P(\mu)$ dass $X + Y \sim P(\lambda + \mu)$.
+
+
 \subsection{Stetige Zufallsvariablen}
 \begin{subbox}{Definition stetige ZV}
 	Eine ZV \(X\) heisst stetig, wenn ihre Verteilungsfunktion \(F_X\) wie folgt geschrieben werden kann:
@@ -314,6 +319,8 @@ Es gelten folgende Eigenschaften:
 
 \(X \sim \mathcal{N}(0,1)\) wird auch Standardnormalverteilung genannt. Für eine standardnormalverteilte ZV \(X\) gilt
 \[Z = m +\sigma \cdot X \sim \mathcal{N}(m, \sigma^2)\]
+
+Die Summe von uiv. normalverteilten Zufallsvariablen ist auch normalverteilt.
 
 \section{Erwartungswert}
 \begin{mainbox}{Definition Erwartungswert}
@@ -1057,7 +1064,7 @@ $$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
 	\small
 	\begin{tabularx}{\textwidth}{llXXXXX}
 		\toprule
-		Diskrete Verteilung & Parameter                                       & \( \E[X] \) & \( \Var[X] \)       & \( p_X(t) \)         & \( F_X(t) \)                     & Eigenschaften \\
+		\textbf{Diskrete Verteilung} & Parameter                                       & \( \E[X] \) & \( \Var[X] \)       & \( p_X(t) \)         & \( F_X(t) \)                     & Eigenschaften \\
 		\midrule
 		Gleichverteilung    & \makecell[l]{\( n \): Anzahl Ereignisse                                                                                                                       \\ \( x_i \): Ereignisse} & \( \frac{1}{n} \sum_{i=1}^{n} x_i \) & \( \frac{1}{n} \sum_{i=1}^{n} x_i^2 - \frac{1}{n^2} \left(\sum_{i=1}^{n} x_i \right)^2 \) & \( \frac{1}{n} \) & \( \frac{|\{k:x_k \leq t\}|}{n} \) \\
 
@@ -1069,10 +1076,9 @@ $$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
 			\item gedächtnislos, $\P[X > t + s \mid X > s] = \P[X > t]$
 		\end{rowlist} \\
 
-		Poisson             & \makecell[l]{ \( \lambda > 0 \): Erwartungswert                                                                                                               \\ und Varianz} & \( \lambda \) & \( \lambda \) & \( \frac{\lambda^t}{t!}e^{-\lambda} \) & \( e^{-\lambda} \sum_{k=0}^{t} \frac{\lambda^{k}}{k!} \) & \begin{rowlist}
-			\item $X \sim P(\lambda), Y \sim P(\mu)$ gilt $X + Y \sim P(\lambda + \mu)$
-			\item $X_n \sim \text{Bin}(n, p_n)$ mit $n p_n = \lambda$ dann $\lim_{n \to \infty} \P[X_n = k] = \P[X = k]$ wobei $X \sim \text{Poisson}(\lambda)$
-		\end{rowlist} \\
+		Poisson             & \makecell[l]{ \( \lambda > 0 \): Erwartungswert                                                                                                               \\ und Varianz} & \( \lambda \) & \( \lambda \) & \( \frac{\lambda^t}{t!}e^{-\lambda} \) & \( e^{-\lambda} \sum_{k=0}^{t} \frac{\lambda^{k}}{k!} \) &  \\
+
+		Negativ-Binomial &  \makecell[l]{\( r: \) Anzahl Erfolge \\ \( p: \) ErfolgsWK} & $\frac{r(1-p)}{p}$ & $\frac{r(1-p)}{p^2}$ & ${t - 1 \choose r - 1} p^r (1-p)^{t - r}$ & I'd rather not \\
 
 		\bottomrule
 	\end{tabularx}
@@ -1082,19 +1088,16 @@ $$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
 	\small
 	\begin{tabularx}{\textwidth}{llXXXXXX}
 		\toprule
-		Stetige Verteilung       & Parameter                      & \( \E[X] \)                                                             & \( \Var[X] \)                                                                                               & \( f_X(t) \)                                                                                                                                  & \( F_X(t) \)                                                                           & Eigenschaften                                                                                                          \\
+		\textbf{Stetige Verteilung}       & Parameter                      & \( \E[X] \)                                                             & \( \Var[X] \)                                                                                               & \( f_X(t) \)                                                                                                                                  & \( F_X(t) \)                                                                           & Eigenschaften                                                                                                          \\
 
 		\midrule
 		Gleichverteilung         & \( [a,b] \): Intervall         & \( \frac{a+b}{2} \)                                                     & \( \frac{1}{12}(b-a)^2 \)                                                                                   & \(\begin{cases} \frac{1}{b-a} &a \le t \le b \\ 0 & \text{sonst}\end{cases}\)                                                                 & \(\begin{cases} 0 & t\le a \\ \frac{t-a}{b-a} & a < t < b \\ 1 & t \ge b \end{cases}\)                                                                                                                          \\
 
 		Exponentialverteilung    & \( \lambda: \frac{1}{\E[X]} \) & \( \frac{1}{\lambda} \)                                                 & \( \frac{1}{\lambda^2} \)                                                                                   & \( \begin{cases} \lambda e^{-\lambda t} & t \geq 0 \\ 0 & t < 0 \end{cases} \)                                                                & \( \begin{cases} 1-e^{-\lambda t} & t>0 \\ 0 & t \leq 0\end{cases}\)                   & \begin{rowlist}
 			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \item gedächtnislos, $\P[X > t + s \mid X > s] = \P[X > t]$
-			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \item $X_1, X_2 \sim \mathcal{N}(0, 1)$ dann ist $X_1^2 + X_2^2 \sim \text{Exp}(\frac{1}{2})$
 		                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \end{rowlist}                                                \\
 
-		Normalverteilung         & \makecell[l]{\( \mu: \E[X] \)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \\ \( \sigma^2 \): Varianz} & \( \mu \) & \( \sigma ^2 \) & \( \frac{1}{\sqrt{2\pi \sigma^2} }e^{-{\frac{(t-\mu)^2}{2\sigma^2} }} \) & \( \frac{1}{ {\sqrt{2\pi \sigma^2}}} \int_{-\infty}^t e^{-\frac{(y-\mu)^2}{2\sigma^2}} \mathrm{d} y \) & \begin{rowlist}
-			\item Summe von uiv. normalverteilten Zufallsvariablen ist normalverteilt
-		\end{rowlist} \\
+		Normalverteilung         & \makecell[l]{\( \mu: \E[X] \)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            \\ \( \sigma^2 \): Varianz} & \( \mu \) & \( \sigma ^2 \) & \( \frac{1}{\sqrt{2\pi \sigma^2} }e^{-{\frac{(t-\mu)^2}{2\sigma^2} }} \) & \( \frac{1}{ {\sqrt{2\pi \sigma^2}}} \int_{-\infty}^t e^{-\frac{(y-\mu)^2}{2\sigma^2}} \mathrm{d} y \) \\
 
 		\( \chi ^2 \)-Verteilung & \( n \): Freiheitsgrad         & \( n \)                                                                 & \( 2n \)                                                                                                    & \( \frac{1}{2^{\frac{n}{2}}\Gamma (\frac{n}{2})} t^{\frac{n}{2}-1} e^{-\frac{t}{2}} \text{ für } t>0\)                                        & \(P\left( \frac{n}{2}, \frac{t}{2}\right)  \)                                          & \begin{rowlist}
 			                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             \item Für $X_1, X_k$ unabhängig und standardnormalverteilt ist $Q := \sum_{i=1}^k X_i^2$ $\chi_k^2$-verteilt
@@ -1117,9 +1120,7 @@ $$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
 			\end{cases}$ & $\begin{cases}
 				P(p, bt) & x \geq 0 \\
 				0        & x < 0
-			\end{cases}$ & \begin{rowlist}
-			\item test
-		\end{rowlist}\\
+			\end{cases}$ \\
 
 		\bottomrule
 	\end{tabularx}
