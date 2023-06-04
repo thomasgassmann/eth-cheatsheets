@@ -520,8 +520,14 @@ Wir treffen folgende Annahmen:
 	Ein Schätzer ist eine Zufallsvariable \(T: \Omega \mapsto \R\) von der Form
 	\[T = t(X_1, \ldots, X_n), \quad t: \R^n \mapsto \R\]
 \end{mainbox}
+
 Ein Schätzer \(T\) ist \textbf{erwartungstreu}, falls für alle \(\theta \in \Theta\) gilt:
 \[\E_\theta [T] = \theta\]
+
+Eine Folge von Schätzern $T^{(n)}$ heisst \textbf{konsistent} für $\theta$ falls für $\forall \epsilon > 0$:
+\[ \lim_{n \to \infty} \P_\theta \left[ \left| T^{(n)} - \theta \right| > \epsilon \right] = 0 \]
+Das bedeutet genau dass $T^{(n)}$ in $\P_\theta$ in Wahrscheinlichkeit gegen $\theta$ konvergiert.
+
 Sei \(\theta \in \Theta\) und \(T\) ein Schätzer. Der \textbf{Bias} (erwartete Schätzfehler) von \(T\) im Modell \(\P_\theta\) ist definiert als:
 \[\E_\theta[T]-\theta\]
 Der mittlere quadratische Schätzfehler (MSE) von \(T\) im Modell \(\P_\theta\) ist definiert als:
@@ -655,6 +661,38 @@ Der \(p\)-Wert hat folgende Eigenschaften:
 
 Insgesamt gilt also kleiner $p$-Wert $\implies$ $H_0$ wird wahrscheinlich verworfen.
 
+\section{Konvergenz}
+
+\begin{subbox}{Fast sichere Konvergenz}
+	Die Folge $X_n$ konvergiert f.s. gegen $X$ falls:
+	$$
+	\P \left[ \lim_{n \to \infty} X_n = X \right] = 1
+	$$
+\end{subbox}
+
+\begin{subbox}{Konvergenz in Wahrscheinlichkeit}
+	Die Folge $X_n$ konvergiert in Wahrscheinlichkeit gegen $X$ falls:
+	$$
+	\forall \epsilon > 0 \lim_{n \to \infty} \P \left[ \left| X_n - X \right| > \epsilon \right] = 0
+	$$
+\end{subbox}
+
+\begin{subbox}{Konvergenz in Verteilung}
+	Die Folge $X_n$ konvergiert in Verteilung gegen $X$ falls an allen Stellen $x \in \R$:
+	$$
+	\lim_{n \to \infty} F_n(x) = F(x)
+	$$
+	Dies wird bspw. beim zentralen Grenzwertsatz verwendet.
+\end{subbox}
+
+Für die Konvergenz gilt:
+
+$$
+\begin{matrix} \text{Fast sichere} \\ \text{Konvergenz} \end{matrix} \implies
+\begin{matrix} \text{Konvergenz in} \\ \text{Wahrscheinlichkeit} \end{matrix} \implies
+\begin{matrix} \text{Konvergenz in} \\ \text{Verteilung} \end{matrix}
+$$
+
 \section{Aufgaben}
 \subsection{Multiple Choice}
 
@@ -734,38 +772,6 @@ Wir definieren \(\tau(x) = \phi(a +(b-a)U)\). Dann verwenden wir
 \end{align*}
 Die Dichte von \(U'\) ist also \(\frac{1}{b-a} \mathbb{I}_{y\in[a,b]}\).
 
-\section{Konvergenz}
-
-\begin{subbox}{Fast sichere Konvergenz}
-	Die Folge $X_n$ konvergiert f.s. gegen $X$ falls:
-	$$
-	\P \left[ \lim_{n \to \infty} X_n = X \right] = 1
-	$$
-\end{subbox}
-
-\begin{subbox}{Konvergenz in Wahrscheinlichkeit}
-	Die Folge $X_n$ konvergiert in Wahrscheinlichkeit gegen $X$ falls:
-	$$
-	\forall \epsilon > 0 \lim_{n \to \infty} \P \left[ \left| X_n - X \right| > \epsilon \right] = 0
-	$$
-\end{subbox}
-
-\begin{subbox}{Konvergenz in Verteilung}
-	Die Folge $X_n$ konvergiert in Verteilung gegen $X$ falls an allen Stellen $x \in \R$:
-	$$
-	\lim_{n \to \infty} F_n(x) = F(x)
-	$$
-	Dies wird bspw. beim zentralen Grenzwertsatz verwendet.
-\end{subbox}
-
-Für die Konvergenz gilt:
-
-$$
-\begin{matrix} \text{Fast sichere} \\ \text{Konvergenz} \end{matrix} \implies
-\begin{matrix} \text{Konvergenz in} \\ \text{Wahrscheinlichkeit} \end{matrix} \implies
-\begin{matrix} \text{Konvergenz in} \\ \text{Verteilung} \end{matrix}
-$$
-
 \section{Analysis}
 
 \begin{mainbox}{Partielle Integration}
@@ -826,6 +832,8 @@ Aufhören falls:
 		\item $\Gamma(s + 1) = s \Gamma(s)$
 	\end{rowlist}
 \end{subbox}
+
+Die regularisierte Gamma-Funktion ist definiert als $P(a, x) = \frac{\gamma(a, x)}{\Gamma(a)}$ wobei $\gamma(a, x) = \int_0^x t^{a - 1} e^{-t} dt$ und $\Gamma(a)$ wie oben.
 
 \section{Tabellen}
 
@@ -917,12 +925,11 @@ Aufhören falls:
 \newpage
 
 \renewcommand*{\arraystretch}{2.5}
-\subsubsection{Diskrete Verteilungen}
 \begin{center}
 	\small
 	\begin{tabularx}{\textwidth}{llXXXXX}
 		\toprule
-		Verteilung       & Parameter                                   & \( \E[X] \) & \( \Var[X] \)       & \( p_X(t) \)         & \( F_X(t) \)       & Eigenschaften              \\
+		Diskrete Verteilung       & Parameter                                   & \( \E[X] \) & \( \Var[X] \)       & \( p_X(t) \)         & \( F_X(t) \)       & Eigenschaften              \\
 		\midrule
 		Gleichverteilung & \makecell[l]{\( n \): Anzahl Ereignisse                                                                                                   \\ \( x_i \): Ereignisse} & \( \frac{1}{n} \sum_{i=1}^{n} x_i \) & \( \frac{1}{n} \sum_{i=1}^{n} x_i^2 - \frac{1}{n^2} \left(\sum_{i=1}^{n} x_i \right)^2 \) & \( \frac{1}{n} \) & \( \frac{|\{k:x_k \leq t\}|}{n} \) \\
 
@@ -943,12 +950,11 @@ Aufhören falls:
 	\end{tabularx}
 \end{center}
 
-\subsubsection{Stetige Verteilungen}
 \begin{center}
 	\small
 	\begin{tabularx}{\textwidth}{llXXXXXX}
 		\toprule
-		Verteilung               & Parameter                            & \( \E[X] \)                      & \( \Var[X] \)                    & \( f_X(t) \)                                                                                                                                  & \( F_X(t) \)                              & Eigenschaften    \\
+		Stetige Verteilung               & Parameter                            & \( \E[X] \)                      & \( \Var[X] \)                    & \( f_X(t) \)                                                                                                                                  & \( F_X(t) \)                              & Eigenschaften    \\
 
 		\midrule
 		Gleichverteilung         & \( [a,b] \): Intervall               & \( \frac{a+b}{2} \)              & \( \frac{1}{12}(b-a)^2 \)        & \(\begin{cases} \frac{1}{b-a} &a \le t \le b \\ 0 & \text{sonst}\end{cases}\)                                                                                                                & \(\begin{cases} 0 & t\le a \\ \frac{t-a}{b-a} & a < t < b \\ 1 & t \ge b \end{cases}\)                \\
@@ -957,16 +963,34 @@ Aufhören falls:
 			\item gedächtnislos, $\P[X > t + s \mid X > s] = \P[X > t]$
 		\end{rowlist}               \\
 
-		Normalverteilung         & \makecell[l]{\( \mu: \E[X] \) \\                                                                                                                                                                                                                                                                        \( \sigma^2 \): Varianz} & \( \mu \) & \( \sigma ^2 \) & \( \frac{1}{\sqrt{2\pi \sigma^2} }e^{-{\frac{(t-\mu)^2}{2\sigma^2} }} \) & \( \frac{1}{ {\sqrt{2\pi \sigma^2}}} \int_{-\infty}^t e^{-\frac{(y-\mu)^2}{2\sigma^2}} \mathrm{d} y \) & \begin{rowlist}
+		Normalverteilung         & \makecell[l]{\( \mu: \E[X] \) \\ \( \sigma^2 \): Varianz} & \( \mu \) & \( \sigma ^2 \) & \( \frac{1}{\sqrt{2\pi \sigma^2} }e^{-{\frac{(t-\mu)^2}{2\sigma^2} }} \) & \( \frac{1}{ {\sqrt{2\pi \sigma^2}}} \int_{-\infty}^t e^{-\frac{(y-\mu)^2}{2\sigma^2}} \mathrm{d} y \) & \begin{rowlist}
 			\item Summe von uiv. normalverteilten Zufallsvariablen ist normalverteilt
 		\end{rowlist} \\
 
-		\( \chi ^2 \)-Verteilung & \( n \): Freiheitsgrad               & \( n \)                          & \( 2n \)                         & \( \frac{1}{2^{\frac{n}{2}}\Gamma (\frac{n}{2})} t^{\frac{n}{2}-1} e^{-\frac{t}{2}} \text{ für } t>0\)                                        & \(P\left( \frac{n}{2}, \frac{t}{2}\right)  \) \\
+		\( \chi ^2 \)-Verteilung & \( n \): Freiheitsgrad               & \( n \)                          & \( 2n \)                         & \( \frac{1}{2^{\frac{n}{2}}\Gamma (\frac{n}{2})} t^{\frac{n}{2}-1} e^{-\frac{t}{2}} \text{ für } t>0\)                                        & \(P\left( \frac{n}{2}, \frac{t}{2}\right)  \) & \begin{rowlist}
+			\item Für $X_1, X_k$ unabhängig und standardnormalverteilt ist $Q := \sum_{i=1}^k X_i^2$ $\chi^2$-verteilt
+			\item Ist $X \sim \chi_n^2$ dann ist $X \sim \gamma(\frac{n}{2}, \frac{1}{2})$
+		\end{rowlist} \\
 
 		t-Verteilung             & \( n \): Freiheitsgrad               & \( \begin{cases} 0 & n>1 \\ \text{undef.} & \text{sonst} \end{cases} \) & \( \begin{cases} \frac{n}{n-2} & n> 2 \\ \infty & 1<n \leq 2 \\ \text{undef.} & \text{sonst} \end{cases} \) & \( \frac{\Gamma \left( \frac{n+1}{2} \right) }{\sqrt{n\pi } \cdot \Gamma (\frac{n}{2})} \left( 1+ \frac{t^2}{n} \right) ^{- \frac{n+1}{2}} \) & I'd rather not & \begin{rowlist}
 			\item $\frac{\mathcal{N}(0,1)}{\sqrt{\frac{\chi_n^2}{n}}}$ ist t-verteilt mit $n$ Freiheitsgraden
+			\item für $n = 1$ Cauchy
+			\item für $n \to \infty$ Normal
 		\end{rowlist}                               \\
 
+		Cauchy					& \makecell[l]{\( s > 0 \) \\ \( -\infty < u < \infty \)} & - & - & $\frac{1}{\pi} \frac{s}{s^2 + (t - u)^2}$ & $\frac{1}{2} + \frac{1}{\pi} \arctan \left( \frac{t - u}{s} \right)$ & \begin{rowlist}
+			\item symmetrisch zu $u$
+		\end{rowlist} \\
+
+		Gamma & \makecell[l]{\( p \) \\ \( b \)} & $\frac{p}{b}$ & $\frac{p}{b^2}$ & $\begin{cases}
+			\frac{b^p}{\Gamma(p)} t^{p - 1} e^{-bt} & t > 0\\
+			0 & t \leq 0
+		\end{cases}$ & $\begin{cases}
+			P(p, bt) & x \geq 0\\
+			0 & x < 0
+		\end{cases}$ & \begin{rowlist}
+			\item test
+		\end{rowlist}\\
 
 		\bottomrule
 	\end{tabularx}
