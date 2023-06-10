@@ -490,12 +490,17 @@ Wenn \(X_1, \ldots, X_n\) stetige ZV mit Dichten \(f_1, \ldots, f_n\) sind, dann
 \end{enumerate}
 
 \section{Grenzwertsätze}
-Sei \(X_1, X_2, \ldots\) eine unendliche Sequenz an uiv. ZV. Wir betrachten die Teilsumme \(S_n = X_1 + \ldots + X_n\).
-\begin{mainbox}{Gesetz der grossen Zahlen}
-	Sei \(\E[|X_1|] < \infty\) und \(m = \E[X_1]\), so gilt
-	\[\lim_{n\to \infty} \frac{X_1 + \ldots + X_n}{n} = m \quad \text{f.s.}\]
+ Wir betrachten die Teilsumme \(S_n = X_1 + \ldots + X_n\).
+\begin{mainbox}{Schwaches Gesetz der grossen Zahlen}
+	Sei \(X_1, X_2, \ldots\) eine Folge von unabhängigen ZV die alle den gleichen Erwartungswert haben. Mit \(\E[|X_1|] < \infty\) und \(m = \E[X_1]\) gilt dass $\overline{X}_n$ für $n \to \infty$ in Wahrscheinlichkeit gegen $m$ konvergiert.
 \end{mainbox}
-Da die ZV uiv. sind, gilt \(\E[|X_i|] < \infty\) und \(m = \E[X_i]\) auch für alle \(i\).
+
+\begin{mainbox}{Starkes Gesetz der grossen Zahlen}
+	Sei $X_1, X_2, \ldots$ eine Folge von iid ZV mit $m = \E[X_1]$. $\overline{X}_n$ konvergiert dann für $n \to \infty$ fast sicher gegen $m$.
+	$$
+	\lim_{n\to \infty} \frac{X_1 + \ldots + X_n}{n} = m \quad \text{f.s.}
+	$$
+\end{mainbox}
 
 \subsubsection*{Fast sichere Konvergenz}
 
