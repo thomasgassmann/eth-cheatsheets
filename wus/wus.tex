@@ -312,6 +312,7 @@ Es gelten folgende Eigenschaften:
 \begin{itemize}
 	\item Wenn \(Y\sim \text{Exp}(\lambda)\), dann ist \(c \cdot Y \sim \text{Exp}(\frac{\lambda}{c})\)
 	\item \(X_1, X_2 \sim \mathcal{N}(0,1)\) uiv. \(\implies \chi_2 = X_1^2 +X_2^2 \sim \text{Exp}(\frac{1}{2})\)
+	\item Die Summe von $n$ exponentialverteilten ZV mit 
 \end{itemize}
 
 \noindent \textbf{Normalverteilung} (\(X \sim \mathcal{N}(m, \sigma^2)\)): Die wohl wichtigste Verteilung. Sie ist definiert als
@@ -1134,7 +1135,10 @@ $$(x+y)^n = \sum_{k=0}^n {n \choose k} x^{n-k} y^k$$
 			\end{cases}$ & $\begin{cases}
 				P(p, bt) & x \geq 0 \\
 				0        & x < 0
-			\end{cases}$ \\
+			\end{cases}$ & \begin{rowlist}
+				\item Für $p = 1$ und $b = \lambda$ exponentialverteilt ($\text{Exp}(\lambda)$)
+				\item Die Summe von $n$ exponentialverteilten ZV ($\text{Exp}(\lambda)$) ist gamma-verteilt mit $p = n, b = \lambda$.
+			\end{rowlist} \\
 
 		\bottomrule
 	\end{tabularx}
