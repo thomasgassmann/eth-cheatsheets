@@ -281,4 +281,4 @@ analysis2/analysis2*.pdf
 chinesisch/*.pdf
 eprog/*.pdf
 wus/*.pdf
-
+!wus/include_degrees_circle.pdf
