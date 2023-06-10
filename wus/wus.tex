@@ -621,11 +621,11 @@ wobei \(Z = \sqrt{n}(T-m) \sim \mathcal{N}(0, 1)\) ist.
 \subsection{Häufige Fälle}
 \subsubsection*{\texorpdfstring{Normalverteilt - \(\mu\) unbekannt, \(\sigma^2\) bekannt (z-Test)}{Normalverteilt - μ unbekannt, σ² bekannt (z-Test)}}
 Erwartungstreuer Schätzer: \(\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i\)\\
-Verteilung unter \(\P_\theta: \frac{\overline{X}_n - \theta_0}{\sqrt{\sigma^2/n}} \sim \mathcal{N}(0,1)\)
+Verteilung unter \(\P_\theta: \frac{\overline{X}_n - \theta}{\sqrt{\sigma^2/n}} \sim \mathcal{N}(0,1)\)
 \begin{enumerate}
 	\item Modell \(X_1, \ldots, X_n \sim \mathcal{N}(\theta, \sigma^2)\) uiv. unter \(\P_\theta\)
 	\item Hypothesen \(H_0 : \theta = \theta_0\), z.B. \(H_A : \theta \ne \theta_0\)
-	\item Test \(T = \frac{\overline{X}_n - \theta_0}{\sqrt{\sigma^2/n}} \sim \mathcal{N}(0,1)\)
+	\item Test \(T = \frac{\overline{X}_n - \theta_0}{\sqrt{\sigma^2/n}} \) ($\sim \mathcal{N}(0,1)$ unter $\theta_0$)
 	\item Verwerfungsbereich \(]-\infty, -c[ \ \cup \ ] c, \infty\) für \(c\ge 0\)
 \end{enumerate}
 
@@ -633,7 +633,8 @@ Verteilung unter \(\P_\theta: \frac{\overline{X}_n - \theta_0}{\sqrt{\sigma^2/n}
 Wir definieren \(\vec{\theta} = (\mu, \sigma^2)\) und den Varianz-Schätzer \(S^2 = \frac{1}{n-1}\sum_{i=1}^n (X_i - \overline{X}_n)^2\).
 \begin{enumerate}
 	\item Modell \(X_1, \ldots, X_n \sim \mathcal{N}(\theta, \sigma^2)\) uiv. unter \(\P_{\vec{\theta}}\)
-	\item Test \(T = \frac{\overline{X}_n - \mu_0}{\sqrt{S^2/n}} \sim t_{n-1}\)
+	\item Hypothesen $H_0: \mu = \mu_0$
+	\item Test \(T = \frac{\overline{X}_n - \mu_0}{\sqrt{S^2/n}}\) ($\sim t_{n-1}$ unter $\theta_0$)
 \end{enumerate}
 
 \subsection{Approximatives Konfidenzintervall}
