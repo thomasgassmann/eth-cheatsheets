@@ -362,6 +362,15 @@ Sei \(X\) eine diskrete ZV mit Werten in \(\mathbb{N}\). Dann gilt folgende Iden
 Sei \(X\) eine stetige ZV mit \(X \ge 0\) f.s., dann gilt:
 \[\E[X] = \int_0^\infty \P[X > x] \mathop{dx}\]
 
+\subsection{Momentenerzeugende Funktion}
+
+\begin{subbox}{Momentenerzeugende Funktion}
+	Sei $X$ eine Zufallsvariable. Die momentenerzeugende Funktion ist definiert als:
+	$$
+		M_X(t) := \E \left[ e^{tX} \right]
+	$$
+\end{subbox}
+
 \subsection{Ungleichungen}
 \begin{subbox}{Monotonie}
 	Seien \(X, Y\) ZV sodass \(X \le Y\) f.s., dann gilt \(\E[X] \le \E[Y]\).
@@ -552,7 +561,7 @@ Verteilung unter \(\P_\theta: \frac{\overline{X}_n - \theta_0}{\sqrt{\sigma^2/n}
 \begin{enumerate}
 	\item Modell \(X_1, \ldots, X_n \sim \mathcal{N}(\theta, \sigma^2)\) uiv. unter \(\P_\theta\)
 	\item Hypothesen \(H_0 : \theta = \theta_0\), z.B. \(H_A : \theta \ne \theta_0\)
-	\item Test \(T = \frac{\overline{X}_n - \mu}{\sqrt{\sigma^2/n}} \sim \mathcal{N}(0,1)\)
+	\item Test \(T = \frac{\overline{X}_n - \theta_0}{\sqrt{\sigma^2/n}} \sim \mathcal{N}(0,1)\)
 	\item Verwerfungsbereich \(]-\infty, -c[ \ \cup \ ] c, \infty\) für \(c\ge 0\)
 \end{enumerate}
 
