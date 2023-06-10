@@ -236,6 +236,7 @@ Eine Folge von Zufallsvariablen \(X_1, X_2, \ldots\) ist unabhängig, falls \(
 	$$
 		f_Y(t) = \frac{1}{\left| \det \left( B \right) \right|} f_X \left( B^{-1} (t - m) \right)
 	$$
+	wobei $Y = g(X)$.
 \end{mainbox}
 
 \subsection{Konstruktion einer Zufallsvariable}
@@ -489,6 +490,20 @@ Wenn \(X_1, \ldots, X_n\) stetige ZV mit Dichten \(f_1, \ldots, f_n\) sind, dann
 	\item Für alle \(\phi_1, \ldots, \phi_n: \R \mapsto \R\) gilt:
 	      \[\E[\phi_1 (x_1)\cdot \ldots\cdot (x_n)] = \E[\phi_1(x_1)] \cdot \ldots \cdot \E[\phi_n(x_n)]\]
 \end{enumerate}
+
+\subsection{Faltungsformel}
+
+Für zwei ZV $X, Y$ sowie $Z = X + Y$ gilt im diskreten Fall:
+
+$$
+	p_Z(z) = \sum_{i = -\infty}^\infty p_X(i) p_Y(z - i)
+$$
+
+Im stetigen Fall:
+
+$$
+	f_Z(z) = \int_{-\infty}^\infty f_X(x) f_Y(z - x) dx
+$$
 
 \section{Grenzwertsätze}
  Wir betrachten die Teilsumme \(S_n = X_1 + \ldots + X_n\).
