@@ -6,6 +6,7 @@
 % 3 column landscape layout with fewer margins
 \usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
 \usepackage{flowfram}
+\usepackage{bbm}
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 \Ncolumn[<10]{3}
@@ -166,9 +167,10 @@ $$
 
 Für eine Partition $\mathcal{B} = (B_i)_{i \in I}$ von $\Omega$ definieren wir:
 
-$$
-	\E[X \mid \mathcal{B}](\omega) = \sum_{i \in I, \P[B_i] > 0} \E[X \mid B_i] 1_{B_i}(\omega)
-$$
+\begin{align*}
+	\E[X \mid \mathcal{B}](\omega) & = \sum_{i \in I, \P[B_i] > 0} \E[X \mid B_i] 1_{B_i}(\omega)\\ 
+	& = \sum_{i \in I, \P[B_i] > 0} \E[\mathbbm{1}_{B_i} X] \frac{\mathbbm{1}_{B_i}(\omega)}{\P[B_i]}
+\end{align*}
 
 Ähnlich definieren wir auch die bedingte Dichte:
 
