@@ -208,7 +208,7 @@ Die Verteilungsfunktion hat folgende Eigenschaften:
 \begin{enumerate}
 	\item \(a < b \implies \P[a < X \le b] = F_X(b) - F_X(a)\)
 	\item \(F\) ist monoton wachsend
-	\item \(F\) ist rechtsstetig, d.h. \(\lim_{t \to 0} F_{x+t} = F(x)\)
+	\item \(F\) ist rechtsstetig, d.h. \(\lim_{t \to 0^+} F_X(x+t) = F_X(x)\)
 	\item \(\lim_{x\to - \infty} F_X(x) = 0\) und \(\lim_{x\to \infty} F_X(x) = 1\)
 \end{enumerate}
 
@@ -216,7 +216,7 @@ Sind die letzten drei Punkte erfüllt existiert auch eine Zufallsvariable mit de
 
 \subsubsection*{Linksstetigkeit}
 Die Definition der Linksstetigkeit ist
-\[F(x-) = \lim_{t\to 0} F(x-t)\]
+\[F(x-) = \lim_{t \to 0^+} F(x-t)\]
 Es gilt allerdings \textit{nicht} immer \(F(x-) = F(x)\), d.h. nicht jede Verteilungsfunktion ist linksstetig. Allerdings gilt:
 \[\forall x \in \R \quad F(x) - F(x-) = \P[X=x]\]
 Daraus lässt sich für stetige ZV \(P[X=x] = 0\) folgern.\\
