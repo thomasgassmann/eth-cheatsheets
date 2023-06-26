@@ -1,6 +1,5 @@
 % Basic stuff
 \documentclass[a4paper,10pt]{article}
-\usepackage[nswissgerman]{babel}
 \usepackage{scrextend}
 
 % 3 column landscape layout with fewer margins
@@ -321,7 +320,6 @@ Es gelten folgende Eigenschaften:
 \begin{itemize}
 	\item Wenn \(Y\sim \text{Exp}(\lambda)\), dann ist \(c \cdot Y \sim \text{Exp}(\frac{\lambda}{c})\)
 	\item \(X_1, X_2 \sim \mathcal{N}(0,1)\) uiv. \(\implies \chi_2 = X_1^2 +X_2^2 \sim \text{Exp}(\frac{1}{2})\)
-	\item Die Summe von $n$ exponentialverteilten ZV mit 
 \end{itemize}
 
 \noindent \textbf{Normalverteilung} (\(X \sim \mathcal{N}(m, \sigma^2)\)): Die wohl wichtigste Verteilung. Sie ist definiert als
@@ -430,6 +428,7 @@ wobei \(m=\E[X]\). Dabei wird \(\sigma_X\) auch die Standardabweichung von \(X\)
 	\item Wenn \(\E[X^2] < \infty\), dann \(\Var[X] = \E[X^2] - \E[X]^2\).
 	\item Wenn \(\E[X^2] < \infty\) und \(a, b \in \R\), dann \(\Var[a X + b] = a^2 \Var[X]\).
 	\item Wenn \(S = X_1 + \ldots + X_n\), wobei \(X_1, \ldots, X_n\) paarweise unabhängig sind, dann gilt \(\sigma_S^2 = \sigma_{X_1}^2 + \ldots + \sigma_{X_n}^2\).
+	\item Allgemein gilt $\Var[X + Y] = \Var[X] + \Var[Y] + 2 \cdot \text{Cov}(X, Y)$, also $\Var[X + Y] = \Var[X] + \Var[Y]$ falls $X, Y$ unabängig oder unkorreliert sind.
 \end{enumerate}
 
 \subsection{Kovarianz}
@@ -713,6 +712,16 @@ Der \(p\)-Wert hat folgende Eigenschaften:
 \end{enumerate}
 
 Insgesamt gilt also kleiner $p$-Wert $\implies$ $H_0$ wird wahrscheinlich verworfen. Der $p$-Wert eines Samples wird also durch $G(T(\omega))$ berechnet.
+
+\subsection{Momentenschätzer}
+
+Wir möchten $k$ unbekannte Parameter $\theta_1, \cdots, \theta_k$ bestimmen welche die Zufallsvariable $X$ mit Dichte $f_X(\omega; \theta)$ charaktisieren.
+
+Die Lösung des folgenden Gleichungssystemes gibt dann den Momentenschätzer:
+
+\begin{align*}
+	\frac{1}{n} \sum_{i=1}^n \omega_i^j =: \hat{\mu}_j \overset{!}{=} & g_j(\theta_1, \cdots, \theta_k) =: \E[X^j]
+\end{align*}
 
 \section{Aufgaben}
 \subsection{Multiple Choice}
