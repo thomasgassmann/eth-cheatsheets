@@ -1131,6 +1131,8 @@ $\sum_{k=0}^\infty q^k$ divergiert für $|q| \ge 1$ und konvergiert zu $\frac{1}
 
 		Negativ-Binomial &  \makecell[l]{\( r: \) Anzahl Erfolge \\ \( p: \) ErfolgsWK} & $\frac{r}{p}$ & $\frac{r(1-p)}{p^2}$ & ${t - 1 \choose r - 1} p^r (1-p)^{t - r}$ & I'd rather not \\
 
+		Hypergeometrisch &  \makecell[l]{\( N: \) Gesamtanzahl \\ \( M \leq N: \) Anzahl Erfolge \\ \( n \leq N: \) Stichprobe} & $\frac{nM}{N}$ & $\frac{nM}{N} \left( 1 - \frac{M}{N} \right) \frac{N - n}{N - 1}$ & $\frac{\binom{M}{t} \cdot \binom{N - M}{n - t}}{\binom{N}{n}}$ & $\sum_{y=0}^t \frac{\binom{M}{y} \cdot \binom{N - M}{n - y}}{\binom{N}{n}}$ \\
+
 		\bottomrule
 	\end{tabularx}
 \end{center}
