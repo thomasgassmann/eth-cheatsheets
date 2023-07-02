@@ -177,6 +177,12 @@ $$
 	f_{X \mid Y}(x \mid y) = \frac{f_{X,Y}(x,y)}{f_Y(y)}
 $$
 
+Somit für den bedingten Erwartungswert für stetige Zufallsvariablen:
+
+$$
+	\E[X \mid Y = y] = \frac{1}{f_Y(y)} \int_{-\infty}^\infty x f_{X,Y}(x,y) dx
+$$
+
 \subsection{Unabhängigkeit}
 \begin{mainbox}{Definition Unabhängigkeit}
 	Zwei Ereignisse \(A, B\in \F\) sind unabhängig, falls gilt:
@@ -722,6 +728,8 @@ Die Lösung des folgenden Gleichungssystemes gibt dann den Momentenschätzer:
 \begin{align*}
 	\frac{1}{n} \sum_{i=1}^n \omega_i^j =: \hat{\mu}_j \overset{!}{=} & g_j(\theta_1, \cdots, \theta_k) =: \E[X^j]
 \end{align*}
+
+Das $s$-te Moment von $X$ ist definiert als $\E[X^s]$.
 
 \section{Aufgaben}
 \subsection{Multiple Choice}
