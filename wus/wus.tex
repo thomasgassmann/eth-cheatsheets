@@ -438,7 +438,6 @@ wobei \(m=\E[X]\). Dabei wird \(\sigma_X\) auch die Standardabweichung von \(X\)
 \end{enumerate}
 
 \subsection{Kovarianz}
-Wir können mit der Kovarianz die Abhängigkeit von zwei Zufallsvariablen messen.
 \begin{subbox}{Definition Kovarianz}
 	Wenn \(X, Y\) zwei ZV mit \(\E[X^2] < \infty, \E[Y^2] < \infty\), dann ist die Kovarianz zwischen \(X, Y\) definiert als
 	\[\text{Cov}(X,Y) = \E[X \cdot Y] - \E[X] \cdot \E[Y]\]
@@ -449,6 +448,7 @@ Wir können mit der Kovarianz die Abhängigkeit von zwei Zufallsvariablen messen
 	\item X, Y unabhängig \(\implies \text{Cov}(X,Y) = 0\)
 \end{itemize}
 
+Die Korrelation zweier Zufallsvariablen $X, Y$ ist ausserdem definiert als $\text{Corr}(X,Y) = \frac{\text{Cov}(X,Y)}{\sqrt{\Var{X}} \cdot \sqrt{\Var{Y}}}$.
 \section{Gemeinsame Verteilungen}
 \subsection{Diskrete gemeinsame Verteilungen}
 \begin{subbox}{Definition gemeinsame Verteilung}
