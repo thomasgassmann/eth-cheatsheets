@@ -286,6 +286,8 @@ Die Gewichtsfunktion einer diskreten ZV ist:
 \noindent \textbf{Binomialverteilung} (\(X \sim \text{Bin}(n,p)\)): Die Wiederholung von Bernoulli-Experimenten. Sie ist definiert als
 \[\forall k \in \{0, \ldots, n\} \quad \P[X=k] = \binom{n}{k} \cdot p^k \cdot (1-p)^{n-k}\]
 
+Sei $N \sim P(\lambda)$ und $X \mid N \sim \text{Bin}(N, p)$. Dann ist $X \sim P(\lambda p)$.
+
 \noindent \textbf{Geometrische Verteilung} (\(X \sim \text{Geom}(p)\)): Beschreibt das erste Auftreten eines Erfolges. Sie ist definiert als
 \[\forall k \in \mathbb{N} - \{0\} \quad \P[X=k]=(1-p)^{k-1}\cdot p\]
 
@@ -294,7 +296,7 @@ Die Gewichtsfunktion einer diskreten ZV ist:
 
 Für $X_n \sim \text{Bin}(n, p_n)$ mit $n p_n = \lambda$ gilt $\lim_{n \to \infty} \P[X_n = k] = \P[X = k]$ wobei $X \sim \text{Poisson}(\lambda)$.
 
-Ausserdem gilt für unabhängige $X \sim P(\lambda), Y \sim P(\mu)$ dass $X + Y \sim P(\lambda + \mu)$.
+Ausserdem gilt für unabhängige $X \sim P(\lambda), Y \sim P(\mu)$ dass $X + Y \sim P(\lambda + \mu)$. Siehe auch Binomialverteilung.
 
 
 \subsection{Stetige Zufallsvariablen}
