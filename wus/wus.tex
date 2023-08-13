@@ -763,7 +763,8 @@ Seien \(X, Y\) unabhängig und lognormalverteilt (\(\ln X, \ln Y\) sind normalve
 
 Seien \(X_1, X_2 \sim \mathcal{U}[0,1]\) unabhängige ZV und sei \(X = \max (X_1, X_2)\). Berechne die Dichtefunktion von \(X\) und \(\P[X_1 \leq x \mid X \geq y]\).
 \begin{align*}
-	F_X(t) & = \P[\max(X_1, X_2) \leq t]                                                                                                              \\ &= \P[X_1 \leq t] \cdot \P[X_2 \leq t] = F_{X_1}(t) \cdot F_{X_2}(t) \\
+	F_X(t) & = \P[\max(X_1, X_2) \leq t] = \P[X_1 \leq x \cap X_1 \leq x]\\
+	&= \P[X_1 \leq t] \cdot \P[X_2 \leq t] = F_{X_1}(t) \cdot F_{X_2}(t) \\
 	f_X(t) & = \frac{d}{dt} F_{X_1}(t) \cdot F_{X_2}(t) = \frac{d}{dt} t^2 \cdot \mathbb{I}_{0 \leq t \leq 1} = 2t \cdot \mathbb{I}_{0 \leq t \leq 1}
 \end{align*}
 
@@ -777,6 +778,8 @@ Für die Wahrscheinlichkeit brauchen wir eine Fallunterscheidung: \smallskip
 	\item \(0 \leq y \leq x \leq 1\):
 	      \[\frac{\mathbb{P}[X_1 \leq x \cap X \geq y]}{\mathbb{P}[X \geq y]} = \frac{x - y^2}{1 - y^2}\]
 \end{enumerate}
+
+Entsprechend kann die Dichte von $\min(X_1, X_2)$ gefunden werden durch $\P[\min(X_1, X_2) \leq x] = \P[X_1 \leq x \cup X_2 \leq x]$ und dem Prinzip der Inklusion/Exklusion.
 
 \subsubsection*{Gemeinsame Dichte}
 
