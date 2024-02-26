@@ -282,3 +282,4 @@ chinesisch/*.pdf
 eprog/*.pdf
 wus/*.pdf
 !wus/include_degrees_circle.pdf
+complex-analysis/*.pdf

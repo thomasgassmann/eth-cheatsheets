@@ -1,0 +1,146 @@
+% Basic stuff
+\documentclass[a4paper,10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[nswissgerman]{babel}
+\usepackage{scrextend}
+\usepackage{lipsum}
+\usepackage{gauss}
+\usepackage{amssymb} % to import \leadsto
+
+% 3 column landscape layout with fewer margins
+\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
+\usepackage{flowfram}
+\usepackage{floatrow}
+\usepackage{amsmath}
+\usepackage[inline]{enumitem}
+\usepackage{pst-node}
+\usepackage{auto-pst-pdf}
+\usepackage{tikz}
+\usepackage{tikz-cd} 
+\usepackage{multicol}
+
+\usetikzlibrary{calc,matrix}
+
+\changefontsizes[9pt]{8pt}
+\ffvadjustfalse
+\setlength{\columnsep}{1cm}
+\Ncolumn{3}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Sign}{sign}
+\DeclareMathOperator{\Rank}{Rank}
+\DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Columnspace}{\mathcal{R}}
+\DeclareMathOperator{\Nullspace}{\mathcal{N}}
+\DeclareMathOperator{\Kernel}{Ker}
+\DeclareMathOperator{\diag}{diag}
+\DeclareMathOperator{\Span}{span}
+
+\newcommand*{\hermconj}{\mathsf{H}}
+
+% define nice looking boxes
+\usepackage[most]{tcolorbox}
+
+% a base set, that is then customised
+\tcbset {
+  base/.style={
+    boxrule=0mm,
+    leftrule=1mm,
+    left=1.75mm,
+    arc=0mm, 
+    fonttitle=\bfseries, 
+    colbacktitle=black!10!white, 
+    coltitle=black, 
+    toptitle=0.75mm, 
+    bottomtitle=0.25mm,
+    title={#1}
+  }
+}
+
+\newcommand{\middot}{~\textperiodcentered~}
+\newlist{rowlist}{enumerate*}{1}
+\setlist[rowlist]{label={\textbf{\roman*}\text{: }}, afterlabel={}, itemjoin=\middot}
+
+\newlist{vaxioms}{enumerate*}{1}
+\setlist[vaxioms]{label={\textbf{V\arabic*}\text{: }}, afterlabel={}, itemjoin=\middot}
+
+\makeatletter
+\renewcommand*\env@matrix[1][*\c@MaxMatrixCols c]{%
+  \hskip -\arraycolsep
+  \let\@ifnextchar\new@ifnextchar
+  \array{#1}}
+\makeatother
+
+\newcommand\undermat[2]{%
+  \makebox[0pt][l]{$\smash{\underbrace{\phantom{%
+    \begin{matrix}#2\end{matrix}}}_{\text{$#1$}}}$}#2}
+
+\newcommand\overmat[2]{%
+  \makebox[0pt][l]{$\smash{\overbrace{\phantom{%
+    \begin{matrix}#2\end{matrix}}}^{\text{$#1$}}}$}#2}
+
+\definecolor{brandblue}{rgb}{0.34, 0.7, 1}
+\newtcolorbox{mainbox}[1]{
+  colframe=brandblue, 
+  base={#1}
+}
+
+\newtcolorbox{subbox}[1]{
+  colframe=black!20!white,
+  base={#1}
+}
+
+% Mathematical typesetting & symbols
+\usepackage{amsthm, mathtools, amssymb} 
+\usepackage{marvosym, wasysym}
+\allowdisplaybreaks
+
+% Tables
+\usepackage{tabularx, multirow}
+\usepackage{booktabs}
+
+% Make enumerations more compact
+\usepackage{enumitem}
+\setitemize{itemsep=0.5pt}
+\setenumerate{itemsep=0.75pt}
+
+% To include sketches & PDFs
+\usepackage{graphicx}
+
+% For hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks=true
+}
+
+% Metadata
+\title{Cheatsheet Komplexe Analysis}
+\author{Thomas Gassmann}
+\date{Februar 2024}
+
+% Math helper stuff
+\def\limn{\lim_{n\to \infty}}
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\sumk{\sum_{k=1}^\infty}
+\def\sumn{\sum_{n=0}^\infty}
+\def\R{\mathbb{R}}
+\def\C{\mathbb{C}}
+\def\E{\mathbb{E}}
+\def\K{\mathbb{K}}
+\def\dx{\text{ d}x}
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\begin{document}
+
+\input{../header.tex}
+
+Credits: \begin{rowlist}
+    \item \href{https://github.com/XYQuadrat/eth-cheatsheets}{xyquadrat}
+\end{rowlist}
+
+\section{Vorwissen}
+\subsection{Komplexe Zahlen}
+
+\end{document}
