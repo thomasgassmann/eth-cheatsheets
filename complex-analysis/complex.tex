@@ -34,6 +34,8 @@
 \DeclareMathOperator{\Kernel}{Ker}
 \DeclareMathOperator{\diag}{diag}
 \DeclareMathOperator{\Span}{span}
+\DeclareMathOperator{\Arg}{Arg}
+\DeclareMathOperator{\Log}{Log}
 
 \newcommand*{\hermconj}{\mathsf{H}}
 
@@ -142,5 +144,165 @@ Credits: \begin{rowlist}
 
 \section{Vorwissen}
 \subsection{Komplexe Zahlen}
+\begin{mainbox}{Definition}
+Ein Ausdruck der Form $z = a + ib$, wobei $i^2 = -1$. $a = Re(z)$ ist der Realteil, $b = Im(z)$ ist der Imaginärteil.
+\end{mainbox}
+
+Addition erfolgt komponentenweise, Multiplikation erfolgt unter Annahme des Binomialgesetzes und $i^2 = -1$ (i.e. $z w = (a c - b d) + i (a d + b  c)$). Für Division gilt $\frac{z}{w} = \frac{c + id}{a + ib} = \frac{z\overbar{w}}{w\overbar{w}} = \frac{(ca + bd) + i(ad - cb)}{a^2 + b^2}$.\\
+Die Norm ist definiert als $|z| = \sqrt{Re(z)^2 + Im(z)^2} = \sqrt{z \cdot \overbar{z}}$. Für $z = x + iy$ ist $\overbar{z} = x - iy$ konjugiert-komplex.
+
+\begin{subbox}{}
+$$z \overbar{z} = Re(z)^2 + Im(z)^2$$
+\end{subbox}
+
+Eine komplexe Zahl kann in Polarkoordinaten dargestellt werden. Es gilt $z = re^{i\phi} = r(\cos(\phi) + i\sin(\phi))$.
+Radizieren: $\sqrt[n]{a} = z \iff a = z^n \iff |a| e^{i\alpha} = r^n e^{i\phi n}$ wobei $r = \sqrt[n]{|a|}$ und $\phi = \frac{\alpha + 2k\pi}{n}$.
+
+\begin{mainbox}{Fundamentalsatz der Algebra}
+  Sei $p(z) = a_n z^n + \cdots + a_0$ ein Polynom mit $a_n \neq 0$ und reellen oder komplexen Koeffizienten $a_i \in \mathbb{C}$. Dann hat $p(z)$ genau $n$ Nullstellen (mit ihren Vielfachen gezählt).
+\end{mainbox}
+
+Es gilt $\overbar{z \pm w} = \overbar{z} \pm \overbar{w}$, $\overbar{zw} = \overbar{z}\overbar{w}$, $\overbar{(\frac{z}{w})} = \frac{\overbar{z}}{\overbar{w}}$, $|\overbar{z}| = |z|$, $|z + w| \leq |z| + |w|$, $|zw| = |z| |w|$.
+
+$$
+\theta = \begin{cases}
+  \arctan(\frac{y}{x}) \textbf{ if z on positive x-axis}\\
+  \frac{\pi}{2} \textbf{ if }x=0, y > 0\\
+  \pi + \arctan(\frac{y}{x}) \textbf{ if z on negative x-axis}\\
+  \frac{3\pi}{2} \textbf{ if }x=0, y < 0
+\end{cases}
+$$
+
+Das Argument $\arg(z)$ einer komplexen Zahl $z \neq 0$ ist als Winkelmass nur bis auf ganzzahlige Vielfache von $2\pi$ bestimmt. Um eine eindeutig bestimmte reelle Zahl zu bekommen können wir entscheiden, Winkel mit mit reellen Zahlen im Intervall $(-\pi,\pi]$ zu messen. Definitionsgemäss ist das die eindeutig bestimmte reelle Zahl
+$$
+\Arg(z) \in (-\pi, \pi]
+$$
+für die $z = r(\cos(\varphi) + i \sin(\varphi))$ mit $r = |z|$ und $\varphi = \Arg(z)$ gilt.
+
+\begin{mainbox}{Komplexer Logarithmus}
+  Sei $z \in C$. \textbf{Ein} Logarithmus von $z$ ist eine Zahl $w \in \C$ mit $\exp(w) = z$. Jede komplexe Zahl ausser $z = 0$ besitzt einen eindeutigen komplexen Logarithmus $w = s + it$ mit $t \in (-\pi, \pi]$. Alle anderen Logarithmen von $z$ sind durch $w + 2\pi ik$ für $\k \in \mathbb{Z}$ gegeben.
+
+  Für $z \neq 0$ ist der Hauptwert des Logarithmus von $z$ definiert durch:
+  $$
+    \Log(z) := \log(|z|) + i \Arg(z)
+  $$
+\end{mainbox}
+
+Sei \(z\) eine komplexe Zahl und \(n\geq2\) eine ganze Zahl. Eine \(n\)-te Wurzel von \(z\) ist eine komplexe Zahl \(w\), die \(w^n=z\) erfüllt.
+
+\subsection{Sets}
+
+\begin{subbox}{Offene Kreisscheibe}
+  Sei $z_0\in\mathbb{C}$ und sei $r$ eine positive reelle Zahl. Die offene Kreisscheibe mit Zentrum $z_0$ und Radius $r$ ist die Teilmenge
+  $$
+  B(z_0, r) := \{ z \in \mathbb{C} : \, |z-z_0| < r \}
+  $$
+  von $\mathbb{C}$.
+\end{subbox}
+
+Eine Teilmenge $U \subseteq \C$ heisst offen, wenn zu jedem $z \in U$ ein Radius $\epsilon>0$ existiert, so dass $B(z,ϵ) \subseteq U$ gilt.
+
+\subsection{Folgen und Reihen}
+
+\begin{mainbox}{Konvergenz}
+  Sei \(z_1,z_2,z_3,\ldots\) eine Folge komplexer Zahlen. Wir sagen \(z \in \mathbb{C}\) sei der Grenzwert dieser Folge, und dass die Folge gegen \(z\) konvergiert, falls es für jede noch so kleine positive reelle Zahl \(\epsilon>0\) eine ganze Zahl \(N>0\) gibt, so dass \[|z-z_n|<\epsilon \text{ für alle } n\geq N \] gilt. In diesem Fall schreiben wir \(\displaystyle\lim_{n\to\infty}z_n=z\).
+\end{mainbox}
+
+\begin{subbox}{Leibnizkriterium}
+Wenn $a_n \ge 0, \ \forall n \ge 1$ monoton fallend (ab gewissen $n_0$) ist und $\limn a_n = 0$ gilt, dann konvergiert $S = \sumk (-1)^{k+1} a_k$ und $a_1 - a_2 \le S \le a_1$.
+\end{subbox}
+
+\begin{mainbox}{Quotientenkriterium}
+Sei $(a_n)$ eine Folge mit $a_n \ne 0, \forall n \ge 1$. \\ Falls $\limn \sup \frac{|a_{n+1}|}{|a_n|} < 1 \implies \sum_{n=1}^\infty a_n$ konvergiert absolut. \\Falls $\limn \inf \frac{|a_{n+1}|}{|a_n|} > 1 \implies \sum_{n=1}^\infty a_n$ divergiert.  
+\end{mainbox}
+
+\begin{mainbox}{Wurzelkriterium}
+Sei $(a_n)$ eine Folge mit $a_n \ne 0, \forall n \ge 1$. Sei $q = \limn \sup \sqrt[n]{|a_n|}$. 
+\begin{itemize}
+ \item $q < 1 \implies \sum_{n=1}^\infty a_n$ konvergiert absolut.
+ \item $q = 1 \implies$ keine Aussage.
+ \item $q > 1 \implies \sum_{n=1}^\infty a_n$ und $\sum_{n=1}^\infty |a_n|$ divergieren.
+\end{itemize}
+\end{mainbox}
+
+
+\subsection{Potenzreihen}
+\begin{subbox}{Definition Potenzreihe}
+ Potenzreihen sind Reihen der Form $\sum_{n=0}^\infty c_n x^n$. Eine Potenzreihe mit Entwicklungspunkt $x_0$ wird als $\sum_{n=0}^\infty c_n(x-x_0)^n$ definiert.
+\end{subbox}
+
+\begin{mainbox}{Konvergenzradius}
+ Der Konvergenzradius einer Potenzreihe $\sumn a_n x^n$ um einen Entwicklungspunkt $x_0$ ist die grösste Zahl $r$, so dass die Potenzreihe für alle $x$ mit $|x - x_0| < r$ konvergiert. Falls die Reihe für alle $x$ konvergiert, ist der Konvergenzradius $r$ unendlich. Sonst:
+ $$r = \begin{cases}
+    +\infty & \text{ falls } \limn\sup \sqrt[n]{|a_n|} = 0\\
+    \frac{1}{\limn\sup \sqrt[n]{|a_n|}} & \text{ falls }  \limn\sup \sqrt[n]{|a_n|} > 0
+ \end{cases} $$
+ Alternativ, falls existiert, kann $r = \limn \left| \frac{a_n}{a_{n+1}} \right|$ verwendet werden (weniger starke Aussage).\\
+ Dies folgt aus dem Wurzelkriterium für $a_n := c_n z^n$. Also wollen wir $\sqrt[n]{|a_n|} \overset{!}{<} 1$ und können dann nach $|z|$ umformen. Hilfreich, wenn nicht exakt $z^n$-Format vorhanden ist.
+\end{mainbox}
+Die Potenzreihe $\sum_{k=0}^\infty c_n x^n$ konvergiert absolut und gleichmässig für alle $|x| < r$ und divergiert für alle $|x| > r$. Der Fall $|x| = r$ ist unklar und muss geprüft werden.
+
+\subsubsection{Potenzreihen}
+\begin{align*}
+\exp(x) &= \sumn \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots & r &= \infty \\
+\sin(x) &= \sumn (-1)^n \frac{x^{2n + 1}}{(2n + 1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots & r &= \infty \\
+\cos(x) &= \sumn (-1)^n \frac{x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots & r &= \infty \\
+\ln(x + 1) &= \sumk (-1)^{k+1} \frac{x^k}{k} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots & r &= 1 \\
+\sinh(x) &= \sumn \frac{x^{2n+1}}{(2n+1)!} & r &= \infty \\
+\cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} & r &= \infty \\
+\arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= 1 \\
+e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
+\end{align*}
+
+
+\subsubsection{Wichtige Reihen}
+\begin{align*}
+ \sum_{i=1}^n i &= \frac{n(n+1)}{2} \\
+ \sum_{i=1}^n i^2 &= \frac{1}{6}n(n+1)(2n+1) \\
+ \sum_{i=1}^n i^3 &= \frac{1}{4}n^2(n+1)^2 \\
+ \sum_{i=1}^\infty \frac{1}{i^2} &= \frac{\pi^2}{6} \\
+ \sum_{n=1}^\infty \frac{1}{n(n+1)} &= 1
+\end{align*}
+
+\subsubsection{Cauchy-Produkt}
+$\sumk b_k$ ist eine \textbf{lineare Anordnung} der Doppelreihe $\Sigma_{i,j \geq 0} a_{i,j}$, falls es eine Bijektion $\sigma : \mathbb{N} \rightarrow \mathbb{N} \times \mathbb{N}$ gibt, mit $b_k = a_{\sigma(k)}$.\\
+
+\begin{subbox}{Konvergenz Doppelreihe}
+  Wenn es $B \geq 0$ gibt, so dass $\Sigma_{i=0}^m \Sigma_{j=0}^m |a_{ij}| \leq B$ $\forall m \geq 0$, dann konvergieren $S_i := \Sigma_{j=0}^\infty a_{ij}$ $\forall i \geq 0$ und $U_j := \Sigma_{i=0}^\infty a_{ij}$ $\forall j \geq 0$ sowie $\Sigma_{i=0}^\infty S_i$, $\Sigma_{j=0}^\infty U_j$ und es gilt $\Sigma_{i=0}^\infty S_i = \Sigma_{j=0}^\infty U_j$. Jede lineare Anordnung einer Doppelreihe konvergiert dann absolut mit demselben Grenzwert.
+\end{subbox}
+
+\begin{subbox}{Tauschbarkeit Summation / Limes}
+  Sei $f_n : \mathbb{N} \rightarrow \mathbb{R}$ eine Folge. Wenn $f(j) := \limn f_n(j)$ $\forall j \in \mathbb{N}$ existiert und $|f_n(j)| \leq g(j)$ für eine Funktion $g: \mathbb{N} \rightarrow \mathbb [0, \infty[$ und falls $\sum_{j=0}^\infty g(j)$ konvergiert, dann folgt $\sum_{j=0}^\infty f(j) = \limn \sum_{j=0}^\infty f_n(j)$.
+\end{subbox}
+
+\begin{mainbox}{Cauchy-Produkt}
+  Das Cauchy-Produkt von zwei Reihen $\sum_{i = 0}^\infty a_i$ und $\sum_{j = 0}^\infty b_j$ ist definiert als
+  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + \ldots$$ Es konvergiert, falls beide Reihen absolut konvergieren. Dann gilt:\\
+  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = (\sum_{i=0}^\infty a_i) (\sum_{j=0}^\infty b_j)$$
+\end{mainbox}
+
+
+\subsubsection{Strategie - Konvergenz von Reihen}
+\begin{enumerate}
+ \item Ist Reihe ein bekannter Typ? (Teleskopieren, Geometrische/Harmonische Reihe, Zetafunktion, ...){
+  \begin{itemize}
+    \item Beim Teleskopieren einer Teleskopreihe $S_n = \sum_{k=0}^n a_k = \sum_{k=0}^n (a_k - a_{k+1}) = a_0 - a_{n+1}$ kann man den Limes von der rechten Seite nehmen.
+  \end{itemize}
+ }
+ \item Ist $\limn a_n = 0$? Wenn nein, divergent.
+ \item Leibnizkriterium anwenden, falls alternierend
+ \item Quotientenkriterium für Exponentialfunktionen oder Fakultäten
+ \item Wurzelkriterium
+ \item Vergleichssatz anwenden, Vergleichsreihen suchen, konvergente Majorante oder divergente Minorante
+ \item Integral-Test anwenden (Reihe zu Integral)
+\end{enumerate}
+
+
+\subsection{Polynome}
+
+Bei Polynomen mit reellen Nullstellen treten die Nullstellen als komplex-konjugiertes Paar auf. Für Grad 2, verwende $z = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}$ um ein Polynom $p(z) = 0$ zu lösen. Für $a z^n + c = 0$, verwende $z = \sqrt[n]{-\frac{c}{a}}$.
+
+Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine reelle Nullstelle.
+
 
 \end{document}
