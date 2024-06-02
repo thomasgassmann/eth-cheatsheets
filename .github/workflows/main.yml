@@ -57,3 +57,7 @@ jobs:
           curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-hs22/files/149/update/ \
             -H "Authorization: $LINALG_TOKEN" \
             -F "file=@./linear-algebra/linalg.pdf"
+
+          curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-fs24/files/296/update/ \
+            -H "Authorization: $CA_TOKEN" \
+            -F "file=@./complex-analysis/complex.pdf"
