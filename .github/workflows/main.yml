@@ -41,6 +41,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINALG_TOKEN: ${{ secrets.LINALG_TOKEN }}
+          CA_TOKEN: ${{ secrets.CA_TOKEN }}
         run: |
           TAG="nightly"
           git tag -f "$TAG"
