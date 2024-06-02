@@ -159,7 +159,10 @@ Eine komplexe Zahl kann in Polarkoordinaten dargestellt werden. Es gilt $z = re^
 Radizieren: $\sqrt[n]{a} = z \iff a = z^n \iff |a| e^{i\alpha} = r^n e^{i\phi n}$ wobei $r = \sqrt[n]{|a|}$ und $\phi = \frac{\alpha + 2k\pi}{n}$.
 
 \begin{mainbox}{Fundamentalsatz der Algebra}
-  Sei $p(z) = a_n z^n + \cdots + a_0$ ein Polynom mit $a_n \neq 0$ und reellen oder komplexen Koeffizienten $a_i \in \mathbb{C}$. Dann hat $p(z)$ genau $n$ Nullstellen (mit ihren Vielfachen gezählt).
+  Sei $p(z) = a_n z^n + \cdots + a_0$ ein Polynom mit $a_n \neq 0$ und reellen oder komplexen Koeffizienten $a_i \in \mathbb{C}$. Dann existieren $w_1, \ldots, w_n \in \C$ mit:
+  $$
+    p(z) = a_n (z - w_1) (z - w_2) \ldots (z - w_n)
+  $$
 \end{mainbox}
 
 Es gilt $\overbar{z \pm w} = \overbar{z} \pm \overbar{w}$, $\overbar{zw} = \overbar{z}\overbar{w}$, $\overbar{(\frac{z}{w})} = \frac{\overbar{z}}{\overbar{w}}$, $|\overbar{z}| = |z|$, $|z + w| \leq |z| + |w|$, $|zw| = |z| |w|$.
@@ -190,7 +193,7 @@ für die $z = r(\cos(\varphi) + i \sin(\varphi))$ mit $r = |z|$ und $\varphi = \
 
 Sei \(z\) eine komplexe Zahl und \(n\geq2\) eine ganze Zahl. Eine \(n\)-te Wurzel von \(z\) ist eine komplexe Zahl \(w\), die \(w^n=z\) erfüllt.
 
-\subsection{Sets}
+\subsection{Mengen}
 
 \begin{subbox}{Offene Kreisscheibe}
   Sei $z_0\in\mathbb{C}$ und sei $r$ eine positive reelle Zahl. Die offene Kreisscheibe mit Zentrum $z_0$ und Radius $r$ ist die Teilmenge
