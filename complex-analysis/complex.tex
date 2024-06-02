@@ -131,6 +131,8 @@
 \def\E{\mathbb{E}}
 \def\K{\mathbb{K}}
 \def\dx{\text{ d}x}
+\def\Re{\text{Re}}
+\def\Im{\text{Im}}
 
 \newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
 
@@ -145,14 +147,14 @@ Credits: \begin{rowlist}
 \section{Vorwissen}
 \subsection{Komplexe Zahlen}
 \begin{mainbox}{Definition}
-Ein Ausdruck der Form $z = a + ib$, wobei $i^2 = -1$. $a = Re(z)$ ist der Realteil, $b = Im(z)$ ist der Imaginärteil.
+Ein Ausdruck der Form $z = a + ib$, wobei $i^2 = -1$. $a = \Re(z)$ ist der Realteil, $b = \Im(z)$ ist der Imaginärteil.
 \end{mainbox}
 
 Addition erfolgt komponentenweise, Multiplikation erfolgt unter Annahme des Binomialgesetzes und $i^2 = -1$ (i.e. $z w = (a c - b d) + i (a d + b  c)$). Für Division gilt $\frac{z}{w} = \frac{c + id}{a + ib} = \frac{z\overbar{w}}{w\overbar{w}} = \frac{(ca + bd) + i(ad - cb)}{a^2 + b^2}$.\\
-Die Norm ist definiert als $|z| = \sqrt{Re(z)^2 + Im(z)^2} = \sqrt{z \cdot \overbar{z}}$. Für $z = x + iy$ ist $\overbar{z} = x - iy$ konjugiert-komplex.
+Die Norm ist definiert als $|z| = \sqrt{\Re(z)^2 + \Im(z)^2} = \sqrt{z \cdot \overbar{z}}$. Für $z = x + iy$ ist $\overbar{z} = x - iy$ konjugiert-komplex.
 
-\begin{subbox}{}
-$$z \overbar{z} = Re(z)^2 + Im(z)^2$$
+\begin{subbox}{Multiplikation mit konjugierter Zahl}
+$$z \overbar{z} = \Re(z)^2 + \Im(z)^2$$
 \end{subbox}
 
 Eine komplexe Zahl kann in Polarkoordinaten dargestellt werden. Es gilt $z = re^{i\phi} = r(\cos(\phi) + i\sin(\phi))$.
@@ -203,7 +205,7 @@ Sei \(z\) eine komplexe Zahl und \(n\geq2\) eine ganze Zahl. Eine \(n\)-te Wurze
   von $\mathbb{C}$.
 \end{subbox}
 
-Eine Teilmenge $U \subseteq \C$ heisst offen, wenn zu jedem $z \in U$ ein Radius $\epsilon>0$ existiert, so dass $B(z,ϵ) \subseteq U$ gilt.
+Eine Teilmenge $U \subseteq \C$ heisst offen, wenn zu jedem $z \in U$ ein Radius $\epsilon>0$ existiert, so dass $B(z,\epsilon) \subseteq U$ gilt.
 
 \subsection{Folgen und Reihen}
 
@@ -307,5 +309,138 @@ Bei Polynomen mit reellen Nullstellen treten die Nullstellen als komplex-konjugi
 
 Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine reelle Nullstelle.
 
+\section{Komplexwertige Funktionen}
+
+\section{Taylor- und Laurentreihen}
+
+\section{Fourier-Analysis}
+
+\section{Laplace-Transformation}
+
+\section{Tabellen}
+
+\subsection{Ungleichungen}
+
+\begin{itemize}
+  \item Dreiecksungleichung: $|a + b| \leq |a| + |b|$
+  \item umgekehrte Dreiecksungleichung: $||a| - |b|| \leq |a \pm b| \leq |a| + |b|$ für alle $a,b \in \R$
+  \item $(1+x)^n \geq 1+ n\cdot x$ \, $\forall n\in \mathbb{N}, x > -1$
+  \item $e^x \geq 1 + x$ \, $\forall x\in \mathbb{R}$
+  \item $2|xy| \leq \epsilon x^2 + \frac{1}{\epsilon} y^2$ für $\forall \epsilon > 0$ und $\forall x,y \in \mathbb{R}$
+  \item $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$
+  \item $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
+\end{itemize}
+
+\subsection{Trigonometrie}
+
+\subsubsection{Doppelwinkel}
+\begin{itemize}
+ \item $\sin(2\alpha) = 2 \sin(\alpha) \cos(\alpha)$
+ \item $\cos(2\alpha) = \cos^2(\alpha) - \sin^2(\alpha) = 1 - 2 \sin^2(\alpha)$
+ \item $\tan(2\alpha) = \frac{2\tan(\alpha)}{1 - \tan^2(\alpha)}$
+\end{itemize}
+
+\subsubsection{Addition}
+\begin{itemize}
+ \item $\sin(\alpha + \beta) = \sin(\alpha) \cos(\beta) + \cos(\alpha) \sin(\beta)$
+ \item $\cos(\alpha + \beta) = \cos(\alpha) \cos(\beta) - \sin(\alpha) \sin(\beta)$
+ \item $\tan(\alpha + \beta) = \frac{\tan(\alpha) + \tan(\beta)}{1 - \tan(\alpha) \tan(\beta)}$
+\end{itemize}
+
+\subsubsection{Subtraktion}
+\begin{itemize}
+ \item $\sin(\alpha - \beta) = \sin(\alpha) \cos(\beta) - \cos(\alpha)\sin(\beta)$
+ \item $\cos(\alpha - \beta) = \cos(\alpha) \cos(\beta) + \sin(\alpha)\sin(\beta)$
+ \item $\tan(\alpha - \beta) = \frac{\tan(\alpha) - \tan(\beta)}{1+\tan(\alpha) \tan(\beta)}$
+\end{itemize}
+
+\subsubsection{Multiplikation}
+\begin{itemize}
+ \item $\sin(\alpha) \sin(\beta) = -\frac{\cos(\alpha + \beta) - \cos(\alpha - \beta)}{2}$
+ \item $\cos(\alpha) \cos(\beta) =  \frac{\cos(\alpha + \beta) + \cos(\alpha - \beta)}{2}$
+ \item $\sin(\alpha) \cos(\beta) =  \frac{\sin(\alpha + \beta) + \sin(\alpha - \beta)}{2}$
+\end{itemize}
+
+\subsubsection{Potenzen}
+\begin{itemize}
+ \item $\sin^2(\alpha) = \frac{1}{2}(1-\cos(2\alpha))$
+ \item $\cos^2(\alpha) = \frac{1}{2}(1+\cos(2\alpha))$
+ \item $\tan^2(\alpha) = \frac{1-\cos(2\alpha)}{1+\cos(2\alpha)}$
+ \item $\sin^3(\alpha) = \frac{3}{4} \sin(\alpha) - \frac{1}{4} \sin(3 \alpha)$
+ \item $\cos^3(\alpha) = \frac{3}{4} \cos(\alpha) + \frac{1}{4} \cos(3 \alpha)$
+\end{itemize}
+
+\subsubsection{Hyperbolische Trigonometrische Funktionen}
+\begin{itemize}
+  \item $\cosh^2(\alpha) - \sinh^2(\alpha) = 1$
+  \item $\sinh(x) = \frac{e^x - e^{-x}}{2}$ und $\cosh(x) = \frac{e^x + e^{-x}}{2}$
+  \item $\sin(ix) = i \sinh(x)$
+ \end{itemize}
+
+\subsubsection{Diverse}
+
+\begin{itemize}
+ \item $\sin^2(\alpha) + \cos^2(\alpha) = 1$
+ \item $\sin(z) = \frac{e^{iz} - e^{-iz}}{2i}$ und $\cos(z) = \frac{e^{iz} + e^{-iz}}{2}$
+ \item $\cos(x)^n = \frac{1}{2^n} \sum_{k=0}^n {n \choose k} \cos((2k - n)x)$
+ \item $\cos(x) = \Re(e^{ix})$, $\sin(x) = \Im(e^{ix})$
+\end{itemize}
+
+
+\begin{center}
+  \includegraphics[width= \linewidth]{include_degrees_circle.pdf}
+\end{center}
+
+\begin{mainbox}{Trigonometrische Funktionen}
+  \begin{center} 
+    \begin{tabular}{c|cccccc}
+      deg & 0° & 30° & 45° & 60° & 90° & 180° \\
+      \midrule
+      rad & 0 & $\frac{\pi}{6}$ & $\frac{\pi}{4}$ & $\frac{\pi}{3}$ & $\frac{\pi}{2}$ & $\pi$ \\
+      cos & 1 & $\frac{\sqrt{3}}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{1}{2}$ & 0 & -1 \\
+      sin & 0 & $\frac{1}{2}$ & $\frac{\sqrt{2}}{2}$ & $\frac{\sqrt{3}}{2}$ & 1 & 0 \\
+      tan & 0 & $\frac{1}{\sqrt{3}}$ & 1 & $\sqrt{3}$ & $+\infty$ & 0 \\
+    \end{tabular}
+  \end{center}
+\end{mainbox}
+
+\subsubsection{Trigonometrische Identitäten}
+\begin{center}
+ \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+  \toprule
+  $\sin(\arccos (x))$ & $\sqrt{1-x^2}$\\
+  $\cos(\arcsin(x))$ & $\sqrt{1-x^2}$\\
+  $\sin(\arctan(x))$ & $\frac{x}{\sqrt{1+x^2}}$\\
+  $\cos(\arctan(x))$ & $\frac{1}{\sqrt{1+x^2}}$\\
+  $\tan(\arcsin(x))$ & $\frac{x}{\sqrt{1-x^2}}$\\
+  $\tan(\arccos(x))$ & $\frac{\sqrt{1-x^2}}{x}$\\
+  \bottomrule
+ \end{tabularx}
+\end{center}
+
+\section{Anleitungen}
+
+\subsection{Partialbruchzerlegung}
+
+\begin{mainbox}{Partialbruchzerlegung}
+  Seien $p(x), q(x)$ zwei Polynome. $\int \frac{p(x)}{q(x)}$ wird wie folgend berechnet:
+  \begin{enumerate}
+   \item Falls $\deg(p) \ge \deg(q)$, führe eine Polynomdivision durch. Dies führt zum Integral $\int a(x) + \frac{r(x)}{q(x)}$.
+   \item Berechne die Nullstellen von $q(x)$.
+   \item Pro Nullstelle: Einen Partialbruch erstellen.
+   \begin{itemize}[left=0pt]
+    \item Einfach, reell: $x_1 \to \frac{A}{x - x_1}$
+    \item $n$-fach, reell: $x_1 \to \frac{A_1}{x - x_1} + \ldots + \frac{A_r}{(x-x_1)^r}$ 
+    \item Einfach, komplex: $x^2 + px + q \to \frac{Ax + B} {x^2 + px + q}$
+    \item $n$-fach, komplex: $x^2 + px + q \to \frac{A_1x+b_1}{x^2+px+q} + \ldots$
+   \end{itemize}
+   \item Parameter $A_1, \ldots, A_n$ (bzw. $B_1, \ldots, B_n$) bestimmen. ($x$ jeweils gleich Nullstelle setzen, umformen und lösen).
+ 
+  \end{enumerate}
+ \end{mainbox}
+
+Für ein monisches Polynom $x^n + a_{n-1} x^{n-1} + \cdots + a_0 = 0$ muss jede Nullstelle $a_0$ teilen.\\
+
+Häufig verwendete Partialbruchzerlegungen sind bspw. $\frac{1}{q(q+1)} = \frac{1}{q} - \frac{1}{q + 1}$ oder $\frac{1}{q(q-1)(q+1)} = \frac{-1}{q} + \frac{1}{2(q+1)} + \frac{1}{2(q-1)}$.
 
 \end{document}
