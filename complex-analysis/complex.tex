@@ -38,6 +38,7 @@
 \DeclareMathOperator{\Log}{Log}
 
 \newcommand*{\hermconj}{\mathsf{H}}
+\renewcommand{\arraystretch}{1.5} % Increases the row spacing
 
 % define nice looking boxes
 \usepackage[most]{tcolorbox}
@@ -317,7 +318,7 @@ Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine 
 
 \section{Laplace-Transformation}
 
-\section{Tabellen}
+\section{Tabellen und Listen}
 
 \subsection{Ungleichungen}
 
@@ -417,6 +418,68 @@ Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine 
   \bottomrule
  \end{tabularx}
 \end{center}
+
+\subsection{Weitere Tabellen}
+
+\subsubsection{Ableitungen (I)}
+\begin{center}
+  \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
+  \toprule
+  $\mathbf{F(x)}$ & $\mathbf{f(x)}$ & $\mathbf{f'(x)}$ \\
+  \midrule
+  $\frac{x^{-a+1}}{-a+1}$ & $\frac{1}{x^a}$ & $\frac{a}{x^{a+1}}$ \\
+  $\frac{x^{a+1}}{a+1}$ & $x^a \ (a \ne -1)$ & $a \cdot x^{a-1}$ \\
+  $\frac{1}{k \ln(a)}a^{kx}$ & $a^{kx}$ & $ka^{kx} \ln(a)$ \\
+  $\ln |x|$ & $\frac{1}{x}$ & $-\frac{1}{x^2}$ \\
+  $\frac{2}{3}x^{3/2}$ & $\sqrt{x}$ & $\frac{1}{2\sqrt{x}}$\\
+  $-\cos(x)$ & $\sin(x)$ & $\cos(x)$ \\
+  $\sin(x)$ & $\cos(x)$ & $-\sin(x)$ \\
+  $\frac{1}{2}(x-\frac{1}{2}\sin(2x))$ & $\sin^2(x)$ & $2 \sin(x)\cos(x)$ \\
+  $\frac{1}{2}(x + \frac{1}{2}\sin(2x))$ & $\cos^2(x)$ & $-2\sin(x)\cos(x)$ \\
+  $-\ln|\cos(x)|$ & $\tan(x)$ & $\frac{1}{\cos^2(x)} = 1 + \tan^2(x)$  \\
+  $\cosh(x)$ & $\sinh(x)$ & $\cosh(x)$ \\
+  $\log(\cosh(x))$ & $\tanh(x)$ & $\frac{1}{\cosh^2(x)} = 1 - \tanh^2(x)$ \\
+  $\ln | \sin(x)|$ & $\cot(x)$ & $-\frac{1}{\sin^2(x)}$ \\
+  $\frac{1}{c} \cdot e^{cx}$ & $e^{cx}$ & $c \cdot e^{cx}$ \\
+  $x(\ln |x| - 1)$ & $\ln |x|$ & $\frac{1}{x}$ \\
+  $\frac{1}{2}(\ln(x))^2$ & $\frac{\ln(x)}{x}$ & $\frac{1 - \ln(x)}{x^2}$ \\
+  $\frac{x}{\ln(a)} (\ln|x| -1)$ & $\log_a |x|$ & $\frac{1}{\ln(a)x}$ \\
+  \bottomrule
+  \end{tabularx}
+\end{center}
+
+\subsubsection{Laplace-Transformationen}
+
+\begin{center}
+  \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
+  \toprule
+  $f(t)$ & $\mathcal{L}[f(t)](s)$ \\
+  \midrule
+  1 & $\frac{1}{s}, \; s > 0$ \\
+  $t^n$ & $\frac{n!}{s^{n+1}}, \; s > 0$ \\
+  $\sin(at)$ & $\frac{a}{s^2 + a^2}, \; s > 0$ \\
+  $\cos(at)$ & $\frac{s}{s^2 + a^2}, \; s > 0$ \\
+  $e^{at}$ & $\frac{1}{s-a}, \; s > a$ \\
+  $e^{at} \sin(bt)$ & $\frac{b}{(s-a)^2 + b^2}, \; s > a$ \\
+  $e^{at} \cos(bt)$ & $\frac{s-a}{(s-a)^2 + b^2}, \; s > a$ \\
+  $t^n e^{at}$ & $\frac{n!}{(s-a)^{n+1}}, \; s > a$ \\
+  $a f(t) + b g(t)$ & $a \mathcal{L}[f](s) + b \mathcal{L}[g](s)$ \\
+  $t f(t)$ & $-\frac{d}{ds} \left( \mathcal{L}[f](s) \right)$ \\
+  $t^n f(t)$ & $(-1)^n \frac{d^n}{ds^n} \left( \mathcal{L}[f](s) \right)$ \\
+  $f'(t)$ & $s \mathcal{L}[f](s) - f(0)$ \\
+  $f''(t)$ & $s^2 \mathcal{L}[f](s) - s f(0) - f'(0)$ \\
+  $e^{at} f(t)$ & $\mathcal{L}[f(t)](s - a)$ \\
+  $\int_0^t f(\tau) g(t-\tau) d\tau$ & $\mathcal{L}[f](s) \cdot \mathcal{L}[g](s)$ \\
+  \bottomrule
+  \end{tabularx}
+\end{center}
+\begin{table}[h!]
+  \begin{tabular}{|c|c|}
+  \hline
+
+  \hline
+  \end{tabular}
+\end{table}
 
 \section{Anleitungen}
 
