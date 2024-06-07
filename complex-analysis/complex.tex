@@ -132,6 +132,7 @@
 \def\E{\mathbb{E}}
 \def\K{\mathbb{K}}
 \def\dx{\text{ d}x}
+\def\dt{\text{ d}t}
 \def\Re{\text{Re}}
 \def\Im{\text{Im}}
 
@@ -622,9 +623,21 @@ $$\int_0^\infty \sin(x^2) \dx = \sqrt{\frac{\pi}{8}}$$
    $\int \frac{1}{x^2+a^2} \dx$ & $\frac{1}{a} \arctan \frac{x}{a}$ \\
    $\int \frac{1}{x^2 - a^2} \dx$ & $\frac{1}{2a} \ln\left| \frac{x-a}{x+a} \right|$ \\
    $\int \sqrt{a^2 - x^2} \dx $ & $\frac{a^2}{2} \arcsin(\frac{x}{a}) + \frac{x}{2} \sqrt{a^2 - x^2}$ \\
+   \bottomrule
+  \end{tabularx} 
+ \end{center}
+
+ \subsubsection{Trigonometrische Integrale}
+
+ \begin{center}
+  \begin{tabularx}{\linewidth}{>{\centering\arraybackslash}X>{\centering\arraybackslash}X}
+   \toprule
+   $\mathbf{f(x)}$ & $\mathbf{F(x)}$ \\
+   \midrule
    $\int \csc(x) \dx $ & $\ln|\csc(x) + \cot(x)|$ \\
    $\int \sec(x) \dx $ & $\ln|\sec(x) + \tan(x)|$ \\
    $\int \cot(x) \dx $ & $\ln|\sin(x)|$ \\
+   $\int x \sin(ax) \dx$ & $-\frac{1}{a} x \cos(ax) + \frac{1}{a^2} \sin(ax)$ \\
    \bottomrule
   \end{tabularx} 
  \end{center}
@@ -638,14 +651,14 @@ $$\int_0^\infty \sin(x^2) \dx = \sqrt{\frac{\pi}{8}}$$
   \toprule
   $f(t)$ & $\mathcal{L}[f(t)](s)$ \\
   \midrule
-  1 & $\frac{1}{s}, \; s > 0$ \\
-  $t^n$ & $\frac{n!}{s^{n+1}}, \; s > 0$ \\
-  $\sin(at)$ & $\frac{a}{s^2 + a^2}, \; s > 0$ \\
-  $\cos(at)$ & $\frac{s}{s^2 + a^2}, \; s > 0$ \\
-  $e^{at}$ & $\frac{1}{s-a}, \; s > a$ \\
-  $e^{at} \sin(bt)$ & $\frac{b}{(s-a)^2 + b^2}, \; s > a$ \\
-  $e^{at} \cos(bt)$ & $\frac{s-a}{(s-a)^2 + b^2}, \; s > a$ \\
-  $t^n e^{at}$ & $\frac{n!}{(s-a)^{n+1}}, \; s > a$ \\
+  1 & $\frac{1}{s}, \; \Re(s) >  0$ \\
+  $t^n$ & $\frac{n!}{s^{n+1}}, \; \Re(s) >  0$ \\
+  $\sin(at)$ & $\frac{a}{s^2 + a^2}, \; \Re(s) >  0$ \\
+  $\cos(at)$ & $\frac{s}{s^2 + a^2}, \; \Re(s) >  0$ \\
+  $e^{at}$ & $\frac{1}{s-a}, \; \Re(s) >  a$ \\
+  $e^{at} \sin(bt)$ & $\frac{b}{(s-a)^2 + b^2}, \; \Re(s) >  a$ \\
+  $e^{at} \cos(bt)$ & $\frac{s-a}{(s-a)^2 + b^2}, \; \Re(s) >  a$ \\
+  $t^n e^{at}$ & $\frac{n!}{(s-a)^{n+1}}, \; \Re(s) >  a$ \\
   $a f(t) + b g(t)$ & $a \mathcal{L}[f](s) + b \mathcal{L}[g](s)$ \\
   $t f(t)$ & $-\frac{d}{ds} \left( \mathcal{L}[f](s) \right)$ \\
   $t^n f(t)$ & $(-1)^n \frac{d^n}{ds^n} \left( \mathcal{L}[f](s) \right)$ \\
@@ -653,6 +666,8 @@ $$\int_0^\infty \sin(x^2) \dx = \sqrt{\frac{\pi}{8}}$$
   $f''(t)$ & $s^2 \mathcal{L}[f](s) - s f(0) - f'(0)$ \\
   $e^{at} f(t)$ & $\mathcal{L}[f(t)](s - a)$ \\
   $\int_0^t f(\tau) g(t-\tau) d\tau$ & $\mathcal{L}[f](s) \cdot \mathcal{L}[g](s)$ \\
+  $\cosh(at)$ & $\frac{s}{s^2 - a^2}, \; \Re(s) >  a$\\
+  $\sinh(at)$ & $\frac{a}{s^2 - a^2}, \; \Re(s) >  a$\\
   \bottomrule
   \end{tabularx}
 \end{center}
