@@ -25,6 +25,8 @@
 \ffvadjustfalse
 \setlength{\columnsep}{1cm}
 \Ncolumn{3}
+\def\X{\mathcal{X}}
+\def\N{\mathcal{N}}
 \DeclareMathOperator{\Tr}{Tr}
 \DeclareMathOperator{\Sign}{sign}
 \DeclareMathOperator{\Rank}{Rank}
@@ -208,6 +210,35 @@ Sei \(z\) eine komplexe Zahl und \(n\geq2\) eine ganze Zahl. Eine \(n\)-te Wurze
 \end{subbox}
 
 Eine Teilmenge $U \subseteq \C$ heisst offen, wenn zu jedem $z \in U$ ein Radius $\epsilon>0$ existiert, so dass $B(z,\epsilon) \subseteq U$ gilt.
+
+\subsubsection{Weitere Eigenschaften von Mengen}
+
+Eine Menge \(\X \subseteq \R^n \) ist
+\begin{itemize}
+  \item \textbf{beschränkt}, falls \(\exists R \ge 0, \forall x \in \X: ||x|| \le R\).
+  \item \textbf{abgeschlossen}, falls jede Folge \((x_k)_{k\in \N} \subseteq \X\), die in \(\R^n\) konvergiert, zu einem Punkt in \(\X\) konvergiert. Dies kann mit einem Ball visualisiert werden. \\Urbilder von offenen (resp. abgeschlossenen) Mengen sind unter stetigen Abbildungen offen (resp. abgeschlossen). Die Umkehrung ist im Allgemeinen falsch.\\
+  Gegenbeispiele: \(\frac{1}{k}, <\).
+  \item \textbf{kompakt}, falls sie beschränkt und abgeschlossen ist. Bilder von kompakten Mengen sind unter stetigen Abbildungen kompakt.
+  \item \textbf{offen}, falls ihr Komplement \(\R^n \setminus \X\) abgeschlossen ist. Alternativ: für jedes $x_0 \in \X$ gibt es ein $\delta > 0$ so dass $B_\delta(x_0) \subseteq \X$.
+  \item \textbf{konvex}, falls \(\forall x, y \in \X: \lambda x + (1 - \lambda)y \in \X\) gilt (die Linie zwischen \(x, y\) ist in \(\X\)).
+\end{itemize}
+
+Es gilt dabei:
+
+\begin{itemize}
+  \item Falls $\{X_\alpha\}_{\alpha \in I}$ eine Menge von offenen (resp. abgeschlossen) Mengen. Dann ist $\cup_{\alpha \in I} X_\alpha$ offen (respektive $\cap_{\alpha \in I} X_\alpha$ abgeschlossen).
+  \item Falls $\{X_\alpha\}_{\alpha \in I}$ eine \textbf{endliche} Menge von offenen (resp. abgeschlossen) Mengen. Dann ist $\cap_{\alpha \in I} X_\alpha$ offen (respektive $\cup_{\alpha \in I} X_\alpha$ abgeschlossen).
+  \item Das kartesische Produkt zweier offenen Mengen ist offen.
+  \item $\emptyset$ und $\R^n$ sind offen \textbf{und} abgeschlossen.
+\end{itemize}
+
+Beispiele:
+\begin{itemize}
+  \item \((a,b) \subseteq \R\) ist offen.
+  \item \(\left[a,b\right) \subseteq \R\) ist weder offen noch abgeschlossen.
+  \item \(\R^n\) und \(\varnothing\) sind offen.
+  \item \((a_1, b_1) \times (a_2,b_2) \subseteq \R^2\) ist offen.
+\end{itemize}
 
 \subsection{Folgen und Reihen}
 
