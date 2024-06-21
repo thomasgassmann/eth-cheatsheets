@@ -42,6 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           LINALG_TOKEN: ${{ secrets.LINALG_TOKEN }}
           CA_TOKEN: ${{ secrets.CA_TOKEN }}
+          IML_TOKEN: ${{ secrets.IML_TOKEN }}
         run: |
           TAG="nightly"
           git tag -f "$TAG"
@@ -62,3 +63,7 @@ jobs:
           curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-fs24/files/296/update/ \
             -H "Authorization: $CA_TOKEN" \
             -F "file=@./complex-analysis/complex.pdf"
+
+          curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-fs24_0/files/308/update/ \
+            -H "Authorization: $IML_TOKEN" \
+            -F "file=@./iml/iml.pdf"
