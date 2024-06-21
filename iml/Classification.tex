@@ -26,8 +26,12 @@ $\min_{w,\xi}\frac{1}{2}\|w\|^2  +\lambda\sum_i\xi_i\ \ \
 
 \subsection*{Evaluation}
 Accuracy $=\frac{TP+TN}{TP+TN+FP+FN}$\\
-Precision $=\frac{TP}{TP+FP}= 1-$ FDR\\
-Recall $=$ TPR$ =\frac{TP}{TP+FN}$\\
-FPR $=\frac{FP}{TN+FP}$\\
+Precision $=\frac{TP}{TP+FP} = 1-$ FDR = $\frac{TP}{|\{\hat{y} = +1\}|}$\\
+FDR = $\frac{FP}{|\{\hat{y} = +1\}|}$, Recall $=$ TPR$ =\frac{TP}{TP+FN}$\\
+FPR $=\frac{FP}{TN+FP} = \frac{FP}{|\{y = -1\}|}$\\
+FNR $=\frac{FN}{|\{ y = +1 \}|}$\\
+TPR $=\frac{TP}{|\{ y = +1 \}|}$, TNR $=\frac{TN}{|\{ y = -1 \}|}$\\
 ROC curve: \ \ $x=$ FPR, $y=$ TPR\\
 F1 $=\frac{2TP}{2TP+FP+FN}=\frac{2}{1/Precision+1/Recall}$\\
+\hspace*{-10mm}
+\includegraphics[width=1.25 \linewidth]{matrix.png}
