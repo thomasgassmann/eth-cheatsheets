@@ -8,10 +8,8 @@ $\argmin_f\E_{x,y}[(y-f(x))^2]=\E[Y\mid X]$\\
 $\argmin_f\E_{x,y}[1_{[y\neq f(x)]}]\\=\argmax_yp(Y=y\mid X=x)$
 
 \subsection*{Bias-Variance-noise decomposition}
-$\E_{x,y}[(\hat{f}_D(x)- y)^2]\\=
-\E_x[\E_D[\hat{f}_D(x)]-f^*(x)]^2\\
-\hspace*{0.1mm}+\E_x[\operatorname{var}[\hat{f}_D(x)]]\\
-\hspace*{0.1mm}+\E_{x,y}[(y-f^*(x))^2]$ where $f^*=\E[Y\mid X]$.
+$\E_{x,y}[(\hat{f}_D(x)- y)^2]= \E_x[\E_D[\hat{f}_D(x)]-f^*(x)]^2\\
+\hspace*{0.1mm}+\E_{x,D}[(\hat{f}_D(x) - \E_D[\hat{f}_D(x)])^2] +\E_{x,y}[(y-f^*(x))^2]$ where $f^*=\E[Y\mid X]$. Expected generalization error equals model bias squared, model variance and observation noise.
 
 
 \subsection*{Logistic regression}

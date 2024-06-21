@@ -49,13 +49,13 @@ $\E_{X,Y}\ell(f(X), Y)$
 Für $X_i$ iid mit $m = \E[X_1]$ und $\Var[X_1] = \sigma^2$ gilt $\P\left[\frac{\sum_{i=1}^n X_i - n m}{\sqrt{\sigma^2 n}} \leq a\right] \xrightarrow[n \to \infty]{} \Phi(a)$.
 
 \subsection*{Gradient Descent}
-$w_{t+1} = w_t - \eta_t \nabla_w \hat{R}(w_t)$
-\subsection*{Gradient Descent with Momentum} $w_{t+1}=w_t+m(w_t-w_{t-1})-\eta_t \nabla_w \hat{R}(w_t)$
+$w_{t+1} = w_t - \eta \nabla L(w_t)$
+\subsection*{Gradient Descent with Momentum} $w_{t+1}=w_t+m(w_t-w_{t-1})-\eta \nabla L(w_t)$
 \subsection*{SGD}
-Pick data point $(x,y)$ u.a.r. and	set\\  $w_{t+1} = w_t - \eta_t \nabla_w l(f(x),y)$
+Pick data poi nt $(x,y)$ u.a.r. and set\\  $w_{t+1} = w_t - \eta \nabla L_{(x,y)}(w_t)$ \\ For mini-batch SGD, choose $S \subseteq \{1, \ldots, n\}$ and set $w_{t+1} = w_t - \eta \nabla L_{S}(w_t)$
 \subsection*{Complexity}
-Matmul $A\in\R^{n\times k},B\in R^{k\times d}$: $\Theta(n\times k\times d)$
+Matmul $A\in\R^{n\times k},B\in R^{k\times d}$: $\Theta(n k d)$
 
 \subsection*{KL Divergence}
-$D_{KL}(P||Q) = \mathbb{E}_p[\log(\frac{p(x)}{q(x)})]$
+$D_{KL}(P||Q) = \mathbb{E}_p[\log(\frac{p(x)}{q(x)})]$, 0 iff $P = Q$, always non-negative
 \\
