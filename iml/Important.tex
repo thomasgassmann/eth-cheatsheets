@@ -1,0 +1,50 @@
+\section*{General}
+
+$$
+\operatorname{var}(AX)=A\operatorname{var}(X)A^T
+$$
+
+$$
+\begin{bsmallmatrix}
+a&b \\ 
+c&d
+\end{bsmallmatrix}^{-1}=\frac{1}{ad-bc}
+\begin{bsmallmatrix}
+d&-b \\ 
+-c&a
+\end{bsmallmatrix}
+$$
+
+$$
+\widehat{\operatorname{cov}}(X)=\frac{1}{n}X^\top X=\frac{1}{n}\sum_i x_ix_i^\top
+$$
+
+\subsection*{Convexity}
+\begin{itemize}
+    \item{$f(t x + (1-t)y) \leq t f(x) + (1-t) f(y)$}
+    \item{$f$ convex, $g$ affine $\imp f\circ g$ convex}
+    \item{$f$ non-decreasing, $g$ convex $\imp f\circ g$ convex}
+\end{itemize}
+
+\subsection*{Gaussian}
+
+$p(x) = \frac{1}{\sqrt{(2\pi|\Sigma|)}}\exp({-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)})$
+
+\subsection*{PSD}
+$M \in \mathbb{R}^{n\times n}$ PSD $\Leftrightarrow \forall x \in \mathbb{R}^n: x^TMx \geq 0 \\
+\Leftrightarrow$ all principal minors of $M$ have non-negative determinant\\
+$\Leftrightarrow \lambda \geq 0 \ \forall \lambda\in\sigma(M)$
+
+\subsection*{Theoretical and Empirical Risk}
+$R(f)=\E_{(x,y)}\ell(f(x), y)$ \\ $\hat{R}(f)=\frac{1}{n}\sum_i\ell(f(x_i), y_i)$
+\subsection*{Gradient Descent}
+$w_{t+1} = w_t - \eta_t \nabla_w \hat{R}(w_t)$
+\subsection*{Gradient Descent with Momentum} $w_{t+1}=w_t+m(w_t-w_{t-1})-\eta_t \nabla_w \hat{R}(w_t)$
+\subsection*{SGD}
+Pick data point $(x,y)$ u.a.r. and	set\\  $w_{t+1} = w_t - \eta_t \nabla_w l(f(x),y)$
+\subsection*{Complexity}
+Matmul $A\in\R^{n\times k},B\in R^{k\times d}$: $\Theta(n\times k\times d)$
+
+\subsection*{KL Divergence}
+$D_{KL}(P||Q) = \mathbb{E}_p[\log(\frac{p(x)}{q(x)})]$
+\\

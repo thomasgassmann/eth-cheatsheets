@@ -1,0 +1,33 @@
+\section*{Classification}
+\subsection*{Logistic Loss}
+$\ell_{log}(x,y) = \log(1+e^{-yf(x)})$ (convex)\\
+$\nabla_w \ell_{log}(x,y) = \frac{-y\nabla_w f(x)}{1+\exp(yf(x))} $
+
+\subsection*{Hinge Loss}
+$l_H(x,y,w) = \max \{0,1-y w^T x\}$ (convex)\\
+$\nabla_w l_H = \begin{cases}
+    -y x&\text{ , if $yw^T x<1$}\\
+	0 &\text{ , if $y w^T x \geq 1$}
+\end{cases}$
+
+\subsection*{Hard-margin SVM}
+If data is separable, find \\
+$\min_w\|w\| \ \ \ \text{s.t.} \ y_iw^\top x_i\geq 1 \ \forall i.$\\
+
+\subsection*{Soft-margin SVM}
+If data is not separable, find \\
+$\min_{w,\xi}\frac{1}{2}\|w\|^2  +\lambda\sum_i\xi_i\ \ \ 
+\text{s.t.} \begin{cases}
+    y_iw^\top x_i\geq 1-\xi_i\\
+    \xi_i\geq0
+\end{cases}\\
+=\min_w\frac{1}{2}\|w\|^2+\lambda\sum_i\max \{0,1-y_i w^\top x_i\}$
+
+
+\subsection*{Evaluation}
+Accuracy $=\frac{TP+TN}{TP+TN+FP+FN}$\\
+Precision $=\frac{TP}{TP+FP}= 1-$ FDR\\
+Recall $=$ TPR$ =\frac{TP}{TP+FN}$\\
+FPR $=\frac{FP}{TN+FP}$\\
+ROC curve: \ \ $x=$ FPR, $y=$ TPR\\
+F1 $=\frac{2TP}{2TP+FP+FN}=\frac{2}{1/Precision+1/Recall}$\\

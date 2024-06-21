@@ -3,11 +3,11 @@
 \usepackage{scrextend}
 
 % 3 column landscape layout with fewer margins
-\usepackage[landscape, left=0.75cm, top=1cm, right=0.75cm, bottom=1.5cm, footskip=15pt]{geometry}
+\usepackage[landscape, left=0.75cm, top=0.75cm, right=0.75cm, bottom=1cm, footskip=15pt]{geometry}
 \usepackage{flowfram}
 \usepackage{bbm}
 \ffvadjustfalse
-\setlength{\columnsep}{1cm}
+\setlength{\columnsep}{0.5cm}
 \Ncolumn[<10]{4}
 \onecolumn[10]
 
@@ -55,8 +55,6 @@
 
 % Make enumerations more compact
 \usepackage{enumitem}
-\setitemize{itemsep=0.5pt}
-\setenumerate{itemsep=0.75pt}
 
 % To include sketches & PDFs
 \usepackage{graphicx}
@@ -66,11 +64,11 @@
 \hypersetup{
 	colorlinks=true
 }
-
+\renewcommand{\baselinestretch}{.9}
 % Metadata
-\title{Cheatsheet\\ Wahrscheinlichkeit \& Statistik}
-\author{Julian Steinmann}
-\date{\vspace{-10pt}Sommer 2022}
+\title{Cheatsheet\\ Introduction to Machine Learning}
+\author{Thomas Gassmann}
+\date{\vspace{-10pt}Sommer 2024}
 
 % Math helper stuff
 \def\limxo{\lim_{x\to 0}}
@@ -120,12 +118,33 @@
 \DeclareMathOperator*{\vol}{vol}
 \DeclareMathOperator*{\Mat}{Mat}
 
+\setlength{\parindent}{0pt}
 
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {0pt}%
+                                {0.5pt}%x
+                                {\sffamily\bfseries\large}}
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
+                                {0pt}%
+                                {0.1pt}%x
+                                {\sffamily\bfseries}}
 \begin{document}
+\small
 
 \input{../header.tex}
 
-Dieses Cheatsheet basiert auf dem \href{https://github.com/XYQuadrat/eth-cheatsheets}{WuS Cheatsheet von xyquadrat}.
-
+\input{Important}
+\input{Regression}
+\input{Classification}
+\input{Kernels}
+\input{NeuralNetworks}
+\input{Clustering}
+\input{DimensionReduction}
+\input{ProbabilityModeling}
+\input{DecisionTheory}
+\input{Generative}
+\input{Latent}
+\input{GANs}
 
 \end{document}

@@ -1,0 +1,35 @@
+\section*{Kernels}
+\subsection*{Polynomial kernel}
+$k(x,y) = (x^Ty)^m$  all monomials of deg. m \\
+$k(x,y) = (1+x^Ty)^m$ all monomials up to deg. m
+There are $\binom{d+m}{m}=O_d(d^m)=O_m(m^d)$ monomials of 
+order $m$ in $d$ variables.
+
+\subsection*{Properties $k(x,y) = \phi(x)^T\phi(y)$}
+\begin{enumerate}[noitemsep,leftmargin=*,topsep=0pt,parsep=0pt,partopsep=0pt]
+    \item $k$ must be symmetric.
+    \item Kernel matrix $K$ must be PSD for all $x_1,\dots,x_n$.\\
+$K=\begin{bmatrix}
+    k(x_1,x_1)&\dots&k(x_1,x_n) \\ 
+    \vdots&\ddots&\vdots\\
+    k(x_n,x_1)&\dots&k(x_n,x_n)
+    \end{bmatrix}
+$\end{enumerate}
+
+\subsection*{Valid kernels}
+$k_1 + k_2,$
+$k_1 k_2,$
+$  c k$ if $c>0;$\\
+$f(k)$, where $f$ is a polynomial/power series with non-negative coefficients;\\
+$k(\binom{x}{y}, \binom{x'}{y'})=k(x,x')k(y,y'),\\ 
+k(\binom{x}{y}, \binom{x'}{y'})=k(x,x') + k(y,y')$ \\
+where $\binom{x}{y}$ is concatenation of vectors;\\
+$k(x,y)=g(x)k(x,y)g(y)$ where $g\colon X\to\R$.
+
+
+\subsection*{Kernelized Ridge}
+Ansatz: $w^*=\Phi^\top\alpha$\\
+$\min_w\|\Phi w-y\|^2 + \lambda ||w||_2^2\\
+=\min_a ||K\alpha -y||_2^2 + \lambda \alpha^T K \alpha$\\
+$\alpha^*=(K+\lambda I)^{-1} y$\\
+Prediction: $\hat{y} = \Sigma_{i=1}^n \alpha_i^* k(x_i,x)$\\

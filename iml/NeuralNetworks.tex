@@ -1,0 +1,31 @@
+\section*{Neural Networks}
+$F(x)=W^{L}\phi^{L-1}(W^{L-1}...(\phi^{1}(W^{1}x)...))$
+
+\subsection*{Activation functions}
+Sigmoid: $\varphi(z) = \frac{1}{1+\exp(-z)}$;  $\varphi' = (1 - \varphi)\cdot\varphi$\\
+Tanh: $\tanh(z) = \frac{\exp(z)-\exp(-z)}{\exp(z)+\exp(-z)}$\\
+ReLu:  $\max(0,z)$
+
+\subsection*{Backpropagation}
+For the output layer $L$:
+\begin{enumerate}[noitemsep,leftmargin=6mm,topsep=0pt,parsep=0pt,partopsep=0pt]
+\item Compute error $\delta^{L} = \nabla_f\ell$
+\item and gradient $\nabla_{W^L}\ell=\delta^L(v^{(L-1)})^T$
+\end{enumerate}
+For each hidden layer $l=L-1,...,1$:
+\begin{enumerate}[noitemsep,leftmargin=6mm,topsep=0pt,parsep=0pt,partopsep=0pt]
+\item  Compute error $\delta^{l} =\varphi'(z^l)\odot ((W^l)^T\delta^{l+1})$
+\item and gradient $\nabla_{W^l}\ell=\delta^l(v^{(l-1)})^T$
+\end{enumerate}
+
+\subsection*{Regularization}
+\begin{itemize}[noitemsep,leftmargin=6mm,topsep=2pt,parsep=2pt,partopsep=2pt]
+    \item Weight decay
+    \item Early stopping (validation)
+    \item Dropout
+    \item Batch normalization
+\end{itemize}
+
+\subsection*{CNNs}
+Output size (per dim) $l=\frac{n+2p-f}{s}+1$
+\\

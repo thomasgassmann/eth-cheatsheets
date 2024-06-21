@@ -1,0 +1,14 @@
+\section*{Bayesian decision theory}
+\begin{enumerate}[noitemsep,leftmargin=6mm,topsep=0pt,parsep=0pt,partopsep=0pt]
+	\item Conditional distribution over labels $P(y|x)$
+	\item Set of actions $\mathcal{A}$
+	\item Cost function $C:Y\times \mathcal{A} \rightarrow \mathbb{R}$
+\end{enumerate}
+
+Pick action that minimizes the expected cost:
+$a^* = \operatorname{argmin_{a \in \mathcal{A}}} \mathbb{E}_y[C(y,a)|x]$
+
+\subsection*{Optimal decision for logistic regression}
+$a^* = \operatorname{argmin_y} \hat{P}(y|x) = sign(w^T x)$ assuming 
+$0$-$1$-cost.
+\\

@@ -1,0 +1,49 @@
+\section*{Generative Modeling}
+Discriminative: Estimate $P(y\mid x)$\\
+Generative: Estimate $P(y,x)$
+
+Typical approach to generative modeling:
+\begin{enumerate}[noitemsep,leftmargin=6mm,topsep=2pt,parsep=2pt,partopsep=2pt]
+    \item Estimate prior on labels $P(y)$
+    \item Estimate conditional distribution $P(x\mid y)$ for each class y
+    \item Obtain predictive distribution using Bayes' rule:
+$P(y\mid x) = \frac{P(y) P(x\mid y)}{P(x)} = \frac{P(x,y)}{P(x)}$
+\end{enumerate}
+
+\subsection*{Naive Bayes}
+Naive Bayes assumes conditional independence:
+$$P(X_1,...,X_n\mid Y) = \prod_i P(X_i\mid Y).$$
+If independence is violated, predictions become overconfident (close to 0 and 1).
+
+\subsection*{Decision rule}
+$\hat{y} = \operatorname{argmax_{y}} P(y\mid x)\\
+\hspace*{2.1mm}= \operatorname{argmax_{y}} P(y) \prod_{i} P(x_i\mid y)\\
+\hspace*{2.1mm}= \operatorname{argmax_{y}} \log P(y) + \sum_{i} \log P(x_i\mid y)$
+
+\subsection*{QDA/Gaussian Bayes Classifier}
+$P(Y=y) = p_y$ and $P(x\mid y) = \mathcal{N}({\mu}_y, {\Sigma}_y)$\\
+$\hat{p}_y= \frac{\operatorname{Count(Y = y)}}{n}$\\
+$\hat{\mu}_{y} = \frac{1}{\operatorname{Count}(Y=y)} \sum_{i:y_i=y} {x_i} $\\
+$\hat{\Sigma}_{y} = \frac{1}{\operatorname{Count}(Y=y)} \sum_{i:y_i=y} (x_i - \hat{\mu}_{y})(x_i-\hat{\mu}_y)^T $
+
+For two classes $\hat{y} = \operatorname{sign}\Big(\log\frac{P(Y=1\mid x)}{P(Y=-1\mid x)}\Big) $ 
+\\ where  
+$    \log\frac{P(Y=1\mid x)}{P(Y=-1\mid x)} = \log \frac{\hat{p}}{1-\hat{p}} + \frac{1}{2}\log \frac{|\hat{\Sigma}_-|}{|\hat{\Sigma}_+|}\\
+    + \frac{1}{2}(x - \hat{\mu}_-)^T \hat{\Sigma}_-^{-1} (x - \hat{\mu}_-) - \frac{1}{2}(x - \hat{\mu}_+)^T \hat{\Sigma}_+^{-1} (x - \hat{\mu}_+)$
+
+\subsection*{Gaussian Naive Bayes}
+GBC with diagonal $\Sigma$s. GNB with shared $\Sigma$s across
+two classes yields the same predictions as Logistic Regression
+(if model is true).
+
+\subsection*{Fisher's LDA (Subcase of GBC)}
+Assume: Two classes, $p = 0.5$, ${\Sigma}_- = {\Sigma}_+ $
+
+\subsection*{Outlier Detection}
+Classify $x$ as outlier if $P(x) \leq \tau$.
+
+\subsection*{Regularization}
+\begin{itemize}[noitemsep,leftmargin=6mm,topsep=0pt,parsep=0pt,partopsep=0pt]
+    \item Restricting model (i.e. covariance)
+    \item Prior on parameters.\\
+\end{itemize}
