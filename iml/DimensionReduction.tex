@@ -1,15 +1,15 @@
 \section*{Dimension Reduction}
 \subsection*{Principal component analysis (PCA)}
 Given centered data, the PCA problem is 
-$$\min_{W^TW=I_k,z_i\in\R^k}\sum_{i=1}^n||W z_i - x_i||_2^2,$$
+$$\min_{W^\top W=I_k,z_i\in\R^k}\sum_{i=1}^n||W z_i - x_i||_2^2,$$
 with solution $W^* = (v_1|...|v_k)$ where $v_i$ are the ordered 
-eigenvectors of $\frac{1}{n}\sum_ix_ix_i^T$ 
+eigenvectors of $\frac{1}{n}\sum_ix_ix_i^\top$ 
 and $z_i = {W^*}^\top x_i$. 
 
 \subsection*{Kernel PCA}
 The Kernel Principal Components are given by $\alpha^{1},...,\alpha^{k}\in \mathbb{R}^n$ 
 where $\alpha^{i} = \frac{1}{\sqrt{\lambda_i}}v_i$ and 
-$K = \sum_{i=1}^n \lambda_i v_i v_i^T$ with ordered $\lambda_i.$ A point 
+$K = \sum_{i=1}^n \lambda_i v_i v_i^\top$ with ordered $\lambda_i.$ A point 
 $x$ is projected to $z \in \mathbb{R}^k$:
 $z_i = \sum_{j=1}^n\alpha_j^{(i)}k(x,x_j)$
 

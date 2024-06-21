@@ -38,8 +38,8 @@ is equivalent to k-means.
 \end{equation*}
 
 GMM M-step:\\ $w_j^{(t)} \leftarrow \frac{1}{n} \sum_{i} \gamma_j^{(t)} (x_i)$; \\
-$\mu_j^{(t)} \leftarrow \frac{\sum_{i} \gamma_j^{(t)} (x_i) x_i}{\sum_{i} \gamma_j^{(t)} (x_i)}\\ %\text{|learning with GMMs } ^t = ^*\\
-\Sigma_j^{(t)} \leftarrow \frac{\sum_{i} \gamma_j^{(t)}(x_i) (x_i - \mu_j^{(t)}) (x_i - \mu_j^{(t)})^T}{\sum_{i} \gamma_j^{(t)}(x_i)} \{+\nu^2\mathbb{I}\}$\\ %\text{|}\gamma^{(t) = \gamma}$
+$\mu_j^{(t)} \leftarrow \frac{\sum_{i} \gamma_j^{(t)} (x_i) x_i}{\sum_{i} \gamma_j^{(t)} (x_i)}\\
+\Sigma_j^{(t)} \leftarrow \frac{\sum_{i} \gamma_j^{(t)}(x_i) (x_i - \mu_j^{(t)}) (x_i - \mu_j^{(t)})^\top}{\sum_{i} \gamma_j^{(t)}(x_i)} \{+\nu^2\mathbb{I}\}$\\ %\text{|}\gamma^{(t) = \gamma}$
 
 The cluster size can be selected via CV.
 EM converges to a local maximum for GMMs, dependent on

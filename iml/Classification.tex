@@ -4,10 +4,10 @@ $\ell_{log}(x,y) = \log(1+e^{-yf(x)})$ (convex)\\
 $\nabla_w \ell_{log}(x,y) = \frac{-y\nabla_w f(x)}{1+\exp(yf(x))} $
 
 \subsection*{Hinge Loss}
-$l_H(x,y,w) = \max \{0,1-y w^T x\}$ (convex)\\
+$l_H(x,y,w) = \max \{0,1-y w^\top x\}$ (convex)\\
 $\nabla_w l_H = \begin{cases}
-    -y x&\text{ , if $yw^T x<1$}\\
-	0 &\text{ , if $y w^T x \geq 1$}
+    -y x&\text{ , if $yw^\top x<1$}\\
+	0 &\text{ , if $y w^\top x \geq 1$}
 \end{cases}$
 
 \subsection*{Hard-margin SVM}

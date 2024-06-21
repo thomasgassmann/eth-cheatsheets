@@ -10,12 +10,12 @@ ReLu:  $\max(0,z)$
 For the output layer $L$:
 \begin{enumerate}[noitemsep,leftmargin=6mm,topsep=0pt,parsep=0pt,partopsep=0pt]
 \item Compute error $\delta^{L} = \nabla_f\ell$
-\item and gradient $\nabla_{W^L}\ell=\delta^L(v^{(L-1)})^T$
+\item and gradient $\nabla_{W^L}\ell=\delta^L(v^{(L-1)})^\top$
 \end{enumerate}
 For each hidden layer $l=L-1,...,1$:
 \begin{enumerate}[noitemsep,leftmargin=6mm,topsep=0pt,parsep=0pt,partopsep=0pt]
-\item  Compute error $\delta^{l} =\varphi'(z^l)\odot ((W^l)^T\delta^{l+1})$
-\item and gradient $\nabla_{W^l}\ell=\delta^l(v^{(l-1)})^T$
+\item  Compute error $\delta^{l} =\varphi'(z^l)\odot ((W^l)^\top \delta^{l+1})$
+\item and gradient $\nabla_{W^l}\ell=\delta^l(v^{(l-1)})^\top$
 \end{enumerate}
 
 \subsection*{Regularization}

@@ -24,12 +24,12 @@ $\hat{y} = \operatorname{argmax_{y}} P(y\mid x)\\
 $P(Y=y) = p_y$ and $P(x\mid y) = \mathcal{N}({\mu}_y, {\Sigma}_y)$\\
 $\hat{p}_y= \frac{\operatorname{Count(Y = y)}}{n}$\\
 $\hat{\mu}_{y} = \frac{1}{\operatorname{Count}(Y=y)} \sum_{i:y_i=y} {x_i} $\\
-$\hat{\Sigma}_{y} = \frac{1}{\operatorname{Count}(Y=y)} \sum_{i:y_i=y} (x_i - \hat{\mu}_{y})(x_i-\hat{\mu}_y)^T $
+$\hat{\Sigma}_{y} = \frac{1}{\operatorname{Count}(Y=y)} \sum_{i:y_i=y} (x_i - \hat{\mu}_{y})(x_i-\hat{\mu}_y)^\top $
 
 For two classes $\hat{y} = \operatorname{sign}\Big(\log\frac{P(Y=1\mid x)}{P(Y=-1\mid x)}\Big) $ 
 \\ where  
 $    \log\frac{P(Y=1\mid x)}{P(Y=-1\mid x)} = \log \frac{\hat{p}}{1-\hat{p}} + \frac{1}{2}\log \frac{|\hat{\Sigma}_-|}{|\hat{\Sigma}_+|}\\
-    + \frac{1}{2}(x - \hat{\mu}_-)^T \hat{\Sigma}_-^{-1} (x - \hat{\mu}_-) - \frac{1}{2}(x - \hat{\mu}_+)^T \hat{\Sigma}_+^{-1} (x - \hat{\mu}_+)$
+    + \frac{1}{2}(x - \hat{\mu}_-)^\top \hat{\Sigma}_-^{-1} (x - \hat{\mu}_-) - \frac{1}{2}(x - \hat{\mu}_+)^\top \hat{\Sigma}_+^{-1} (x - \hat{\mu}_+)$
 
 \subsection*{Gaussian Naive Bayes}
 GBC with diagonal $\Sigma$s. GNB with shared $\Sigma$s across

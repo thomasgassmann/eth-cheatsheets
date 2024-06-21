@@ -1,7 +1,7 @@
 \section*{General}
 
 $$
-\operatorname{var}(AX)=A\operatorname{var}(X)A^T
+\operatorname{var}(AX)=A\operatorname{var}(X)A^\top
 $$
 
 $$
@@ -23,20 +23,31 @@ $$
 \begin{itemize}
     \item{$f(t x + (1-t)y) \leq t f(x) + (1-t) f(y)$}
     \item{$f$ convex, $g$ affine $\imp f\circ g$ convex}
-    \item{$f$ non-decreasing, $g$ convex $\imp f\circ g$ convex}
+    \item{$f$ convex, non-decreasing, $g$ convex $\imp f\circ g$ convex}
+    \item{$f$ convex, $g$ affine $\imp f\circ g$ convex}
+    \item{$\alpha, \beta \geq 0, f, g$ convex $\implies \alpha f + \beta g$ convex}
+    \item pointwise maximum of two convex functions is convex
 \end{itemize}
 
 \subsection*{Gaussian}
 
-$p(x) = \frac{1}{\sqrt{(2\pi|\Sigma|)}}\exp({-\frac{1}{2}(x-\mu)^T\Sigma^{-1}(x-\mu)})$
+For $\mu \in \R^p, \Sigma \in \R^{p \times p} \ \text{spd}$, $X$ has normal distribution with density:
+
+$\frac{1}{\sqrt{(2\pi)^p \det(\Sigma))}}\exp({-\frac{1}{2}(x-\mu)^\top \Sigma^{-1}(x-\mu)})$
 
 \subsection*{PSD}
-$M \in \mathbb{R}^{n\times n}$ PSD $\Leftrightarrow \forall x \in \mathbb{R}^n: x^TMx \geq 0 \\
+$M \in \mathbb{R}^{n\times n}$ PSD $\Leftrightarrow \forall x \in \mathbb{R}^n: x^\top Mx \geq 0 \\
 \Leftrightarrow$ all principal minors of $M$ have non-negative determinant\\
 $\Leftrightarrow \lambda \geq 0 \ \forall \lambda\in\sigma(M)$
 
-\subsection*{Theoretical and Empirical Risk}
-$R(f)=\E_{(x,y)}\ell(f(x), y)$ \\ $\hat{R}(f)=\frac{1}{n}\sum_i\ell(f(x_i), y_i)$
+\subsection*{Expected estimation and generalization error}
+$\E_{X}\ell(f(X), f^\ast(X))$ \\ 
+$\E_{X,Y}\ell(f(X), Y)$
+
+\subsection*{Central Limit Theorem}
+
+Für $X_i$ iid mit $m = \E[X_1]$ und $\Var[X_1] = \sigma^2$ gilt $\P\left[\frac{\sum_{i=1}^n X_i - n m}{\sqrt{\sigma^2 n}} \leq a\right] \xrightarrow[n \to \infty]{} \Phi(a)$.
+
 \subsection*{Gradient Descent}
 $w_{t+1} = w_t - \eta_t \nabla_w \hat{R}(w_t)$
 \subsection*{Gradient Descent with Momentum} $w_{t+1}=w_t+m(w_t-w_{t-1})-\eta_t \nabla_w \hat{R}(w_t)$

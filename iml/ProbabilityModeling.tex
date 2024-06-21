@@ -15,17 +15,17 @@ $\E_{x,y}[(\hat{f}_D(x)- y)^2]\\=
 
 
 \subsection*{Logistic regression}
-Parametrize $P(y\mid x)$ by $\frac{1}{1+\exp(-y w^T x)}$.\\
+Parametrize $P(y\mid x)$ by $\frac{1}{1+\exp(-y w^\top x)}$.\\
 MLE is $\operatorname{argmax_w} P(y_{1:n}|w,x_{1:n})\\
 = \operatorname{argmin_w} - \sum_{i=1}^n \log P(y_i|w,x_i)\\
-= \operatorname{argmin_w} \sum_{i=1}^n \log(1+\exp(-y_i w^T x_i))$
+= \operatorname{argmin_w} \sum_{i=1}^n \log(1+\exp(-y_i w^\top x_i))$
 
 \subsection*{Gradient for logistic regression}
-$\ell(w) = \log(1+\exp(-yw^Tx))$\\
-$\nabla_w \ell(w) =\frac{-yx}{1+\exp(yw^Tx)}$
+$\ell(w) = \log(1+\exp(-yw^\top x))$\\
+$\nabla_w \ell(w) =\frac{-yx}{1+\exp(yw^\top x)}$
 
 \subsection*{Multiclass Logistic Regression}
-Parametrize $P(Y=i\mid x)$ by $\frac{\exp(w_i^Tx)}{\sum_j \exp(w_j^Tx)}$.
+Parametrize $P(Y=i\mid x)$ by $\frac{\exp(w_i^\top x)}{\sum_j \exp(w_j^\top x)}$.
 
 \subsection*{Kernelized logistic regression}
 $\min_\alpha\sum_i\log(1+\exp(-y_i\alpha^\top K_i)) + \lambda\alpha^\top K \alpha$
