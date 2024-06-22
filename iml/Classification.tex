@@ -1,18 +1,4 @@
 \section*{Classification}
-\subsection*{Logistic Loss}
-$\ell_{log}(x,y) = \log(1+e^{-yf(x)})$ (convex)\\
-$\nabla_w \ell_{log}(x,y) = \frac{-y\nabla_w f(x)}{1+\exp(yf(x))} $
-
-\subsection*{Hinge Loss}
-$l_H(x,y,w) = \max \{0,1-y w^\top x\}$ (convex)\\
-$\nabla_w l_H = \begin{cases}
-    -y x&\text{ , if $yw^\top x<1$}\\
-	0 &\text{ , if $y w^\top x \geq 1$}
-\end{cases}$
-
-\subsection*{Hard-margin SVM}
-If data is separable, find \\
-$\min_w \lVert w \rVert_2 \ \text{s.t.} \ y_iw^\top x_i\geq 1 \ \forall i.$\\
 
 \subsection*{Soft-margin SVM}
 If data is not separable, find \\

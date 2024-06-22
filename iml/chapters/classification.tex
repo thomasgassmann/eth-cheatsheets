@@ -6,8 +6,6 @@
 
 \textbf{Logistic loss} \quad $\log(1 + e^{-y \hat{f}(x)})$
 
-\qquad \qquad $\nabla \ell(\hat{f}(x), y) = \frac{-y_i x_i}{1 + e^{y_i \hat{f}(x)}}$
-
 \textbf{Hinge loss} \quad \ $\max(0, 1-y \hat{f}(x))$
 
 \textbf{Softmax} $p(1 | x) = \frac{1}{1 + e^{- \hat{f}(x)}}, p(-1 | x) = \frac{1}{1 + e^{\hat{f}(x)}}$ 
@@ -33,7 +31,6 @@ Where $\text{margin} (w) = \min_i y_i w^\top x_i$.
 $$\hat{w} = \min_{w, \xi} \frac{1}{2} ||w||_2^2 + \lambda \sum_{i=1}^n \underbrace{\max (0, 1 - y_i w^\top x_i)}_{\text{hinge loss}}$$ \\[-23pt]
 
 \subsection*{Metrics} 
-Choose $+1$ as the more important class. \\[-18pt]
 
 \begin{multicols*}{2}
 	\begin{center}
