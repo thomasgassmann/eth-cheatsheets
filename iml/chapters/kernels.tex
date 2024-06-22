@@ -1,18 +1,16 @@
 \section*{Kernels}
 
-Parameterize: $w = \Phi^\top \alpha$, $K = \Phi \Phi^\top$
+Parameterize: $w = \Phi^\top \alpha$, $K = \Phi \Phi^\top$, $k(x,y) = \varphi(x)^\top \varphi(y)$
 
 A kernel is \textbf{valid} if $K$ is sym.: $k(x,z) = k(z,x)$ and psd: $z^\top K z \geq 0$, check Gram matrix (matrix of all inner products) is psd
 
-\textbf{lin.}: $k(x, z) = x^\top z$, \textbf{poly.}: $k(x, z) = (x^\top z + 1)^m$
-\textbf{rbf}: $k(x, z) = \exp ( -\frac{||x - z||_\alpha}{\tau} )$
-
-$\alpha = 1 \Rightarrow $ laplacian kernel, $\alpha = 2 \Rightarrow $ gaussian kernel
+\textbf{lin.}: $k(x, z) = (x^\top z)^m$, \textbf{poly.}: $k(x, z) = (x^\top z + 1)^m$
+\textbf{RBF}: $k(x, z) = \exp ( -\frac{||x - z||_\alpha}{\tau} )$, $\alpha = 1 \Rightarrow $ Laplacian kernel, $\alpha = 2 \Rightarrow $ Gaussian kernel
 
 \textbf{Mercers Theorem}: Valid kernels can be decomposed into a lin. comb. of inner products.
 
-\textbf{Kernel composition rules} $k = k_1 + k_2$, \quad $k = k_1 \cdot k_2$ \quad $\forall c > 0. \; k = c \cdot k_1$,
-$\forall f \text{ convex}. \; k = f(k_1), $ holds for polynoms with pos. coefficients or exp function. 
+\textbf{Kernel composition} $k = k_1 + k_2$, \quad $k = k_1 \cdot k_2$ \quad $\forall c > 0. \; k = c \cdot k_1$,
+$k = f(k_1)$ holds for $f$ convex or polynomials/power series with non-neg. coefficients  
 
 $\forall f. \; k(x,y) = f(x)k_1(x,y)f(y)$
 

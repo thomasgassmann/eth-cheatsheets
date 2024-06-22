@@ -10,11 +10,6 @@ Typical approach to generative modeling:
 $P(y\mid x) = \frac{P(y) P(x\mid y)}{P(x)} = \frac{P(x,y)}{P(x)}$
 \end{enumerate}
 
-\subsection*{Naive Bayes}
-Naive Bayes assumes conditional independence:
-$$P(X_1,...,X_n\mid Y) = \prod_i P(X_i\mid Y).$$
-If independence is violated, predictions become overconfident (close to 0 and 1).
-
 \subsection*{Decision rule}
 $\hat{y} = \operatorname{argmax_{y}} P(y\mid x)\\
 \hspace*{2.1mm}= \operatorname{argmax_{y}} P(y) \prod_{i} P(x_i\mid y)\\
