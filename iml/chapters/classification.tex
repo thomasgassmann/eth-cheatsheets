@@ -39,13 +39,15 @@ $$\hat{w} = \min_{w, \xi} \frac{1}{2} ||w||_2^2 + \lambda \sum_{i=1}^n \underbra
 	
 	$\text{error}_1 / \text{FPR}: \frac{\text{FP}}{\text{TN + FP}}$
 	$\text{error}_2 / \text{FNR}: \frac{\text{FN}}{\text{TP + FN}}$
-	$\text{Precision}: \frac{\text{TP}}{\text{TP + FP}}$
 	$\text{TPR / Recall}: \frac{\text{TP}}{\text{TP + FN}}$
+	$\text{TNR}: \frac{\text{TN}}{\text{TN + FP}}$
 \end{multicols*}
 
 .\\[-20pt]
+$\text{Precision}: \frac{\text{TP}}{\text{TP + FP}} = 1 - \text{FDR}$, FDR = $\frac{FP}{TP + FP}$
+
 \textbf{AUROC}: Plot TPR (y) vs. FPR (x) and compare different ROC's with area under the curve.
 
-\textbf{F1-Score}: $\frac{2TP}{2TP+FP+FN}=\frac{2}{1/Precision+1/Recall}$, $\text{Accuracy}: \frac{\text{TP + TN}}{\text{P + N}}$
+\textbf{F1-Score}: $\frac{2TP}{2TP+FP+FN}=\frac{2}{1/Precision+1/Recall}$, $\text{Accuracy}: \frac{\text{TP + TN}}{\text{P + N}} = \frac{TP + TN}{TP + TN + FP + FN}$
 
 Goal: large recall and small FPR.
