@@ -67,3 +67,23 @@ For $A = U \Sigma V^\top \in \R^{m \times n}$ and $\Sigma^\dagger \in \R^{n \tim
 $$
 A^\dagger = V \Sigma^\dagger U^\top
 $$
+
+\subsection*{Inverse}
+
+$A^{-1}=
+\begin{bsmallmatrix}
+a&b \\ 
+c&d
+\end{bsmallmatrix}^{-1}=\frac{1}{ad-bc}
+\begin{bsmallmatrix}
+d&-b \\ 
+-c&a
+\end{bsmallmatrix}
+$
+
+\subsection*{SVD}
+$X\in \mathbb{R}^{n\times p}, U\in \mathbb{R}^{n\times n}, S\in \mathbb{R}^{n\times p},
+V\in \mathbb{R}^{p\times p}$\\
+$X=USV^T=\sum_{k=1}^{rank(X)}\sigma_{k,k}u_k (v_k)^T,\!${\tiny{($U^TU=V^TV=I$)}}\\
+$X^TX=VS^TU^TUSV^T=VS^TSV^T=V\Sigma V^T$\\
+$\Sigma = diag(\sigma_1^2,..,\sigma_n^2);\sigma_i^2=\lambda_i; \forall \lambda_i \geq 0$

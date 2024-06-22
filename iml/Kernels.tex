@@ -1,9 +1,12 @@
 \section*{Kernels}
-\subsection*{Polynomial kernel}
+\subsection*{Examples of Kernels}
 $k(x,y) = (x^\top y)^m$  all monomials of deg. m \\
-$k(x,y) = (1+x^\top y)^m$ all monomials up to deg. m
+$k(x,y) = (1+x^\top y)^m$ all monomials up to deg. m\\
 There are $\binom{d+m}{m}=O_d(d^m)=O_m(m^d)$ monomials of 
-order $m$ in $d$ variables.
+order $m$ in $d$ variables.\\
+Gaussian kernel: $k(x,y) = exp(-||x-y||_2^2/h^2)$\\
+Laplacian kernel: $k(x,y) = exp(-||x-y||_1/h)$
+
 
 \subsection*{Properties $k(x,y) = \phi(x)^\top \phi(y)$}
 \begin{enumerate}[noitemsep,leftmargin=*,topsep=0pt,parsep=0pt,partopsep=0pt]
