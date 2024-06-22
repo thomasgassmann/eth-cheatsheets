@@ -49,6 +49,8 @@ jobs:
           LINALG_TOKEN: ${{ secrets.LINALG_TOKEN }}
           CA_TOKEN: ${{ secrets.CA_TOKEN }}
           IML_TOKEN: ${{ secrets.IML_TOKEN }}
+          ANA1_TOKEN: ${{ secrets.ANA1_TOKEN }}
+          ANA2_TOKEN: ${{ secrets.ANA2_TOKEN }}
         run: |
           TAG="nightly"
           git tag -f "$TAG"
@@ -73,3 +75,11 @@ jobs:
           curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-fs24_0/files/308/update/ \
             -H "Authorization: $IML_TOKEN" \
             -F "file=@./iml/iml.pdf"
+
+          curl https://exams.vis.ethz.ch/api/document/tgassmann/analysis-i-cheatsheet-fs22/files/309/update/ \
+            -H "Authorization: $ANA1_TOKEN" \
+            -F "file=@./analysis1/analysis1.pdf"
+
+          curl https://exams.vis.ethz.ch/api/document/tgassmann/analysis-ii-cheatsheet-hs22/files/310/update/ \
+            -H "Authorization: $ANA2_TOKEN" \
+            -F "file=@./analysis2/analysis2.pdf"
