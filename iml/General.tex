@@ -59,3 +59,11 @@ Matmul $A\in\R^{n\times k},B\in R^{k\times d}$: $\Theta(n k d)$
 \subsection*{KL Divergence}
 $D_{KL}(P||Q) = \mathbb{E}_p[\log(\frac{p(x)}{q(x)})]$, 0 iff $P = Q$, always non-negative
 \\
+
+\subsection*{Pseudoinverse}
+
+For $A = U \Sigma V^\top \in \R^{m \times n}$ and $\Sigma^\dagger \in \R^{n \times m}$ inverse of non-zero singular values:
+
+$$
+A^\dagger = V \Sigma^\dagger U^\top
+$$
