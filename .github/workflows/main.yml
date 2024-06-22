@@ -30,6 +30,10 @@ jobs:
       - name: Fetch tags
         shell: bash
         run: git fetch --tags -f
+      - name: Add revision
+        run: |
+          GIT_COMMIT=$(git rev-parse --short "$GITHUB_SHA")
+          sed -i "s/GITCOMMIT/$GIT_COMMIT/g" ./header.tex
       - name: Compile LaTeX document (xelatex)
         uses: xu-cheng/latex-action@v2
         with:
