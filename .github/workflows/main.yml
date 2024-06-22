@@ -37,7 +37,6 @@ jobs:
             analysis1/analysis1.tex
             analysis2/analysis2.tex
             complex-analysis/complex.tex
-            iml/iml.tex
             linear-algebra/linalg.tex
             wus/wus.tex
           work_in_root_file_dir: true
