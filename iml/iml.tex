@@ -15,6 +15,7 @@
 
 \usepackage{tabularx}
 \usepackage{ctable}
+\usepackage[inline]{enumitem}
 
 % Set page margins
 \geometry{top=.5cm, left=.5cm, right=.5cm, bottom=.5cm}
@@ -55,6 +56,11 @@
 \setlength{\belowdisplayskip}{0pt}
 \setlength{\abovedisplayshortskip}{0pt}
 \setlength{\belowdisplayshortskip}{0pt}
+
+\newcommand{\middot}{~\textperiodcentered~}
+\newlist{rowlist}{enumerate*}{1}
+\setlist[rowlist]{label={\textbf{\roman*}\text{: }}, afterlabel={}, itemjoin=\middot}
+
 
 % _____ CONTENT __________________________________________________
 

@@ -1,0 +1,147 @@
+% Basic stuff
+\documentclass[a4paper,11pt]{article}
+\usepackage{scrextend}
+
+% 3 column landscape layout with fewer margins
+\usepackage[landscape, left=0.75cm, top=0.75cm, right=0.75cm, bottom=1cm, footskip=15pt]{geometry}
+\usepackage{flowfram}
+\usepackage{bbm}
+\ffvadjustfalse
+\setlength{\columnsep}{0.5cm}
+\Ncolumn[<10]{4}
+\onecolumn[10]
+
+% define nice looking boxes
+\usepackage[many]{tcolorbox}
+\changefontsizes[11pt]{11pt}
+
+% a base set, that is then customised
+\tcbset {
+	base/.style={
+		boxrule=0mm,
+		leftrule=1mm,
+		left=1.75mm,
+		arc=0mm, 
+		fonttitle=\bfseries, 
+		colbacktitle=black!10!white, 
+		coltitle=black, 
+		toptitle=0.75mm, 
+		bottomtitle=0.25mm,
+		title={#1}
+	}
+}
+
+\definecolor{brandblue}{rgb}{0.34, 0.7, 1}
+\newtcolorbox{mainbox}[1]{
+	colframe=brandblue, 
+	base={#1}
+}
+
+\newtcolorbox{subbox}[1]{
+	colframe=black!20!white,
+	base={#1}
+}
+
+% Mathematical typesetting & symbols
+\usepackage{amsthm, mathtools, amssymb} 
+\usepackage{marvosym, wasysym}
+\allowdisplaybreaks
+
+% Tables
+\usepackage{tabularx, multirow}
+\usepackage{makecell}
+\usepackage{booktabs}
+\renewcommand*{\arraystretch}{2}
+
+% Make enumerations more compact
+\usepackage{enumitem}
+
+% To include sketches & PDFs
+\usepackage{graphicx}
+
+% For hyperlinks
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true
+}
+\renewcommand{\baselinestretch}{.9}
+% Metadata
+\title{Cheatsheet\\ Introduction to Machine Learning}
+\author{Thomas Gassmann}
+\date{\vspace{-10pt}Sommer 2024}
+
+% Math helper stuff
+\def\limxo{\lim_{x\to 0}}
+\def\limxi{\lim_{x\to\infty}}
+\def\limxn{\lim_{x\to-\infty}}
+\def\R{\mathbb{R}}
+\def\P{\mathbb{P}}
+\def\F{\mathcal{F}}
+\def\sumn{\sum_{n=0}^\infty}
+\def\sumk{\sum_{k=1}^\infty}
+\def\E{\mathbb{E}}
+\DeclareMathOperator{\Var}{\text{Var}}
+\newcommand{\middot}{~\textperiodcentered~}
+\newlist{rowlist}{enumerate*}{1}
+\setlist[rowlist]{label={\textbf{\roman*}\text{: }}, afterlabel={}, itemjoin=\middot}
+
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\X}{\mathbb{X}}
+\renewcommand{\P}{\mathbb{P}}
+
+\newcommand{\No}{\mathcal{N}}
+
+\newcommand{\br}{\par\medskip\noindent}
+% \newcommand{\P}{\mathbb{P}}
+\newcommand{\Oh}{\mathcal{O}}
+% \newcommand{\vphi}{\varphi}
+% \newcommand{\veps}{\varepsilon} 
+\newcommand{\bd}{\textbf}
+\newcommand{\equi}{\Leftrightarrow}
+\newcommand{\imp}{\Rightarrow}
+\newcommand{\emp}{\varnothing}
+\newcommand{\subs}{\subseteq}
+\newcommand{\ol}{\overline}
+\newcommand{\ra}{\rangle}
+\newcommand{\la}{\langle}
+\newcommand{\ox}{\otimes}
+\newcommand*\dx{\mathop{}\!\mathrm{d}x}
+\newcommand*\dy{\mathop{}\!\mathrm{d}y}
+\newcommand*\dz{\mathop{}\!\mathrm{d}z}
+
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\vol}{vol}
+\DeclareMathOperator*{\Mat}{Mat}
+
+\setlength{\parindent}{0pt}
+
+\makeatletter
+\renewcommand{\section}{\@startsection{section}{1}{0mm}%
+                                {0pt}%
+                                {0.5pt}%x
+                                {\sffamily\bfseries\large}}
+\renewcommand{\subsection}{\@startsection{subsection}{1}{0mm}%
+                                {0pt}%
+                                {0.1pt}%x
+                                {\sffamily\bfseries}}
+\begin{document}
+\small
+
+\input{General}
+\input{Probabilities}
+\input{Regression}
+\input{Classification}
+\input{Kernels}
+\input{NeuralNetworks}
+\input{Clustering}
+\input{DimensionReduction}
+\input{ProbabilityModeling}
+\input{Generative}
+\input{Latent}
+
+\end{document}

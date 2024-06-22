@@ -27,11 +27,7 @@ large $\lambda \Rightarrow$ larger bias but smaller variance
 \subsection*{Cross-Validation}
 
 \begin{compactitem}
-	\item For all folds $i = 1,..., k$: 
-		\begin{compactitem}
-			\item Train $\hat{f}_i$ on $D' - D'_i$
-			\item Val. error $R_i = \frac{1}{|D'_i|} \sum \ell(\hat{f}_i(x), y)$
-		\end{compactitem}
+	\item For all folds $i = 1,..., k$:  Train $\hat{f}_i$ on $D' - D'_i$; Val. error $R_i = \frac{1}{|D'_i|} \sum \ell(\hat{f}_i(x), y)$
 	\item Compute CV error $\frac{1}{k} \sum_{i=1}^k R_i$
 	\item Pick model with lowest $CV$ error
 \end{compactitem}

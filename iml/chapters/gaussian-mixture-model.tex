@@ -1,6 +1,6 @@
 \section*{Gaussian Mixture Model}
 
-Assume that data is generated from a convex-combination of Gaussian distributions: \\[-8pt]
+data is generated from a convex-combination of Gaussian distributions
 
 $p(x  | \theta) = p(x  | \mu, \Sigma, w) = \sum_{j=1}^k w_j \mathcal{N}(x; \mu_j, \Sigma_j)$
 
@@ -66,4 +66,4 @@ with $\gamma_z(x) = p(z \; | \; x, \theta^{(t-1)})$
 \textbf{M-Step}: Compute MLE / Maximize:
 $$\theta^{(t)} = \argmax{\theta} \; Q(\theta; \theta^{(t-1)})$$
 
-We have monotonic convergence, each EM-iteration increases the data likelihood.
+each EM-iteration increases the data likelihood

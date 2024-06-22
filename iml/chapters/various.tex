@@ -5,8 +5,7 @@ $$\nabla_x x^\top A = A \quad \nabla_x a^\top x = \nabla_x x^\top a = a$$
 $$\nabla_x b^\top A x = A^\top b \quad \nabla_x x^\top x = 2x \quad \nabla_x x^\top A x = 2 Ax$$\\[-20pt]
 $$\nabla_w || y-Xw||_2^2 = 2X^\top(Xw-y)$$
 
-\textbf{Bayes Theorem}: \\[-13pt]
-$$p(y \; | \; x) = \frac{1}{p(x)} \underbrace{p(y) \cdot p(x \; | \; y)}_{p(x,y)}$$ \\[-23pt]
+\textbf{Bayes Theorem}: $p(y \; | \; x) = \frac{1}{p(x)} \underbrace{p(y) \cdot p(x \; | \; y)}_{p(x,y)}$
 
 \textbf{Normal Distribution}:
 
@@ -16,9 +15,10 @@ $\mathcal{N}(x; \mu, \Sigma) = \frac{1}{\sqrt{(2 \pi)^d \text{det}(\Sigma)}} \ex
 
 $\text{Tr}(AB) = \text{Tr}(BA)$, $\text{Var}(X) = \E[X^2] - \E[X]^2$, $X \in \mathbb{R}^{n \times d}: \; \; X^{-1} \rightarrow \mathcal{O}(d^3) \; X^\top X \rightarrow \mathcal{O}(nd^2)$, $\binom{n}{k} = \frac{n!}{(n-k)!k!}$, $||w^\top w||_2 = \sqrt{w^\top w}$
  
-Cov$[X] = \E[(X- \E[X])(X- \E[X])^\top]$
-
-$p(z|x,\theta) = \frac{p(x,z|\theta)}{p(x | \theta)}$, $\text{Var}(AX) = A \text{Var}(X) A^\top$
+Cov$[X] = \E[(X- \E[X])(X- \E[X])^\top]$;
+Covariance matrix for centered data: $
+\widehat{\operatorname{cov}}(X)=\frac{1}{n}X^\top X=\frac{1}{n}\sum_i x_ix_i^\top
+$; $p(z|x,\theta) = \frac{p(x,z|\theta)}{p(x | \theta)}$, $\text{Var}(AX) = A \text{Var}(X) A^\top$
 
 
 $A^{-1}=
@@ -42,6 +42,13 @@ $
 
 \begin{compactitem}
 	\item $\alpha f + \beta g$, $\alpha, \beta \geq 0$, convex if $f, g$ convex
-	\item $f \circ g$, convex if $f$ convex and $g$ affine or $f$ non-decresing and $g$ convex
+	\item $f \circ g$, convex if $f$ convex and $g$ affine or $f$ convex non-decresing and $g$ convex
 	\item $\max(f, g)$, convex if $f,g$ convex
 \end{compactitem}
+
+\textbf{PSD}
+$M \in \mathbb{R}^{n\times n}$ PSD $\Leftrightarrow \forall x \in \mathbb{R}^n: x^\top Mx \geq 0 \\
+\Leftrightarrow$ all principal minors of $M$ have non-negative determinant $\Leftrightarrow \lambda \geq 0 \ \forall \lambda\in\sigma(M)$
+
+\textbf{CLT} For $X_i$ iid with $m = \E[X_1]$ and $\Var[X_1] = \sigma^2$: $\mathbb{P}\left[\frac{\sum_{i=1}^n X_i - n m}{\sqrt{\sigma^2 n}} \leq a\right] \xrightarrow[n \to \infty]{} \Phi(a)$.
+\textbf{KL Divergence} $D_{KL}(P||Q) = \mathbb{E}_p[\log(\frac{p(x)}{q(x)})]$, 0 iff $P = Q$, always non-negative

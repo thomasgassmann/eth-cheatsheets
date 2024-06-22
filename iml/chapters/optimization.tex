@@ -12,3 +12,6 @@ For linear regression:
 $\rho = ||I - \eta X^\top X||_{op}^t$ conv. speed for const. $\eta$. Opt. fixed $\eta = \frac{2}{\lambda_{\text{min}} + \lambda_{\text{max}}}$ and max. $\eta \leq \frac{2}{\lambda_{\text{max}}}$. 
 
 \textbf{Momentum}: $w^{t+1} = w^t + \gamma \Delta w^{t-1} - \eta_t \nabla \ell(w^t)$
+
+\textbf{SGD}: pick point u.a.r.
+\textbf{Minibatch SGD}: pick a batch u.a.r., same in expectation
