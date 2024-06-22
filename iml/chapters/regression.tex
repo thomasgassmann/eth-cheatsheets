@@ -1,0 +1,37 @@
+\section*{Regression}
+
+\textbf{Squared loss} \quad (convex)
+
+\qquad \qquad $\frac{1}{n}\sum (y_i - f(x_i))^2 = \frac{1}{n}||y - X w||_2^2$
+
+\qquad \qquad $\nabla_w L(w) = 2X^\top(Xw -y)$
+
+Solution: $\hat{w} = (X^\top X)^{-1}X^\top y$
+
+\subsection*{Regularization}
+
+\textbf{Lasso Regression} \quad (sparse)
+
+\qquad \qquad $\argmin{w \in \R^d} ||y - \Phi w||_2^2 + \lambda ||w||_1$
+
+\textbf{Ridge Regression}
+
+\qquad \qquad $\argmin{w \in \R^d} ||y - \Phi w||_2^2 + \lambda ||w||_2^2$
+
+\qquad \qquad $\nabla_w L(w) = 2X^\top(Xw -y) + 2 \lambda w$
+
+Solution: $\hat w = (X^\top X + \lambda I)^{-1} X^\top y$
+
+large $\lambda \Rightarrow$ larger bias but smaller variance 
+
+\subsection*{Cross-Validation}
+
+\begin{compactitem}
+	\item For all folds $i = 1,..., k$: 
+		\begin{compactitem}
+			\item Train $\hat{f}_i$ on $D' - D'_i$
+			\item Val. error $R_i = \frac{1}{|D'_i|} \sum \ell(\hat{f}_i(x), y)$
+		\end{compactitem}
+	\item Compute CV error $\frac{1}{k} \sum_{i=1}^k R_i$
+	\item Pick model with lowest $CV$ error
+\end{compactitem}

@@ -1,0 +1,69 @@
+\section*{Unsupervised Learning}
+
+\subsection*{k-Means Clustering}
+
+Optimization Goal (non-convex):
+
+\qquad $\hat{R} (\mu) = \sum_{i=1}^n \min_{j\in \{1,...,k\}} ||x_i - \mu_j||_2^2$
+
+Lloyd's heuristics:
+Init. cluster centers $\mu^{(0)}$:
+\begin{compactitem}
+	\item Assign points to closest center				
+	\item Update $\mu_i$ as mean of assigned points
+\end{compactitem}
+
+Converges in exponential time.
+
+Initialize with \textbf{k-Means++}:
+
+\begin{compactitem}
+	\item Random data point $\mu_1 = x_i$
+	\item Add $\mu_2,...,\mu_k$ rand., with prob:
+		$$\text{given } \mu_{1:j} \text{ pick } \mu_{j+1} = x_i$$ 
+		$\text{ where } p(i) = \frac{1}{z} \min_{l \in \{1,...,j\}} ||x_i - \mu_l||_2^2$
+\end{compactitem}
+Converges in expectation $\mathcal O (\log k) * \text{opt. solution}$.
+Find $k$ by negligible loss decrease or reg.
+
+\subsection*{Principal Component Analysis}
+
+Optimization goal:
+$\argmin{||w||_2 = 1, z} \sum_{i=1}^n ||x_i - z_i w||_2^2$
+
+The optimal solution is given by $z_i = w^\top x_i$.  
+
+Substituting gives us:
+
+\qquad \qquad $\hat{w} = \text{argmax}_{||w||_2=1} \; w^\top \Sigma w$
+
+Where $\Sigma = \frac{1}{n} \sum_{i=1}^n x_i x_i^\top$ is the empirical covariance. Closed form solution given by the principal eigenvector of $\Sigma$, i.e. $w = v_1$ for $\lambda_1 \geq ... \geq \lambda_d \geq 0$:
+$\Sigma = \sum_{i=1}^d \lambda_i v_i v_i^\top$
+
+For $k > 1$ we have to change the normalization to $W^\top W = I$ then we just take the first $k$ principal eigenvectors so that $W = [v_1, ..., v_k]$.
+
+\subsection*{PCA through SVD}
+\color{White} . \color {Black}\\[-10pt]
+The first $k$ columns of $V$ where $X = U S V^\top$.
+
+\subsection*{Kernel PCA}
+
+$\Sigma = \frac{1}{n} \sum_{i=1}^n x_i x_i^\top = X^\top X \Rightarrow$  kernel trick:
+
+\qquad \qquad $\hat{\alpha} = \text{argmax}_\alpha \; \frac{\alpha^\top K^\top K \alpha}{\alpha^\top K \alpha}$
+
+Closed form solution:
+
+$\alpha^{(i)} = \frac{1}{\sqrt{\lambda_i}}v_i \quad K = \sum_{i = 1}^n \lambda_i v_i v_i^\top, \lambda_1 \geq ... \geq 0$\\[-6pt]
+
+A point $x$ is projected as:
+$z_i = \sum_{j=1}^n \alpha_j^{(i)} k(x_j, x)$
+
+\color{White} . \color {Black}\\[-18pt]
+
+\subsection*{Autoencoders}
+
+We want to minimize $\frac{1}{n}\sum_{i=1}^n ||x_i - \hat{x}_i||_2^2$.
+$$\hat{x} = f_{dec}(f_{enc}(x, \theta_{enc}); \theta_{dec})$$
+
+Lin. activation func. \& square loss $=>$ PCA

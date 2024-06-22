@@ -1,0 +1,69 @@
+\section*{Gaussian Mixture Model}
+
+Assume that data is generated from a convex-combination of Gaussian distributions: \\[-8pt]
+
+$p(x  | \theta) = p(x  | \mu, \Sigma, w) = \sum_{j=1}^k w_j \mathcal{N}(x; \mu_j, \Sigma_j)$
+
+We don't have labels and want to cluster this data. The problem is to estimate the param. for the Gaussian distributions.
+
+\ \ $\text{argmin}_{\theta} \; - \sum_{i=1}^n \log \sum_{j=1}^k w_j \cdot \mathcal{N}(x_i \; | \; \mu_j, \Sigma_j)$
+
+This is a non-convex objective. Similar to training a GBC without labels. Start with guess for our parameters, predict the unknown labels and then impute the missing data. Now we can get a closed form update.
+
+\subsection*{Hard-EM Algorithm}
+
+\textbf{E-Step}: predict the most likely class for each data point:
+\begin{align*}
+	z_i^{(t)} &= \argmax{z} \; p(z \; | \; x_i, \theta^{(t-1)}) \\[-5pt]
+	&= \argmax{z} \; p(z \; | \; \theta^{(t-1)}) \cdot p(x_i \; | \; z, \theta^{(t-1)})
+\end{align*}
+\textbf{M-Step}: compute MLE of $\theta^{(t)}$ as for GBC. \smallskip
+
+Problems: labels if the model is uncertain, tries to extract too much inf. Works poorly if clusters are overlapping. With uniform weights and spherical covariances is equivalent to k-Means with Lloyd's heuristics.
+
+\subsection*{Soft-EM Algorithm}
+
+\textbf{E-Step}: calculate the cluster membership weights for each point ($w_j = \pi_j = p(Z = j))$: \\[-8pt]
+
+\quad $\gamma_j^{(t)}(x_i) = p(Z = j \; | \; D) =\frac{w_j \cdot p(x_i ; \theta_j^{(t-1)})}{\sum_k w_k \cdot p(x_i ; \theta_k^{(t-1)})}$
+		
+\textbf{M-Step}: compute MLE with closed form:
+
+$w_j^{(t)} = \frac{1}{n} \sum_{i=1}^n \gamma_j^{(t)}(x_i) \quad \; \mu_j^{(t)} = \frac{\sum_{i=1}^n x_i \cdot \gamma_j^{(t)}(x_i)}{\sum_{i=1}^n \gamma_j^{(t)}(x_i)}$
+
+\qquad \quad $\Sigma_j^{(t)} = \frac{\sum_{i=1}^n \gamma_j^{(t)}(x_i)(x_i - \mu_j^{(t)})(x_i - \mu_j^{(t)})^\top}{\sum_{i=1}^n \gamma_j^{(t)}(x_i)}$
+
+
+Init. the weights as uniformly distributed, rand. or with k-Means++ and for variances use spherical init. or empirical covariance of the data. Select $k$ using cross-validation.
+
+\subsection*{Degeneracy of GMMs}
+
+GMMs can overfit with limited data. Avoid this by add $v^2 I$ to variance, so it does not collapse (equiv. to a Wishart prior on the covariance matrix). Choose $v$ by cross-validation.
+
+\subsection*{Gaussian-Mixture Bayes Classifiers}
+
+Assume that $p(x \; | \; y)$ for each class can be modelled by a GMM.
+
+\qquad $p(x \; | \; y) = \sum_{j=1}^{k_y} w_j^{(y)} \mathcal{N}(x; \mu_j^{(y)}, \Sigma_j^{(y)})$
+
+Giving highly complex decision boundaries:
+
+\qquad $p(y \; | \; x) = \frac{1}{z} p(y)  \sum_{j=1}^{k_y} w_j^{(y)} \mathcal{N}(x; \mu_j^{(y)}, \Sigma_j^{(y)})$
+
+\subsection*{GMMs for Density Estimation}
+
+Can be used for anomaly detection or data imputation. Detect outliers, by comparing the estimated density against $\tau$. Allows to control the FP rate. Use ROC curve as evaluation criterion and optimize using CV to find $\tau$.
+
+\subsection*{General EM Algorithm}
+
+\textbf{E-Step}: Take the expected value over latent variables $z$ to generate likelihood function $Q$:
+\begin{align*}
+	Q(\theta ; \theta^{(t-1)}) &= \E_{Z}[ \log  p(X, Z \; | \; \theta) \; | \; X, \theta^{(t-1)}] \\[-5pt]
+	&= \sum_{i=1}^n \sum_{z_i=1}^k \gamma_{z_i}(x_i) \log p(x_i, z_i \; | \; \theta)
+\end{align*}
+with $\gamma_z(x) = p(z \; | \; x, \theta^{(t-1)})$
+
+\textbf{M-Step}: Compute MLE / Maximize:
+$$\theta^{(t)} = \argmax{\theta} \; Q(\theta; \theta^{(t-1)})$$
+
+We have monotonic convergence, each EM-iteration increases the data likelihood.

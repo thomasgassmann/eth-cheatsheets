@@ -1,0 +1,35 @@
+\section*{Various}
+
+\textbf{Derivatives}:
+$$\nabla_x x^\top A = A \quad \nabla_x a^\top x = \nabla_x x^\top a = a$$
+$$\nabla_x b^\top A x = A^\top b \quad \nabla_x x^\top x = 2x \quad \nabla_x x^\top A x = 2 Ax$$\\[-20pt]
+$$\nabla_w || y-Xw||_2^2 = 2X^\top(Xw-y)$$
+
+\textbf{Bayes Theorem}: \\[-13pt]
+$$p(y \; | \; x) = \frac{1}{p(x)} \underbrace{p(y) \cdot p(x \; | \; y)}_{p(x,y)}$$ \\[-23pt]
+
+\textbf{Normal Distribution}:
+
+$\mathcal{N}(x; \mu, \Sigma) = \frac{1}{\sqrt{(2 \pi)^d \text{det}(\Sigma)}} \exp(-\frac{(x - \mu)^\top \Sigma^{-1} (x-\mu)}{2})$
+
+\textbf{Other Facts}
+
+$\text{Tr}(AB) = \text{Tr}(BA)$, $\text{Var}(X) = \E[X^2] - \E[X]^2$, $X \in \mathbb{R}^{n \times d}: \; \; X^{-1} \rightarrow \mathcal{O}(d^3) \; X^\top X \rightarrow \mathcal{O}(nd^2)$, $\binom{n}{k} = \frac{n!}{(n-k)!k!}$, $||w^\top w||_2 = \sqrt{w^\top w}$
+ 
+Cov$[X] = \E[(X- \E[X])(X- \E[X])^\top]$
+
+$p(z|x,\theta) = \frac{p(x,z|\theta)}{p(x | \theta)}$
+
+\textbf{Convexity}
+
+0: $L(\lambda w + (1 - \lambda)v) \leq \lambda L (w) + (1- \lambda) L(v)$
+
+1: $L(w) + \nabla L(w)^\top (v - w) \leq L(v)$
+
+2: Hessian $\nabla^2 L (w) \succcurlyeq 0$ (psd)
+
+\begin{compactitem}
+	\item $\alpha f + \beta g$, $\alpha, \beta \geq 0$, convex if $f, g$ convex
+	\item $f \circ g$, convex if $f$ convex and $g$ affine or $f$ non-decresing and $g$ convex
+	\item $\max(f, g)$, convex if $f,g$ convex
+\end{compactitem}

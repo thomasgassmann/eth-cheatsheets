@@ -30,7 +30,7 @@ jobs:
       - name: Fetch tags
         shell: bash
         run: git fetch --tags -f
-      - name: Compile LaTeX document
+      - name: Compile LaTeX document (xelatex)
         uses: xu-cheng/latex-action@v2
         with:
           root_file: |
@@ -43,6 +43,13 @@ jobs:
           work_in_root_file_dir: true
           glob_root_file: true
           latexmk_use_xelatex: true
+      - name: Compile LaTeX document (pdflatex)
+        uses: xu-cheng/latex-action@v2
+        with:
+          root_file: |
+            iml/iml.tex
+          work_in_root_file_dir: true
+          glob_root_file: true
       - name: Deploy
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

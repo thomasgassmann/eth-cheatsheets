@@ -1,0 +1,17 @@
+\section*{GANs}
+
+Learn $f:$ "simple" distr. $\mapsto$ non linear distr. Computing likelihood of the data becomes hard, therefore we need a different loss.
+\begin{align*}
+	\min_{w_G} \max_{w_D} \; & \E_{x \sim p_{\text{data}}} [\log D(x, w_D)] \\[-5pt]
+ 	+ &\E_{z \sim p_z} [\log (1 - D(G(z, w_G), w_D))]
+\end{align*}
+ 
+ Training requires finding a saddle point, always converges to saddle point with if G, D have enough capacity. For a fixed $G$, the optimal discriminator is:
+ $$D_G(x) = \frac{p_{\text{data}}(x)}{p_{\text{data}}(x) + p_G(x)}$$
+ 
+The prob. of being fake is $1 - D_G$. Too powerful discriminator could lead to memorization of finite data. Other issues are oscillations/divergence or mode collapse. \smallskip
+ 
+One possible performance metric:
+$$DG = \max_{w_D'} M(w_G, w_D') - \min_{w_G'} M(w_G', w_D)$$
+ 
+Where $M(w_G, w_D)$ is the training objective.

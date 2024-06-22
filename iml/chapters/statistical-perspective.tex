@@ -1,0 +1,66 @@
+\section*{Statistical Perspective}
+
+Assume that data is generated iid. by some $p(x, y)$. We want to find $f: X \mapsto Y$ that minimizes the \textbf{population risk}.
+
+\subsection*{Opt. Predictor for the Squared Loss}
+
+$f$ minimizing the population risk:
+
+\qquad $f^*(x) = \E[y \; | \; X = x] = \int y \cdot p(y \; | \; x) dy$
+
+Estimate $\hat{p}(y \; | \; x)$ with MLE:
+\begin{align*}
+	\theta^* &= \argmax{\theta} \; \hat{p}(y_1, ..., y_n \; | \; x_1, ..., x_n, \theta) \\[-10pt]
+	&= \argmin{\theta} \; - \sum_{i=1}^n \log p(y_i \; | \; x, \theta) 
+\end{align*} \\[-15pt]
+
+The MLE for linear regression is unbiased and has minimum variance among all unbiased estimators. However, it can overfit.
+
+\subsection*{Ex. Conditional Linear Gaussian}
+
+Assume Gaussian noise $y = f(x) + \epsilon$ with $\epsilon \sim \mathcal{N}(0, \sigma^2)$ and $f(x) = w^\top x$:
+
+\qquad \qquad $\hat p(y \; | \; x, \theta) = \mathcal{N}(y; w^\top x, \sigma^2)$
+
+The optimal $\hat w$ can be found using MLE:
+
+$\hat w = \argmax{w} \; p(y | x, \theta) =\argmin{w} \sum (y_i - w^\top x_i)^2$
+
+\subsection*{Maximum a Posteriori Estimate}
+
+Introduce bias to reduce variance. The small weight assumption is a Gaussian prior $w_i \sim \mathcal{N}(0, \beta^2)$. The posterior distribution of $w$ is given by:
+$p(w \; | \; x, y) = \frac{p(w) \cdot p( y \; | \; x, w)}{p( y \; | \; x)}$
+
+Now we want to find the MAP for $w$:
+
+$\hat w = \text{argmax}_w \; p(w \; | \; \bar x, \bar y)$ \\[-8pt]
+
+\quad $= \text{argmin}_w - \log \frac{p(w) \cdot p( y \; | \; x, w)}{p( y \; | \; x)} $ \\[-8pt]
+
+\quad $= \text{argmin}_w \; \frac{\sigma^2}{\beta^2} ||w||_2^2 + \sum_{i=1}^n(y_i - w^\top x_i)^2$
+
+Regularization can be understood as MAP inference, with different priors (= regularizers) and likelihoods (= loss functions).
+
+\subsection*{Statistical Models for Classification}
+
+$f$ minimizing the population risk:
+
+\qquad \qquad $f^*(x) = \text{argmax}_{\hat y} \; p(\hat y \; | \; x)$
+
+This is called the Bayes' optimal predictor for the 0-1 loss. Assuming iid. Bernoulli noise, the conditional probability is:
+
+\qquad \qquad$p(y \; | \; x,w) \sim \text{Ber}(y; \sigma(w^\top x))$
+
+Where $\sigma(z) = \frac{1}{1 + \exp(-z)}$ is the sigmoid function. Using MLE we get:
+
+\quad \;$\hat w = \argmin{w} \sum_{i = 1}^n \log (1 + \exp(-y_i w^\top x_i))$
+
+Which is the logistic loss. Instead of MLE we can estimate MAP, e.g. with a Gaussian prior:
+
+$\; \;\hat w = \argmin{w} \; \lambda ||w||_2^2 + \sum_{i = 1}^n \log (1 + e^{-y_i w^\top x_i})$
+
+
+
+
+
+

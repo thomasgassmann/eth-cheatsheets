@@ -1,0 +1,23 @@
+\section*{Kernels}
+
+Parameterize: $w = \Phi^\top \alpha$, $K = \Phi \Phi^\top$
+
+A kernel is \textbf{valid} if $K$ is sym.: $k(x,z) = k(z,x)$ and psd: $z^\top K z \geq 0$
+
+\textbf{lin.}: $k(x, z) = x^\top z$, \textbf{poly.}: $k(x, z) = (x^\top z + 1)^m$
+\textbf{rbf}: $k(x, z) = \exp ( -\frac{||x - z||_\alpha}{\tau} )$
+
+$\alpha = 1 \Rightarrow $ laplacian kernel \\
+$\alpha = 2 \Rightarrow $ gaussian kernel
+
+\textbf{Kernel composition rules}
+
+$k = k_1 + k_2$, \quad $k = k_1 \cdot k_2$ \quad $\forall c > 0. \; k = c \cdot k_1$,
+$\forall f \text{ convex}. \; k = f(k_1), $ holds for polynoms with pos. coefficients or exp function. 
+
+$\forall f. \; k(x,y) = f(x)k_1(x,y)f(y)$
+
+\textbf{Mercers Theorem}: Valid kernels can be decomposed into a lin. comb. of inner products.
+
+\textbf{Kern. Ridge Reg.}
+$\frac{1}{n} ||y - K\alpha ||_2^2 + \lambda \alpha^\top K \alpha$

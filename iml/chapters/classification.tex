@@ -1,0 +1,55 @@
+\section*{Classification}
+
+\textbf{Zero-One loss} \quad not convex or continuous
+
+\qquad \qquad $\ell_{0-1}(\hat{f}(x), y) = \mathbb{I}_{y \neq \sgn \hat{f}(x)}$
+
+\textbf{Logistic loss} \quad $\log(1 + e^{-y \hat{f}(x)})$
+
+\qquad \qquad $\nabla \ell(\hat{f}(x), y) = \frac{-y_i x_i}{1 + e^{y_i \hat{f}(x)}}$
+
+\textbf{Hinge loss} \quad \ $\max(0, 1-y \hat{f}(x))$
+
+\textbf{Softmax} $p(1 | x) = \frac{1}{1 + e^{- \hat{f}(x)}}, p(-1 | x) = \frac{1}{1 + e^{\hat{f}(x)}}$ 
+
+Multi-Class \ \ \ $\hat{p}_k = e^{\hat{f}_k(x)} / \sum_{i=1}^K e^{\hat{f}_j(x)}$
+
+\subsection*{Linear Classifiers}
+
+$f(x) = w^\top x$, the decision boundary $f(x) = 0$. \smallskip
+
+If data is lin. sep., grad. desc. converges to \textbf{Maximum-Margin Solution}: 
+
+\quad $w_\text{MM} = \text{argmax} \; \text{margin} (w) \; \text{with } ||w||_2 = 1$
+
+Where $\text{margin} (w) = \min_i y_i w^\top x_i$.
+ 
+\subsection*{Support Vector Machines}
+\textbf{Hard SVM}
+
+\qquad $\hat{w} = \min_w ||w||_2 \; \; \text{s.t. } \forall i \;y_i w^\top x_i \geq 1$
+ 
+\textbf{Soft SVM} \quad allow "slack" in the constraints
+$$\hat{w} = \min_{w, \xi} \frac{1}{2} ||w||_2^2 + \lambda \sum_{i=1}^n \underbrace{\max (0, 1 - y_i w^\top x_i)}_{\text{hinge loss}}$$ \\[-23pt]
+
+\subsection*{Metrics} 
+Choose $+1$ as the more important class. \\[-18pt]
+
+\begin{multicols*}{2}
+	\begin{center}
+		\includegraphics[width=\columnwidth]{confusion-matrix.jpeg}
+	\end{center}
+	
+	$\text{error}_1 / \text{FPR}: \frac{\text{FP}}{\text{TN + FP}}$
+	$\text{error}_2 / \text{FNR}: \frac{\text{FN}}{\text{TP + FN}}$
+	$\text{Precision}: \frac{\text{TP}}{\text{TP + FP}}$
+	$\text{TPR / Recall}: \frac{\text{TP}}{\text{TP + FN}}$
+\end{multicols*}
+
+.\\[-20pt]
+\textbf{AUROC}: Plot TPR vs. FPR and compare different ROC's with area under the curve.
+
+\textbf{F1-Score}: $\frac{2\text{TP}}{2\text{TP + FP + FN}}$, $\text{Accuracy}: \frac{\text{TP + TN}}{\text{P + N}}$
+
+Goal: large recall and small FPR.
+  

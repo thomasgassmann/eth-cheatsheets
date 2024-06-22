@@ -1,0 +1,56 @@
+\section*{Generative Modeling}
+
+Aim to estimate $p(x, y)$ for complex situations using Bayes' rule: $p(x,y) = p(x|y) \cdot p(y)$
+
+\subsection*{Naive Bayes Model}
+
+GM for classification tasks. Assuming for a class label, each feature is independent. This helps estimating $p( x \; | \; y) =\prod_{i=1}^d p(x_i \; | \; y_i)$.
+
+\subsection*{Gaussian Naive Bayes Classifier}
+
+Naive Bayes Model with Gaussians features. Estimate the parameters via MLE:
+
+MLE for class prior: $p(y) = \hat p_y = \frac{\text{Count}(Y = y)}{n}$
+MLE for feature distribution:
+
+\qquad \qquad $p(x_i \; | \; y) = \mathcal{N}(x_i; \hat \mu_{y,i}, \sigma^2_{y,i})$ \\[-13pt]
+
+Where:\\[-10pt]
+
+\qquad \quad $\mu_{y,i} = \frac{1}{\text{Count}(Y = y)} \sum_{j \; | \; y_j = y} x_{j,i}$
+
+\qquad \quad $\sigma^2_{y,i} = \frac{1}{\text{Count}(Y = y)} \sum_{j \; | \; y_j = y} (x_{j,i} - \hat \mu_{y, i})^2$
+
+
+Predictions are made by: \\[-20pt]
+$$y = \argmax{\hat y} \; p(\hat y \; | \; x) = \argmax{\hat y} \; p(\hat y) \cdot \prod_{i=1}^d p(x_i \; | \; \hat y)$$
+
+Equivalent to decision rule for bin. class.: \\[-8pt]
+
+\qquad \qquad $y = \sgn \left( \color{Red} \log \frac{p(Y = +1 \; | \; x)}{p(Y = -1 \; | \; x)} \color{Black} \right)$ \\[-3pt]
+
+Where \color{Red}$f(x)$\color{Black} is called the discriminant function. If the conditional independence assumption is violated, the classifier can be overconfident.
+
+\subsection*{Gaussian Bayes Classifier}
+
+No independence assumption, model the features with a multivariant Gaussian $\mathcal{N}(x; \mu_y, \Sigma_y)$:
+
+\quad $\mu_{y} = \frac{1}{\text{Count}(Y = y)} \sum_{j \; | \; y_j = y} x_{j}$
+
+\quad $\Sigma_{y} = \frac{1}{\text{Count}(Y = y)} \sum_{j \; | \; y_j = y} (x_{j} - \hat \mu_{y}) (x_{j} - \hat \mu_{y})^\top$
+
+This is also called the \textbf{quadratic discriminant analysis} (QDA). LDA: $\Sigma_+ = \Sigma_-$, Fisher LDA: $p(y) = \frac{1}{2}$, Outlier detection: $p(x) \leq \tau$.
+
+\subsection*{Avoiding Overfitting}
+
+MLE is prone to overfitting. Avoid this by restricting model class (fewer parameters, e.g. GNB) or using priors (restrict param. values).
+
+\subsection*{Generative vs. Discriminative}
+
+\textbf{Discriminative models}:
+
+$p(y | x)$, can't detect outliers, more robust
+
+\textbf{Generative models}:
+
+$p(x,y)$, can be more powerful (dectect outliers, missing values) if assumptions are met, are typically less robust against outliers

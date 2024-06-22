@@ -1,0 +1,19 @@
+\section*{Model Error}
+
+\textbf{Empirical Risk} \quad \ $\hat R_D(f) = \frac{1}{n} \sum \mathcal \ell(y, f(x))$
+
+\textbf{Population Risk} \quad $R(f) = \E_{x,y \sim p}[\ell(y, f(x))]$
+
+It holds that $\E_D[\hat R_D (\hat f)] \leq R(\hat f)$. We call $R(\hat f)$ the generalization error.
+
+\textbf{Bias Variance Tradeoff}:
+
+Pred. error = \color{red} Bias$^2$ \color{black} + \color{blue} Variance \color{black} + \color{ForestGreen} Noise \color{black}
+\begin{align*}
+	\E_D[R(\hat f)] &= \color{red} \E_x[f^*(x) - \E_D[\hat f_D(x)]]^2 \\[-4pt]
+ 	&+ \color{blue} \E_x[\E_D[(\hat f_D(x) - \E_D[\hat f_D(x)])^2]] \color{black}  + \color{ForestGreen} \sigma
+\end{align*}
+
+\textbf{Bias}: how close $\hat f$ can get to $f^*$
+
+\textbf{Variance}: how much $\hat f$ changes with $D$
