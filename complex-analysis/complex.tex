@@ -216,6 +216,12 @@ Sei \(z\) eine komplexe Zahl und \(n\geq2\) eine ganze Zahl. Eine \(n\)-te Wurze
 
 Eine Teilmenge $U \subseteq \C$ heisst offen, wenn zu jedem $z \in U$ ein Radius $\epsilon>0$ existiert, so dass $B(z,\epsilon) \subseteq U$ gilt.
 
+Die \textbf{geschlossene Kreisscheibe} hingegen definieren wir als:
+
+$$
+\overbar{B(z_0, r)} := \{ z \in \mathbb{C} : \, |z-z_0| \leq r \}
+$$
+
 \subsubsection{Weitere Eigenschaften von Mengen}
 
 Eine Menge \(\X \subseteq \R^n \) ist
@@ -549,7 +555,7 @@ Aus dem Cauchy'schen Integralsatz erhalten wir eine Behauptung wann die obigen A
 
 Dies definiert eine stetige Deformation $H$ von $\gamma_0$ zu $\gamma_1$. Für jedes feste $s \in [0,1]$ ist $\gamma_s(t) := H(s, t)$ ein Pfad von $\alpha$ nach $\beta$, definiert auf $[a,b]$.
 
-\begin{subbox}{Einfacher Zusammenhang}
+\begin{subbox}{einfach zusammenhängend}
   Eine teilmenge $U \subseteq \C$ heisst \textbf{einfach zusammenhängend} falls sie wegzusammenhängend ist und für alle $\alpha, \beta \in U$, alle Pfade von $\alpha$ nach $\beta$ homotop zu einander sind.
 \end{subbox}
 
@@ -605,6 +611,69 @@ Aus den drei äquivalenten Aussagen folgt nun:
 
 Insbesondere, seien \(\gamma_1\) und \(\gamma_2\) zwei Kurven mit der gleichen Orientierung und sei \(U\) als die Menge von diesen zwei Kurven definiert. Falls \(f\colon U\to\mathbb{C}\) holomorph ist, gilt \begin{align*} \int_{\gamma_1}f(z)\,dz=\int_{\gamma_2}f(z)\,dz\,. \end{align*}
 
+\subsection{Mittelwertsatz, Maximum Prinzip und Satz von Liouville}
+
+\begin{mainbox}{Cauchy'sche Integralformel}
+  Sei \(U \subseteq \mathbb{C}\) eine einfach zusammenhängende offene Menge und \(z_0\in U\). Sei \(\gamma \colon [0,1] \to U \setminus \{z_0\}\) eine Kurve, die \(z_0\) einmal im positiven Sinn umläuft und sei \(f \colon U \to \mathbb{C}\) holomorph. Dann gilt:
+\begin{align*}f(z_0) = \frac{1}{2\pi i} \int_{\gamma} \frac{f(z)}{z-z_0}dz \end{align*}
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.6\linewidth]{assets/3-5-1.png}
+\end{figure}
+\end{mainbox}
+
+Mit dieser Formel können wir z.B. das Integral $\int_\gamma \frac{z}{(9-z^2)(z+i)} dz$ und $\gamma(t) = 2\exp(2\pi it)$ einfacher berechnen. Definieren wir $f(z) := \frac{z}{9 - z^2}$, so gilt:
+\begin{align*}
+  \int_\gamma \frac{z}{(9-z^2)(z+i)} dz = \int_\gamma \frac{f(z)}{z + i} dz = 2\pi i f(-i)
+\end{align*}
+
+Durch Induktion folgt auch:
+
+\begin{mainbox}{Verallgemeinerung von Cauchy's Integralsatz}
+  Sei \(f \colon U \to \mathbb{C}\) mit \(U\subseteq \mathbb{C}\) offen, holomorph, so ist \(f\) beliebig oft \(\mathbb{C}\)-differenzierbar und es gilt für \(z_0\in U\) und eine beliebige Kurve \(\gamma \colon [0,1] \to U\) die \(z_0\) einmal im Gegenuhrzeigersinn umrundet: \begin{align*} f^{( n )}(z_0) = \frac{n!}{2\pi i} \int_{\gamma} \frac{f(z)}{(z-z_0)^{n+1}}dz \end{align*}
+\end{mainbox}
+
+Daraus folgt nun:
+
+\begin{subbox}{Differenzierbarkeit holomorpher Funktionen}
+  Sei $f$ holomorph. Dann sind alle Ableitungen $f^{(n)}$ holomorph.
+
+  Weiter, sei $u := \Re(f), v := \Im(f)$, so haben $u, v$ unendlich viele partielle Ableitungen.
+\end{subbox}
+
+\begin{mainbox}{Mittelwertsatz}
+  Seien \(U\subset\mathbb{C}\) eine offene Menge und \(f \colon U \to \mathbb{C}\) eine holomorphe Funktion. Seien \(z_0 \in U\) und \(r > 0\) so dass \(\overline{B(z_0,r)} \subseteq U\). Dann gilt:
+  \begin{align*} f(z_0) = \int_0^1 f(z_0 + r \exp(2 \pi i t))\, dt\,, \end{align*} d.h.\(f(z_0)\) ist der Mittelwert von \(f\) auf dem Kreis mit Zentrum \(z_0\) und Radius \(r\).
+\end{mainbox}
+
+Aus dem Mittelwertsatz schliessen wir nun:
+
+\begin{subbox}{Maximum holomorpher Funktionen}
+  Sei $f$ auf $B(z_0, r)$ holomorph. Falls $|f(z)| \leq |f(z_0)|$ für jedes $z \in B(z_0, r)$ gilt, dann ist:
+  $$
+    f(z) = f(z_0)
+  $$
+
+  Das heisst $f$ ist konstant (da $|f|$ konstant und $f$ holomorph).
+\end{subbox}
+
+Daraus folgt wiederum per Widerspruchsbeweis:
+
+\begin{mainbox}{Maximum Modulus Prinzip}
+  Sei $f$ holomorph und nicht konstant auf einer wegzusammenhängenden offenen Menge $U$. Dann besitzt $|f(z)|$ \textbf{kein} Maximum auf $U$.
+\end{mainbox}
+
+Im obigen Satz gibt es also keinen Punkt $z_0 \in U$ mit $|f(z)| \leq |f(z_0)|$.
+
+\begin{subbox}{Maximum auf kompakter Menge}
+  Sei $f$ eine nicht-konstante, stetige Funktion auf  einer kompakten Menge $K$. Sei $f$ holomorph auf dem Inneren von $K$. Dann wird $\max_{z \in K} |f(z)|$ auf dem Rand von $K$ erreicht.
+\end{subbox}
+
+\begin{mainbox}{Satz von Liouville}
+  Sei $f: \C \mapsto \C$ eine ganze Funktion (also definiert und holomorph auf der ganzen komplexen Ebene). Falls $|f(z)|$ beschränkt ist, so ist $f$ konstant.
+\end{mainbox}
+
+Der Satz von Liouville gilt nicht für Funktionen die nur auf einer reellen Variable definiert sind. Beispielsweise $f(x, y) = \cos(x) \sin(y)$ ist auf der ganzen reellen Ebene beschränkt und unendlich oft differenzierbar, aber nicht konstant.
 
 \section{Taylor- und Laurentreihen}
 
