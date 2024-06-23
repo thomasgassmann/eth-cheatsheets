@@ -406,7 +406,7 @@ Falls eine Funktion $\overbar{z}$ enthält, so ist sie nie holomorph.
 
 Für eine komplex-differenzierbare Funktion folgt aus der Existenz des Limits die folgende Gleichheit der partiellen Ableitungen:
 
-\begin{mainbox}{Cauchy-Riemann Gleichungen}
+\begin{mainbox}{Cauchy-Riemann Gleichungen (CRG)}
   Sei \(f \colon U \to \mathbb{C}\) eine Funktion wobei \(f'(z_0)\) für eine beliebige Stelle \(z_0 \in U\) existiert. So existieren die partiellen Ableitungen \(u_x,u_y,v_x,v_y\) an der Stelle \(z_0\) und erfüllen die Cauchy‐Riemann Gleichungen (CRG), d.h.
   \begin{align*} 
     \begin{aligned}
@@ -427,6 +427,58 @@ Für eine komplex-differenzierbare Funktion folgt aus der Existenz des Limits di
   $f$ ist komplex-differenzierbar in $z_0$ genau dann wenn der Real- und Imaginärteil partiell-differenzierbar sind und die Cauchy-Riemann Gleichungen erfüllen.
 \end{mainbox}
 
+Die \textbf{Umkehrung} des obigen Satzes gilt im Allgemeinen \textbf{nicht}!
+
+Eine lineare Abbildung mit positiver Determinante heisst konform falls sie winkeltreu ist. Eine $\R$-differenzierbare Funktion $f$ ist auch $\C$-differenzierbar genau dann wenn ihre Ableitung eine konformale Abbildung ist. Dies liegt intuitiv daran dass die Jacobi-Matrix (wegen den Cauchy-Riemann Gleichungen) die Form $\begin{bsmallmatrix}
+  a & -b\\
+  b & a
+\end{bsmallmatrix}$ hat.
+
+Für die Umkehrung verwenden wir den nachfolgenden Satz:
+
+\begin{mainbox}{Ausreichendes Kriterium für $\C$-Differenzierbarkeit}
+  Sei \(f \colon U \to \mathbb{C}\) und sei \(z_0 \in U\). Nehmen wir an, dass:
+  \begin{itemize}
+    \item \(u_x,u_y,v_x,v_y\) in einer offenen Menge um \(z_0\) existieren, und
+    \item \(u_x,u_y,v_x,v_y\) stetig in \(z_0\) sind und die CRG in \(z_0\) erfüllen.
+  \end{itemize}
+  Dann existiert \(f'(z_0)\), d.h. \(f\) ist \(\mathbb{C}\)-differenzierbar in \(z_0\).
+\end{mainbox}
+
+\begin{subbox}{Konsequenzen der CRG}
+  Seien $f, g: B(z_0, r) \mapsto \C$ holomorph für $z_0 \in \C$ und $r > 0$:
+  \begin{itemize}
+    \item Falls $\Re(f) = u$ konstant ist, ist $f$ auch konstant.
+    \item Falls $\Re(f) = \Re(g)$, dann gilt $f = g + ic$ mit $c \in \R$.
+    \item Falls $\overbar{f}: B(z_0, r) \mapsto \C$, dann ist $f$ konstant.
+    \item Falls $|f(z)|$ konstant ist, dann ist $f$ konstant.
+  \end{itemize}
+\end{subbox}
+
+\subsection{Kurvenintegrale}
+
+\begin{mainbox}{Komplexes Integral}
+  Sei \(f \colon [a,b] \to \mathbb{C}\). So definiert man:
+  \begin{align*}
+    \int_a^b f(t) \dt:=\int_a^b \Re(f(t)) \dt + i \int_a^b \Im(f(t)) \dt 
+  \end{align*}
+  wobei die Integrale reell sind.
+\end{mainbox}
+
+\begin{mainbox}{Pfad in der komplexen Ebene}
+  \begin{enumerate}
+    \item Ein Pfad ist eine stetige Abbildung \(\gamma\colon[a,b]\to\mathbb{C}\).
+    \item Ein Pfad ist \textbf{einfach}, falls aus \(\gamma(t_1)=\gamma(t_2)\) folgt, dass \(t_1=t_2\) oder \(\{t_1,t_2\}=\{a,b\}\). Das heisst ein einfacher Pfad hat keine Selbstschnittpunkte (ausser in $a,b$).
+    \item Falls \(\gamma(a)=\gamma(b)\) heisst der Pfad \textbf{geschlossen}.
+    \item Der Pfad ist \textbf{differenzierbar} auf \((a,b)\), falls \begin{align} \gamma'(t_0)= \lim_{t \to t_0} \frac{\gamma (t) - \gamma (t_0)}{t-t_0} \end{align} für jedes \(t\in(a,b)\) existiert. In diesem Fall heisst \(\gamma'(t_0)\) der Tangentialvektor zum Pfad \(\gamma\) an der Stelle \(\gamma(t_0)\in U\).
+  \end{enumerate}
+\end{mainbox}
+
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.9\linewidth]{assets/paths.png}
+  \caption{Im Uhrzeigersinn von oben links: ein einfacher Pfad, ein nicht einfacher Pfad; ein nicht differenzierbarer einfacher Pfad und ein geschlossener Pfad.}
+\end{figure}
 
 \section{Taylor- und Laurentreihen}
 
