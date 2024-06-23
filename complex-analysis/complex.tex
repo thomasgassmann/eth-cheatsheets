@@ -146,10 +146,12 @@
 
 \input{../header.tex}
 
-Credits: \begin{rowlist}
+\section{Credits}
+
+\begin{itemize}
     \item \href{https://github.com/XYQuadrat/eth-cheatsheets}{xyquadrat}
     \item \href{https://people.math.ethz.ch/~iozzi/SkriptKomplexeAnalysis.pdf}{Komplexe Analysis (Meike Akveld, Alessandra Iozzi, Peter Jossen)}
-\end{rowlist}
+\end{itemize}
 
 \section{Vorwissen}
 \subsection{Komplexe Zahlen}
@@ -531,6 +533,78 @@ Für die Umkehrung verwenden wir den nachfolgenden Satz:
 Falls eine (und deshalb jede) der Aussagen gilt, heisst die Funktion \(F\) eine Stammfunktion von \(f\) und \begin{align*} \int_\delta f(z)\,dz=F(\delta(1))-F(\delta(0))\,. \end{align*}
 
 \end{mainbox}
+
+Aus dem Cauchy'schen Integralsatz erhalten wir eine Behauptung wann die obigen Aussagen gelten.
+
+\subsection{Cauchy'scher Integralsatz}
+
+\begin{subbox}{Homotopie}
+  Sei \(U \subseteq \mathbb{C}\) offen, \(\gamma_0, \gamma_1: [a,b] \to U\) Pfade mit \(\gamma_0(a) = \gamma_1(a)=\alpha\) und \(\gamma_0(b) = \gamma_1(b)=\beta\). Wir sagen \(\gamma_0\) sei homotop zu \(\gamma_1\), falls es eine stetige Funktion \(H \colon [0,1]\times[a,b] \to U\) mit:
+  
+  \begin{equation*}
+    \begin{matrix} H(0,t) = \gamma_0(t)\\ H(1,t) = \gamma_1(t) 
+    \end{matrix} ~~~ \forall t \in [a,b] ~~~ \text{ und } ~~~ \begin{matrix} H(s,a)=\alpha\\ H(s,b) = \beta \end{matrix} ~~~ \forall s\in [0,1] \end{equation*} gibt. Die Funktion \(H\) ist die sogennante Homotopie von \(\gamma_0\) und \(\gamma_1\).
+
+\end{subbox}
+
+Dies definiert eine stetige Deformation $H$ von $\gamma_0$ zu $\gamma_1$. Für jedes feste $s \in [0,1]$ ist $\gamma_s(t) := H(s, t)$ ein Pfad von $\alpha$ nach $\beta$, definiert auf $[a,b]$.
+
+\begin{subbox}{Einfacher Zusammenhang}
+  Eine teilmenge $U \subseteq \C$ heisst \textbf{einfach zusammenhängend} falls sie wegzusammenhängend ist und für alle $\alpha, \beta \in U$, alle Pfade von $\alpha$ nach $\beta$ homotop zu einander sind.
+\end{subbox}
+
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.9\linewidth]{assets/connected.png}
+  \caption{Eine einfach zusammenhängende Menge an der linken Seite und eine nicht einfach zusammenhängende Menge an der rechten Seite.}
+\end{figure}
+
+\begin{mainbox}{Cauchy'scher Integralsatz}
+  Sei $U \subseteq \C$ eine einfach zusammenhängende offene Teilmenge und $f: U \mapsto \C$ eine holomorphe Funktion. Dann besitzt $f$ eine Stammfunktion auf $U$.
+\end{mainbox}
+
+Aus den drei äquivalenten Aussagen folgt nun:
+
+\begin{subbox}{Konsequenzen des Cauchy'schen Integralsatzes}
+  Sei $U \subseteq \C$ eine einfach zusammenhängende offene Teilmenge und $f: U \mapsto \C$ eine holomorphe Funktion.
+  \begin{itemize}
+    \item Sei $\gamma$ ein geschlossener Pfad. Dann gilt $\int_\gamma f(z) dz = 0$.
+    \item Das Kurvenintegral von $f$ ist unabhängig vom Pfad.
+  \end{itemize}
+\end{subbox}
+
+\begin{mainbox}{Eigenschaften (I)}
+  Sei \(U\subseteq\mathbb{C}\) eine wegzusammenhängende Menge, sei \(\gamma\colon[a,b]\to U\) ein Pfad und \(f\colon U\to\mathbb{C}\) stetig. Dann gilt:
+
+  \begin{itemize}
+    \item{
+      Dreiecksungleichung für Weg-Integrale:
+      \begin{align*}\left|\int_a^b f(\gamma (t)) \cdot \gamma'(t) \,dt\right| \leq \int_a^b \left|f(\gamma (t))\cdot \gamma'(t)\right|\, dt\, .\end{align*}
+    }
+    \item{
+      Sei \(L\) die Länge von \(\gamma\), d.h. \(L=\int_a^b|\gamma'(t)|dt\). Wenn \(|f(z)| \leq M\) für jedes \( z\in U\), dann folgt \begin{align*} \left|\int_{\gamma} f(z)dz\right| \leq M\cdot L \end{align*}
+    }
+  \end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften (II)}
+  \begin{enumerate}
+    \item Sei \(\gamma\) eine geschlossene einfache im Gegenuhrzeigersinn orientierte Kurve.
+    \item Seien \(\gamma_1,\dots,\gamma_n\) einfache geschlossene im Uhrzeigersinn orientierte Kurven, die innerhalb \(\gamma\) sind. Nehmen wir an, dass die Mengen, die diese Kurven einschliessen, keine Schnittpunkte mit einanderen haben.
+    \item Sei \(U\) die Menge von diesen Kurven definiert.
+  \end{enumerate} 
+
+  \begin{figure}[H]
+    \centering 
+    \includegraphics[width=0.6\linewidth]{assets/3-4-1.png}
+  \end{figure}
+  
+  Falls \(f\colon U\to\mathbb{C}\) holomorph ist, gilt:
+  \begin{align*} \int_\gamma f(z)\,dz+\sum_{k=1}^n\int_{\gamma_k}f(z)\,dz=0 \end{align*}
+\end{mainbox}
+
+Insbesondere, seien \(\gamma_1\) und \(\gamma_2\) zwei Kurven mit der gleichen Orientierung und sei \(U\) als die Menge von diesen zwei Kurven definiert. Falls \(f\colon U\to\mathbb{C}\) holomorph ist, gilt \begin{align*} \int_{\gamma_1}f(z)\,dz=\int_{\gamma_2}f(z)\,dz\,. \end{align*}
+
 
 \section{Taylor- und Laurentreihen}
 
