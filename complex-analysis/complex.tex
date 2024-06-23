@@ -732,6 +732,36 @@ Falls $z_0 = 0$, nennt man die Reihe \textbf{MacLaurin}-Reihe von $f$.
   Eine Funktion heisst analytisch, falls sie sich durch eine Potenzreihe darstellen lässt.
 \end{subbox}
 
+\begin{subbox}{Singularitäten und Nullstellen}
+  Man nennt \(z_0\) eine isolierte \textbf{Singularität} der Funktion \(f\), wenn \(f\) an der Stelle \(z_0\) nicht holomorph ist, aber es ein \(\epsilon>0\) gibt, so dass \(f(z)\) für jedes \(z\in B(z_0,\epsilon)\setminus \{ z_0 \}\) holomorph ist.
+  
+  Eine Nullstelle \(z_0\) einer Funktion heisst \textbf{isoliert}, falls es ein \(\epsilon>0\) gibt, so dass für jedes \(z\in B(z_0,\epsilon)\) : \(f(z)\neq0\).
+\end{subbox}
+
+Die Funktion $f(z) = |z|^2$ hat bspw. keine Singularitäten, weil sie nirgendwo holomorph ist.
+
+\begin{mainbox}{Klassifizierung von Singularitäten und Nullstellen}
+  Sei \(U\subseteq \mathbb{C}\) offen, \(z_0 \in U\) und \(f\) holomorph auf \(U\setminus\{z_0\}\). Wir schreiben \(f(z) = \sum_{n=-\infty}^{\infty} c_n (z-z_0)^n\) für jedes \(z\in B(z_0,R)\setminus\{z_0\}\) für ein gewisses \(R>0\). So definiert man:
+
+  \begin{enumerate}
+    \item{
+      \(z_0\) ist eine \textbf{wesentliche Singularität} falls \(c_n \neq 0\) für unendlich viele negative \(n\).
+    }
+    \item{
+      \(z_0\) ist ein \textbf{Pol der Ordnung \(m \geq 1\)} falls \(c_{-m} \neq 0\) und \(c_n =0\) für alle \(n<-m\). Falls \(m=1\), heisst \(z_0\) ein einfacher Pol.
+    }
+    \item{
+      \(z_0\) ist eine \textbf{hebbare Singularität} falls \(c_n = 0\) für alle \(n<0\).
+    }
+    \item{
+      \(z_0\) ist eine Nullstelle der Ordnung \(m \geq 0\) falls \(c_m \neq 0\) und \(c_n =0\) für alle \(n < m\).
+    }
+  \end{enumerate}
+\end{mainbox}
+
+Falls $z_0$ eine hebbare Singularität von $f$ ist, so kann man $f$ in einer Umgebung von $z_0$ holomorph fortsetzen.
+
+\subsection{Residuensatz}
 
 
 \section{Fourier-Analysis}
