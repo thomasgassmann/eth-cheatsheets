@@ -20,7 +20,7 @@ This is a non-convex objective. Similar to training a GBC without labels. Start 
 \end{align*}
 \textbf{M-Step}: compute MLE of $\theta^{(t)}$ as for GBC. \smallskip
 
-Problems: tries to extract too much inf, works poorly if clusters overlapping, with uniform weights and spherical covariances equivalent to k-means with Lloyd's heuristic
+Problems: works poorly if clusters overlapping, with uniform weights and spherical covariances equivalent to k-means with Lloyd's heuristic
 
 \subsection*{Soft-EM Algorithm}
 
@@ -49,7 +49,7 @@ Giving highly complex decision boundaries:
 
 \subsection*{GMMs for Density Estimation}
 
-Can be used for anomaly detection or data imputation. Detect outliers, by comparing the estimated density against $\tau$. Allows to control the FP rate. Use ROC curve as evaluation criterion and optimize using CV to find $\tau$.
+Detect outliers, by comparing the estimated density against $\tau$. Allows to control the FP rate. Use ROC curve as evaluation criterion and optimize using CV to find $\tau$.
 
 \subsection*{General EM Algorithm}
 

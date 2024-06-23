@@ -2,36 +2,29 @@
 
 \subsection*{k-Means Clustering}
 
-Optimization Goal (non-convex):
+Want $\mu_i$ to minimize $\sum_{i=1}^n \min_{j\in\{1,...k\}}\|x_i-\mu_j\|_2^2$
+Non-convex and NP-hard in general. Can be kernelized.
 
-\qquad $\hat{R} (\mu) = \sum_{i=1}^n \min_{j\in \{1,...,k\}} ||x_i - \mu_j||_2^2$
+\subsection*{Lloyd's heuristic}
+$\hspace*{3mm}z_i = \text{argmin}_{j\in\{1,...,k\}}\|x_i - \mu_j^{t-1}\|_2^2\\
+\hspace*{3mm}\mu_j^{(t)} = \frac{1}{n_j}\sum_{i:z_i=j}x_i$\\
+Monotonically decreases objective and converges to a local 
+optimum. Cost per iteration $O(nkd)$, worst-case exponential
 
-Lloyd's heuristic:
-Init. cluster centers $\mu^{(0)}$:
-\begin{compactitem}
-	\item Assign points to closest center				
-	\item Update $\mu_i$ as mean of assigned points
-\end{compactitem}
-
-Converges in exponential time.
-
-Initialize with \textbf{k-Means++}:
-
-\begin{compactitem}
+\textbf{k-Means++}: \begin{compactitem}
 	\item Random data point $\mu_1 = x_i$
 	\item Add $\mu_2,...,\mu_k$ rand., with prob:
 		$$\text{given } \mu_{1:j} \text{ pick } \mu_{j+1} = x_i$$ 
 		$\text{ where } p(i) = \frac{1}{z} \min_{l \in \{1,...,j\}} ||x_i - \mu_l||_2^2$
 \end{compactitem}
 Converges in expectation $\mathcal O (\log k) * \text{opt. solution}$.
-Find $k$ by negligible loss decrease or reg.
 
 \subsection*{Principal Component Analysis}
 
 Given centered data, the PCA problem is 
 $$\min_{W^\top W=I_k,z_i\in\R^k}\sum_{i=1}^n||W z_i - x_i||_2^2,$$
 with solution $W^* = (v_1|...|v_k)$ where $v_i$ are the ordered 
-eigenvectors of $\frac{1}{n}\sum_ix_ix_i^\top$ 
+eigvec. of $\frac{1}{n}\sum_ix_ix_i^\top$ 
 and $z_i = {W^*}^\top x_i$. 
 
 \subsection*{PCA through SVD}
