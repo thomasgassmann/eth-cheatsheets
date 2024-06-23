@@ -4,15 +4,25 @@ Parameterize: $w = \Phi^\top \alpha$, $K = \Phi \Phi^\top$, $k(x,y) = \varphi(x)
 
 A kernel is \textbf{valid} if $K$ is sym.: $k(x,z) = k(z,x)$ and psd: $z^\top K z \geq 0$, check Gram matrix (matrix of all inner products) is psd
 
-\textbf{lin.}: $k(x, z) = (x^\top z)^m$, \textbf{poly.}: $k(x, z) = (x^\top z + 1)^m$
+\textbf{all monomials of deg. m}: $k(x,y) = (x^\top y)^m$ \\
+\textbf{all monomials up to deg. m}: $k(x,y) = (1+x^\top y)^m$, there are $\binom{d+m}{m}$ monomials of 
+order $m$ in $d$ variables.\\
+
 \textbf{RBF}: $k(x, z) = \exp ( -\frac{||x - z||_\alpha}{\tau} )$, $\alpha = 1 \Rightarrow $ Laplacian kernel, $\alpha = 2 \Rightarrow $ Gaussian kernel
 
 \textbf{Mercers Theorem}: Valid kernels can be decomposed into a lin. comb. of inner products.
 
-\textbf{Kernel composition} $k = k_1 + k_2$, \quad $k = k_1 \cdot k_2$ \quad $\forall c > 0. \; k = c \cdot k_1$,
-$k = f(k_1)$ holds for $f$ convex or polynomials/power series with non-neg. coefficients  
+\textbf{Kernel composition}
 
-$\forall f. \; k(x,y) = f(x)k_1(x,y)f(y)$
+\begin{rowlist}
+    \item $\forall c > 0. \; k = c \cdot k_1$
+    \item $f(k)$, where $f$ is a polynomial/power series with non-negative coefficients
+    \item{
+        $k(\binom{x}{y}, \binom{x'}{y'})=k(x,x')k(y,y')$, $k(\binom{x}{y}, \binom{x'}{y'})=k(x,x') + k(y,y')$ where $\binom{x}{y}$ is concatenation of vectors
+    }
+    \item If for $g$ all Taylor coefficients non-negative, then $k(x, x') = g(\left< x, x' \right>)$ is a valid kernel
+    \item $\forall f. \; k(x,y) = f(x)k_1(x,y)f(y)$
+\end{rowlist}
 
 \textbf{Kern. Ridge Reg.}
 $\frac{1}{n} ||y - K\alpha ||_2^2 + \lambda \alpha^\top K \alpha$

@@ -35,11 +35,7 @@ $w_j^{(t)} = \frac{1}{n} \sum_{i=1}^n \gamma_j^{(t)}(x_i) \quad \; \mu_j^{(t)} =
 \qquad \quad $\Sigma_j^{(t)} = \frac{\sum_{i=1}^n \gamma_j^{(t)}(x_i)(x_i - \mu_j^{(t)})(x_i - \mu_j^{(t)})^\top}{\sum_{i=1}^n \gamma_j^{(t)}(x_i)}$
 
 
-Init. the weights as uniformly, or with k-Means++ and for variances use spherical init. or empirical covariance of the data. Select $k$ using cross-validation.
-
-\subsection*{Degeneracy of GMMs}
-
-GMMs can overfit with limited data. Avoid this by add $v^2 I$ to variance (choose with cv), so it does not collapse.
+Init. the weights as uniformly, or with k-Means++ and for variances use spherical init. or empirical covariance of the data. Select $k$ using cross-validation. GMMs can \color{Red}overfit \color{Black} with limited data. Avoid this by add $v^2 I$ to variance (choose with cv), so it does not collapse.
 
 \subsection*{Gaussian-Mixture Bayes Classifiers}
 
