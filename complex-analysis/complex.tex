@@ -682,6 +682,55 @@ Der Satz von Liouville gilt nicht für Funktionen die nur auf einer reellen Vari
 
 \subsection{Reihen Entwicklung}
 
+\begin{mainbox}{Komplexe Taylorreihe}
+  Sei \( f \colon B(z_0,R_0) \to \mathbb{C}\) eine holomorphe Funktion und \( R_0 > 0 \). Dann besitzt \(f\) eine Reihen Entwicklung so dass für jedes  \(z\in B(z_0,R_0)\) gilt: \begin{align*} f(z) = \sum_{n=0}^{\infty} \frac{f^{( n )}(z_0)}{n!} (z-z_0)^n \end{align*} Anders gesagt, die Reihe konvergiert absolut für alle \( z\in B(z_0,R_0)\).
+\end{mainbox}
+
+Falls $z_0 = 0$, nennt man die Reihe \textbf{MacLaurin}-Reihe von $f$. 
+
+\begin{subbox}{Geometrische Reihe}
+  Falls $|z| < 1$ gilt:
+  $$
+    \frac{1}{1 - z} = \sum_{n=0}^\infty z^n
+  $$
+  Für die Partialsumme gilt $S_n = \frac{1 - z^{n+1}}{1 - z}$.
+\end{subbox}
+
+\begin{mainbox}{Laurentreihe}
+  Sei \(f\) eine Funktion, die holomorph auf einem Kreisring \( R_1 <|z-z_0| < R_2 \) ist. Dann besitzt \(f\) für jedes \(z\) im Kreisring eine Reihen Entwicklung:
+  \begin{align*} f(z)=\sum_{n=0}^\infty a_n(z-z_0)^n+\sum_{n=1}^\infty b_n\frac{1}{(z-z_0)^n}\end{align*}
+  wobei:
+  \begin{align*} a_n=\frac{1}{2\pi i}\int_\gamma\frac{f(z)}{(z-z_0)^{n+1}}\,dz\,,\text{ für } n=0,1,2,\dots\end{align*} \begin{align*}b_n=\frac{1}{2\pi i}\int_\gamma\frac{f(z)}{(z-z_0)^{-n+1}}\,dz\,,\text{ für } n=1,2,\dots \end{align*} und \(\gamma\) ist eine geschlossene Kurve, die im Kreisring enthalten ist und die einmal im Gegenuhrzeigersinn \(z_0\) umläuft.
+\end{mainbox}
+
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.4\linewidth]{assets/4-1-1.png}
+  \caption{Kreisring für Kurve bei Laurentreihe}
+\end{figure}
+
+\begin{enumerate}
+  \item{
+    Die Laurentreihe lässt sich auch in einer \textbf{kompakteren Form} schreiben:
+
+    \begin{align*} 
+       f(z) = \sum_{n=-\infty}^{\infty} c_n (z-z_0)^n
+     \end{align*}
+     wobei:
+     \begin{align*}
+      c_n=\frac{1}{2\pi i}\int_\gamma\frac{f(z)}{(z-z_0)^{n+1}}\,dz\,,\text{ für } n=0,\pm1,\pm2,\dots
+    \end{align*}
+  }
+
+  \item{
+    Die Formel für \(b_n\) kann auch als 
+    \begin{align*} b_n=\frac{1}{2\pi i}\int_\gamma f(z)(z-z_0)^{n-1}\,dz\,,\text{ für } n=1,2,\dots \end{align*} geschrieben werden. Falls \(f\) an der Stelle \(z_0\) holomorph ist, ist die Funktion \(f(z)(z-z_0)^{n-1}\) auch holomorph und \(b_n=0\) für \(n=1,2,\dots\). In diesem Fall ist die Laurent-Reihen Entwicklung die Taylor-Reihen Entwicklung und \begin{align*} a_n=\frac{1}{n!}f^{( n )}(z_0) \end{align*}
+  }
+\end{enumerate}
+
+\begin{subbox}{Analytische Funktion}
+  Eine Funktion heisst analytisch, falls sie sich durch eine Potenzreihe darstellen lässt.
+\end{subbox}
 
 
 
