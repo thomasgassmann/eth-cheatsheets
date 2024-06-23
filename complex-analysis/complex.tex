@@ -470,7 +470,7 @@ Für die Umkehrung verwenden wir den nachfolgenden Satz:
     \item Ein Pfad ist eine stetige Abbildung \(\gamma\colon[a,b]\to\mathbb{C}\).
     \item Ein Pfad ist \textbf{einfach}, falls aus \(\gamma(t_1)=\gamma(t_2)\) folgt, dass \(t_1=t_2\) oder \(\{t_1,t_2\}=\{a,b\}\). Das heisst ein einfacher Pfad hat keine Selbstschnittpunkte (ausser in $a,b$).
     \item Falls \(\gamma(a)=\gamma(b)\) heisst der Pfad \textbf{geschlossen}.
-    \item Der Pfad ist \textbf{differenzierbar} auf \((a,b)\), falls \begin{align} \gamma'(t_0)= \lim_{t \to t_0} \frac{\gamma (t) - \gamma (t_0)}{t-t_0} \end{align} für jedes \(t\in(a,b)\) existiert. In diesem Fall heisst \(\gamma'(t_0)\) der Tangentialvektor zum Pfad \(\gamma\) an der Stelle \(\gamma(t_0)\in U\).
+    \item Der Pfad ist \textbf{differenzierbar} auf \((a,b)\), falls \begin{align*} \gamma'(t_0)= \lim_{t \to t_0} \frac{\gamma (t) - \gamma (t_0)}{t-t_0} \end{align*} für jedes \(t\in(a,b)\) existiert. In diesem Fall heisst \(\gamma'(t_0)\) der Tangentialvektor zum Pfad \(\gamma\) an der Stelle \(\gamma(t_0)\in U\).
   \end{enumerate}
 \end{mainbox}
 
@@ -479,6 +479,58 @@ Für die Umkehrung verwenden wir den nachfolgenden Satz:
   \includegraphics[width=0.9\linewidth]{assets/paths.png}
   \caption{Im Uhrzeigersinn von oben links: ein einfacher Pfad, ein nicht einfacher Pfad; ein nicht differenzierbarer einfacher Pfad und ein geschlossener Pfad.}
 \end{figure}
+
+\begin{mainbox}{Kurvenintegral entlang eines Pfades}
+  Sei \(U \subseteq \mathbb{C}\) offen, \(f \colon U \to \mathbb{C}\) stetig und sei \(\gamma \colon [0,1] \to U \subseteq \mathbb{C}\) differenzierbar. Wir definieren das Kurvenintegral von \(f\) entlang \(\gamma\) durch:
+  
+  \begin{align*} 
+  \int_{\gamma} f(z) \text{dz} :=& \int_0^1 f(\gamma(\text{t}))\cdot \gamma'(\text{t}) \text{dt}\\
+   = &\int_0^1 \Re(f(\gamma (t))  \gamma'(t) )\text{dt} + i \int_0^1 \Im(f(\gamma (t))  \gamma'(t)) \text{dt}
+  \end{align*}
+\end{mainbox}
+
+\begin{subbox}{Eigenschaften des Kurvenintegrales}
+   Sei $\gamma: [0, 1] \mapsto U \subseteq \C$ ein Pfad und \(f\colon U\to\mathbb{C}\) stetig:
+
+  \begin{enumerate}
+    \item{
+      \textbf{Linearität}: Sei \(g\colon U\to\mathbb{C}\) stetig und \(\alpha,\beta \in \mathbb{C}\). Dann gilt \begin{align*} \int_{\gamma} [ \alpha f(z) + \beta g(z) ] dz = \alpha \int_{\gamma} f(z)dz + \beta \int_{\gamma} g(z)dz\,. \end{align*}
+    }
+    \item{
+      Sei \(\delta\colon[0,1]\to U\subseteq\mathbb{C}\) durch \(\delta(t):=\gamma(1-t)\) definiert. Dann ist \begin{align*} \int_{\delta} f(z) dz =-\int_{\gamma} f(z) dz\,. \end{align*}
+ 
+      Man schreibt \(\delta=\gamma^{-1}\) oder manchmal auch \(\delta=-\gamma\).
+    }
+    \item{
+      Sei \(\delta\colon[0,1]\) ein Pfad mit \(\gamma (1) = \delta(0)\) und setze:
+      \begin{align*} (\gamma * \delta) (t) := \begin{cases} \gamma(2t) &\text{ falls } 0 \leq t \leq 1/2\\ \delta (2t-1) &\text{ falls } 1/2 \leq t \leq 1\,. \end{cases} \end{align*}
+
+      $(\gamma * \delta)$ entspricht den Pfaden $\gamma$ und $\delta$ ''aneinander gesetzt''. So gilt:
+      \begin{align*} \int_{\gamma * \delta} f(z) dz = \int_{\gamma} f(z) dz + \int_{\delta} f(z) dz\,. \end{align*}
+    }
+    \item{
+      \textbf{Unabhängigkeit der Parametrisierung}: Sei \(\sigma \colon [0,1] \to [0,1]\) eine differenzierbare Funktion mit \(\sigma(0) =0, \sigma(1)=1\) und sei \(\delta\colon[0,1]\to U\) durch \(\delta (t) := \gamma (\sigma (t))\) definiert. Anders gesagt, ist \(\delta\) eine andere Parametrisierung des Bildes von \(\gamma\). Dann gilt:
+      \begin{align*} \int_{\delta} f(z)dz=\int_{\gamma} f(z) dz\,. \end{align*}
+    }
+  \end{enumerate}
+\end{subbox}
+
+\begin{mainbox}{Wegzusammenhängend}
+  Eine Menge $U$ heisst \textbf{wegzusammenhängend}, falls es für jede zwei Punkte $z_1, z_2 \in U$ einen Pfad gibt, der die zwei Punkte verbindet.
+\end{mainbox}
+
+\begin{mainbox}{Stammfunktion}
+  Sei \(U \subseteq \mathbb{C}\) eine offene wegzusammenhängende Menge und \(f \colon U \to \mathbb{C}\) stetig. Dann sind folgende Aussagen äquivalent:
+
+  \begin{itemize}
+    \item Für jede geschlossene Kurve \(\gamma \colon [0,1] \rightarrow U\) gilt \(\int_{\gamma} f(z) dz = 0\).
+    \item Das Kurvenintegral \(\int_\delta f(z)dz\) ist unabhängig vom Pfad \(\delta\colon[0,1]\to U\).
+    \item Es gibt eine \(\mathbb{C}\)-differenzierbare Funktion \(F \colon U \to \mathbb{C}\) mit \(F'(z)=f(z)\).
+  \end{itemize}
+
+Falls eine (und deshalb jede) der Aussagen gilt, heisst die Funktion \(F\) eine Stammfunktion von \(f\) und \begin{align*} \int_\delta f(z)\,dz=F(\delta(1))-F(\delta(0))\,. \end{align*}
+
+\end{mainbox}
 
 \section{Taylor- und Laurentreihen}
 
