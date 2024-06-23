@@ -1,8 +1,0 @@
-\section*{Kernels}
-
-\subsection*{Kernelized Ridge}
-Ansatz: $w^*=\Phi^\top\alpha$\\
-$\min_w\|\Phi w-y\|^2 + \lambda ||w||_2^2\\
-=\min_a ||K\alpha -y||_2^2 + \lambda \alpha^\top K \alpha$\\
-$\alpha^*=(K+\lambda I)^{-1} y$\\
-Prediction: $\hat{y} = \Sigma_{i=1}^n \alpha_i^* k(x_i,x)$\\

@@ -1,6 +1,6 @@
 \section*{Gaussian Mixture Model}
 
-data is generated from a convex-combination of Gaussian distributions
+Data is generated from a convex-combination of Gaussian distributions
 
 $p(x  | \theta) = p(x  | \mu, \Sigma, w) = \sum_{j=1}^k w_j \mathcal{N}(x; \mu_j, \Sigma_j)$
 
@@ -20,7 +20,7 @@ This is a non-convex objective. Similar to training a GBC without labels. Start 
 \end{align*}
 \textbf{M-Step}: compute MLE of $\theta^{(t)}$ as for GBC. \smallskip
 
-Problems: works poorly if clusters overlapping, with uniform weights and spherical covariances equivalent to k-means with Lloyd's heuristic
+Problems: works poorly if clusters overlapping, Hard-EM for GMM with $w_z=\frac{1}{k}, \Sigma_z=\sigma^2{I}$ is equivalent to k-means.
 
 \subsection*{Soft-EM Algorithm}
 

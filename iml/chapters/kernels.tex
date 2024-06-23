@@ -25,4 +25,5 @@ order $m$ in $d$ variables.\\
 \end{rowlist}
 
 \textbf{Kern. Ridge Reg.}
-$\frac{1}{n} ||y - K\alpha ||_2^2 + \lambda \alpha^\top K \alpha$
+Ansatz: $w^*=\Phi^\top\alpha$\\
+$\min_w \frac1n \|y - \Phi w\|^2 + \lambda ||w||_2^2 = \min_\alpha \frac1n ||y - K\alpha||_2^2 + \lambda \alpha^\top K \alpha$

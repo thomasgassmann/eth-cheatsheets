@@ -2,13 +2,19 @@
 
 Aim to estimate $p(x, y)$ for complex situations using Bayes' rule: $p(x,y) = p(x|y) \cdot p(y)$
 
-\subsection*{Naive Bayes Model}
+\subsection*{Gaussian Bayes Classifier}
 
-GM for classification tasks. Assuming for a class label, each feature is independent. This helps estimating $p( x \; | \; y) =\prod_{i=1}^d p(x_i \; | \; y_i)$.
+No independence assumption, model the features with a multivariate Gaussian $\mathcal{N}(x; \mu_y, \Sigma_y)$:
+
+\quad $\mu_{y} = \frac{1}{\text{Count}(Y = y)} \sum_{j \; | \; y_j = y} x_{j}$
+
+\quad $\Sigma_{y} = \frac{1}{\text{Count}(Y = y)} \sum_{j \; | \; y_j = y} (x_{j} - \hat \mu_{y}) (x_{j} - \hat \mu_{y})^\top$
+
+This is also called the \textbf{quadratic discriminant analysis} (QDA). LDA: $\Sigma_+ = \Sigma_-$, Fisher LDA: $p(y) = \frac{1}{2}$, classify $x$ as outlier if: $p(x) \leq \tau$.
 
 \subsection*{Gaussian Naive Bayes Classifier}
 
-Naive Bayes Model with ind. Gaussians features. Estimate the parameters via MLE:
+GBC with diagonal $\Sigma$s. Estimate the parameters via MLE:
 
 MLE for class prior: $p(y) = \hat p_y = \frac{\text{Count}(Y = y)}{n}$
 MLE for feature distribution:
@@ -30,16 +36,6 @@ Equivalent to decision rule for bin. class.: \\[-8pt]
 \qquad \qquad $y = \sgn \left( \color{Red} \log \frac{p(Y = +1 \; | \; x)}{p(Y = -1 \; | \; x)} \color{Black} \right)$ \\[-3pt]
 
 Where \color{Red}$f(x)$\color{Black} is called the discriminant function. If the conditional independence assumption is violated, the classifier can be overconfident.
-
-\subsection*{Gaussian Bayes Classifier}
-
-No independence assumption, model the features with a multivariate Gaussian $\mathcal{N}(x; \mu_y, \Sigma_y)$:
-
-\quad $\mu_{y} = \frac{1}{\text{Count}(Y = y)} \sum_{j \; | \; y_j = y} x_{j}$
-
-\quad $\Sigma_{y} = \frac{1}{\text{Count}(Y = y)} \sum_{j \; | \; y_j = y} (x_{j} - \hat \mu_{y}) (x_{j} - \hat \mu_{y})^\top$
-
-This is also called the \textbf{quadratic discriminant analysis} (QDA). LDA: $\Sigma_+ = \Sigma_-$, Fisher LDA: $p(y) = \frac{1}{2}$, Outlier detection: $p(x) \leq \tau$.
 
 \subsection*{Avoiding Overfitting}
 
