@@ -33,6 +33,7 @@
 \DeclareMathOperator{\Sign}{sign}
 \DeclareMathOperator{\Rank}{Rank}
 \DeclareMathOperator{\Image}{Im}
+\DeclareMathOperator{\Res}{Res}
 \DeclareMathOperator{\Columnspace}{\mathcal{R}}
 \DeclareMathOperator{\Nullspace}{\mathcal{N}}
 \DeclareMathOperator{\Kernel}{Ker}
@@ -763,6 +764,92 @@ Falls $z_0$ eine hebbare Singularität von $f$ ist, so kann man $f$ in einer Umg
 
 \subsection{Residuensatz}
 
+Sei \(f \colon U \setminus \{ z_0 \} \to \mathbb{C}\) holomorph, so dass man \(f\) als \begin{align*} f(z) = \sum_{n=-\infty}^{\infty} c_n (z-z_0)^n\,, \end{align*} auf einer Scheibe einer gewisses Radius (ausser \(z_0\)) schreiben kann, wobei \begin{align*} c_n = \frac{1}{2\pi i} \int_{\gamma} \frac{f(\xi)}{(\xi - z_0)^{n+1}} d\xi \end{align*} mit \(\gamma \subset U\) eine positiv orientierte geschlossene Kurve ist, die einmal \(z_0\) im positiven Sinne umrundet. Insbesondere gilt für \(n=-1\) \begin{align*}c_{-1} = \frac{1}{2\pi i} \int_{\gamma} f(\xi) d\xi \end{align*}
+
+\begin{mainbox}{Residuum}
+  Sei \(z_0\) eine isolierte Singularität von \(f\). Mann nennt den Koeffizienten \(c_{-1}\) von \(\frac{1}{z-z_0}\) in der Laurent-Reihe von \(f\) (entwickelt an $z_0$), das Residuum von \(f\) an der Stelle \(z_0\) und schreibe \(\operatorname{Res}(f,z_0)\).
+\end{mainbox}
+
+Man kan Residuen verwenden um komplexe Integrale einfacher zu lösen. Es reicht dazu aus den Koeffizient aus der Laurent-Reihen Entwicklung abzulesen.
+
+Beispielsweise möchten wir $\int_\gamma \exp(\frac{1}{z^2}) dz$ auf der Kurve $\gamma(t) = r \exp(2\pi i t)$ für $r > 0$ berechnen. Eine isolierte Singularität existiert nur im Nullpunkt. Folglich:
+$$
+\int_\gamma \exp \left( \frac{1}{z^2} \right) dz = 2\pi i \Res(f, 0)
+$$
+Da $\exp(1/z^2) = \sum_{n=0}^\infty \frac{1}{n!} \frac{1}{z^{2n}}$ können wir ablesen dass $\Res(f, 0) = c_{-1} = 0$.
+
+\begin{mainbox}{Residuensatz}
+  Sei \(U \subseteq \mathbb{C}\) eine offene wegzusammenhängende Teilmenge und sei \(\gamma : [0,1] \to U\) eine positiv orientierte einfache geschlossene Kurve. Seien \(z_1,...,z_n\) im Inneren von \(\gamma\) enthalten und sei \(f \colon U \setminus \{z_1,...,z_n\} \to \mathbb{C}\) holomorph. Dann gilt: \begin{align*}  \int_{\gamma} f(z)\,dz = 2\pi i \sum_{j=1}^n \operatorname{Res}(f,z_j) \end{align*}
+\end{mainbox}
+
+
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.9\linewidth]{assets/4-2-1.png}
+  \caption{Kurven im Residuensatz}
+\end{figure}
+
+Dies lässt sich verallgemeinern für den Fall dass $\gamma$ kein einfacher oder positiv orientierter Pfad ist. Für einen beliebiegen geschlossenen Pfad $\gamma$ definieren wir die Windungszahl:
+
+\begin{subbox}{Windungszahl}
+  Die Windungszahl \(\operatorname{W}(\gamma,z)\) einer Kurve \(\gamma\) um einen Punkt \(z\) beschreibt wie oft sich \(\gamma\) um \(z\) im Gegenuhrzeigersinn dreht. Also: 
+  \begin{itemize}
+    \item \(\operatorname{W}(\gamma,z) = 1\) falls $\gamma$ sich um $z$ einmal im Gegenuhrzeigersinn (mathematisch positive Richtung) dreht
+    \item \(\operatorname{W}(\gamma,z) = -1\) falls $\gamma$ sich um $z$ einmal im Uhrzeigersinn dreht
+    \item \(\operatorname{W}(\gamma,z) = 0\) falls $z$ ausserhalb der Menge liegt welche von $\gamma$ umschlossen wird 
+  \end{itemize}
+  Die Definition lässt sich für beliebige Elemente von $\mathbb{Z}$ erweitern.
+
+\end{subbox}
+
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.9\linewidth]{assets/4-2-2.png}
+  \caption{Windungszahl für verallgemeinerten Residuensatz}
+\end{figure}
+
+\begin{subbox}{Residuensatz (Verallgemeinerung)}
+  Sei \(U\subset\mathbb{C}\) eine offene wegzusammenhängende Menge, \(\gamma\subset U\) eine Kurve und \(z_1,\dots,z_N\in U\). Sei \(f\colon U\setminus\{z_1,\dots,z_N\}\to \mathbb{C}\) holomorph. Dann gilt: \begin{align*} \int_{\gamma} f(z)dz = 2\pi i \sum_{k=1}^N \operatorname{W}(\gamma ,z_k) \cdot \operatorname{Res}(f,z_k) \end{align*}
+\end{subbox}
+
+\subsubsection{Berechnung von Residuen}
+
+Für eine \textbf{hebbare Singularität} oder eine \textbf{Nullstelle} $z_0$ einer Funktion $f$ gilt in jedem Fall $c_n = 0$ für alle $n < 0$. Folglich gilt also auch $\Res(f, z_0) = c_{-1} = 0$.
+
+Für \textbf{Polstellen} gibt es einige Lemmas:
+
+\begin{subbox}{Residuen an Polstellen}
+  Sei \(z_0\) eine isolierte Singularität der Funktion \(f\). Die Stelle \(z_0\) ist ein Pol der Ordnung \(m\geq1\) genau dann, wenn es eine Funktion $\phi$, welche an der Stelle \(z_0\) holomorph ist, gibt, mit \begin{align*} f(z)=\frac{\phi(z)}{(z-z_0)^m} \end{align*} wobei \(\phi(z_0)\neq0\) gilt.
+\end{subbox}
+
+\begin{mainbox}{Berechnung des Residuums an Polstellen}
+  Falls \(z_0\) ein Pol der Ordnung \(m\) der Funktion \(f\) ist, gilt: \begin{align*} 
+     \operatorname{Res}(f,z_0)= \lim_{z \to z_0} \frac{\phi^{(m-1)}(z)}{(m-1)!} 
+  \end{align*}
+  beziehungsweise:
+  \begin{align*} 
+    \operatorname{Res}(f,z_0)= \frac{\phi^{(m-1)}(z_0)}{(m-1)!} 
+ \end{align*}
+ falls $\phi^{m-1}$ in $z_0$ wohldefiniert ist.
+\end{mainbox}
+
+Dies zeigen wir wie folgt: Nach Annahme schreben wir $f$ als:
+
+$$
+  f(z) = \frac{c_{-m}}{(z - z_0)^m} + \ldots + \frac{c_{-1}}{z - z_0} + c_0 + \ldots
+$$
+Folglich:
+$$
+  (z - z_0)^m f(z) = c_{-m} + \ldots + c_{-1} (z - z_0)^{m-1} + c_0 (z - z_0)^m + \ldots
+$$
+Nun gilt:
+$$
+\frac{d^{m-1}}{dz^{m-1}} (z - z_0)^m f(z) = (m - 1)! c_{-1} + (z - z_0) (c_0 + \ldots)
+$$
+
+Des Weiteren bemerken wir auch dass für $m = 1$ gilt dass $\Res(f, z_0) = \phi(z_0)$.
+
+Ausserdem folgt auch dass falls $f$ einen Pol $z_0$ der Ordnung $m \geq 1$ hat, dass dann $\lim_{z \to z_0} f(z) = \lim_{z \to z_0} \frac{\phi(z)}{(z - z_0)^m}$ divergiert (da $\phi(z) \neq 0$).
 
 \section{Fourier-Analysis}
 
