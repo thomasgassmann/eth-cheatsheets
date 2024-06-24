@@ -819,7 +819,7 @@ Für eine \textbf{hebbare Singularität} oder eine \textbf{Nullstelle} $z_0$ ein
 Für \textbf{Polstellen} gibt es einige Lemmas:
 
 \begin{subbox}{Residuen an Polstellen}
-  Sei \(z_0\) eine isolierte Singularität der Funktion \(f\). Die Stelle \(z_0\) ist ein Pol der Ordnung \(m\geq1\) genau dann, wenn es eine Funktion $\phi$, welche an der Stelle \(z_0\) holomorph ist, gibt, mit \begin{align*} f(z)=\frac{\phi(z)}{(z-z_0)^m} \end{align*} wobei \(\phi(z_0)\neq0\) gilt.
+  Sei \(z_0\) eine isolierte Singularität der Funktion \(f\). Die Stelle \(z_0\) ist ein Pol der Ordnung \(m\geq1\) genau dann, wenn es eine Funktion $\phi$, welche an der Stelle \(z_0\) holomorph ist, gibt, mit \begin{align*} f(z)=\frac{\phi(z)}{(z-z_0)^m} \end{align*} wobei \(\phi(z_0)\neq0\) gilt. Falls $\phi(z_0) = 0$ muss man andere Methoden verwenden, z.B. die Laurentreihe entwickeln.
 \end{subbox}
 
 \begin{mainbox}{Berechnung des Residuums an Polstellen}
@@ -850,6 +850,19 @@ $$
 Des Weiteren bemerken wir auch dass für $m = 1$ gilt dass $\Res(f, z_0) = \phi(z_0)$.
 
 Ausserdem folgt auch dass falls $f$ einen Pol $z_0$ der Ordnung $m \geq 1$ hat, dass dann $\lim_{z \to z_0} f(z) = \lim_{z \to z_0} \frac{\phi(z)}{(z - z_0)^m}$ divergiert (da $\phi(z) \neq 0$).
+
+\begin{subbox}{Residuum bei einfachen Polen}
+  Falls $z_0$ ein einfacher Pol der Funktion $f$ ist, gilt:
+  $$
+    \Res(f, z_0) = \lim_{z \to z_0} (z - z_0) f(z)
+  $$
+\end{subbox}
+
+\begin{subbox}{Nullstellen}
+  Sei $f: U \mapsto \C$ holomorph an der Stelle $z_0 \in U$. Die Funktion $f$ hat an der Stelle ein Nullstelle der Ordnung $m$ genau dann wenn es ein holomorphes $g: U \mapsto \C$ gibt mit $f(z) = (z - z_0)^m g(z)$ und $g(z_0) \neq 0$. 
+\end{subbox}
+
+Sind also $p,q$ holomorph an $z_0$ mit $p(z_0) \neq 0$ wobei $z_0$ eine Nullstelle der Ordnung $m$ für $q$ ist, dann gilt dass $z_0$ ein Pol der Ordnung $m$ für $\frac{p(z)}{q(z)}$ ist.
 
 \section{Fourier-Analysis}
 
@@ -914,7 +927,7 @@ Ausserdem folgt auch dass falls $f$ einen Pol $z_0$ der Ordnung $m \geq 1$ hat, 
   \item $\cosh^2(\alpha) - \sinh^2(\alpha) = 1$
   \item $\sinh(x) = \frac{e^x - e^{-x}}{2}$ und $\cosh(x) = \frac{e^x + e^{-x}}{2}$
   \item $\sin(ix) = i \sinh(x)$
-  \item $\cos(ix) = i \cosh(x)$
+  \item $\cos(ix) = \cosh(x)$
  \end{itemize}
 
 \subsubsection{Diverse}
