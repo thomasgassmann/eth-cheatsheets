@@ -521,7 +521,7 @@ Für die Umkehrung verwenden wir den nachfolgenden Satz:
       \begin{align*} \int_{\gamma * \delta} f(z) dz = \int_{\gamma} f(z) dz + \int_{\delta} f(z) dz\,. \end{align*}
     }
     \item{
-      \textbf{Unabhängigkeit der Parametrisierung}: Sei \(\sigma \colon [0,1] \to [0,1]\) eine differenzierbare Funktion mit \(\sigma(0) =0, \sigma(1)=1\) und sei \(\delta\colon[0,1]\to U\) durch \(\delta (t) := \gamma (\sigma (t))\) definiert. Anders gesagt, ist \(\delta\) eine andere Parametrisierung des Bildes von \(\gamma\). Dann gilt:
+      \textbf{Unabhängigkeit der Parameterisierung}: Sei \(\sigma \colon [0,1] \to [0,1]\) eine differenzierbare Funktion mit \(\sigma(0) =0, \sigma(1)=1\) und sei \(\delta\colon[0,1]\to U\) durch \(\delta (t) := \gamma (\sigma (t))\) definiert. Anders gesagt, ist \(\delta\) eine andere Parameterisierung des Bildes von \(\gamma\). Dann gilt:
       \begin{align*} \int_{\delta} f(z)dz=\int_{\gamma} f(z) dz\,. \end{align*}
     }
   \end{enumerate}
@@ -798,8 +798,7 @@ Dies lässt sich verallgemeinern für den Fall dass $\gamma$ kein einfacher oder
     \item \(\operatorname{W}(\gamma,z) = -1\) falls $\gamma$ sich um $z$ einmal im Uhrzeigersinn dreht
     \item \(\operatorname{W}(\gamma,z) = 0\) falls $z$ ausserhalb der Menge liegt welche von $\gamma$ umschlossen wird 
   \end{itemize}
-  Die Definition lässt sich für beliebige Elemente von $\mathbb{Z}$ erweitern.
-
+  Die Windungszahl kann auch z.B. $0.5$ sein falls wir den Kreis nur zur Hälfte "umlaufen".
 \end{subbox}
 
 \begin{figure}[H]
@@ -884,6 +883,87 @@ Daraus folgern wir z.B. dass $f(z) := \sin^2(z) + \cos^2(z) - 1 \equiv 0$ für j
 
 \subsection{Anwendungen des Residuensatzes auf reelle Integrale}
 
+\begin{subbox}{Cauchy-Hauptwert}
+  Der Limes \begin{align*} \lim_{R\to\infty}\int_{-R}^Rf(z)\,dz \end{align*} wird als Cauchy-Hauptwert (principal value) des Integrals \(\int_{-\infty}^\infty f(z)\,dz\) bezeichnet \begin{align*} P.V.\int_{-\infty}^\infty f(z)\,dz=\lim_{R\to\infty}\int_{-R}^Rf(z)\,dz \end{align*}
+\end{subbox}
+
+\begin{subbox}{Uneigentliches Integral}
+  Die Definition vom uneigentlichen Integral lautet \begin{align*} \int_{-\infty}^\infty f(x)\,dx=\lim_{R\to\infty}\int_{-R}^0f(x)\,dx+\lim_{R\to\infty}\int_{0}^Rf(x)\,dx \end{align*} falls beide Integrale an der rechten Seite existieren. Falls beide Integrale auf der rechten Seite existieren, existiert auch \(\lim_{R\to\infty}\int_{-R}^Rf(x)\,dx\). Die Umkehrung dieser Aussage ist aber nicht wahr, wie das Beispiel von \(f(x)=x\) zeigt.
+\end{subbox}
+
+Wir versuchen nun Integrale der Form $\int_{-\infty}^\infty f(x) \dx$ mit dem Residuensatz zu berechnen.
+
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.5\linewidth]{assets/4-4-1.png}
+  \caption{Kurve zur Berechnung des uneigentlichen Integrals}
+\end{figure}
+
+Wir betrachten den Pfad $\gamma_R$, d.h. den Halbkreis mit Radius $R$ im ersten und zweiten Quadranten, im Gegenuhrzeigersinn orientiert.
+
+Die Kurve \(\gamma_R\ast[-R,R]\) ist eine geschlossene Kurve und wir können deshalb den Residuensatz anwenden, um das Integral zu berechnen. Daraus folgt, dass 
+\begin{align*} \int_{\gamma_R\ast[-R,R]} f(x) dx=2\pi i\sum_{j=1}^{n_R}\operatorname{Res}(f,z_j)\,, \end{align*} 
+wobei \(z_1,\dots, z_{n_R}\) die Pole innerhalb der Kurve \(\gamma_R\ast[-R,R]\) sind.
+
+
+Aus (KI3) auf der linken Seite angewendet erhalten wir \begin{align*} \int_{\gamma_R} f(x) dx+\int_{-R}^{R} f(x) dx=2\pi i\sum_{j=1}^{n_R}\operatorname{Res}(f,z_j) \end{align*} Wir nehmen jetzt den Limes für \(R \to \infty\). Falls \begin{align*} \lim_{R\to \infty} \int_{\gamma_R} f(z)dz = 0  \end{align*} erhalten wir \begin{align*} \lim_{R\to\infty}\int_{-R}^Rf(z)\,dz=2\pi i\sum_{j=1}^{n}\operatorname{Res}(f,z_j) \end{align*} wobei die Summe jetzt über alle Pole \(z_1,\dots, z_n\) mit \(\Im(z_j)>0\), \(j=1,\dots,n\) geht.
+
+Nachfolgend geben wir jetzt eine Bedingung dafür dass das obige Integral über $\gamma_R$ verschwindet.
+
+\begin{subbox}{Uneigentliches Integral mit Residuensatz}
+  Sei \(\gamma_R(t):=Re^{ i t}\) für \(t\in[0,\pi]\). Seien \(p\) und \(q\) Polynome mit den folgenden Eigenschaften:
+  \begin{itemize}
+    \item \(\deg(p)\leq \deg(q)-2\)
+    \item \(q(x)\) besitzt keine Nullstellen auf der \(x\)-Achse
+  \end{itemize}
+
+
+Sei: \begin{align*} f(z) := \frac{p(z)}{q(z)}h(z)\,. \end{align*} wobei \(|h(z)|\) auf der Menge \(\{z\in\mathbb{C}:\,\Im(z)\geq0\}\) beschränkt ist. Dann gilt: \begin{align*} \lim_{R\to \infty} \int_{\gamma_R} f(z)\,dz = 0 \end{align*}
+
+Somit gilt auch:
+
+\begin{align*} P.V.\int_{-\infty}^\infty f(x) dx = 2 \pi i \sum_{z_j}\operatorname{Res} \left( \frac{p(z)}{q(z)}h(z),z_j \right) \end{align*} wobei \(z_j\) die Pole sind, welche in der Menge \(\{z\in\mathbb{C}:\,\Im(z)>0\}\) enthalten sind.
+
+\end{subbox}
+
+Bestimmen wir z.B. folgendes Integral: \begin{align*} \int_{-\infty}^{\infty} \frac{1}{(1+x^2)^2}dx\end{align*}
+
+In diesem Fall sind \(p(z)=1\), \(q(z) = (1+z^2)^2\) mit \(q(x) > 0\) für jedes \(x\in\mathbb{R}\), und \(h(z)=1\). Hier ist die Funktion \(f(z)\) gerade und dann ist \begin{align*} \int_{-\infty}^\infty \frac{1}{(1+x^2)^2}\,dx =2 \pi i \sum_{z_j}\operatorname{Res} \left(\frac{1}{(1+z^2)^2},z_j \right) \end{align*}
+
+Die Pole vom Integrand sind deshalb die Nullstellen von \(q\), d.h. \(z_{\pm}= \pm i\) und \(z_-= i\) ist der einzige Pol, der innerhalb von \(\gamma_R\ast[-R,R]\) mit \(\gamma_R(t):=Re^{ i t}\), für \(t\in[0,\pi]\) enthalten ist. Ausserdem ist \(z_-= i\) ein Pol der Ordnung 2. Um \(\operatorname{Res} \left(\frac{1}{(1+z^2)^2}, i \right)\) zu berechnen schreiben wir \begin{align*} f(z)=\frac{1}{(1+z^2)^2}=\frac{\phi(z)}{(z- i)^2}\,, \end{align*} wobei \(\phi(z)=\frac{1}{(z+ i)^2}\), mit \(\phi\) holomorph um \(z= i\) und \(\phi( i)\neq0\). Nun gilt: \begin{align*} \operatorname{Res}(f, i) = \frac{\phi'( i)}{1!} = -\frac{2}{( i + i)^3} = \frac{-2}{-8 i} = \frac{- i}{4}\,. \end{align*} Also: \begin{align*} \int_{-\infty}^\infty \frac{1}{(1+x^2)^2}\,dx =2\pi i\operatorname{Res} \left(\frac{1}{(1+x^2)^2}, i \right)= 2\pi i\frac{- i}{4}=\frac{\pi}{2}\,□ \end{align*}
+
+Falls $q$ nun aber eine Nullstelle auf der $x$-Achse hat, müssen wir anders vorgehen.
+
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.75\linewidth]{assets/4-4-2.png}
+  \caption{Parameterisierung falls $q$ Nullstellen auf der $x$-Achse hat}
+\end{figure}
+
+Sei $V$ das obige Gebiet wobei wir mit $\partial V$ den Rand bezeichnen. Da $f$ auf $V$ holomorph ist gilt wegen dem Satz von Cauchy:
+
+\begin{align*} \int_{\partial V}f(z)\,dz=0 \end{align*} 
+
+Nun gilt aber auch:
+\begin{align*} \int_{\partial V}f(z)\,dz=\int_{\gamma_R} f(z)\,dz+\int_{-R}^{-\epsilon}f(z)\,dz+\int_{-\gamma_\epsilon} f(z)\,dz+\int_\epsilon ^Rf(z)\,dz \end{align*}
+
+Schlussendlich:
+\begin{align*} \int_{-\infty}^\infty f(z)dz= -\lim_{R\to\infty}\int_{\gamma_R}f(z)\,dz -\lim_{\epsilon\to0}\int_{-\gamma_\epsilon} f(z)dz  \end{align*}
+
+Beim Integral über die Kurve $-\gamma_{\epsilon}$ ist zu beachten dass die Windungszahl $-0.5$ ist.
+
+\begin{subbox}{Residuensatz mit Halbkreis}
+  Sei \(f\) eine holomorphe Funktion auf \(B(x_0,R)\setminus\{x_0\}\), wobei \(x_0\in\mathbb{R}\) und \(R>0\). Nehmen wir an, dass \(x_0\) ein einfacher Pol von \(f\) ist. Sei \(\gamma_\epsilon\) ein im Gegenuhrzeigersinn durchlaufenen Halbkreis um \(x_0\) mit \(\Im(\gamma_\epsilon)>0\) und \(\epsilon< R\). Dann:
+  \begin{align*} \lim_{\epsilon \to 0} \int_{\gamma_{\epsilon}} f(z) dz = \pi i \operatorname{Res}(f,x_0) \end{align*}
+
+\end{subbox}
+
+\begin{figure}[H]
+  \centering 
+  \includegraphics[width=0.5\linewidth]{assets/4-4-3.png}
+  \caption{Residuensatz mit Halbkreis}
+\end{figure}
+
 
 
 \section{Fourier-Analysis}
@@ -903,6 +983,7 @@ Daraus folgern wir z.B. dass $f(z) := \sin^2(z) + \cos^2(z) - 1 \equiv 0$ für j
   \item $|\langle x,y \rangle| \leq ||x|| \cdot ||y||$ für $\forall x,y, \in \mathbb{R}^n$
   \item $\sqrt[n]{x_1 x_2 \cdots x_n} \leq \frac{x_1 + x_2 + \cdots + x_n}{n}$
   \item $\left| \int_A f(x) \mathop{dx}\right| \le \int_A \left|f(x)\right| \mathop{dx}$
+  \item $\sin(t) \geq \frac{2t}{\pi}$ für jedes $t \in [0, \pi/2]$
 \end{itemize}
 
 \subsection{Trigonometrie}
