@@ -964,9 +964,88 @@ Beim Integral über die Kurve $-\gamma_{\epsilon}$ ist zu beachten dass die Wind
   \caption{Residuensatz mit Halbkreis}
 \end{figure}
 
-
-
 \section{Fourier-Analysis}
+
+\subsection{Fourier-Reihen}
+
+\begin{subbox}{Periode und Fundamentalperiode}
+  Sei \(f\colon\mathbb{R}\to\mathbb{C}\). Falls es \(p\in\mathbb{R}\) gibt, so dass \begin{align*}f(t+p)=f(t)\text{ für jedes }t\in\mathbb{R}\end{align*} heisst \(f\) periodisch und \(p\) heisst die Periode von \(f\). Die Frequenz von \(f\) ist $f=\frac{1}{p}$. Die kleinste Periode (falls sie existiert) heisst die Fundamentalperiode.
+\end{subbox}
+
+$f(t) = c$ mit $c \in \C$ ist auch periodisch, aber hat keine Fundamentalperiode.
+
+Die Summe periodischer Funktionen ist immer dann periodisch, wenn die Perioden aller Summanden ein gemeinsames Vielfaches haben. In diesem Fall ist die Periode das (kleinste) gemeinsame Vielfache. Gleichermassen für das Produkt aus periodischen Funktionen.
+
+\begin{subbox}{Trigonometrisches Polynom}
+  Ein trigonometrisches Polynom N-ten Grades ist eine endliche Linearkombination
+   \begin{align*} \frac{a_0}{2}+\sum_{n=1}^N\left(a_n\cos\left(\frac{n\pi}{L}t\right)+b_n\sin\left(\frac{n\pi}{L}t\right)\right) \end{align*}
+   von Funktionen in der Menge
+    \begin{align*} \left\{\sin\left(\frac{n\pi}{L}t\right),\cos\left(\frac{n\pi}{L}t\right): n\in\mathbb{Z}, n\geq0\right\} \end{align*}
+    wobei \(a_N\neq0\) oder \(b_N\neq0\), oder, äquivalent, eine endliche Linearkombination \begin{align*} \sum_{n=-N}^Nc_ne^{ i\frac{n\pi}{L}t} \end{align*}
+     von Funktionen in der Menge \begin{align*} \left\{e^{ i\frac{n\pi}{L}t}:\,n\in\mathbb{Z}\right\} \end{align*} wobei \(c_N\neq0\). Eine formelle Reihe \begin{align*} \frac{a_0}{2}+\sum_{n=1}^\infty\left(a_n\cos\left(\frac{n\pi}{L}t\right)+b_n\sin\left(\frac{n\pi}{L}t\right)\right) \end{align*} oder \begin{align*} \sum_{n=-\infty}^\infty c_ne^{ i\frac{n\pi}{L}t} \end{align*} heisst eine trigonometrische Reihe.
+ 
+\end{subbox}
+
+\begin{subbox}{Orthonormalitätsbeziehungen für $e^{i\frac{n\pi}{L}t}$}
+  Seien \(n,m\in\mathbb{Z}\). Dann gilt: \begin{align*} \frac{1}{2L}\int_{-L}^L e^{ i \frac{n\pi}{L}t}e^{- i \frac{m\pi}{L}t}\,dt =\begin{cases} 1&n=m\\ 0&n\neq m \end{cases} \end{align*}
+\end{subbox}
+
+\begin{subbox}{Orthonormalitätsbez. für $\cos(\frac{n\pi}{L}t)$ und $\sin(\frac{n\pi}{L}t)$}
+  Seien \(n,m\in\mathbb{N}\cup\{0\}\). Dann gilt:
+\begin{align*}\int_{-L}^L\cos\left(\frac{n\pi}{L}t\right)\cos\left(\frac{m\pi}{L}t\right)\,dt=\begin{cases}0&n\neq m\\L&n=m\neq0\\2L&n=m=0 \end{cases} \end{align*}
+\begin{align*} \int_{-L}^L\sin\left(\frac{n\pi}{L}t\right)\sin\left(\frac{m\pi}{L}t\right)\,dt=\begin{cases}0&n\neq m \lor n = m = 0\\L&n=m\neq0 \end{cases} \end{align*}
+\begin{align*} \int_{-L}^L\cos\left(\frac{n\pi}{L}t\right)\sin\left(\frac{m\pi}{L}t\right)\,dt=0, \text{ für jedes }n,m  \end{align*}
+
+\end{subbox}
+
+\begin{mainbox}{Fourierreihe}
+  Sei \(f\) eine \(2L\)-Periodische Funktion, die durch eine trigonometrische Reihe \begin{align*} f(t)\sim \frac{a_0}{2}+\sum_{n=1}^\infty\left(a_n\cos\left(\frac{n\pi}{L}t\right)+b_n\sin\left(\frac{n\pi}{L}t\right)\right)  \end{align*} 
+  oder 
+  \begin{align*} f(t)\sim \sum_{n=-\infty}^\infty c_ne^{ i\frac{n\pi}{L}t} \end{align*} dargestellt werden kann. Dann gilt 
+  \begin{align*} a_m=\frac{1}{L}\int_{-L}^Lf(t)\cos\left(\frac{m\pi}{L}t\right)\,dt \text{ falls } m\geq 0  \end{align*} \begin{align*} b_m=\frac{1}{L}\int_{-L}^Lf(t)\sin\left(\frac{m\pi}{L}t\right)\,dt \text{ falls } m>0  \end{align*} und \begin{align*} c_m=\frac{1}{2L}\int_{-L}^Lf(t)e^{- i \frac{m\pi}{L} t}\,dt \text{ falls } m\in\mathbb{Z}  \end{align*}
+\end{mainbox}
+
+Ist $f$ reellwertig, so sind auch alle $a_k$ und alle $b_k$ reell; ist $f$ gerade, so treten nur Cosinusterme auf, und ist $f$ ungerade, so treten nur Sinusterme auf.
+
+$\frac{a_0}{2}$ ist der Mittelwert von $f$ auf einer Periode. $a_1\cos\left(\frac{\pi}{L}t\right)+b_1\sin\left(\frac{\pi}{L}t\right)$ ist die 1. Harmonische oder Grundschwingung. $a_n\cos\left(\frac{n\pi}{L}t\right)+b_n\sin\left(\frac{n\pi}{L}t\right)$ ist die $n$-te Harmonische oder $n-1$-te Oberschwingung.
+
+\begin{mainbox}{Beziehungen zwischen Koeffizienten}
+  Für die Koeffizienten der Fourierreihe gilt:
+  \begin{align*} 
+    c_n&=\frac{1}{2}(a_n- i b_n) & c_{-n} =\frac{1}{2}(a_n+ i b_n)\\ 
+    a_n&=c_n+c_{-n} & b_n = i(c_n-c_{-n})  \end{align*}
+\end{mainbox}
+
+\begin{subbox}{Fourierreihe ungerader und gerader Funktionen}
+  Sei \(f\) eine \(2L\)-periodische Funktion mit Fourier-Reihen Entwicklung.
+  \begin{itemize}
+    \item{
+      Falls \(f\) gerade ist, sind alle \(b_n=0\) und \begin{align*} a_n&=\frac{2}{L}\int_0^Lf(t)\cos\left(\frac{n\pi}{L}t\right)\,dt\,,\text{ für }n\geq0 \end{align*}
+    }
+    \item{
+      Falls \(f\) ungerade ist, sind alle \(a_n=0\) und \begin{align*} b_n=\frac{2}{L}\int_0^Lf(t)\sin\left(\frac{n\pi}{L}t\right)\,dt\,,\text{ für }n\geq1 \end{align*}
+    }
+  \end{itemize}
+\end{subbox}
+
+\begin{subbox}{Konvergenz von Fourierreihen}
+  Sei \(f\) eine \(2L\)-periodische Funktion auf \([-L,L]\), die stückweise stetig ist und die eine linke und rechte Ableitung an jedem Punkt in \([-L,L]\) besitzt. Dann ist die Fourier-Reihen Entwicklung von \(f\) auf \([-L,L]\) konvergent. An jedem Punkt \(t\in[-L,L]\), wo \(f\) stetig ist, ist die Summe der Fourier-Reihe gleich \(f(t)\):
+   \begin{align*} \frac{a_0}{2}+\sum_{k=1}^\infty\left(a_k\cos\left(\frac{n\pi}{L}t\right)+b_k\sin\left(\frac{n\pi}{L}t\right)\right)=f(t) \end{align*}
+    und an einer Sprungstelle \(t_0\in[-L,L]\) gilt:
+     \begin{align*} \frac{a_0}{2}+\sum_{k=1}^\infty\left(a_k\cos\left(\frac{n\pi}{L}t_0\right)+b_k\sin\left(\frac{n\pi}{L}t_0\right)\right)=\\\frac12\left(\lim_{t\to t_0^-}f(t)+\lim_{t\to t_0^+}f(t)\right) \end{align*}
+\end{subbox}
+
+\begin{subbox}{Eindeutigkeit der Fourierreihe}
+  Sei \(f\) eine \(2\pi\)-periodische Funktion auf \([-L,L]\), die stückweise stetig ist und die die linke und rechte Ableitung an jedem Punkt in \([-L,L]\) hat. Dann besitzt \(F\) genau eine Fourier-Reihe, durch welche sie für alle \(f\in\mathbb{R}\) dargestellt wird.
+\end{subbox}
+
+Als Gibbs'sches Phänomen bezeichnet man das Verhalten, dass bei abgebrochenen Fourierreihen und bei der Fourier-Transformation von stückweise stetigen, differenzierbaren Funktionen in der Umgebung von Sprungstellen sogenannte Überschwingungen auftreten. Diese Überschwingungen verschwinden auch dann nicht, wenn die endliche Anzahl von Termen zur Approximierung bzw. die Bandbreite auf beliebig hohe, aber endliche Werte erhöht wird, sondern weisen in der maximalen Auslenkung eine konstante, relative Auslenkung von ca. 9\% auf.
+
+Wir betonen, dass das Überschwingen nicht nach null geht, aber die Grenze der Folge von Teilsummen (das ist die Fourier-Reihe) kein Überschwingen hat. Darin besteht kein Widerspruch, da sich der Punkt, an dem das Überschwingen auftritt, in Richtung des Sprunges bewegt. Wir haben punktweise Konvergenz, aber keine gleichmässige Konvergenz.
+
+\subsection{Fourier-Transformation}
+
+
 
 \section{Laplace-Transformation}
 
@@ -1014,6 +1093,9 @@ Beim Integral über die Kurve $-\gamma_{\epsilon}$ ist zu beachten dass die Wind
  \item $\sin(\alpha) \sin(\beta) = -\frac{\cos(\alpha + \beta) - \cos(\alpha - \beta)}{2}$
  \item $\cos(\alpha) \cos(\beta) =  \frac{\cos(\alpha + \beta) + \cos(\alpha - \beta)}{2}$
  \item $\sin(\alpha) \cos(\beta) =  \frac{\sin(\alpha + \beta) + \sin(\alpha - \beta)}{2}$
+ \item $\cos(nt)\cos(mt) =\frac12 \cos((n+m)t)+\frac12\cos((n-m)t)$
+ \item $\sin(nt) \sin(mt) =\frac12\cos((n-m)t)-\frac12\cos((n+m)t)$
+ \item $\sin(nt)\cos(mt) =\frac12\sin((n+m)t)+\frac12\sin((n-m)t)$
 \end{itemize}
 
 \subsubsection{Potenzen}
@@ -1099,6 +1181,16 @@ $$\int_0^\infty e^{-x}x^{s-1} \dx = \begin{cases}
 $$\int_0^\infty \sin(x^2) \dx = \sqrt{\frac{\pi}{8}}$$
 
 \subsection{Gerade und ungerade Funktionen}
+
+Eine Funktion $f$ heisst:
+
+\begin{itemize}
+  \item gerade falls $f(t) = f(-t)$
+  \item ungerade falls $f(t) = -f(-t)$
+\end{itemize}
+
+für jedes $t$ im Definitionsbereich.
+
 \begin{itemize}
   \item Die Verknüpfung von ungeraden Funktionen ist ungerade. 
   \item Sei $g$ gerade und $f$ beliebig. $f \circ g$ ist gerade.
