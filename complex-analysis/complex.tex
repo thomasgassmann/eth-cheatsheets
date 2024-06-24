@@ -1045,7 +1045,53 @@ Wir betonen, dass das Überschwingen nicht nach null geht, aber die Grenze der F
 
 \subsection{Fourier-Transformation}
 
+Falls \(f\) eine \(2L\)-periodische Funktion ist, haben wir im letzen Kapitel ihre Fourier-Reihe studiert. Man kann die Fourier-Koeffizienten von \(f\) als eine Funktion \begin{align*} \begin{aligned} \hat f\colon\mathbb{Z}&\longrightarrow~~~\mathbb{C}\\ n&\mapsto \hat f( n ):=\langle f,\mathbf{e}_{n,L}\rangle=c_n \end{aligned} \end{align*} auffassen. Die Funktion \(\hat f\) wird die Fourier-Transformation von \(f\) genannt. Wir betrachten jetzt Funktionen, die nicht periodisch sind und nicht periodisch fortgesetztz werden können.
 
+\begin{subbox}{Absolute Integrierbarkeit}
+  Die Funktion \(f\colon\mathbb{R}\to\mathbb{C}\) heisst absolut integrierbar, falls \begin{align*} \int_{-\infty}^\infty |f(t)|\,dt<\infty \end{align*}
+\end{subbox}
+
+\begin{subbox}{Satz von Dirichlet für die Fourier-Transformation}
+  Sei \(f\colon\mathbb{R}\to\mathbb{C}\) eine stückweis stetig absolut integrierbar Funktion, die eine linke und rechte Ableitung an jedem Punkt hat. An jedem Punkt \(t\), wo \(f\) stetig ist, gilt \begin{align*} f(t)=\frac{1}{\sqrt{2\pi}}\int_{-\infty }^\infty \left(\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(v )e^{- i \omega v }\,dv \right)e^{ i \omega t}\,d\omega \end{align*} Falls \(f\) an der Stelle \(t_0\in\mathbb{R}\) nicht stetig ist, gilt 
+  \begin{align*} 
+    \frac{1}{\sqrt{2\pi}}\int_{-\infty }^\infty \left(\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(v )e^{- i \omega v } dv \right)e^{ i \omega t_0} d\omega =\\
+    \frac12\left(\lim_{t\to t_0^-}f(t)+\lim_{t\to t_0^+}f(t)\right) \end{align*}
+\end{subbox}
+
+\begin{mainbox}{Fourier-Transformation}
+  Sei \(f\colon\mathbb{R}\to\mathbb{C}\) eine absolut integrierbare Funktion. Die Fourier-Tranformation \(\hat f\colon\mathbb{R}\to\mathbb{C}\) ist \begin{align*} \hat f(\omega)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(t)e^{- i\omega t}\,dt \end{align*} Eine alternative Schreibweise von \(\hat f\) ist \(\mathcal F(f)\) und manchmal spricht man auch von der Spektralfunktion.
+\end{mainbox}
+
+\begin{mainbox}{Inverse Fourier-Transformation}
+  Sei \(f\colon\mathbb{R}\to\mathbb{C}\) eine absolut integrierbare Funktion, deren Fourier-Transformation \(\hat f\) auch absolut integrierbar ist. Die inverse Fourier-Transformation von \(\hat f\) ist \begin{align*} \mathcal F^{-1}(\hat f)(t):=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(\omega)e^{ i\omega t}\,d\omega \end{align*}
+\end{mainbox}
+
+\begin{mainbox}{Eigenschaften der Fourier-Tranformation}
+  Seien \(f\colon\mathbb{R}\to\mathbb{C}\) und \(g\colon\mathbb{R}\to\mathbb{C}\) absolut intergrierbar (und wenn nötig seien auch \(\hat{f}\), \(f'\), \(f^{( n )}\), \(\dots\) absolut intergrierbar). Dann gilt:
+  \begin{itemize}
+    \item{
+      \textbf{Linearität}: Für jedes \(\alpha,\beta \in \mathbb{C}\) gilt: \begin{align*} \widehat{(\alpha f + \beta g)}(\omega ) = \alpha \hat{f}(\omega ) + \beta \hat{g}(\omega ) \end{align*}
+    }
+    \item{
+      \textbf{Verschiebung in der \(t\)-Variabel}: Sei \(a \in \mathbb{R}\) und sei \(T_af(t):=f(t-a)\). Dann gilt: \begin{align*} \widehat{T_af}(\omega ) = e^{- i \omega a} \hat{f}(\omega )  \end{align*}
+    }
+    \item{
+      \textbf{Verschiebung in der \(\omega\)-Variabel}: Sei \(a \in \mathbb{R}\). Dann gilt: \begin{align*} \widehat{e^{ i at} f(t)}(\omega ) = \hat{f}(\omega -a) \end{align*}
+    }
+    \item{
+      \textbf{Streckung}: Sei \(a\in\mathbb{R}\) und sei \(S_af(t):=f(at)\). Dann gilt: \begin{align*} \widehat{S_af}(\omega ) = \frac{1}{|a|} \hat{f}\left(\frac{\omega }{a}\right) \end{align*}
+    }
+    \item{
+      Es gilt \begin{align*} \hat{\hat{f}}(t) = f(-t) \end{align*}
+    }
+    \item{
+      \textbf{Fourier-Transformation der Ableitung}: Für \(n\in\mathbb{N}\) gilt: \begin{align*} \widehat{f^{( n )}}(\omega ) = ( i \omega )^n \hat{f}(\omega ) \end{align*}
+    }
+    \item{
+      \textbf{Ableitung der Fourier-Transformation}: Sei \(n\in\mathbb{N}\). Es gilt: \begin{align*} \widehat{t^n f(t)}(\omega ) = i^n \frac{d^n}{d\omega ^n} \hat{f}(\omega ) \end{align*}
+    }
+  \end{itemize}
+\end{mainbox}
 
 \section{Laplace-Transformation}
 
