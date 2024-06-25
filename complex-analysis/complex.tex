@@ -357,6 +357,18 @@ Bei Polynomen mit reellen Nullstellen treten die Nullstellen als komplex-konjugi
 
 Bei einem Polynom über $\mathbb{C}$ mit ungeradem Grad gibt es mindestens eine reelle Nullstelle.
 
+\subsection{Gamma-Funktion}
+Die Gamma-Funktion wird gebraucht, um die Funktion $n \mapsto (n-1)!$ zu interpolieren. Für $s > 0$ definieren wir: $$\Gamma(s) := \int_0^\infty e^{-x}x^{s-1}\dx = (s-1)!$$
+Die Gamma-Funktion konvergiert für alle $s > 0$ und hat folgende weiter Eigenschaften:
+\begin{enumerate}
+  \item $\Gamma(1) = 1$
+  \item $\Gamma(\frac{1}{2}) = \sqrt{\pi}$
+  \item $\Gamma(s + 1) = s \Gamma(s)$
+  \item $\Gamma$ ist logarithmisch konvex, d.h.: $$\Gamma(\lambda x + (2 - \lambda)y) \leq \Gamma(x)^\lambda \Gamma(y)^{1 - \lambda}$$ für alle $x, y > 0$ und $0 \leq \lambda \leq 1$
+\end{enumerate}
+Die Gamma-Funktion ist die einzige Funktion $]0, \infty[ \to ]0, \infty[$, die $(1), (2)$ und $(3)$ erfüllt. Zudem gilt: $$\Gamma(x) = \limn \frac{n!n^x}{x(x+1)...(x+n)} \ \ \ \forall x > 0$$
+
+
 \section{Komplexwertige Funktionen}
 
 \subsection{Ableitung komplexwertiger Funktionen}
@@ -1152,6 +1164,52 @@ Daraus folgt auch dass:
 \end{subbox}
 
 \section{Laplace-Transformation}
+
+\subsection{Grundbegriffe}
+
+Die Laplace-Transformation ändert den Begriff der Fourier-Transformation ein wenig. Wir betrachten Funktionen \(f\colon\mathbb{R}\to\mathbb{C}\), sodass \(f(t)=0\) für jedes \(t<0\), und für \(t>0\) ersetzen wir die Funktion \(f(t)\) in der Fourier-Transformation durch die Funtkion \(e^{-ct}f(t)\), wobei \(c>0\).
+
+\begin{subbox}{Originalraum}
+  Sei \(\mathcal{E}\) der Raum der Funtkionen \(f\colon\mathbb{R}\to\mathbb{C}\), die die folgenden drei Eigenschaften erfüllen:
+  \begin{itemize}
+    \item \(f(t)=0\) für jedes \(t<0\)
+    \item es gibt ein \(\sigma\in\mathbb{R}\) und ein \(M>0\) mit \begin{equation*} |f(t)|\leq Me^{\sigma t} \end{equation*} für alle \(t>0\)
+    \item{
+      \(f\) ist stückweise stetig und die Grenzwerte \begin{equation*} \lim_{t\to t_0^-}f(t)\text{ und }\lim_{t\to t_0^+}f(t) \end{equation*} existieren an jeder Sprungstelle \(t_0\in\mathbb{R}_{>0}\) und insbesondere existiert \begin{equation*} \lim_{t\to 0^+}f(t) \end{equation*}
+    }
+  \end{itemize}
+
+Dann ist Die Laplace-Transformation \(\mathcal{L}[f]\) für jede Funktion \(f\in \mathcal{E}\) auf der Halbebene \(\{s\in\mathbb{C}:\,\Re (s)>\sigma\}\) wohldefiniert und eine komplexe Analytische Funktion der Variable \(s\). Ausserdem gilt \begin{equation*} \lim_{\Re (s)\to\infty}\mathcal{L}[f](s)=0 \end{equation*}
+\end{subbox}
+
+Das Produkt zweier Originalfunktionen ist wieder eine Originalfunktion.
+
+Die Funktion \(f(t)=H(t)\,e^{t^2}\) ist bspw. keine Originalfuntkion, weil es kein \(\sigma\) gibt, sodass \(e^{t^2} < e^{\sigma t}\) für jedes \(t > 0\). Die Idee ist, dass eine Originalfunktion wachsen kann, aber nicht schneller als ein Exponentialfuntion mit linearem Exponent.
+
+Eine Funktion $f \in \mathcal{E}$ heisst Originalfunktion und lebt im Zeitbereich. Die Laplace-Tranformation $\mathcal{L}[f]$ ist eine Bildfunktion und lebt im Bildbereich.
+
+\begin{mainbox}{Laplace-Transformation}
+  Sei $s \in \C$. Die Laplace-Transformation der Funktion $f: \R \mapsto \C$ ist:
+  \begin{equation*}
+    \mathcal{L}[f](s):=\int_0^\infty e^{-st}f(t)\,dt
+\end{equation*}
+\end{mainbox}
+
+Der Unterschied zwischen der Laplace-Transformation und der Fourier-Transformation ist, dass man für die Laplace-Transformation auch wachsende Funktionen betrachten kann. Zudem bringen die Werte von $f$ für negative Werte von $t$ keine Kontribution.
+
+\begin{subbox}{Multiplikation mit Heaviside-Funktion}
+  Falls \(f(t)\not\equiv0\) für \(t<0\), können wir immer die Funktion zwingen die Bedingung zu erfüllen. Wir können dazu die Funktion \(f\) mit der Heaviside Funktion \begin{equation*} H(t):=\begin{cases} 0 & t < 0 \\ 1 & t > 0 \end{cases} \end{equation*} multiplizieren.
+\end{subbox}
+
+Die Charakteristische Funktion eines Intervalls $(a,b)$ schreibt sich z.B. als \(\chi_{(a,b)}(t)=H(t-a)-H(t-b)\).
+
+
+\begin{subbox}{Wachstumskoeffizient}
+  Falls \(\sigma'>\sigma\), gilt auch \begin{equation*} e^{\sigma t} < e^{\sigma' t} \end{equation*} so dass aus \begin{equation*} |f(t)| < C e^{\sigma t} < Ce^{\sigma' t} \end{equation*} Der kleinste \(\sigma_f \), so dass \(|f(t)| < Ce^{\sigma t}\) für jedes \(\sigma_f < \sigma\) heisst Wachstumkoeffizient.
+
+\end{subbox}
+
+\subsection{Rechenregeln und verallgemeinerte Funktionen}
 
 \section{Tabellen und Listen}
 
