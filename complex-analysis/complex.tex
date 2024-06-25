@@ -1240,6 +1240,14 @@ Die Charakteristische Funktion eines Intervalls $(a,b)$ schreibt sich z.B. als \
   \end{itemize}
 \end{mainbox}
 
+Ändert sich bei Anwendung dieser Regeln der Definitionsbereich (z.B. bei Verschiebung der $t$-Variable), so muss man mit der Heaviside-Funktion multiplizieren, um sicherzustellen dass die Funktion für $t < 0$ verschwindet.
+
+So gilt z.B.:
+
+$$
+e^{-t} \mathcal{L}[H(t) e^{-\alpha t}](s) = \mathcal{L}[H(t - 1) e^{-\alpha(t-1)}](s)
+$$
+
 \begin{mainbox}{Weitere Eigenschaften der Laplace-Transformation}
   Sei \(f\in\mathcal{E}\).
   \begin{itemize}
@@ -1299,6 +1307,21 @@ Die Charakteristische Funktion eines Intervalls $(a,b)$ schreibt sich z.B. als \
   \end{itemize}
   Diese Eigenschaften charakterisieren die Dirac-Delta Funktion eindeutig.
 \end{subbox}
+
+\subsection{Eindeutigkeit der Laplace-Transformation und die Inverse Laplace Transformation}
+
+Mittels der Laplace-Transformation verwandeln wir das Problem in ein Problem, das einfacher im Bildbereich zu lösen ist. Der Vorteil dieser Methode ist, dass Differentiation im Originalraum bei der Laplace-Transformation der Multiplikation (mit $s$) im Bildbereich entspricht.
+
+\begin{subbox}{Satz von Lerch}
+  Seien \(f_1,f_2\in\mathcal{E}\) mit Wachstumkoeffizienten \(\sigma_1,\sigma_2\). Nehmen wir an, dass \begin{equation*} \mathcal{L}[f_1](s)=\mathcal{L}[f_2](s) \end{equation*} für jedes \(s\) mit \(\Re (s)>\max\{\sigma_1,\sigma_2\}\) gilt. Dann ist \begin{equation*} f_1(t)=f_2(t) \end{equation*} an allen Stellen \(t\) an denen \(f_1\) und \(f_2\) stetig sind.
+\end{subbox}
+
+\begin{mainbox}{Inverse Laplace-Transformation}
+  Sei \(f\in\mathcal{E}\) mit Wachstumkoeffizient \(\sigma_f\) und Laplace-Transformation \(F(s)\). Sei \(\beta_c( y):=c+ i y\) für \(y\in(-\infty,\infty)\) ein Pfad, wobei \(c>\sigma_f\) beliebig ist. Dann gilt an allen stetigen Punkten \(t\in(0,\infty)\) von \(f\):
+  
+  \begin{equation*} f(t) =\frac{1}{2\pi i}\int_{\beta_c} e^{st}F(s)\,ds \end{equation*} An den Stellen \(t_0\in(0,\infty)\) an welchen $f$ nicht stetig ist gilt: \begin{equation*} \frac12\left(\lim_{t\to t_0^-}F(t)+\lim_{t\to t_0^+}F(t)\right) =\frac{1}{2\pi i}\int_{\beta_c} e^{st}F(s)\,ds \end{equation*}
+
+\end{mainbox}
 
 \section{Tabellen und Listen}
 
@@ -1612,13 +1635,6 @@ für jedes $t$ im Definitionsbereich.
   \bottomrule
   \end{tabularx}
 \end{center}
-\begin{table}[h!]
-  \begin{tabular}{|c|c|}
-  \hline
-
-  \hline
-  \end{tabular}
-\end{table}
 
 \section{Anleitungen}
 
