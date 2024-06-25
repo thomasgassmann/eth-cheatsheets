@@ -1238,11 +1238,67 @@ Die Charakteristische Funktion eines Intervalls $(a,b)$ schreibt sich z.B. als \
         Falls die Funktionen im Ursprung definiert sind kann man den Limes weglassen.
     }
   \end{itemize}
-
-
-
-
 \end{mainbox}
+
+\begin{mainbox}{Weitere Eigenschaften der Laplace-Transformation}
+  Sei \(f\in\mathcal{E}\).
+  \begin{itemize}
+    \item{
+      \textbf{Ableitungen der Laplace-Transformation}: Es gilt für \(n=0,1,2,\dots\):
+       \begin{equation*} \frac{d^n}{ds^n}(\mathcal{L}[f])(s)=(-1)^n\mathcal{L}[t^nf(t)](s) \end{equation*}
+    }
+
+    \item{
+      \textbf{Laplace-Transformation von Integral}:
+      \begin{equation*} \mathcal{L}\left[\int_0^t f(\tau)\,d\tau\right](s)=\frac{1}{s}\mathcal{L}[f](s) \end{equation*}
+    }
+
+    \item{
+      Sei \(\sigma_f\) der Wachstumkoeffizient von \(f\). Für \(x>\sigma_f\) gilt: \begin{equation*} \mathcal{L}\left[\frac{f(t)}{t}\right](x+ i y)=\int_{x+ i y}^{\infty+ i y} \mathcal{L}[f](\tau)\,d\tau \end{equation*}
+    }
+  \end{itemize}
+\end{mainbox}
+
+\begin{mainbox}{Faltungssatz für Laplace-Transformationen}
+  \begin{itemize}
+    \item{
+      \textbf{Periodische Funktionen}: Sei \(T>0\) und sei \(f\) eine \(T\)-periodische Funktion, d.h. \(f(t+T)=f(t)\) für jedes \(t\geq0\). Dann gilt für jedes \(s\in\mathbb{C}\) mit \(\Re(s)>0\) \begin{equation*} \mathcal{L}[f](s)=\frac{1}{1-e^{-sT}}\int_0^Te^{-st}f(t)\,dt \end{equation*}
+    }
+    \item{
+      \textbf{Faltungssatz}: Seien \(f,g\in\mathcal{E}\). Dann gilt \begin{equation*} \mathcal{L}[f*g]=\mathcal{L}[f]\mathcal{L}[g] \end{equation*}
+    }
+  \end{itemize}
+\end{mainbox}
+
+\begin{subbox}{Dirac-Delta Funktion}
+  Sei: \begin{equation*} \delta_\epsilon(t):= \frac{1}{2\epsilon}\chi_{(-\epsilon,\epsilon)}(t) \end{equation*} Die Dirac-Delta ist dann wie folgende definiert: \begin{equation*} \delta(t):=\lim_{\epsilon\to0}\delta_\epsilon(t) \end{equation*}
+\end{subbox}
+
+\begin{subbox}{Eigenschaften der Dirac-Delta Funktion}
+  \begin{itemize}
+    \item{
+      Es gilt:
+      $$
+        \int_{-\infty}^\infty \delta(t) dt = 1
+      $$
+    }
+
+    \item{
+      Für jede stetige Funktion $f$ gilt:
+      \begin{equation*}
+        \int_{-\infty}^\infty\delta(t-t_0)f(t)\,dt=f(t_0)
+    \end{equation*}
+    }
+
+    \item{
+      Es gilt:
+      \begin{equation*}
+        H(t)=\int_{-\infty}^t\delta(s)\,ds
+    \end{equation*}
+    }
+  \end{itemize}
+  Diese Eigenschaften charakterisieren die Dirac-Delta Funktion eindeutig.
+\end{subbox}
 
 \section{Tabellen und Listen}
 
