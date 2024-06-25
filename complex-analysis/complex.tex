@@ -331,7 +331,7 @@ $\sumk b_k$ ist eine \textbf{lineare Anordnung} der Doppelreihe $\Sigma_{i,j \ge
 \begin{mainbox}{Cauchy-Produkt}
   Das Cauchy-Produkt von zwei Reihen $\sum_{i = 0}^\infty a_i$ und $\sum_{j = 0}^\infty b_j$ ist definiert als
   $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = a_0b_0 + (a_0b_1 + a_1b_0) + \ldots$$ Es konvergiert, falls beide Reihen absolut konvergieren. Dann gilt:\\
-  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = (\sum_{i=0}^\infty a_i) (\sum_{j=0}^\infty b_j)$$
+  $$\sum_{n=0}^\infty \sum_{j=0}^n (a_{n-j} \cdot b_j) = \left( \sum_{i=0}^\infty a_i \right) \left( \sum_{j=0}^\infty b_j \right)$$
 \end{mainbox}
 
 
@@ -1092,6 +1092,64 @@ Falls \(f\) eine \(2L\)-periodische Funktion ist, haben wir im letzen Kapitel ih
     }
   \end{itemize}
 \end{mainbox}
+
+\subsection{Faltung}
+
+\begin{mainbox}{Faltung}
+  Seien \(f,g\colon\mathbb{R}\to\mathbb{C}\) zwei absolut integrierbare Funktionen. Das Faltungprodukt \(f\ast g\) von \(f\) und \(g\) ist: \begin{equation*} f\ast g(x):=\int_{-\infty}^\infty f(x-t)g(t)\,dt =\int_{-\infty}^\infty f(t)g(x-t)\,dt \end{equation*}
+\end{mainbox}
+
+Die Faltung hat eine "glättende" Wirkung. Die Faltung zweier Funktionen ist mindestens so glatt wie die glatteste der beiden Funktionen.
+
+Seien \(f,g\colon\mathbb{R}\to\mathbb{C}\) zwei absolut integrierbare Funktionen, die auf \((-\infty,0)\) \textbf{verschwinden}. Dann gilt für \(x<0\) \begin{equation*} f*g(x)=0 \end{equation*} und für \(x\geq0\) \begin{equation*} f*g(x) = \int_0^x f(x-t)g(t) dt \end{equation*}
+
+Sei \(\chi_{[0,1]}\) die \textbf{Charakteristische Funktion} des Intervalls \([0,1]\). Es gilt für jede absolut integrierbare Funktion \(g\) mit \(g(t)=0\) auf \((-\infty,0)\) \begin{equation*} \chi_{[0,1]}*g(x)=\int_{x-1}^x g(t)\,dt \end{equation*}
+
+\begin{mainbox}{Eigenschaften der Faltung}
+  Seien \(f,g,h\colon\mathbb{R}\to\mathbb{C}\) absolut integrierbare Funktionen.
+  \begin{itemize}
+    \item{
+      \textbf{Kommutativität}:
+      \begin{equation*} f*g=g*f \end{equation*}
+    }
+    \item{
+      \textbf{Assoziativität}:
+      \begin{equation*} (f*g)*h=f*(g*h) \end{equation*}
+    }
+    \item{
+      \textbf{Distributivität}: Falls \(\alpha,\beta\in\mathbb{C}\), gilt:
+       \begin{equation*} (\alpha f+\beta g)*h=\alpha f*h+\beta g*h \end{equation*}
+    }
+    \item{
+      \textbf{Translation:} Falls \(T_a(f)(x):=f(x-a)\) ist, gilt für jedes \(a\in\mathbb{R}\):
+      \begin{equation*} (T_af)*g=T_a(f*g) \end{equation*}
+    }
+    \item{
+      \textbf{Fourier-Transformation der Faltung}:
+      \begin{equation*} \mathcal{F}(f*g)=\sqrt{2\pi}\mathcal{F}(f)\mathcal{F}(g) \end{equation*}
+    }
+    \item{
+      \textbf{Inverse Fourier-Transformation der Faltung}: Falls \(\hat f\) und \(\hat g\) absolut integrierbar sind, gilt: \begin{equation*} \mathcal{F}^{-1}(f*g)={\sqrt{2\pi}}\mathcal{F}^{-1}(f)\cdot\mathcal{F}^{-1}(g) \end{equation*}
+    }
+    \item{
+      \textbf{Fourier-Transformation des Produktes}: Seien \(\mathcal{F}(f)\), \(\mathcal{F}(g)\) und \(f\cdot g\) absolut integrierbar. Dann gilt:
+       \begin{equation*} \mathcal{F}(f\cdot g)=\frac{1}{\sqrt{2\pi}}\mathcal{F}(f)*\mathcal{F}(g) \end{equation*}
+    }
+    \item{
+      \textbf{Inverse Fourier-Transformation des Produktes}: Seien \(f\), \(g\) und \(f\cdot g\) absolut integrierbar ist. Dann gilt: \begin{equation*} \mathcal{F}^{-1}(f\cdot g)=\frac{1}{\sqrt{2\pi}}\mathcal{F}^{-1}(f)*\mathcal{F}^{-1}(g) \end{equation*}
+    }
+  \end{itemize}
+\end{mainbox}
+
+Daraus folgt auch dass:
+
+\begin{equation*}
+  \sqrt{2\pi}\mathcal{F}^{-1}(\mathcal{F}(f)\mathcal{F}(g))(t)=(f*g)(t)
+\end{equation*}
+
+\begin{subbox}{Satz von Plancherel}
+  Sei \(f\colon\mathbb{R}\to\mathbb{C}\) eine absolut integrierbar Funktion deren Fourier-Transformation auch absolut integrierbar ist. Dann gilt: \begin{align*} \int_{-\infty}^{\infty} |f(t)|^2 \,dt = \int_{-\infty}^{\infty} |\hat{f}(\omega )|^2\,d\omega \end{align*}
+\end{subbox}
 
 \section{Laplace-Transformation}
 
