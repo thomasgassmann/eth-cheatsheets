@@ -1211,6 +1211,39 @@ Die Charakteristische Funktion eines Intervalls $(a,b)$ schreibt sich z.B. als \
 
 \subsection{Rechenregeln und verallgemeinerte Funktionen}
 
+\begin{subbox}{Linearität der Laplace-Transformation}
+  Seien \(f,g\in\mathcal{E}\) und \(\alpha,\beta\in\mathbb{C}\). Dann gilt \begin{equation*} \mathcal{L}[\alpha f+\beta g](s)=\alpha\mathcal{L}[f](s)+\beta\mathcal{L}[g](s) \end{equation*}
+\end{subbox}
+
+\begin{mainbox}{Eigenschaften der Laplace-Transformation}
+  Sei \(f\in\mathcal{E}\).
+  \begin{itemize}
+    \item{
+      \textbf{Verschiebung in der \(t\) Variabel}:
+      \begin{equation*} \mathcal{L}[f(t-a)](s)=e^{-as}\mathcal{L}[f](s) \end{equation*}
+    }
+    \item{
+      \textbf{Verschiebung in der \(s\) Variabel}: Sei \(\alpha\in\mathbb{C}\). Dann: \begin{equation*} \mathcal{L}[e^{\alpha t}f(t)](s)=\mathcal{L}[f](s-\alpha) \end{equation*}
+    }
+    \item{
+      \textbf{Ähnlichkeit}: Sei \(a\in\mathbb{R}^+\) und \(S_af(t):=f(at)\). Dann gilt: \begin{equation*} \mathcal{L}[S_af](s)=\frac{1}{a}\mathcal{L}[f]\left(\frac{s}{a}\right) \end{equation*}
+    }
+    \item{
+      \textbf{Laplace-Transformation der Ableitung}: Sei \(f\in\mathcal{E}\) mit \(f'\in\mathcal{E}\) und sei \(f(t)\) stetig für \(t>0\). Dann gilt:
+       \begin{equation*} \mathcal{L}[f'](s)=s\mathcal{L}[f](s)-\lim_{t\to0^+}f(t) \end{equation*} Falls auch \(f'',\dots,f^{( n )}\in\mathcal{E}\) und falls \(f,f',\dots,f^{(n-1)}\) stetig für \(t>0\) sind, gilt:
+        \begin{align*} 
+          \mathcal{L}[f^{( n )}](s) = & s^n\mathcal{L}[f](s) - s^{n-1}\lim_{t\to0^+}f(t) \\
+          & - s^{n-2}\lim_{t\to0^+}f'(t) -\dots -\lim_{t\to0^+}f^{(n-1)}(t) 
+        \end{align*}
+        Falls die Funktionen im Ursprung definiert sind kann man den Limes weglassen.
+    }
+  \end{itemize}
+
+
+
+
+\end{mainbox}
+
 \section{Tabellen und Listen}
 
 \subsection{Ungleichungen}
