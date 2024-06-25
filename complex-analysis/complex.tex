@@ -833,6 +833,20 @@ Für \textbf{Polstellen} gibt es einige Lemmas:
   Sei \(z_0\) eine isolierte Singularität der Funktion \(f\). Die Stelle \(z_0\) ist ein Pol der Ordnung \(m\geq1\) genau dann, wenn es eine Funktion $\phi$, welche an der Stelle \(z_0\) holomorph ist, gibt, mit \begin{align*} f(z)=\frac{\phi(z)}{(z-z_0)^m} \end{align*} wobei \(\phi(z_0)\neq0\) gilt. Falls $\phi(z_0) = 0$ muss man andere Methoden verwenden, z.B. die Laurentreihe entwickeln.
 \end{subbox}
 
+\begin{subbox}{Hebbare Singularität}
+  $f$ hat eine hebbare Singularität an $z_0$, wenn $\lim_{z \to z_0} f(z)$ existiert. In diesem Falle gilt $\Res(f, z_0) = 0$.
+\end{subbox}
+
+Falls $\lim_{z \to z_0} |f(z)| = \infty$, so hat $f$ einen Pol an $z_0$.
+
+\begin{subbox}{Polstellen}
+  Sei $z_0$ ein Pol von $f$. Dann ist $z_0$ ein Pol $m$-ter Ordnung, wenn:
+  $$
+    \lim_{z \to z_0} (z - z_0)^m f(z) = a \neq 0
+  $$
+  wobei $a \in \C$.
+\end{subbox}
+
 \begin{mainbox}{Berechnung des Residuums an Polstellen}
   Falls \(z_0\) ein Pol der Ordnung \(m\) der Funktion \(f\) ist, gilt: \begin{align*} 
      \operatorname{Res}(f,z_0)= \lim_{z \to z_0} \frac{\phi^{(m-1)}(z)}{(m-1)!} 
@@ -874,6 +888,13 @@ Ausserdem folgt auch dass falls $f$ einen Pol $z_0$ der Ordnung $m \geq 1$ hat, 
 \end{subbox}
 
 Sind also $p,q$ holomorph an $z_0$ mit $p(z_0) \neq 0$ wobei $z_0$ eine Nullstelle der Ordnung $m$ für $q$ ist, dann gilt dass $z_0$ ein Pol der Ordnung $m$ für $\frac{p(z)}{q(z)}$ ist.
+
+\begin{subbox}{}
+  Sei $U \subset \C$ offen, $z_0 \in U$ und $f: U \setminus \{z_0\} \mapsto \C$ eine holomorphe Funktion. Angenommen $f(\overbar{z}) = \overbar{f(z)}$ für alle $z \in \C$. Dann gilt:
+  $$
+    \Res(f, \overbar{z_0}) = \overbar{\Res(f, z_0)}
+  $$
+\end{subbox}
 
 \subsection{Bedingungen, unter denen $f(z) \equiv 0$}
 
@@ -987,6 +1008,13 @@ Beim Integral über die Kurve $-\gamma_{\epsilon}$ ist zu beachten dass die Wind
 $f(t) = c$ mit $c \in \C$ ist auch periodisch, aber hat keine Fundamentalperiode.
 
 Die Summe periodischer Funktionen ist immer dann periodisch, wenn die Perioden aller Summanden ein gemeinsames Vielfaches haben. In diesem Fall ist die Periode das (kleinste) gemeinsame Vielfache. Gleichermassen für das Produkt aus periodischen Funktionen.
+
+\begin{subbox}{Integral periodischer Funktionen}
+  Sei $f: \R \mapsto \C$ eine stetige $L$-periodische Funktion. Für ein beliebiges $\alpha \in \R$ gilt:
+  $$
+    \int_{0}^L f(t) dt = \int_{\alpha}^{\alpha + L} f(t) dt
+  $$
+\end{subbox}
 
 \begin{subbox}{Trigonometrisches Polynom}
   Ein trigonometrisches Polynom N-ten Grades ist eine endliche Linearkombination
@@ -1396,6 +1424,8 @@ Mittels der Laplace-Transformation verwandeln wir das Problem in ein Problem, da
  \item $\sin(z) = \frac{e^{iz} - e^{-iz}}{2i}$ und $\cos(z) = \frac{e^{iz} + e^{-iz}}{2}$
  \item $\cos(x)^n = \frac{1}{2^n} \sum_{k=0}^n {n \choose k} \cos((2k - n)x)$
  \item $\cos(x) = \Re(e^{ix})$, $\sin(x) = \Im(e^{ix})$
+ \item $\tan(x) = \frac{e^{ix} - e^{-ix}}{i(e^{ix} + e^{-ix})}$
+ \item $\cot(x) = \frac{i(e^{ix} + e^{-ix})}{e^{ix} - e^{-ix}}$
 \end{itemize}
 
 
