@@ -151,6 +151,7 @@
 
 \begin{itemize}
     \item \href{https://github.com/XYQuadrat/eth-cheatsheets}{xyquadrat}
+    \item \href{https://amiv.ethz.ch/en/studies/documents/63f48ab8236e8866a0e84f51}{Viturin Schuhmacher}
     \item \href{https://people.math.ethz.ch/~iozzi/SkriptKomplexeAnalysis.pdf}{Komplexe Analysis (Meike Akveld, Alessandra Iozzi, Peter Jossen)}
 \end{itemize}
 
@@ -466,7 +467,12 @@ Für eine komplex-differenzierbare Funktion folgt aus der Existenz des Limits di
 
 Die \textbf{Umkehrung} des obigen Satzes gilt im Allgemeinen \textbf{nicht}!
 
-Eine lineare Abbildung mit positiver Determinante heisst konform falls sie winkeltreu ist. Eine $\R$-differenzierbare Funktion $f$ ist auch $\C$-differenzierbar genau dann wenn ihre Ableitung eine konformale Abbildung ist. Dies liegt intuitiv daran dass die Jacobi-Matrix (wegen den Cauchy-Riemann Gleichungen) die Form $\begin{bsmallmatrix}
+In \textbf{Polarkoordinaten} lauten die CRG:
+$$
+u_r = \frac1r v_{\varphi}, \ v_r = -\frac1r u_{\varphi}, \ f(r, \varphi) = u(r, \varphi) + i v(r, \varphi)
+$$
+
+Eine lineare Abbildung mit positiver Determinante heisst \textbf{konform} falls sie winkeltreu ist. Eine $\R$-differenzierbare Funktion $f$ ist auch $\C$-differenzierbar genau dann wenn ihre Ableitung eine konformale Abbildung ist. Dies liegt intuitiv daran dass die Jacobi-Matrix (wegen den Cauchy-Riemann Gleichungen) die Form $\begin{bsmallmatrix}
   a & -b\\
   b & a
 \end{bsmallmatrix}$ hat.
@@ -803,6 +809,8 @@ $$
 $$
 Da $\exp(1/z^2) = \sum_{n=0}^\infty \frac{1}{n!} \frac{1}{z^{2n}}$ können wir ablesen dass $\Res(f, 0) = c_{-1} = 0$.
 
+Für \textbf{gerade Funktionen} gilt dies allgemein: Falls $f(z)$ gerade ist so gilt immer $\Res(f, z_0) = 0$, da die Laurentreihe nur gerade Koeffizienten hat.
+
 \begin{mainbox}{Residuensatz}
   Sei \(U \subseteq \mathbb{C}\) eine offene wegzusammenhängende Teilmenge und sei \(\gamma : [0,1] \to U\) eine positiv orientierte einfache geschlossene Kurve. Seien \(z_1,...,z_n\) im Inneren von \(\gamma\) enthalten und sei \(f \colon U \setminus \{z_1,...,z_n\} \to \mathbb{C}\) holomorph. Dann gilt: \begin{align*}  \int_{\gamma} f(z)\,dz = 2\pi i \sum_{j=1}^n \operatorname{Res}(f,z_j) \end{align*}
 \end{mainbox}
@@ -908,6 +916,8 @@ Ausserdem folgt auch dass falls $f$ einen Pol $z_0$ der Ordnung $m \geq 1$ hat, 
     \Res(f, z_0) = \frac{p(z_0)}{q'(z_0)}
   $$
 \end{mainbox}
+
+Bei \textbf{wesentlichen Singularitäten} empfiehlt es sich die Laurentreihe zuerst zu berechnen. 
 
 \begin{subbox}{Nullstellen}
   Sei $f: U \mapsto \C$ holomorph an der Stelle $z_0 \in U$. Die Funktion $f$ hat an der Stelle ein Nullstelle der Ordnung $m$ genau dann wenn es ein holomorphes $g: U \mapsto \C$ gibt mit $f(z) = (z - z_0)^m g(z)$ und $g(z_0) \neq 0$. 
@@ -1022,6 +1032,31 @@ Beim Integral über die Kurve $-\gamma_{\epsilon}$ ist zu beachten dass die Wind
   \includegraphics[width=0.5\linewidth]{assets/4-4-3.png}
   \caption{Residuensatz mit Halbkreis}
 \end{figure}
+
+\subsection{Uneigentliche reelle Integrale}
+	
+Falls \( f(z) = \dfrac{p(z)}{q(z)} \) und \( q(z) \neq 0\)  \(\forall z \in \mathbb{R}\) und \( \deg(p) \leqslant \deg(q) - 2 \) wie zuvor:
+
+  \[ \displaystyle \int\limits_{-\infty}^\infty f(x) e^{i\alpha x}dx = \begin{cases}
+  \displaystyle 2\pi i \sum\limits_{z_i \in H^+} \Res\big(f(z)e^{i\alpha z}, z_i\big)	&	\alpha \geqslant 0\\
+  \displaystyle -2\pi i \sum_{z_i \in H^-} \Res\big(f(z)e^{i\alpha z}, z_i\big)		&	\alpha \leqslant 0\\
+\end{cases} \]
+  \[ \displaystyle \int\limits_{-\infty}^\infty f(x) \cos(\alpha x)dx = \begin{cases}
+    
+  \displaystyle -2\pi\cdot \text{Im}\left(\sum_{z_i \in H^+} \Res\big(f(z)e^{i\alpha z},  z_i\big) \right)
+  &	\alpha \geqslant 0\\
+  \displaystyle 2\pi\cdot \text{Im}\left(\sum_{z_i \in H^-} \Res\big(f(z)e^{i\alpha z},  z_i\big) \right)
+  &	\alpha \leqslant 0\\
+\end{cases} \]
+
+  \[ \displaystyle \int\limits_{-\infty}^\infty f(x) \sin(\alpha x)dx = \begin{cases}
+  \displaystyle 2\pi\cdot \text{Re}\left(\sum_{z_i \in H^+} \Res\big(f(z)e^{i\alpha z},  z_i\big) \right)
+  &	\alpha \geqslant 0\\
+  \displaystyle -2\pi\cdot \text{Re}\left(\sum_{z_i \in H^-} \Res\big(f(z)e^{i\alpha z},  z_i\big) \right)
+  &	\alpha \leqslant 0\\
+\end{cases} \]
+
+$H^+$ ist die obere Halbebene, $H^-$ die untere Halbebene. In den unteren Halbebene wird der Pfad im Uhrzeigersinn parametrisiert, folglich haben wir ein negatives Vorzeichen.
 
 \section{Fourier-Analysis}
 
@@ -1148,7 +1183,7 @@ Falls \(f\) eine \(2L\)-periodische Funktion ist, haben wir im letzen Kapitel ih
       \textbf{Streckung}: Sei \(a\in\mathbb{R}\) und sei \(S_af(t):=f(at)\). Dann gilt: \begin{align*} \widehat{S_af}(\omega ) = \frac{1}{|a|} \hat{f}\left(\frac{\omega }{a}\right) \end{align*}
     }
     \item{
-      Es gilt \begin{align*} \hat{\hat{f}}(t) = f(-t) \end{align*}
+      \textbf{Dualität}: Es gilt: \begin{align*} \hat{\hat{f}}(t) = f(-t) \end{align*}
     }
     \item{
       \textbf{Fourier-Transformation der Ableitung}: Für \(n\in\mathbb{N}\) gilt: \begin{align*} \widehat{f^{( n )}}(\omega ) = ( i \omega )^n \hat{f}(\omega ) \end{align*}
