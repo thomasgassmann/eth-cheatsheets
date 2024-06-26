@@ -582,7 +582,7 @@ Aus dem Cauchy'schen Integralsatz erhalten wir eine Behauptung wann die obigen A
 
 \end{subbox}
 
-Dies definiert eine stetige Deformation $H$ von $\gamma_0$ zu $\gamma_1$. Für jedes feste $s \in [0,1]$ ist $\gamma_s(t) := H(s, t)$ ein Pfad von $\alpha$ nach $\beta$, definiert auf $[a,b]$.
+Dies definiert eine stetige Deformation $H$ von $\gamma_0$ zu $\gamma_1$. Für jedes feste $s \in [0,1]$ ist $\gamma_s(t) := H(s, t)$ ein Pfad von $\alpha$ nach $\beta$, definiert auf $[a,b]$. Eine Homotopie kann z.B. durch die Parameterisierung $H(s, t) = (1 - s)\gamma_1(t) + s \gamma_2(t)$ gefunden werden.
 
 \begin{subbox}{einfach zusammenhängend}
   Eine teilmenge $U \subseteq \C$ heisst \textbf{einfach zusammenhängend} falls sie wegzusammenhängend ist und für alle $\alpha, \beta \in U$, alle Pfade von $\alpha$ nach $\beta$ homotop zu einander sind.
@@ -692,7 +692,7 @@ Daraus folgt wiederum per Widerspruchsbeweis:
   Sei $f$ holomorph und nicht konstant auf einer wegzusammenhängenden offenen Menge $U$. Dann besitzt $|f(z)|$ \textbf{kein} Maximum auf $U$.
 \end{mainbox}
 
-Im obigen Satz gibt es also keinen Punkt $z_0 \in U$ mit $|f(z)| \leq |f(z_0)|$.
+Im obigen Satz gibt es also keinen Punkt $z_0 \in U$ mit $|f(z)| \leq |f(z_0)|$. Dasselbe gilt auch für das \textbf{Minimum}.
 
 \begin{subbox}{Maximum auf kompakter Menge}
   Sei $f$ eine nicht-konstante, stetige Funktion auf  einer kompakten Menge $K$. Sei $f$ holomorph auf dem Inneren von $K$. Dann wird $\max_{z \in K} |f(z)|$ auf dem Rand von $K$ erreicht.
@@ -869,6 +869,12 @@ Falls $\lim_{z \to z_0} |f(z)| = \infty$, so hat $f$ einen Pol an $z_0$.
     \operatorname{Res}(f,z_0)= \frac{\phi^{(m-1)}(z_0)}{(m-1)!} 
  \end{align*}
  falls $\phi^{m-1}$ in $z_0$ wohldefiniert ist.
+
+ Wir können dies auch schreiben als:
+
+$$
+  \Res(f, z_0) = \frac{1}{(m - 1)!} \lim_{z \to z_0} \left( \frac{d^{m-1}}{dz^{m-1}} (z - z_0)^m f(z) \right)
+$$
 \end{mainbox}
 
 Dies zeigen wir wie folgt: Nach Annahme schreben wir $f$ als:
@@ -889,12 +895,19 @@ Des Weiteren bemerken wir auch dass für $m = 1$ gilt dass $\Res(f, z_0) = \phi(
 
 Ausserdem folgt auch dass falls $f$ einen Pol $z_0$ der Ordnung $m \geq 1$ hat, dass dann $\lim_{z \to z_0} f(z) = \lim_{z \to z_0} \frac{\phi(z)}{(z - z_0)^m}$ divergiert (da $\phi(z) \neq 0$).
 
-\begin{subbox}{Residuum bei einfachen Polen}
+\begin{mainbox}{Residuum bei einfachen Polen}
   Falls $z_0$ ein einfacher Pol der Funktion $f$ ist, gilt:
   $$
     \Res(f, z_0) = \lim_{z \to z_0} (z - z_0) f(z)
   $$
-\end{subbox}
+\end{mainbox}
+
+\begin{mainbox}{Residuum für Pole bei Bruch}
+  Sei $f(z) \frac{p(z)}{q(z)}$ wobei $p$ und $q$ holomorph sind mit $p(z_0) \neq 0$ sowie $q(z_0) = 0$ und $q'(z_0) \neq 0$. Dann gilt:
+  $$
+    \Res(f, z_0) = \frac{p(z_0)}{q'(z_0)}
+  $$
+\end{mainbox}
 
 \begin{subbox}{Nullstellen}
   Sei $f: U \mapsto \C$ holomorph an der Stelle $z_0 \in U$. Die Funktion $f$ hat an der Stelle ein Nullstelle der Ordnung $m$ genau dann wenn es ein holomorphes $g: U \mapsto \C$ gibt mit $f(z) = (z - z_0)^m g(z)$ und $g(z_0) \neq 0$. 
