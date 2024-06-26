@@ -426,6 +426,19 @@ Die Gamma-Funktion ist die einzige Funktion $]0, \infty[ \to ]0, \infty[$, die $
 
 Falls eine Funktion $\overbar{z}$ enthält, so ist sie nie holomorph.
 
+Die Komposition von holomorphen Funktionen ist holomorph.
+
+Die folgenden Eigenschaften sind äquivalent:
+
+\begin{itemize}
+  \item Funktion ist einmal komplex differenzierbar
+  \item Funktion ist beliebig oft komplex differenzierbar
+  \item Real- und Imaginärteil erfüllen die Cauchy-Riemann Gleichungen und sind mindestens einmal stetig reell-differenzierbar
+  \item Funktion lässt sich als komplexe Potenzreihe entwickeln
+  \item Funktionswerte im Inneren einer Kreisscheibe lassen sich aus den Funktionswerten am Rand mit Hilfe der cauchy-schen Integralformel ermitteln
+  \item Die Funktion ist stetig und das Wegintegral der Funktion über einen beliebigen geschlossenen zusammenziehbaren Weg verschwindet
+\end{itemize}
+
 \subsection{Cauchy-Riemann Gleichungen}
 
 Für eine komplex-differenzierbare Funktion folgt aus der Existenz des Limits die folgende Gleichheit der partiellen Ableitungen:
@@ -1426,6 +1439,7 @@ Mittels der Laplace-Transformation verwandeln wir das Problem in ein Problem, da
  \item $\cos(x) = \Re(e^{ix})$, $\sin(x) = \Im(e^{ix})$
  \item $\tan(x) = \frac{e^{ix} - e^{-ix}}{i(e^{ix} + e^{-ix})}$
  \item $\cot(x) = \frac{i(e^{ix} + e^{-ix})}{e^{ix} - e^{-ix}}$
+ \item $\exp(\overbar{z}) = \overbar{\exp(z)}$, $\sin(\overbar{z}) = \overbar{\sin(z)}$, $\cos(\overbar{z}) = \overbar{\cos(z)}$
 \end{itemize}
 
 
