@@ -1104,6 +1104,9 @@ Die Summe periodischer Funktionen ist immer dann periodisch, wenn die Perioden a
   oder 
   \begin{align*} f(t)\sim \sum_{n=-\infty}^\infty c_ne^{ i\frac{n\pi}{L}t} \end{align*} dargestellt werden kann. Dann gilt 
   \begin{align*} a_m=\frac{1}{L}\int_{-L}^Lf(t)\cos\left(\frac{m\pi}{L}t\right)\,dt \text{ falls } m\geq 0  \end{align*} \begin{align*} b_m=\frac{1}{L}\int_{-L}^Lf(t)\sin\left(\frac{m\pi}{L}t\right)\,dt \text{ falls } m>0  \end{align*} und \begin{align*} c_m=\frac{1}{2L}\int_{-L}^Lf(t)e^{- i \frac{m\pi}{L} t}\,dt \text{ falls } m\in\mathbb{Z}  \end{align*}
+
+  Bei Funktionen mit periodischer Fortzsetzung ist bei der Berechnung der Koeffizienten darauf zu achten das Integral im richtigen Bereich zu evaluieren ($-L$ und $L$ entsprechend verschieben).
+
 \end{mainbox}
 
 Ist $f$ reellwertig, so sind auch alle $a_k$ und alle $b_k$ reell; ist $f$ gerade, so treten nur Cosinusterme auf, und ist $f$ ungerade, so treten nur Sinusterme auf.
@@ -1115,6 +1118,7 @@ $\frac{a_0}{2}$ ist der Mittelwert von $f$ auf einer Periode. $a_1\cos\left(\fra
   \begin{align*} 
     c_n&=\frac{1}{2}(a_n- i b_n) & c_{-n} =\frac{1}{2}(a_n+ i b_n)\\ 
     a_n&=c_n+c_{-n} & b_n = i(c_n-c_{-n})  \end{align*}
+
 \end{mainbox}
 
 \begin{subbox}{Fourierreihe ungerader und gerader Funktionen}
@@ -1127,6 +1131,8 @@ $\frac{a_0}{2}$ ist der Mittelwert von $f$ auf einer Periode. $a_1\cos\left(\fra
       Falls \(f\) ungerade ist, sind alle \(a_n=0\) und \begin{align*} b_n=\frac{2}{L}\int_0^Lf(t)\sin\left(\frac{n\pi}{L}t\right)\,dt\,,\text{ für }n\geq1 \end{align*}
     }
   \end{itemize}
+
+  Bei Funktionen mit periodischer Fortzsetzung ist bei der Berechnung der Koeffizienten darauf zu achten das Integral im richtigen Bereich zu evaluieren ($-L$ und $L$ entsprechend verschieben).
 \end{subbox}
 
 \begin{subbox}{Konvergenz von Fourierreihen}
