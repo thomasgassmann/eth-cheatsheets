@@ -207,7 +207,11 @@ für die $z = r(\cos(\varphi) + i \sin(\varphi))$ mit $r = |z|$ und $\varphi = \
   $$
 \end{mainbox}
 
-Sei \(z\) eine komplexe Zahl und \(n\geq2\) eine ganze Zahl. Eine \(n\)-te Wurzel von \(z\) ist eine komplexe Zahl \(w\), die \(w^n=z\) erfüllt.
+Sei \(z\) eine komplexe Zahl und \(n\geq2\) eine ganze Zahl. Eine \(n\)-te Wurzel von \(z\) ist eine komplexe Zahl \(w\), die \(w^n=z\) erfüllt. Für die $n$-ten Wurzeln gilt:
+$$
+w_k = \sqrt[n]{z} = \sqrt[n]{\vert z \vert} \cdot \exp\left(i \cdot \frac{\varphi + 2k\pi}{n} \right)
+$$
+mit $ k = 0,1,2,\dots, n-1$ und $\varphi = \Arg(z)$.
 
 \subsection{Mengen}
 
@@ -306,6 +310,8 @@ Die Potenzreihe $\sum_{k=0}^\infty c_n x^n$ konvergiert absolut und gleichmässi
 \cosh(x) &= \sumn \frac{x^{2n}}{(2n)!} & r &= \infty \\
 \arctan(x) &= \sumn (-1)^n \frac{x^{2n+1}}{2n+1} & r &= 1 \\
 e^{-x} &= \sumn (-1)^n \cdot \frac{x^n}{n!} & r &= \infty \\
+\sqrt{1+x} &= 1 + \frac{x}{2} - \frac{x^2}{8} + \frac{x^3}{16} + \mathcal{O}(x^4) & r &< 1 \\
+\frac{1}{1 - x} &= \sumn x^n & x &< 1
 \end{align*}
 
 
@@ -369,6 +375,17 @@ Die Gamma-Funktion konvergiert für alle $s > 0$ und hat folgende weiter Eigensc
 \end{enumerate}
 Die Gamma-Funktion ist die einzige Funktion $]0, \infty[ \to ]0, \infty[$, die $(1), (2)$ und $(3)$ erfüllt. Zudem gilt: $$\Gamma(x) = \limn \frac{n!n^x}{x(x+1)...(x+n)} \ \ \ \forall x > 0$$
 
+\subsection{Mitternachtsformel}
+
+$$
+az^2 + bz + c = 0 \Leftrightarrow z_{1,2} = \frac{-b \pm \sqrt{b^2-4ac}}{2a}
+$$
+
+\subsection{Binomialkoeffizienten}
+
+$$
+\binom{n}{k}=\frac{n!}{k!\cdot(n-k)!}
+$$
 
 \section{Komplexwertige Funktionen}
 
@@ -1169,6 +1186,15 @@ Falls \(f\) eine \(2L\)-periodische Funktion ist, haben wir im letzen Kapitel ih
   Sei \(f\colon\mathbb{R}\to\mathbb{C}\) eine absolut integrierbare Funktion. Die Fourier-Tranformation \(\hat f\colon\mathbb{R}\to\mathbb{C}\) ist \begin{align*} \hat f(\omega)=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty f(t)e^{- i\omega t}\,dt \end{align*} Eine alternative Schreibweise von \(\hat f\) ist \(\mathcal F(f)\) und manchmal spricht man auch von der Spektralfunktion.
 \end{mainbox}
 
+In vielen Fällen lässt sich das obige Integral auch mit dem \textbf{Residuensatz} berechnen.
+
+Falls $f$ \textbf{gerade} ist, so ist auch $\hat{f}$ gerade. Falls $f$ \textbf{ungerade} ist, so ist auch $\hat{f}$ ungerade.
+
+Man kann die Fourier-Tranformation auch zur Berechnung von Integralen verwenden. Es gilt:
+$$
+\hat{f}(0) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^\infty f(t) e^{-i\cdot 0 \cdot t} dt \implies  \int_{-\infty}^\infty f(t) dt = \sqrt{2\pi} \hat{f}(0)
+$$
+
 \begin{mainbox}{Inverse Fourier-Transformation}
   Sei \(f\colon\mathbb{R}\to\mathbb{C}\) eine absolut integrierbare Funktion, deren Fourier-Transformation \(\hat f\) auch absolut integrierbar ist. Die inverse Fourier-Transformation von \(\hat f\) ist \begin{align*} \mathcal F^{-1}(\hat f)(t):=\frac{1}{\sqrt{2\pi}}\int_{-\infty}^\infty \hat f(\omega)e^{ i\omega t}\,d\omega \end{align*}
 \end{mainbox}
@@ -1259,9 +1285,9 @@ Daraus folgt auch dass:
 \end{subbox}
 
 \begin{subbox}{Parseval's Identität}
-  Für eine $2\pi$-periodische Funktion $f$ und ihre Fourierreihenkoeffizienten $c_n$ gilt:
+  Für eine $2L$-periodische Funktion $f$ und ihre Fourierreihenkoeffizienten $c_n$ gilt:
   $$
-    \sum_{n = -\infty}^\infty | c_n |^2 = \frac{1}{2\pi} \int_{-\pi}^\pi |f(t)|^2 dt
+    \frac{1}{2L} \int_{-L}^L |f(t)|^2 dt = \sum_{n = -\infty}^\infty | c_n |^2 = \frac{|a_0|^2}{4} + \frac12 \sum_{n=1}^\infty \left( |a_n|^2 +|b_n|^2 \right)
   $$
 \end{subbox}
 
@@ -1457,6 +1483,14 @@ Mittels der Laplace-Transformation verwandeln wir das Problem in ein Problem, da
  \item $\cos(\alpha + \beta) = \cos(\alpha) \cos(\beta) - \sin(\alpha) \sin(\beta)$
  \item $\tan(\alpha + \beta) = \frac{\tan(\alpha) + \tan(\beta)}{1 - \tan(\alpha) \tan(\beta)}$
 \end{itemize}
+
+\subsubsection{Summen}
+\begin{itemize}
+  \item $\sin \theta \pm \sin \varphi = 2 \sin \left( \frac{\theta \pm \varphi}{2} \right) \cos \left( \frac{\theta \mp \varphi}{2} \right)$
+  \item $\cos \theta + \cos \varphi = 2 \cos \left( \frac{\theta + \varphi}{2} \right) \cos \left( \frac{\theta - \varphi}{2} \right)$
+  \item $\cos \theta - \cos \varphi = -2 \sin \left( \frac{\theta + \varphi}{2} \right) \sin \left( \frac{\theta - \varphi}{2} \right)$
+  \item $\tan \theta \pm \tan \varphi = \frac{\sin(\theta \pm \varphi)}{\cos \theta \cos \varphi}$
+  \end{itemize}
 
 \subsubsection{Subtraktion}
 \begin{itemize}
@@ -1711,9 +1745,9 @@ für jedes $t$ im Definitionsbereich.
   \end{tabularx} 
  \end{center}
 
-\subsubsection{Fourier-Transformationen}
-
 \subsubsection{Laplace-Transformationen}
+
+Die linke Seite muss hier generell noch mit der Heaviside Funktion multipliziert werden.
 
 \begin{center}
   \begin{tabularx}{\linewidth}{c>{\centering\arraybackslash}Xc}
@@ -1729,12 +1763,15 @@ für jedes $t$ im Definitionsbereich.
   $e^{at} \cos(bt)$ & $\frac{s-a}{(s-a)^2 + b^2}, \; \Re(s) >  a$ \\
   $t^n e^{at}$ & $\frac{n!}{(s-a)^{n+1}}, \; \Re(s) >  a$ \\
   $a f(t) + b g(t)$ & $a \mathcal{L}[f](s) + b \mathcal{L}[g](s)$ \\
+  $f(t-a)$&$e^{-a s}\cdot \mathcal{L}[f](s)$ \\
+  $f(at)$&$\frac1a \mathcal{L}[f](\frac{s}{a})$\\
   $t f(t)$ & $-\frac{d}{ds} \left( \mathcal{L}[f](s) \right)$ \\
   $t^n f(t)$ & $(-1)^n \frac{d^n}{ds^n} \left( \mathcal{L}[f](s) \right)$ \\
   $f'(t)$ & $s \mathcal{L}[f](s) - f(0)$ \\
   $f''(t)$ & $s^2 \mathcal{L}[f](s) - s f(0) - f'(0)$ \\
   $e^{at} f(t)$ & $\mathcal{L}[f(t)](s - a)$ \\
   $\int_0^t f(\tau) g(t-\tau) d\tau$ & $\mathcal{L}[f](s) \cdot \mathcal{L}[g](s)$ \\
+  $\int_0^t f(\tau)d\tau$&$\frac{1}{s}\cdot \mathcal{L}[f](s)$\\
   $\cosh(at)$ & $\frac{s}{s^2 - a^2}, \; \Re(s) >  a$\\
   $\sinh(at)$ & $\frac{a}{s^2 - a^2}, \; \Re(s) >  a$\\
   $\delta(t - a)$ & $e^{-as}$\\
@@ -1794,6 +1831,16 @@ Berechne $\frac{6x^3 + 5x^2 - 7}{3x^2 - 2x - 1} = 2x + 3 + \frac{8x - 4}{3x^2 -2
 \begin{center}
   \includegraphics[width=0.4 \linewidth]{synthetic-division.png}
 \end{center}
+
+\subsection{Laplace und Differentialgleichungen}
+\begin{enumerate}
+	\item DGL in Bildbereich transformieren
+	\item Anfangswerte in transformierte DGL einsetzen
+	\item DGL nach \(L[y](s)\) auflösen
+	\item Partialbruchzerlegung
+	\item Rücktransformation mit Tabellen
+  \item $f(t)=0$ für $t<0$ hinzuschreiben, oder mit $H(t)$ multiplizieren
+\end{enumerate}
 
 
 
