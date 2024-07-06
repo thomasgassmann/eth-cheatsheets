@@ -1794,7 +1794,7 @@ Die linke Seite muss hier generell noch mit der Heaviside Funktion multipliziert
   \end{tabularx}
 \end{center}
 
-\section{Anleitungen}
+\section{Anleitungen und Beispiele}
 
 \subsection{Partialbruchzerlegung}
 
@@ -1857,6 +1857,71 @@ Berechne $\frac{6x^3 + 5x^2 - 7}{3x^2 - 2x - 1} = 2x + 3 + \frac{8x - 4}{3x^2 -2
   \item $f(t)=0$ für $t<0$ hinzuschreiben, oder mit $H(t)$ multiplizieren
 \end{enumerate}
 
+\subsection{Laurentreihen}
 
+Finde die Laurentreihe der folgenden Funktion im Kreisring $\{ z \in \C \mid 1 < |z| < 2 \}$ sowie im Kreisring $\{ z \in \C \mid 2 < |z| < 3 \}$:
+
+$$
+f(z) = \frac{3z - 4}{z^2 - 3z + 2} + \frac{1}{z - 3}
+$$
+
+Durch Partialbruchzerlegung erhalten wir:
+
+$$
+f(z)=\frac{1}{z-1}+\frac{2}{z-2}+\frac{1}{z-3}
+$$
+
+Wir müssen nun vier entwicklungen berechnen:
+
+\begin{itemize}
+  \item{
+$\frac{1}{z-1}$ für $z>1$
+
+$$
+\frac{1}{z-1}=\frac{1}{z} \frac{1}{1-1 / z}=\frac{1}{z} \sum_{k \geq 0} z^{-k}=\sum_{k>0} z^{-k}=\sum_{k \geq 0} z^{-k-1}
+$$
+  }
+  \item{
+    $\frac{2}{z-2}$ für $z<2$
+
+$$
+\frac{2}{z-2}=\frac{-1}{1-z / 2}=-\sum_{k \geq 0}(z / 2)^{k}
+$$
+  }
+  \item {
+    $\frac{2}{z-2}$ für $z>2$
+
+$$
+\frac{2}{z-2}=\frac{2}{z} \frac{1}{1-2 / z}=\frac{2}{z} \sum_{k \geq 0}(2 / z)^{k}=\sum_{k \geq 0}(2 / z)^{k+1}
+$$
+  }
+  \item{
+    $\frac{1}{z-3}$ für $z<3$
+
+$$
+\frac{1}{z-3}=\frac{-1}{3} \frac{1}{1-z / 3}=\frac{-1}{3} \sum_{k \geq 0}(z / 3)^{k}
+$$
+  }
+\end{itemize}
+
+
+Auf dem ersten Kreisring gilt also:
+
+$$
+\begin{aligned}
+f(z) & =\sum_{k \geq 0} z^{-k-1}-\sum_{k \geq 0}(z / 2)^{k}+\frac{-1}{3} \sum_{k \geq 0}(z / 3)^{k} \\
+& =\sum_{k \geq 0}\left(z^{-k-1}-(z / 2)^{k}-\frac{(z / 3)^{k}}{3}\right) \\
+& =\sum_{k=-\infty}^{-1} z^{k}-\sum_{k=0}^{\infty}\left(3^{-k-1}+2^{-k}\right) z^{k}
+\end{aligned}
+$$
+
+Auf dem zweiten Kreisring gilt also:
+
+$$
+\begin{aligned}
+f(z) & =\sum_{k \geq 0} z^{-k-1}+\sum_{k \geq 0}(2 / z)^{k+1}+\frac{-1}{3} \sum_{k \geq 0}(z / 3)^{k} \\
+& =\sum_{k=-\infty}^{-1}\left(1+2^{-k}\right) z^{k}-\sum_{k=0}^{\infty} 3^{-k-1} z^{k} .
+\end{aligned}
+$$
 
 \end{document}
