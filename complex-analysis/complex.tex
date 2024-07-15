@@ -489,6 +489,12 @@ $$
 u_r = \frac1r v_{\varphi}, \ v_r = -\frac1r u_{\varphi}, \ f(r, \varphi) = u(r, \varphi) + i v(r, \varphi)
 $$
 
+  Um eine \textbf{Stammfunktion} von $f(x + iy) = u(x, y) + iv(x, y)$ zu fiden, sucht man $U, V$ mit:
+  \begin{align*}
+    & U_x = u,&  & U_y = -v\\
+    & V_x = v,&  & V_y = u
+  \end{align*}
+
 Eine lineare Abbildung mit positiver Determinante heisst \textbf{konform} falls sie winkeltreu ist. Eine $\R$-differenzierbare Funktion $f$ ist auch $\C$-differenzierbar genau dann wenn ihre Ableitung eine konformale Abbildung ist. Dies liegt intuitiv daran dass die Jacobi-Matrix (wegen den Cauchy-Riemann Gleichungen) die Form $\begin{bsmallmatrix}
   a & -b\\
   b & a
@@ -996,7 +1002,7 @@ Aus (KI3) auf der linken Seite angewendet erhalten wir \begin{align*} \int_{\gam
 
 Nachfolgend geben wir jetzt eine Bedingung dafür dass das obige Integral über $\gamma_R$ verschwindet.
 
-\begin{subbox}{Uneigentliches Integral mit Residuensatz}
+\begin{mainbox}{Uneigentliches Integral mit Residuensatz}
   Sei \(\gamma_R(t):=Re^{ i t}\) für \(t\in[0,\pi]\). Seien \(p\) und \(q\) Polynome mit den folgenden Eigenschaften:
   \begin{itemize}
     \item \(\deg(p)\leq \deg(q)-2\)
@@ -1010,7 +1016,7 @@ Somit gilt auch:
 
 \begin{align*} P.V.\int_{-\infty}^\infty f(x) dx = 2 \pi i \sum_{z_j}\operatorname{Res} \left( \frac{p(z)}{q(z)}h(z),z_j \right) \end{align*} wobei \(z_j\) die Pole sind, welche in der Menge \(\{z\in\mathbb{C}:\,\Im(z)>0\}\) enthalten sind.
 
-\end{subbox}
+\end{mainbox}
 
 Bestimmen wir z.B. folgendes Integral: \begin{align*} \int_{-\infty}^{\infty} \frac{1}{(1+x^2)^2}dx\end{align*}
 
@@ -1890,6 +1896,7 @@ Wir verwenden hier die übliche Definition der Fourier-Transformation mit $\frac
   \midrule
   \(\chi_{[-a,a]}\)(t) & $\sqrt{\frac{2}{\pi}} \frac{\sin(aw)}{w}$\\
   $e^{-t^2}$ & $\frac{\exp \left({-\frac{w^2}{4}}\right)}{\sqrt{2}}$\\
+  $\frac{1}{t^2 + k^2}$ & $\frac{1}{k} \sqrt{\frac{\pi}{2}} e^{-k|w|} $\\
   \bottomrule
   \end{tabularx}
 \end{center}
