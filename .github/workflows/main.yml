@@ -33,7 +33,7 @@ jobs:
       - name: Add revision
         run: |
           GIT_COMMIT=$(git rev-parse --short "$GITHUB_SHA")
-          sed -i "s/GITCOMMIT/$GIT_COMMIT/g" ./header.tex
+          sed -i "s/GITCOMMIT/$GIT_COMMIT/g" ./commit.tex
       - name: Compile LaTeX document (xelatex)
         uses: xu-cheng/latex-action@v2
         with:
