@@ -13,7 +13,6 @@ This is a non-convex objective. Similar to training a GBC without labels. Start 
 \subsection*{Hard-EM Algorithm}
 
 \textbf{E-Step}: predict the most likely class for each data point:
-
 \begin{align*}
 	z_i^{(t)} &= \argmax{z} \; p(z \; | \; x_i, \theta^{(t-1)}) \\[-5pt]
 	&= \argmax{z} \; p(z \; | \; \theta^{(t-1)}) \cdot p(x_i \; | \; z, \theta^{(t-1)})
