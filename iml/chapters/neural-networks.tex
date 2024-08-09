@@ -21,7 +21,7 @@ Hidden: $z^{(l)} = W^{(l)} v^{(l-1)}, v^{(l)} = [\varphi(z^{(l)}); 1]$
 Only compute \color{Red} \textbf{the gradient}\color{Black}. Rand. init. weights by distr. assumption for $\varphi$. ( $2 / n_{in}$ for ReLu and $1/n_{in}$ or $ 1/ (n_{in} + n_{out})$ for Tanh)
 
 \subsection*{Overfitting}
-\textbf{Regularization}; \textbf{Early Stopping}; \textbf{Dropout}: ignore hidden units with prob. $p$, after training use all units and scale weights by $p$; \textbf{Batch Normalization}: normalize the input data (mean 0, variance 1) in each layer
+\textbf{Regularization}; \textbf{Early Stopping}; \textbf{Dropout}: keep hidden units with prob. $p$, after training use all units and scale weights by $p$; \textbf{Batch Normalization}: normalize the input data (mean 0, variance 1) in each layer
 
 \subsection*{CNN \quad \color{Black}$\varphi(W * v^{(l)})$}
 
