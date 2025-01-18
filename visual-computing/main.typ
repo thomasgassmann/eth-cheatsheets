@@ -47,7 +47,7 @@ Common model for image noise: additive Gaussian. $I(x, y) = f(x, y) + c$ where $
 Poisson (shot) noise: $p(k) = (lambda^k e^(- lambda)) / (k!)$. Rician noise (MRI): $p(I) = 1 / (sigma^2) exp((-(I^2 + f^2)) / (2 sigma^2)) I_0 ((I f) / (sigma^2))$
 Multiplicative noise: $I = f + f c$. Signal to noise ratio (SNR) s is index of image quality: $s = F / sigma$ where $F = 1 / (X Y) sum_(x = 1)^X sum_(y = 1)^Y f(x, y)$. Peak SNR (PSNR): $s_"peak" = (F_"max") / sigma$.
 
-*Color camera concepts*: Prism (splitting light, 3 sensors, requires good alignment), Filter mosaic (coat filter on sensor, grid, introduces aliasing), Filter wheel (rotate filter in front of lens, static image), CMOS sensor (absorbing colors at different depths)
+*Color camera concepts*: Prism (splitting light, 3 sensors, requires good alignment), Filter mosaic (coat filter on sensor, grid, introduces aliasing), Filter wheel (rotate filter in front of lens, static image), CMOS sensor (absorbing colors at different depths), Rolling shutter effect (the effect produced by the sequential readout of pixels while a digital camera is moving)
 
 == Image segmentation
 Partition image into regions of interest.
@@ -78,7 +78,7 @@ Seed region(s) by hand or conservative thresholding
 
 #colorbox(title: [Distance measures $I_alpha$], inline: false)[
   - Plain BG subtraction: $bold(I)_alpha = abs(bold(I) - bold(I)_"bg")$
-  - *Mahalanobis* $bold(I)_alpha = sqrt((bold(I) - bold(I)_"bg")^T Sigma^(-1) (bold(I) - bold(I)_"bg"))$ where $Sigma$ is the BG image's covariance matrix: \
+  - *Mahalanobis* $bold(I)_alpha = sqrt((bold(I) - mu)^T Sigma^(-1) (bold(I) - mu))$ where $Sigma$ is the BG image's covariance matrix: \
     $Sigma_(i j) = EE[(X_i - mu_i) (X_j - mu_j)]$, estimate it from $n >= 3$ data points: $1 / (n - 1) sum_(i = 1)^n (x_i - mu) (x_i - mu)^T$
   Needs thresholds: $bold(I)_alpha > bold(T)$ ($T in RR^3$ RGB, gray $RR$)
 ]
@@ -144,7 +144,7 @@ $nabla^2 f(x, y) = (diff^2 f(x, y)) / (diff x^2) + (diff^2 f(x, y)) / (diff y^2)
   + Compute grad. mag. & orient. (Sobel, Prewitt, ...)
     #fitWidth($ M(x, y) = sqrt(((diff f) / (diff x))^2 + ((diff f) / (diff y))^2), alpha(x, y) = tan^(-1)((diff f) / (diff y) slash.big (diff f) / (diff x)) $)
   + Nonmaxima suppression: quantize edges normal to 4 dirs, if smaller than either neighb. suppress
-  + Double thresholding: $T_"high", T_"low"$, keep if $>= T_"high"$ or $>= T_"low"$ and 8-conn. through $>= T_"low"$ to $T_"high"$ px.
+  + Double thresholding: $T_"high", T_"low"$, keep if $>= T_"high"$ or $>= T_"low"$ and 8-conn. through $>= T_"low"$ to $T_"high"$ px. (first detect strong/weak edge pixels, then reject weak edge pixels not connected with strong edge pixels)
 ]
 
 #colorbox(title: [Hough transformation], color: silver)[
@@ -153,7 +153,7 @@ $nabla^2 f(x, y) = (diff^2 f(x, y)) / (diff x^2) + (diff^2 f(x, y)) / (diff y^2)
   + Draw line in $(m, c)$ plane for each edge pixel $(x, y)$, increment bins by 1 along line
   + Detect peaks in $(m, c)$ plane.
 ]
-Infinite slopes arise, reparameterize line with $(theta, x)$: $x cos theta + y sin theta = rho$. For circles with known radius: $(x - a)^2 + (y - b)^2 = r^2$, else 3D Hough. _(Loop through all discrete values of 2 params $(x, y)$ corresponding to bins, compute $r$ for $(x, y)$ update 3D bin $(x, y, r)$ like in 2D case, find maximum in 3D bins)_
+Infinite slopes arise, reparameterize line with $(theta, rho)$: $x cos theta + y sin theta = rho$. For circles with known radius: $(x - a)^2 + (y - b)^2 = r^2$, else 3D Hough. _(e.g. for a circle with unknown radius we have a cone in $(x,y,r)$ space, then find maximum in 3D bins)_
 
 *Corner detection*: Edges only well localized in single direction. We need acc. local., invar. against shift, rot., scale, brightness, noise robust, repeatability. We define Local displacement sensitivity: $S(Delta x, Delta y) =$ $sum_((x, y) in "window") (f(x, y) - f(x + Delta x, y + Delta y))^2$. Using the Taylor approx. below and $bold(M)$, we get: $f_x = I_x, ...$
 
@@ -194,7 +194,16 @@ $F(delta(x - x_0))(u) = e^(-i 2 pi u x_0)$. and $sinc(u) = sin(u) / u$
   [Timeshift], $f(x - x_0)$, $e^(-2 pi i u x_0) dot.c F(u)$,
   [Freq. shift], $e^(2 pi i u_0 x) f(x)$, $F(u - u_0)$,
   [Different.], $(dif n) / (dif x^n) f(x)$, $(i / (2 pi) u)^n F(u)$,
-  [Multiplic.], $x f(x)$, $i / (2 pi) dif / (dif u) F(u)$
+  [Multiplic.], $x f(x)$, $i / (2 pi) dif / (dif u) F(u)$,
+  [Stretching], $f(a x)$, $frac(1, |a|) F(frac(u, a))$,
+  [Deriv. Fourier], $x^n f(x)$, $i^n frac(d^n, "du"^n) F(u)$
+)
+
+=== More Properties
+
+#grid(columns: (auto, auto), column-gutter: 1.5em, row-gutter: 0.8em,
+  [*Property*], [*Definition*],
+  [Dual Transform:], $f(-x) = F(F(f))(x)$
 )
 
 #image("fourier-transforms.png", height: 20em)
@@ -215,7 +224,7 @@ Images are vectorized row-by-row. Linear image processing algorithms can be writ
   + Compute eigendecomp. of $Sigma$ by solving $Sigma e = lambda e$ with e.g. SVD ($Sigma = U Lambda U^T$)
   + Define $U_k$ as first k eigenval. of $Sigma$, $U_k = mat(u_1, ..., u_k)$ dirs with largest variance.
   + $"PCA"(x_i) = U_k^T (x_i - mu) = U_k^T dot.c x''_i$
-  To decompress, use $"PCA"^(-1)(x_i) =U_k dot.c y_i + mu$
+  To decompress, use $"PCA"^(-1)(x_i) =U_k dot.c y_i + mu$ where $y$ is the lower-dimensional representation.
 ]
 
 Simple recognition, compare in projected space, find nearest neighbour. Find face by computing reconstr. error and minimizing by varying patch pos. Compress data and visualization. Eigenfaces struggle with lighting differences. Fisherfaces improve this by maximizing between-class scatter, minimzing within-class scatter.
@@ -432,11 +441,19 @@ Rigid transforms: translation, rotation. Linear: Rotation, Scaling, Shear. Proje
   Transforming a normal: $bold(n') = (bold(M)^(-1))^T bold(n)$
 ]
 
-Projections: parallel projection vs perspective.
-#grid(columns: (auto, auto), column-gutter: 1em,
-  $bold(M_"per") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 1 / d, 0)$,
-  $bold(M_"ort") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 0, 0; 0, 0, 0, 1)$
-)
+Parallel projection:
+$
+  bold(M_"ort") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 0, 0; 0, 0, 0, 1)
+  $
+
+Perspective projection:
+
+$
+bold(M_"per") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 1 / d, 0)
+$
+
+
+#image("perspective-projection.png")
 
 #colorbox(title: [Quaternions], color: orange)[
   Alternative approach for rotation. Similar to $CC$, define $i^2 = j^2 = k^2 = - 1$, $i j k = -1$, $i j = k$, $j i = -k$, $j k = i$, $k j = -i$, $k i = j$, $i k = -j$. For $q = a + b i + c j + d k$, we have \ 
