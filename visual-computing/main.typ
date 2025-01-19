@@ -79,7 +79,7 @@ Seed region(s) by hand or conservative thresholding
 #colorbox(title: [Distance measures $I_alpha$], inline: false)[
   - Plain BG subtraction: $bold(I)_alpha = abs(bold(I) - bold(I)_"bg")$
   - *Mahalanobis* $bold(I)_alpha = sqrt((bold(I) - mu)^T Sigma^(-1) (bold(I) - mu))$ where $Sigma$ is the BG image's covariance matrix: \
-    $Sigma_(i j) = EE[(X_i - mu_i) (X_j - mu_j)]$, estimate it from $n >= 3$ data points: $1 / (n - 1) sum_(i = 1)^n (x_i - mu) (x_i - mu)^T$
+    $Sigma_(i j) = EE[(X_i - mu_i) (X_j - mu_j)^top]$, estimate it from $n >= 3$ data points: $1 / (n - 1) sum_(i = 1)^n (x_i - mu) (x_i - mu)^T$
   Needs thresholds: $bold(I)_alpha > bold(T)$ ($T in RR^3$ RGB, gray $RR$)
 ]
 
@@ -206,6 +206,10 @@ $F(delta(x - x_0))(u) = e^(-i 2 pi u x_0)$. and $sinc(u) = sin(u) / u$
   [Dual Transform:], $f(-x) = F(F(f))(x)$
 )
 
+Fourier Transform of the Box filter with size 1 is $sinc$.
+
+If $h(x,y) = f(x) g(x)$ is a separable 2D function, it holds that $H(u, v) = F(u) G(v)$.
+
 #image("fourier-transforms.png", height: 20em)
 
 #colorbox(title: [Image restoration])[
@@ -216,6 +220,8 @@ Image degradation is applying kernel $h$ to some image $f$. The inverse $tilde(h
 Images are vectorized row-by-row. Linear image processing algorithms can be written as $g = F f$. Auto-correl. fun.: $R_"ff" = E[f_i dot.c f_i^H] = (F dot.c F^H) / n$.
 
 *Eigenmatrix*: $Phi$ of autocorrelation matrix $R_"ff"$: $Phi$ is unitary, columns form set of eigenvectors of $R_"ff"$: $R_"ff" Phi = Phi Lambda$ where $Lambda$ is a diag. matrix of eigenvecs. $R_"ff"$ is symmetric nonneg. definite, hence $lambda_i >= 0$, and normal: $R_"ff"^H R_"ff" = R_"ff" R_"ff"^H$.
+
+*Autocorrelation matrix*: $EE[X X^top]$, unlike covariance matrix, we do not subtract the mean here ($EE[(X - mu) (X - mu)^top]$).
 
 #colorbox(title: "Karhunen-Loeve / Principal component anal. ", inline: false)[
   + Normalize to remove brightness var.: $x'_i = x_i / norm(x_i)$
@@ -228,7 +234,7 @@ Images are vectorized row-by-row. Linear image processing algorithms can be writ
 ]
 
 Simple recognition, compare in projected space, find nearest neighbour. Find face by computing reconstr. error and minimizing by varying patch pos. Compress data and visualization. Eigenfaces struggle with lighting differences. Fisherfaces improve this by maximizing between-class scatter, minimzing within-class scatter.
-// TODO Fisher formulas?
+// TODO: Fisher formulas?
 
 == JPG & JPEG
 + Convert RGB $->$ YUV (Y luminance / brightness, UV color / chrominance). Humans more sensitive to color, compress colors with chroma subsampling (e.g. color of upper left pixel for 4x4 grid)
@@ -272,7 +278,7 @@ Aperture problem: 2 unknowns for every pixel $(u, v)$ but only one equation $=> 
 ]
 Gradient method fails when intensity structure within window is poor, displacement large etc.
 #colorbox(title: [Coarse-to-fine estimation])[
-  Create levels by gradual subsampling. Start at coarsest level, estimate OF, iterate and add until reached finest level. 
+  Create levels by gradual subsampling. Start at coarsest level, estimate OF, iterate and add until reached finest level. Result is OF at finest level.
 ]
 Still fails if large lighting changes happen.
 
@@ -421,7 +427,11 @@ Change position & orientation of objects, project to screen, animating objects, 
     [Shear \ (2D)], $mat(1, a, 0; 0, 1, 0; 0, 0, 1)$
   )
 ]
-Rigid transforms: translation, rotation. Linear: Rotation, Scaling, Shear. Projective: Rigid + Linear + Persp. + Paral.
+*Rigid transforms*: translation, rotation. 
+
+*Linear*: Rotation, Scaling, Shear. 
+
+*Projective transforms*: Rigid + Linear + Persp. + Paral.
 
 *Commutativity* ($M_1 M_2 = M_2 M_1$) holds for:
 #table(align: center, stroke: none,
