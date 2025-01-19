@@ -116,7 +116,7 @@ The 2 operations are the same with reversed kernels. \
     [Laplacian], $mat(0,1,0; 1,-4,1;0,1,0)$,
     [Prewitt (x)], $mat(-1,0,1;-1,0,1;-1,0,1)$,
     [Gaussian], [\ $G_sigma = 1 / (2 pi sigma^2) e^(-(x^2 + y^2) / (2 sigma^2))$],
-    [Sobel (x)], $mat(-1,0,-1; -2,0,2; -1,0,1)$,
+    [Sobel (x)], $mat(-1,0,1; -2,0,2; -1,0,1)$,
     [Diff. (x)], $mat(-1, 1)$, [Diff. (y)], $mat(-1, 1)^T$
   )
 ]
@@ -550,7 +550,7 @@ Implicit repr. easily test inside / outside, compact storage, but sampling expen
 - *Implicit surfaces*, surface: zeros of a function
 We need to store textures as bitmaps, hence parameterizing complex surfaces.
 
-Manifolds: surface homeomorphic to disk, closed manifolds divids space into two.
+Manifolds: surface homeomorphic to disk, closed manifolds divids space into two., in manifold mesh there are at most two faces sharing an edge
 
 *Mesh data structures*: Locations, how vertices are connected, attributes such as normals, color etc. Must support rendering, geometry queries, modifications. E.g.
 - Triangle list (list of 3 points, redundant, e.g. STL).
