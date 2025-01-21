@@ -11,6 +11,10 @@
   date: "January 25, 2024",
 )
 
+= Prerequisites
+
+
+
 = Computer Vision
 == Digital images & sensors
 An image (as 2D signal) is a continuous function. A pixel is a discrete sample of that cont. function.
@@ -22,6 +26,7 @@ Some challenges with images: transmission interference, compression artifacts, s
   - *Blooming*: Oversaturated photosites cause vertical channels to "flood" (bright vertical line)
   - *Bleeding/Smearing*: While charge in transit, bright light hits photosites above - worse with shorter shutter times (electrical shutters only)
   - *Dark current*: CCDs produce thermally generated charge: random noise despite darkness. Avoid by cooling, worsens with age.
+  - High *production cost*, high *power consumption*
 ]
 
 #colorbox(title: [CMOS sensors])[
@@ -62,7 +67,7 @@ $B(x, y) = 1 "if" I(x, y) >= T "else" 0$, finding $T$ with trial and error, comp
 *Chromakeying* choose special background color $bold(x)$, then segmentation using: $I_alpha = norm(bold(I) - bold(x)) > T$. Issues: hard $alpha$-mask, variation not same in 3 channels.
 
 #colorbox(title: [Receiver operating characteristic (ROC)], inline: false)[
-  ROC curve describes performance of binary classifier. Plots (y-axis, sensitivity, $"TP" / ("TP" + "FN")$) against (x-axis, 1-specificity, $"FP" / ("FP" + "TN")$). We can choose operating point with gradient $beta = N / P dot.c (V_"TN" + C_"FP") / (V_"TP" + C_"FN")$ where $V$ value and $C$ cost.
+  ROC curve describes performance of binary classifier. Plots (y-axis, sensitivity, $"TP" / ("TP" + "FN")$, TPR) against (x-axis, 1-specificity, $"FP" / ("FP" + "TN")$, FPR). We can choose operating point with gradient $beta = N / P dot.c (V_"TN" + C_"FP") / (V_"TP" + C_"FN")$ where $V$ value and $C$ cost.
 ]
 
 *Pixel neighbourhoods* or 4/8-connectivity: 4-neighb. means horiz. + vert. or 8-neighb. with diag.
@@ -90,6 +95,7 @@ Seed region(s) by hand or conservative thresholding
 Modify pixels on some function of local neighb.
 *Shift-invariant*: same for all pixels, $K$ not dependent on pos.\
 *Linear*: linear combination of neighb.
+*Local*: Filter is linear, if output only depends on pixels in its neighbors, not on all pixels (global)
 
 #colorbox(title: "Correlation")[ 
   Template matching: $I' = K circle.small I$
@@ -107,7 +113,7 @@ Modify pixels on some function of local neighb.
 
 The 2 operations are the same with reversed kernels. \
 *Filtering near edges*: clip to black, wrap around, copy edge, reflect across edge, vary filter! \
-*Separable*: kernel $K(m, n) = f(m) g(n)$ \
+*Separable*: kernel $K(m, n) = f(m) g(n)$, if the kernel matrix has rank 1 it's separable because it's the outer product of two vectors \
 
 #colorbox(title: "Important kernel examples", color: purple, inline: false)[
   #grid(columns: (auto, auto, auto, auto), gutter: 1em,
@@ -139,7 +145,7 @@ $"LoG"(x, y) = - 1/ (pi sigma^4) (1 - (x^2 + y^2) / (2 sigma^2)) exp(-(x^2 + y^2
 $nabla^2 f(x, y) = (diff^2 f(x, y)) / (diff x^2) + (diff^2 f(x, y)) / (diff y^2)$
 
 #colorbox(title: [Canny edge detector], color: silver)[
-  Thin, uninterrupted edges, extended more completely than with simple thresh.
+  Thin, uninterrupted edges, no guarantee on the connectivity of edges, extended more completely than with simple thresh.
   + Smooth image with Gaussian filter
   + Compute grad. mag. & orient. (Sobel, Prewitt, ...)
     #fitWidth($ M(x, y) = sqrt(((diff f) / (diff x))^2 + ((diff f) / (diff y))^2), alpha(x, y) = tan^(-1)((diff f) / (diff y) slash.big (diff f) / (diff x)) $)
@@ -231,6 +237,11 @@ Images are vectorized row-by-row. Linear image processing algorithms can be writ
   + Define $U_k$ as first k eigenval. of $Sigma$, $U_k = mat(u_1, ..., u_k)$ dirs with largest variance.
   + $"PCA"(x_i) = U_k^T (x_i - mu) = U_k^T dot.c x''_i$
   To decompress, use $"PCA"^(-1)(x_i) =U_k dot.c y_i + mu$ where $y$ is the lower-dimensional representation.
+]
+
+#colorbox(title: [PCA storage space], color: green)[
+  Given $n$ images of size $x times y$, we want to store the dataset given a budget of $Z$ units of space. What is max number $K$ of princip. comp. allowed? \
+  We need to store dataset mean $mu: x times y$, truncated eigenmat. $U_k: (x times y) times K$, compr. imgs. ${y_i}: n times K$
 ]
 
 Simple recognition, compare in projected space, find nearest neighbour. Find face by computing reconstr. error and minimizing by varying patch pos. Compress data and visualization. Eigenfaces struggle with lighting differences. Fisherfaces improve this by maximizing between-class scatter, minimzing within-class scatter.
@@ -509,7 +520,8 @@ $f_r (x, arrow(omega)_i, arrow(omega)_r) = (dif L_r (x, arrow(omega)_r)) / (dif 
 
   $h_i$ own emission coefficient, $I_a$ ambient light intensity, $k_a$ ambient light coefficient, $I_p$ directed light source intensity, $k_d$ diffuse reflection coefficient, $theta in [0, pi / 2]$ angle surface normal $N$ and light source vector $L$, attenuation factor $f_"att"$, $O_(d lambda)$ value of spectrum of object color at the point $lambda$.
 
-  $k_a, k_d, k_s, n$ are material dependent constants.
+  $k_a, k_d, k_s, n$ are material dependent constants. Increasing $n$ causes the highlight to appear smaller in terms of area. As the power increase, more values are
+mapped to zero.
 ]
 
 == Shading models
@@ -672,8 +684,3 @@ Facts:
 + Given material with a BRDF fct that satisfies $integral_Omega f_r (omega_i, omega_o) dif omega_i = 1$, all incom. energy is reflected
 + For a perfect mirror material, its $f_r (omega_i, omega_o)$ is non-zero $<=> omega_i$ is reflection vec. of $omega_o$ against surf. normal at the point of interest
 + Due to persp. proj., barycentric coords. of values on a triangle of different depths are not an affine function of screen space positions.
-
-#colorbox(title: [PCA storage space], color: green)[
-  Given $n$ images of size $x times y$, we want to store the dataset given a budget of $Z$ units of space. What is max number $K$ of princip. comp. allowed? \
-  We need to store dataset mean $mu: x times y$, truncated eigenmat. $U_k: (x times y) times K$, compr. imgs. ${y_i}: n times K$
-]
