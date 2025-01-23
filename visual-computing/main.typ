@@ -185,10 +185,16 @@ $ S(Delta x, Delta y) approx mat(Delta x, Delta y) bold(M) mat(Delta x, Delta y)
 ]
 Inverse FT exists. Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$ vectorized image. $F(u, v) = 1 / N sum_(x = 0)^(N - 1) sum_(y = 0)^(N - 1) f(x, y) dot.c e^(-i 2 pi (u x + v y) / N)$
 
-Relevant: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / 2$ \
-Dirac delta: $delta(x) = 0 "if" x != 0 "else undefined"$ with $integral_(-oo)^infinity delta(x) dif x = 1$ Sampling: Mult with seq. of $delta$-fnts
+*Relevant*: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / 2$, $sinc(u) = sin(u) / u$ \
+*Dirac delta*: $delta(x) = 0 "if" x != 0 "else undefined"$. Properties: \
 
-$F(delta(x - x_0))(u) = e^(-i 2 pi u x_0)$. and $sinc(u) = sin(u) / u$
+- $integral_(-oo)^infinity delta(x) dif x = 1$
+- $delta(alpha x) = delta(alpha x) / abs(alpha)$ and $delta(-t) = delta(t)$
+- $F(delta(x - x_0))(u) = e^(-i 2 pi u x_0)$
+- $(delta convolve f)(x) = integral_(-infinity)^(infinity) f(t) delta(x - t) d t = f(x)$
+
+*Sampling*: Mult with seq. of $delta$-fnts
+
 
 
 #grid(columns: (auto, auto, auto), column-gutter: 1.5em, row-gutter: 0.8em,
@@ -412,7 +418,7 @@ Light is mixture of many wavelengths. Consider $P(lambda)$ as intensity at wavel
   - *CMY*: inverse (subtr.) to RGB. CMY = 1 - RGB.
   - *YIQ*: Luminance Y, In-phase I (orange-blue), Quadrature Q (purple-green). $ vec(Y, I, Q) = mat(0.299, 0.587, 0.114; 0.596, -0.275, -0.321; 0.212, -0.523, 0.311) vec(R, G, B) $
   - *HSV*: hue (base color), saturation (purity of color), value / lightness / brightness (intuitive)
-  - *CIELAB / CIELUV*: Correct CIE chart colors to adjust for perceived "distance" betw. colors, nonlinear warp. MacAdams ellipses nearly circular.
+  - *CIELAB / CIELUV*: color space is perceptually uniform, correct the CIE chart colors to adjust for perceived "distance" betw. colors (small change in euclidean distance $arrow$ small change in perceived color), nonlinear warp. MacAdams ellipses nearly circular.
 ]
 
 #colorbox(color: yellow)[
@@ -483,7 +489,7 @@ $
 ]
 Rotating a point $p = mat(x, y, z)^T$ around axis $u = mat(u_1, u_2, u_3)$ by angle $theta$.
 + Convert $p$ to quaternion $p_Q = x i + y j + z k$
-+ Convert $q$ to quaternion $q'' = u_1 i + u_2 j + u_3 k$, normalize $q' = q'' slash.big norm(q'')$
++ Convert $u$ to quaternion $q'' = u_1 i + u_2 j + u_3 k$, normalize $q' = q'' slash.big norm(q'')$
 + Rotate quaternion $q = cos theta / 2 + q' sin theta / 2$ and $q^(-1) = cos theta / 2 - q' sin theta / 2$
 + Rotated point $p' = q p q^(-1)$. Convert to cartesian.
 
@@ -510,9 +516,11 @@ $omega_x = sin theta cos phi.alt, omega_y = sin theta sin phi.alt, omega_z = cos
 $f_r (x, arrow(omega)_i, arrow(omega)_r) = (dif L_r (x, arrow(omega)_r)) / (dif E_i (x arrow(omega)_i)) = (dif L_r (x, arrow(omega)_r)) / (L_i (x, arrow(omega)_i) cos theta_i dif arrow(omega)_i)$ \
 *Reflection equation*: reflected radiance due to incident illumination from all directions (from BRDF): $integral_(H^2) f_r (x, arrow(omega)_i, arrow(omega)_r) L_i (x, arrow(omega)_i) cos theta_i d arrow(omega)_i = L_r (x, arrow(omega)_r)$ \
 *Types of reflections*: Exact comp. is slow $->$ Specular, ideal diffuse, glossy specular, retro-reflective. \
-*Attenuation*: $f_"att" = 1 / d_L^2$ due to spatial radiation.
+*Attenuation*: $f_"att" = 1 / d_L^2$ due to spatial radiation, loss of flux when light travels through a medium.
 
-#colorbox(title: [Phong Illumination Model], inline: false)[
+*Types*: local illumination only considers the light hitting an object directly from the lightsource, global illumination also considers indirect light bouncing off from other objects that are hitting the object.
+
+#colorbox(title: [Phong Illumination Model TODO: check equation below], inline: false)[
   Approximate specular reflection by cosine powers
   #fitWidth(
     $ I_lambda = underbrace(I_a_lambda k_a O_d_lambda, "Ambient") + f_"att" I_(p_lambda) [underbrace(k_d O_(d_lambda)(N dot.c L), "Diffuse") + underbrace(k_s (R dot.c V)^n, "Specular")] $
@@ -641,7 +649,7 @@ Interpolate points $bold(p)_0, ..., bold(p)_n$ using basis fcts.
 
 == Subdivision surfaces
 
-Generalizatin of spline curves / surfaces allowing arbitrary control meshes using successive refinement (subdivision), converging to smooth limit surfaces, connecting splines and meshes. 
+Generalization of spline curves / surfaces allowing arbitrary control meshes using successive refinement (subdivision), converging to smooth limit surfaces, connecting splines and meshes. 
 
 TODO: Conrer-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
 
