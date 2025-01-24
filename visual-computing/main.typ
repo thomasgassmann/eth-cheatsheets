@@ -30,16 +30,16 @@ Some challenges with images: transmission interference, compression artifacts, s
 ]
 
 #colorbox(title: [CMOS sensors])[
-  Mostly same as CCD, but each sensor has amplifier. Cheaper, lower power, no blooming, on-chip integration with other components, but less sensitive and more noise. Rolling shutter is an issue for sequential read-out of lines.
+  Mostly same as CCD, but each sensor has amplifier. Cheaper, lower power, no blooming, on-chip integration with other components, but less sensitive and more noise. Rolling shutter is an issue for sequential read-out of lines. Also susceptible to dark current.
 ]
 
-We can either sample an image (in 2D) either in a cartesian grid, hexagonally or other non-uniform ways. *Undersampling* means loss of information and introduces aliasing: signals reconstructed incorrectly as lower frequency. To reconstruct a continuous image, we could use bilinear interpolation: 
+We can either sample an image (in 2D) either in a cartesian grid, hexagonally or other non-uniform ways. *Undersampling* means loss of information and introduces aliasing: signals reconstructed incorrectly and higher frequencies incorrenty show up as lower frequency. To reconstruct a continuous image, we could use bilinear interpolation: 
 
 // fixme smaller math and auto-line fix with new typst release
 $f(x,y) = (1 - a) (1 - b) dot.c f(i, j) + a (1 - b) dot.c \ f(i + 1, j) + a b dot.c f(i + 1, j + 1) + (1 - a) b \ dot.c f(i + 1, j)$
 
 #colorbox(title: [Nyquist-Shannon sampling theorem], color: silver, inline: false)[
-  Sample frequency must be at least twice as big as the highest frequency in the signal / image
+  Sample frequency must be at least twice as big as the highest frequency in the signal / image ($omega_s > 2 dot omega_(max)$, strict inequality)
 ]
 
 *Quantization*: real-valued function get digital values. #underline[_*Lossy*_] (in contrast to sampling)! Simple version: equally spaced levels with k intervals: $k = 2^b$.
@@ -218,7 +218,7 @@ Inverse FT exists. Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bo
   [Dual Transform:], $f(-x) = F(F(f))(x)$
 )
 
-Fourier Transform of the Box filter with size 1 is $sinc$.
+Fourier Transform of the Box filter with size 1 (i.e. 1 between $-1/2$ and $1/2$) is the normalized $sinc$ function, i.e. $sinc(x) = sin(pi x) / (pi x)$.
 
 If $h(x,y) = f(x) g(x)$ is a separable 2D function, it holds that $H(u, v) = F(u) G(v)$.
 
@@ -238,7 +238,7 @@ Images are vectorized row-by-row. Linear image processing algorithms can be writ
 #colorbox(title: "Karhunen-Loeve / Principal component anal. ", inline: false)[
   + Normalize to remove brightness var.: $x'_i = x_i / norm(x_i)$
   + Center data by subtracting mean: $x''_i = x'_i - mu, mu = 1 / N sum x'_i$
-  + Compute covar. mat.: $Sigma = 1 / (N - 1) sum x''_i dot c (x''_i)^T$
+  + Compute covar. mat.: $Sigma = 1 / (N - 1) sum x''_i dot c (x''_i)^T$ TODO: what is c???
   + Compute eigendecomp. of $Sigma$ by solving $Sigma e = lambda e$ with e.g. SVD ($Sigma = U Lambda U^T$)
   + Define $U_k$ as first k eigenval. of $Sigma$, $U_k = mat(u_1, ..., u_k)$ dirs with largest variance.
   + $"PCA"(x_i) = U_k^T (x_i - mu) = U_k^T dot.c x''_i$
@@ -249,6 +249,8 @@ Images are vectorized row-by-row. Linear image processing algorithms can be writ
   Given $n$ images of size $x times y$, we want to store the dataset given a budget of $Z$ units of space. What is max number $K$ of princip. comp. allowed? \
   We need to store dataset mean $mu: x times y$, truncated eigenmat. $U_k: (x times y) times K$, compr. imgs. ${y_i}: n times K$
 ]
+'
+TODO: title? eigenfaces section
 
 Simple recognition, compare in projected space, find nearest neighbour. Find face by computing reconstr. error and minimizing by varying patch pos. Compress data and visualization. Eigenfaces struggle with lighting differences. Fisherfaces improve this by maximizing between-class scatter, minimzing within-class scatter.
 // TODO: Fisher formulas?
@@ -271,7 +273,7 @@ $I(x, y, t) = I(x + (dif x) / (dif t) diff t, y + (dif y) / (dif t) diff t, t + 
 Optical flow constraint: \
 $(dif I) / (dif t) = (diff I) / (diff x) (dif x) / (dif t) + (diff I) / (diff y) (dif y) / (dif t) + (diff I) / (diff t) = 0$
 
-Aperture problem: 2 unknowns for every pixel $(u, v)$ but only one equation $=> oo$ solutions, opt. flow defines a line in $(u, v)$ space, compute normal flow. Need additional constraints to solve.
+Aperture problem: inability to correctly estimate motion along an edge, 2 unknowns for every pixel $(u, v)$ but only one equation $=> oo$ solutions, opt. flow defines a line in $(u, v)$ space, compute normal flow. Need additional constraints to solve.
 
 #colorbox(title: [Horn & Schunck algorithm])[
   Assumption: values $u(x, y)$, $v(x, y)$ are smooth and change slowly with $x, y$. Minimize $e_s + lambda e_c$ for $lambda > 0$ where
@@ -598,7 +600,7 @@ Anti-aliasing filters:
 
 Magnification: for pixels mapping to area larger than pixel (jaggies), use bilinear interpolation.
 
-*Mipmapping*: Store texture at multiple resolutions, choose based on projected size of triangle (far away $->$ lower res, interpol. possible). Avoids aliasing, improves efficiency, higher storage overhead. (minification)
+*Mipmapping*: Store texture at multiple resolutions, choose based on projected size of triangle (far away $->$ lower res, interpol. possible), texels in larger level of mipmap hierarchy represent larger regions of texture (e.g. we halve resolution at each level). Avoids aliasing, improves efficiency, higher storage overhead. (minification)
 
 *Supersampling*: Multiple color samples per pixel, final color is average - different patterns of samples possible (uniform, jittering, stochastic, Poisson).
 
