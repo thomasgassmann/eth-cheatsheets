@@ -657,7 +657,27 @@ Interpolate points $bold(p)_0, ..., bold(p)_n$ using basis fcts.
 *Example:* $N_i^1 (u) = cases((u - u_i) / (u_(i + 1) - u_i) #h(0.5cm) u in [u_i, u_(i+1)], (u_(i + 2) - u) / (u_(i + 2) - u_(i + 1)) #h(0.25cm) u in [u_(i+1), u_(i+2)])$
 
 #colorbox(title: [De Casteljau])[
-  // TODO: Casteljau
+  Compute a triangular representation, successively interpolate, "corner cutting":
+  #grid(columns: 2, column-gutter: 0.5cm, [
+    #table(
+      columns: 4,
+      rows: 4,
+      stroke: none,
+      [$b_0$], [], [], [],
+      [$b_1$], [$b_0^1$], [], [],
+      [$b_2$], [$b_1^1$], [$b_0^2$], [],
+      [$b_3$], [$b_2^1$], [$b_1^2$], [$b_0^3$]
+    )
+  ], [
+    Consider the three control points $b_0, b_1, b_2$:
+    
+    $
+    b_0^1(t) = (1 - t)b_0 + t b_1\
+    b_1^1(t) = (1 - t)b_1 + t b_2\
+    b_0^2(t) = (1 - t)b_0^1(t) + t b_1^1(t)
+    $
+  ])
+  
 ]
 
 == Subdivision surfaces
