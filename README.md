@@ -9,3 +9,4 @@ Overview:
 - Wahrscheinlichkeit und Statistik (10 pages): FS23, based on [xyquadrat's cheatsheet](https://github.com/XYQuadrat/eth-cheatsheets)
 - Komplexe Analysis (20 pages): FS24
 - Introduction to Machine Learning (2 pages): FS24, based on [fhehli's cheatsheet](https://github.com/fhehli/iml-cheatsheet) and [dcamenisch's cheatsheet](https://github.com/dcamenisch/iml-cheatsheet)
+- Visual Computing (8 pages): HS24, based on [jhoffmann's cheatsheet](https://typst.app/project/ruyA4kPNzRyNmyu3MZqxny)

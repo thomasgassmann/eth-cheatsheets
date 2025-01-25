@@ -6,14 +6,12 @@
 #show: project.with(
   title: "Visual Computing",
   authors: (
-    (name: "Jacques Hoffmann", email: "jacques.hoffmann@math.ethz.ch"),
+    (name: "Thomas Gassmann", email: "tgassmann@student.ethz.ch"),
   ),
   date: "January 25, 2024",
 )
 
 = Prerequisites
-
-
 
 = Computer Vision
 == Digital images & sensors

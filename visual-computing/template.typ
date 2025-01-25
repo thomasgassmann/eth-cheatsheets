@@ -39,7 +39,7 @@
   align(center, text(size: 10pt)[
     This document is licensed under CC BY-SA 4.0. It may be distributed or modified, as long as the author and the license remain intact.
     
-    Based on work by #link("https://github.com/XYQuadrat/eth-cheatsheets/tree/main/viscomp")[jsteinmann] and #link("https://typst.app/project/ruyA4kPNzRyNmyu3MZqxny")[jhoffmann]
+    Based on work by #link("https://github.com/XYQuadrat/eth-cheatsheets/tree/main/viscomp")[*jsteinmann*] and #link("https://typst.app/project/ruyA4kPNzRyNmyu3MZqxny")[*jhoffmann*]
   ])
 
   // Main body.
