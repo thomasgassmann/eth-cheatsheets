@@ -238,7 +238,7 @@ Images are vectorized row-by-row. Linear image processing algorithms can be writ
 #colorbox(title: "Karhunen-Loeve / Principal component anal. ", inline: false)[
   + Normalize to remove brightness var.: $x'_i = x_i / norm(x_i)$
   + Center data by subtracting mean: $x''_i = x'_i - mu, mu = 1 / N sum x'_i$
-  + Compute covar. mat.: $Sigma = 1 / (N - 1) sum x''_i dot c (x''_i)^T$ TODO: what is c???
+  + Compute covar. mat.: $Sigma = 1 / (N - 1) sum x''_i dot x''_i^T$
   + Compute eigendecomp. of $Sigma$ by solving $Sigma e = lambda e$ with e.g. SVD ($Sigma = U Lambda U^T$)
   + Define $U_k$ as first k eigenval. of $Sigma$, $U_k = mat(u_1, ..., u_k)$ dirs with largest variance.
   + $"PCA"(x_i) = U_k^T (x_i - mu) = U_k^T dot.c x''_i$
@@ -249,11 +249,14 @@ Images are vectorized row-by-row. Linear image processing algorithms can be writ
   Given $n$ images of size $x times y$, we want to store the dataset given a budget of $Z$ units of space. What is max number $K$ of princip. comp. allowed? \
   We need to store dataset mean $mu: x times y$, truncated eigenmat. $U_k: (x times y) times K$, compr. imgs. ${y_i}: n times K$
 ]
-'
-TODO: title? eigenfaces section
+
+=== Eigenfaces
 
 Simple recognition, compare in projected space, find nearest neighbour. Find face by computing reconstr. error and minimizing by varying patch pos. Compress data and visualization. Eigenfaces struggle with lighting differences. Fisherfaces improve this by maximizing between-class scatter, minimzing within-class scatter.
-// TODO: Fisher formulas?
+
+=== LDA / Fisherfaces
+
+Find directions where ratio between/within individual variance is maximized (i.e. minimizing within class difference, maximizing between-class difference).
 
 == JPG & JPEG
 + Convert RGB $->$ YUV (Y luminance / brightness, UV color / chrominance). Humans more sensitive to color, compress colors with chroma subsampling (e.g. color of upper left pixel for 4x4 grid)
@@ -414,18 +417,19 @@ Light is mixture of many wavelengths. Consider $P(lambda)$ as intensity at wavel
 
 #colorbox(title: [Color spaces], inline: false)[
   - *RGB* (useful for displays, RGB colors specified)
-  - *CIE XYZ*: Change of basis to avoid neg. comp. // todo add formula
-  - *CIE xyY*: Chomaticity (color) $(x, y)$ derived by normalizing XYZ color components: $x = X / (X + Y + Z), y = Y / (X + Y + Z)$. Y is brightness.
+  - *CIE XYZ*: Change of basis to avoid neg. comp. From xyZ via: $X = (x Y)/y, Y = Y, Z = Y/y - (x Y) /y - Y$.
+  - *CIE xyY*: Chomaticity (color) $(x, y)$ derived by normalizing XYZ color components: $x = X / (X + Y + Z), y = Y / (X + Y + Z)$. Y is brightness, $z = 1 - x - y$.
   - *CIE RGB*: (435.8, 546.1, 700.0nm). Linear combination span triangle, the Color Gamut.
   - *CMY*: inverse (subtr.) to RGB. CMY = 1 - RGB.
-  - *YIQ*: Luminance Y, In-phase I (orange-blue), Quadrature Q (purple-green). $ vec(Y, I, Q) = mat(0.299, 0.587, 0.114; 0.596, -0.275, -0.321; 0.212, -0.523, 0.311) vec(R, G, B) $
-  - *HSV*: hue (base color), saturation (purity of color), value / lightness / brightness (intuitive)
+  - *YIQ*: Luminance Y, In-phase I (orange-blue), Quadrature Q (purple-green). $ vec(Y, I, Q) = mat(0.299, 0.587, 0.114; 0.596, -0.275, -0.321; 0.212, -0.523, 0.311) vec(R, G, B) $ NTSC-Norm used in television, based on psycho physical properties of eye, color space resolution is used for tones which can best be distinguished by eye.
+  - *HSV*: hue (base color), saturation (purity of color), value / lightness / brightness (intuitive), easy to pick color, used in e.g. arts
+  - *HLS*: alternative color space to HSV, used for same applications
   - *CIELAB / CIELUV*: color space is perceptually uniform, correct the CIE chart colors to adjust for perceived "distance" betw. colors (small change in euclidean distance $arrow$ small change in perceived color), nonlinear warp. MacAdams ellipses nearly circular.
 ]
 
-#colorbox(color: yellow)[
+#colorbox(color: yellow, title: [White point calibration])[
   #fitWidth($ vec(x, y, z) = mat(x_R C_R, x_G C_G, x_B C_B; y_R C_R, y_G C_G, y_B C_B; (1 - x_R - y_R) C_R, (1 - x_G - y_G) C_G, (1 - x_B - y_B) C_B) vec(R, G, B)$)
-  Set $(R, G, B) = (1, 1, 1)$. Map to given white point (e.g. $(0.9505, 1, 1.0890)$)), then find $C_R, C_G, C_B$.
+  Set $(R, G, B) = (1, 1, 1)$. Map to given white point in xyz (e.g. $(0.9505, 1, 1.0890)$)), then find $C_R, C_G, C_B$.
 ]
 
 
@@ -522,7 +526,7 @@ $f_r (x, arrow(omega)_i, arrow(omega)_r) = (dif L_r (x, arrow(omega)_r)) / (dif 
 
 *Types*: local illumination only considers the light hitting an object directly from the lightsource, global illumination also considers indirect light bouncing off from other objects that are hitting the object.
 
-#colorbox(title: [Phong Illumination Model TODO: check equation below], inline: false)[
+#colorbox(title: [Phong Illumination Model], inline: false)[
   Approximate specular reflection by cosine powers
   #fitWidth(
     $ I_lambda = underbrace(I_a_lambda k_a O_d_lambda, "Ambient") + f_"att" I_(p_lambda) [underbrace(k_d O_(d_lambda)(N dot.c L), "Diffuse") + underbrace(k_s (R dot.c V)^n, "Specular")] $
@@ -635,25 +639,34 @@ Generate discrete pixel values - approxiate with finit amount. \
 
 Disadvantages: global support of basis functions, new control pts yields higher degree, $C^r$ continuity between segments of Bézier-Curves.
 
-// TODO Casteljau?
 Interpolate points $bold(p)_0, ..., bold(p)_n$ using basis fcts.
 
 #colorbox(title: [B-Spline functions])[
   B-Spline curve $bold(s)(u)$ built from piecewise polyn. bases $s(u) = sum_(i = 0)^k bold(d)_i N_i^n (u)$ \
   Coefficients $bold(d)_i$ are called "de Boor" pts. Bases are piecewise, recursively def. polyn. over sequence of knots $u_0 < u_1 < u_2 < ...$ defined by knot vec. $T = bold(u) = mat(u_0, ..., u_(k + n + 1))$
 
-  TODO: add definition
+  $
+  N_i^n (u) = (u - u_i) (N_i^(n-1)(u)) / (u_(i + n) - u_i) + (u_(i + n + 1) - u) (N_(i + 1)^(n - 1)(u)) / (u_(i + n + 1) - u_(i + 1))
+  $
 
-  Partition of unity $sum_i N_i^n (u) equiv 1$, positivity $N_i^n(u) >= 0$, compact support $N_i^n(u) = 0$, $forall u in.not [u_i, u_(i + n + 1)]$, continuity $N_i^n$ is $(n - 1)$ times cont. differentiable.
+  $
+    N_i^0 (u) = cases(1 text("  ") u in [u_i, u_(i + 1)], 0 text("   else"))
+  $
 
-  // TODO recurrence relation
+  Partition of unity $sum_i N_i^n (u) = 1$, positivity $N_i^n(u) >= 0$, compact support $N_i^n (u) = 0$, $forall u in.not [u_i, u_(i + n + 1)]$, continuity $N_i^n$ is $(n - 1)$ times cont. differentiable.
+]
+
+*Example:* $N_i^1 (u) = cases((u - u_i) / (u_(i + 1) - u_i) #h(0.5cm) u in [u_i, u_(i+1)], (u_(i + 2) - u) / (u_(i + 2) - u_(i + 1)) #h(0.25cm) u in [u_(i+1), u_(i+2)])$
+
+#colorbox(title: [De Casteljau])[
+  // TODO: Casteljau
 ]
 
 == Subdivision surfaces
 
 Generalization of spline curves / surfaces allowing arbitrary control meshes using successive refinement (subdivision), converging to smooth limit surfaces, connecting splines and meshes. 
 
-TODO: Conrer-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
+TODO: Corner-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
 
 == Visibility and shadows
 *Painter's algorithm*: Render objects from furthest to nearest. Issues with cyclic overlaps &intersec. \
@@ -679,7 +692,7 @@ TODO: Conrer-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
 *Uniform grids*: Preprocess: compute bounding box, set grid res., rasterize objects, store refs. to objects. Traversal: incrementally rasterize rays - stop at intersection. Fast & easy, but non-adaptive to scene geometry.
 *Space partitioning trees*: octree, kd-tree, bsp-tree
 
-// TODO
+// TODO: space partitioning trees
 
 Another solution: bounding volume hierarchies (BVH)
 
