@@ -142,7 +142,7 @@ Image sharpening: enhances edges by increasing high frequency components: $I' = 
 ]
 
 $"LoG"(x, y) = - 1/ (pi sigma^4) (1 - (x^2 + y^2) / (2 sigma^2)) exp(-(x^2 + y^2) / (2 sigma^2))$
-$nabla^2 f(x, y) = (diff^2 f(x, y)) / (diff x^2) + (diff^2 f(x, y)) / (diff y^2)$
+$nabla^2 f(x, y) = (diff^2 f(x, y)) / (diff x^2) + (diff^2 f(x, y)) / (diff y^2)$, DoG can approximate LoG.
 
 #colorbox(title: [Canny edge detector], color: silver)[
   Thin, uninterrupted edges, no guarantee on the connectivity of edges, extended more completely than with simple thresh.
@@ -178,6 +178,8 @@ $ S(Delta x, Delta y) approx mat(Delta x, Delta y) bold(M) mat(Delta x, Delta y)
     Invariant to shift, rot, brightness offset, not scaling, $(Delta x, Delta y)$ (blue box) constant, ellipses (eigenvectors) rotate but shapes (eigenvalues) remain same
 ])
 
+Can be made scale-invariant by looking for strong responses to DoG filter over scale space, then consider loc. max. in both position and scale space (see SIFT).
+
 #colorbox(title: [_Lowe's_ Scale Invariant Feature Tranform (SIFT)],)[
   Used to track feature points over 2 images. Look for strong responses in Difference of Gaussian (DoG) over scale space and position, consider local maxima in both spaces to find blobs. Compute histogram of gradient directions (ignoring gradient mag. bc lighting etc.) at selected scale, pos., rot. by choosing principal direction. Now both pictures are at the same scale & orientation, compare gradient histog. to find matching points. $"DoG"(x, y) = 1 / k e^((x^2 + y^2) / (k sigma)^2) - e^(-(x^2 + y^2) / (sigma^2)), k = sqrt(2)$
 ]
@@ -191,7 +193,7 @@ $ S(Delta x, Delta y) approx mat(Delta x, Delta y) bold(M) mat(Delta x, Delta y)
 ]
 Inverse FT exists. Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$ vectorized image. $F(u, v) = 1 / N sum_(x = 0)^(N - 1) sum_(y = 0)^(N - 1) f(x, y) dot.c e^(-i 2 pi (u x + v y) / N)$
 
-*Relevant*: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / 2$, $sinc(u) = sin(u) / u$ \
+*Relevant*: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / (2i)$, $sinc(u) = sin(u) / u$ \
 *Dirac delta*: $delta(x) = 0 "if" x != 0 "else undefined"$. Properties: \
 
 - $integral_(-oo)^infinity delta(x) dif x = 1$
