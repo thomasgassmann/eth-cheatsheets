@@ -427,7 +427,7 @@ Contemporary pipeline: CPU, Vector processing (per-vertex ops, transforms, light
   - *CMY*: inverse (subtr.) to RGB. CMY = 1 - RGB.
   - *YIQ*: Luminance Y, In-phase I (orange-blue), Quadrature Q (purple-green). $ vec(Y, I, Q) = mat(0.299, 0.587, 0.114; 0.596, -0.275, -0.321; 0.212, -0.523, 0.311) vec(R, G, B) $ NTSC-Norm used in television, based on psycho physical properties of eye, color space resolution is used for tones which can best be distinguished by eye.
   - *HSV*: hue (base color), saturation (purity of color), value / lightness / brightness (intuitive), easy to pick color, used in e.g. arts
-  - *HLS*: alternative color space to HSV, used for same applications
+  - *HLS/HSL*: alternative color space to HSV, used for same applications
   - *CIELAB / CIELUV*: color space is perceptually uniform, correct the CIE chart colors to adjust for perceived "distance" betw. colors (small change in euclidean distance $arrow$ small change in perceived color), nonlinear warp. MacAdams ellipses nearly circular.
 ]
 
@@ -495,7 +495,7 @@ Change position & orientation of objects, project to screen, animating objects, 
 #image("perspective-projection.png")
 
 #colorbox(title: [Quaternions], color: orange)[
-  Alternative approach for rotation. Similar to $CC$, define $i^2 = j^2 = k^2 = - 1$, $i j k = -1$, $i j = k$, $j i = -k$, $j k = i$, $k j = -i$, $k i = j$, $i k = -j$. For $q = a + b i + c j + d k$, we have \ 
+  Similar to $CC$, define $i^2 = j^2 = k^2 = - 1$, $i j k = -1$, $i j = k$, $j i = -k$, $j k = i$, $k j = -i$, $k i = j$, $i k = -j$. For $q = a + b i + c j + d k$, we have: \ 
   - $norm(q) = sqrt(a^2 + b^2 + c^2 + d^2)$
   - $overline(z) = a - b i - c j - d k$ and $z^(-1) = overline(z) slash.big norm(z)$
 ]
