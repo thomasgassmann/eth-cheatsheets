@@ -11,8 +11,6 @@
   date: "January 25, 2024",
 )
 
-= Prerequisites
-
 = Computer Vision
 == Digital images & sensors
 An image (as 2D signal) is a continuous function. A pixel is a discrete sample of that cont. function.

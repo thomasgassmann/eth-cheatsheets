@@ -34,6 +34,7 @@ jobs:
         run: |
           GIT_COMMIT=$(git rev-parse --short "$GITHUB_SHA")
           sed -i "s/GITCOMMIT/$GIT_COMMIT/g" ./commit.tex
+          sed -i "s/GITCOMMIT/$GIT_COMMIT/g" ./visual-computing/template.typ
       - name: Setup typst
         uses: typst-community/setup-typst@v3
       - name: Compile typst

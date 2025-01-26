@@ -16,29 +16,16 @@
   show: columns.with(3, gutter: 1em)
 
   // Title row.
-  align(center)[
+  align(left)[
     #block(text(weight: 700, 1.75em, title))
     #v(0.8em, weak: true)
-    #date
+    #date, GITCOMMIT, licensed under CC BY-SA 4.0
+    #block(authors.map(a => a.name + " (" + a.email + ")").join())
   ]
 
   // Author information.
-  pad(
-    top: 0.3em,
-    bottom: 0.3em,
-    x: 2em,
-    grid(
-      columns: (1fr,) * calc.min(3, authors.len()),
-      gutter: 1em,
-      ..authors.map(author => align(center)[
-        *#author.name* \
-        #author.email
-      ])
-    ),
-  )
+  
   align(center, text(size: 10pt)[
-    This document is licensed under CC BY-SA 4.0. It may be distributed or modified, as long as the author and the license remain intact.
-    
     Based on work by #link("https://github.com/XYQuadrat/eth-cheatsheets/tree/main/viscomp")[*jsteinmann*] and #link("https://typst.app/project/ruyA4kPNzRyNmyu3MZqxny")[*jhoffmann*]
   ])
 
