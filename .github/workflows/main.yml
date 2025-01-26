@@ -97,3 +97,7 @@ jobs:
           curl https://exams.vis.ethz.ch/api/document/tgassmann/analysis-ii-cheatsheet-hs22/files/310/update/ \
             -H "Authorization: $ANA2_TOKEN" \
             -F "file=@./analysis2/analysis2.pdf"
+
+          curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-hs24-based-on-jhoffmanns-cheatsheet/files/421/update/ \
+            -H "Authorization: $VC_TOKEN" \
+            -F "file=@./vc.pdf"
