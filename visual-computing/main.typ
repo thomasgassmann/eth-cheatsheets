@@ -187,26 +187,23 @@ Can be made scale-invariant by looking for strong responses to DoG filter over s
 == Fourier transform
 #colorbox(title: [Fourier transform])[
   represents signal in new basis (in amplitudes & phases of constituent sinusoids).
-  
+
   $F(f(x))(u) = integral_RR f(x) dot.c exp(-i 2 pi u x) dif x$ \
+  $F^(-1)(g(u))(x) = integral_RR g(u) dot.c exp(i 2 pi x u) dif u$ \
   $F(f(x, y))(u, v) = integral.double_(RR^2) f(x, y) e^(-i 2 pi (u x + v y)) dif x dif y$
 ]
-Inverse FT exists. Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$ vectorized image. $F(u, v) = 1 / N sum_(x = 0)^(N - 1) sum_(y = 0)^(N - 1) f(x, y) dot.c e^(-i 2 pi (u x + v y) / N)$
+Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$ vectorized image. $F(u, v) = 1 / N sum_(x = 0)^(N - 1) sum_(y = 0)^(N - 1) f(x, y) dot.c e^(-i 2 pi (u x + v y) / N)$, Dual Transform: $f(-x) = F(F(f))(x)$
 
 *Relevant*: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / (2i)$, $sinc(u) = sin(u) / u$ \
 *Dirac delta*: $delta(x) = 0 "if" x != 0 "else undefined"$. Properties: \
 
-- $integral_(-oo)^infinity delta(x) dif x = 1$
-- $delta(alpha x) = delta(alpha x) / abs(alpha)$ and $delta(-t) = delta(t)$
-- $F(delta(x - x_0))(u) = e^(-i 2 pi u x_0)$
+- $integral_(-oo)^infinity delta(x) dif x = 1$, $delta(alpha x) = delta(alpha x) / abs(alpha)$ and $delta(-t) = delta(t)$
 - $(delta convolve f)(x) = integral_(-infinity)^(infinity) f(t) delta(x - t) d t = f(x)$
 
 *Sampling*: Mult with seq. of $delta$-fnts
 
-
-
 #grid(columns: (auto, auto, auto), column-gutter: 1.5em, row-gutter: 0.8em,
-  [*Property*], $bold(f(x))$, $bold(F(u))$,
+  [*Property*], $bold(f(x)), f(x,y)$, $bold(F(u)), F(u, v)$,
   [Linearity], $alpha f_1(x) + beta f_2(x)$, $alpha F_1(u) + beta F_2(u)$,
   [Duality], $F(x)$, $f(-u)$,
   [Convolut.], $(f * g)(x)$, $F(u) dot.c G(u)$,
@@ -216,19 +213,16 @@ Inverse FT exists. Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bo
   [Different.], $(dif n) / (dif x^n) f(x)$, $(i / (2 pi) u)^n F(u)$,
   [Multiplic.], $x f(x)$, $i / (2 pi) dif / (dif u) F(u)$,
   [Stretching], $f(a x)$, $frac(1, |a|) F(frac(u, a))$,
-  [Deriv. Fourier], $x^n f(x)$, $i^n frac(d^n, "du"^n) F(u)$
+  [Deriv. Fourier], $x^n f(x)$, $i^n frac(d^n, "du"^n) F(u)$,
 )
-
-=== More Properties
 
 #grid(columns: (auto, auto), column-gutter: 1.5em, row-gutter: 0.8em,
-  [*Property*], [*Definition*],
-  [Dual Transform:], $f(-x) = F(F(f))(x)$
+  $bold(f(x)), f(x,y)$, $bold(F(u)), F(u, v)$,
+  $sin(2 pi u_0 x + 2 pi v_0 y)$, [$1/(2i) (delta(u - u_0, v - v_0) - delta(u + u_0, v + v_0))$],
+  [$text("Box")(x) = cases(1 #h(1em) x in [-1/2, 1/2], 0 #h(1em) text("else"))$], [$sinc(u) = sin(pi u) / (pi u) text("(norm. sinc)")$],
+  [$h(x,y) = f(x)g(x)$], [$H(u, v) = F(u) G(v)$],
+  [$delta(x - x_0)$], [$e^(-2 i pi u x_0)$]
 )
-
-Fourier Transform of the Box filter with size 1 (i.e. 1 between $-1/2$ and $1/2$) is the normalized $sinc$ function, i.e. $sinc(x) = sin(pi x) / (pi x)$.
-
-If $h(x,y) = f(x) g(x)$ is a separable 2D function, it holds that $H(u, v) = F(u) G(v)$.
 
 #image("fourier-transforms.png", height: 20em)
 
