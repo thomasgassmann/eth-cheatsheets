@@ -197,7 +197,7 @@ Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$
 *Relevant*: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / (2i)$, $sinc(u) = sin(u) / u$ \
 *Dirac delta*: $delta(x) = 0 "if" x != 0 "else undefined"$. Properties: \
 
-- $integral_(-oo)^infinity delta(x) dif x = 1$, $delta(alpha x) = delta(alpha x) / abs(alpha)$ and $delta(-t) = delta(t)$
+- $integral_(-oo)^infinity delta(x) dif x = 1$, $delta(alpha x) = delta(x) / abs(alpha)$ and $delta(-t) = delta(t)$
 - $(delta convolve f)(x) = integral_(-infinity)^(infinity) f(t) delta(x - t) d t = f(x)$
 
 *Sampling*: Mult with seq. of $delta$-fnts
@@ -221,7 +221,8 @@ Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$
   $sin(2 pi u_0 x + 2 pi v_0 y)$, [$1/(2i) (delta(u - u_0, v - v_0) - delta(u + u_0, v + v_0))$],
   [$text("Box")(x) = cases(1 #h(1em) x in [-1/2, 1/2], 0 #h(1em) text("else"))$], [$sinc(u) = sin(pi u) / (pi u) text("(norm. sinc)")$],
   [$h(x,y) = f(x)g(x)$], [$H(u, v) = F(u) G(v)$],
-  [$delta(x - x_0)$], [$e^(-2 i pi u x_0)$]
+  [$delta(x - x_0)$], [$e^(-2 i pi u x_0)$],
+  [$e^(2 i pi(u_0 x + v_0 y))$], [$delta(u - u_0, v - v_0)$]
 )
 
 #image("fourier-transforms.png", height: 20em)
