@@ -124,7 +124,9 @@ The 2 operations are the same with reversed kernels. \
     [Diff. (x)], $mat(-1, 1)$, [Diff. (y)], $mat(-1, 1)^T$
   )
 ]
-The Gaussian kernel is rot. symetric, single lobe (neighbor's influence decreases monotonically, also in frequency domain), FT is again a Gaussian, separable, easily made efficient.
+The Gaussian kernel is rot. symmetric, single lobe (neighbor's influence decreases monotonically, also in frequency domain), FT is again a Gaussian, separable, easily made efficient.
+
+Laplacian is rot. invariant (isotropic), usually more noisy since it uses 2nd derivative.
 
 #fitWidth($ (diff f) / (diff x) = lim_(epsilon -> 0) (f(x + epsilon, y) / epsilon - f(x, y) / epsilon) approx (f(x_(n + 1), y) - f(x_n, y)) / (Delta x) $)
 Hence, diff. leads to the convolution $mat(-1, 1)$
@@ -167,8 +169,14 @@ bold(M) = sum_((x, y) in "window") mat(f_x^2 (x, y), f_x (x, y) f_y (x, y); f_x 
 $ S(Delta x, Delta y) approx mat(Delta x, Delta y) bold(M) mat(Delta x, Delta y)^T approx bold(Delta)^T bold(M) bold(Delta) $
 
 #colorbox(title: [Harris corner detection])[
-  Compute matrix $bold(M)$. Compute $C(x, y) = det(bold(M)) - k dot.c ("trace"(bold(M)))^2$ $= lambda_1 lambda_2 - k dot.c (lambda_1 + lambda_2)^2$. Mark as corner if $C(x, y) > T$. Do non max-suppression and for better local., weight central pixels with weights  for sum in $bold(M)$: $G(x - x_0, y - y_0, sigma)$. Compute subpixel local. by fitting parabola to cornerness function.  Invariant to shift, rot, brightness offset, not scaling.
+  Compute matrix $bold(M)$. Compute $C(x, y) = det(bold(M)) - k dot.c ("trace"(bold(M)))^2$ $= lambda_1 lambda_2 - k dot.c (lambda_1 + lambda_2)^2$. Mark as corner if $C(x, y) > T$. Do non max-suppression and for better local., weight central pixels with weights  for sum in $bold(M)$: $G(x - x_0, y - y_0, sigma)$. Compute subpixel local. by fitting parabola to cornerness function.
 ]
+
+#grid(columns: 2, column-gutter: 1cm, [
+  #image("harris-corner-detection.png", height: 7em, width: 13em)
+], [
+    Invariant to shift, rot, brightness offset, not scaling, $(Delta x, Delta y)$ (blue box) constant, ellipses (eigenvectors) rotate but shapes (eigenvalues) remain same
+])
 
 #colorbox(title: [_Lowe's_ Scale Invariant Feature Tranform (SIFT)],)[
   Used to track feature points over 2 images. Look for strong responses in Difference of Gaussian (DoG) over scale space and position, consider local maxima in both spaces to find blobs. Compute histogram of gradient directions (ignoring gradient mag. bc lighting etc.) at selected scale, pos., rot. by choosing principal direction. Now both pictures are at the same scale & orientation, compare gradient histog. to find matching points. $"DoG"(x, y) = 1 / k e^((x^2 + y^2) / (k sigma)^2) - e^(-(x^2 + y^2) / (sigma^2)), k = sqrt(2)$
@@ -274,7 +282,7 @@ $I(x, y, t) = I(x + (dif x) / (dif t) diff t, y + (dif y) / (dif t) diff t, t + 
 Optical flow constraint: \
 $(dif I) / (dif t) = (diff I) / (diff x) (dif x) / (dif t) + (diff I) / (diff y) (dif y) / (dif t) + (diff I) / (diff t) = 0$
 
-Aperture problem: inability to correctly estimate motion along an edge, 2 unknowns for every pixel $(u, v)$ but only one equation $=> oo$ solutions, opt. flow defines a line in $(u, v)$ space, compute normal flow. Need additional constraints to solve.
+*Aperture problem*: when flow is computed for point along linear feature (e.g. edge), not possible to determine exact location of corresponding point in second image, only possible to determine the flow normal to linear feature, 2 unknowns for every pixel $(u, v)$ but only one equation $=> oo$ solutions, opt. flow defines a line in $(u, v)$ space, compute normal flow. Need additional constraints to solve.
 
 #colorbox(title: [Horn & Schunck algorithm])[
   Assumption: values $u(x, y)$, $v(x, y)$ are smooth and change slowly with $x, y$. Minimize $e_s + lambda e_c$ for $lambda > 0$ where
@@ -286,7 +294,7 @@ Aperture problem: inability to correctly estimate motion along an edge, 2 unknow
 ]
 
 #colorbox(title: [Lucas-Kanade])[
-  Assumption: neighb. in NxM patch $Omega$ have same motion $mat(u, t)^T$, small mov., bright. const. Minimize energy (using least squares) $E = sum_(x, y in Omega) (I_x (x, y) u + I_y (x, y) v + I_t (x, y))^2$
+  Assumption: neighb. in NxM patch $Omega$ have same motion $mat(u, t)^T$ (spatial coherence), small movement, brightness constancy assumption. Minimize energy (using least squares) $E = sum_(x, y in Omega) (I_x (x, y) u + I_y (x, y) v + I_t (x, y))^2$
   
   $mat(sum I_x^2, sum I_x I_y; sum I_x I_y, sum I_y^2) vec(u, v) = -vec(sum I_x I_t, sum I_y I_t)$ _sums over patch $Omega$_\
   Let $M = sum (nabla I) (nabla I)^T$ and $b = mat(-sum I_x I_t, -sum I_y I_t)$
@@ -294,7 +302,7 @@ Aperture problem: inability to correctly estimate motion along an edge, 2 unknow
 ]
 
 #colorbox(title: [Iterative refinement])[
-  Estimate OF with Lucas-Kanade. Warp image using estimate OF. Estimate OF using warped image. Refine by repeating and add up all estimates. Fails if intensity structure  poor / large mov.
+  Estimate OF with Lucas-Kanade. Warp image using estimated OF. Estimate OF again using warped image. Refine estimate by repeating. Fails if intensity structure  poor / large mov.
 ]
 Gradient method fails when intensity structure within window is poor, displacement large etc.
 #colorbox(title: [Coarse-to-fine estimation])[
@@ -317,8 +325,8 @@ Interlaced video format: 2 temporally shifted half images (in bands) increases f
 #colorbox(title: [Video compression with temporal redundancy], inline: false)[
   Predict current frame based on previously coded frames. Introducing 3 types of coded frames:
   + I-frame: Intra-coded frame, coded independently
-  + P-frame: Predictively-coded based on previously coded frames (e.g. motion vec. + changes)
-  + B-frame: Bi-directionally predicted frame, based on both previous and future frames.
+  + P-frame: Predictively-coded based on previously coded (P and I, H.264 can also allow B) frames (e.g. motion vec. + changes)
+  + B-frame: Bi-directionally predicted frame, based on both previous and future frames. In older standards B-frames are never used as references for prediction of other frames.
 ]
 Inefficient for many scene changes or high motion. 
 
@@ -409,9 +417,12 @@ Contemporary pipeline: CPU, Vector processing (per-vertex ops, transforms, light
 
 
 == Light & Colors
-Light is mixture of many wavelengths. Consider $P(lambda)$ as intensity at wavelength $lambda$. Humans project inf. dimens. to 3D color (RGB). CIE experiment: some colors are not comb. of RGB. (neg. red needed)
 
-#image("ciergb.png", height: 15em)
+#grid(columns: 2, column-gutter: 0.5em, [
+  #image("ciergb.png", height: 15em)
+], [
+  Light is mixture of many wavelengths. Consider $P(lambda)$ as intensity at wavelength $lambda$. Humans project inf. dimens. to 3D color (RGB). CIE experiment: some colors are not comb. of RGB. (neg. red needed)
+])
 
 #colorbox(title: [Color spaces], inline: false)[
   - *RGB* (useful for displays, RGB colors specified)
@@ -472,16 +483,18 @@ Change position & orientation of objects, project to screen, animating objects, 
   Transforming a normal: $bold(n') = (bold(M)^(-1))^T bold(n)$
 ]
 
-Parallel projection:
-$
-  bold(M_"ort") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 0, 0; 0, 0, 0, 1)
+#grid(columns: 2, column-gutter: 1em, [
+  Parallel projection:
   $
+    bold(M_"ort") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 0, 0; 0, 0, 0, 1)
+  $
+], [
+  Perspective projection:
 
-Perspective projection:
-
-$
-bold(M_"per") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 1 / d, 0)
-$
+  $
+  bold(M_"per") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 1, 0; 0, 0, 1 / d, 0)
+  $
+])
 
 
 #image("perspective-projection.png")
@@ -520,9 +533,7 @@ $omega_x = sin theta cos phi.alt, omega_y = sin theta sin phi.alt, omega_z = cos
 $f_r (x, arrow(omega)_i, arrow(omega)_r) = (dif L_r (x, arrow(omega)_r)) / (dif E_i (x arrow(omega)_i)) = (dif L_r (x, arrow(omega)_r)) / (L_i (x, arrow(omega)_i) cos theta_i dif arrow(omega)_i)$ \
 *Reflection equation*: reflected radiance due to incident illumination from all directions (from BRDF): $integral_(H^2) f_r (x, arrow(omega)_i, arrow(omega)_r) L_i (x, arrow(omega)_i) cos theta_i d arrow(omega)_i = L_r (x, arrow(omega)_r)$ \
 *Types of reflections*: Exact comp. is slow $->$ Specular, ideal diffuse, glossy specular, retro-reflective. \
-*Attenuation*: $f_"att" = 1 / d_L^2$ due to spatial radiation, loss of flux when light travels through a medium.
-
-*Types*: local illumination only considers the light hitting an object directly from the lightsource, global illumination also considers indirect light bouncing off from other objects that are hitting the object.
+*Attenuation*: $f_"att" = 1 / d_L^2$ due to spatial radiation, loss of flux when light travels through a medium.  *Types*: local illumination only considers the light hitting an object directly from the lightsource, global illumination also considers indirect light bouncing off from other objects that are hitting the object.
 
 #colorbox(title: [Phong Illumination Model], inline: false)[
   Approximate specular reflection by cosine powers
@@ -565,9 +576,13 @@ Flat shading: one color per primitive
 
 Flat, Gouraud in screen space, Phong in obj. space
 
-*Transparency*: (2 obj., $P_1$ & $P_2$). Perceived intensity $I_lambda = I'_lambda_1 + I'_lambda_2$ where $I'_lambda_1$ is emission of $P_1$ and $I'_lambda_2$ is intensity filtered by $P_1$. We model it as follows: $I_lambda = I_(lambda_1) alpha_1 Delta t + I_(lambda_2) e^(-alpha_1 Delta t)$ where $alpha$ absorption, $Delta t$ thickness. Linearization: $I_lambda = I_lambda_1 alpha_1 Delta t + I_lambda_2 (1 - alpha_1 Delta t)$. If last object, set $Delta t = 1$. Problem: rendering order, sorted traversal of polygons and back-to-front rendering. \
+*Transparency*: (2 obj., $P_1$ & $P_2$). Perceived intensity $I_lambda = I'_lambda_1 + I'_lambda_2$ where $I'_lambda_1$ is emission of $P_1$ and $I'_lambda_2$ is intensity filtered by $P_1$. We model it as follows: $I_lambda = I_(lambda_1) alpha_1 Delta t + I_(lambda_2) e^(-alpha_1 Delta t)$ where $alpha$ absorption, $Delta t$ thickness. \
 
-#image("transparency.png", height: 7em)
+#grid(columns: 2, [
+  #image("transparency.png", height: 7em, width: 13em)
+], [
+  Linearization: $I_lambda = I_lambda_1 alpha_1 Delta t + I_lambda_2 (1 - alpha_1 Delta t)$. If last object, set $Delta t = 1$. Problem: rendering order, sorted traversal of polygons and back-to-front rendering.
+])
 
 *Back-to-front* order not always clear, resort to depth peeling, multiple passes, each pass renders next closest fragment.
 
