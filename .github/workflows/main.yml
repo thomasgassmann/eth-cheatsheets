@@ -65,6 +65,7 @@ jobs:
           IML_TOKEN: ${{ secrets.IML_TOKEN }}
           ANA1_TOKEN: ${{ secrets.ANA1_TOKEN }}
           ANA2_TOKEN: ${{ secrets.ANA2_TOKEN }}
+          VC_TOKEN: ${{ secrets.VC_TOKEN }}
         run: |
           TAG="nightly"
           git tag -f "$TAG"
@@ -98,6 +99,6 @@ jobs:
             -H "Authorization: $ANA2_TOKEN" \
             -F "file=@./analysis2/analysis2.pdf"
 
-          curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-hs24-based-on-jhoffmanns-cheatsheet/files/421/update/ \
+          curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-hs24-based-on-jhoffmanns-cheatsheet/files/423/update/ \
             -H "Authorization: $VC_TOKEN" \
             -F "file=@./vc.pdf"
