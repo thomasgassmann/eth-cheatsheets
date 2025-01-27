@@ -462,7 +462,7 @@ Change position & orientation of objects, project to screen, animating objects, 
 #colorbox(title: [Change of coord. system], color: purple, inline: false)[
   #grid(columns: (10em, auto),
     image("change-coords.png"),
-    $ p' = underbrace(mat(bold(r_0), bold(r_2), bold(r_3), bold(t); 0, 0, 0, 1), bold(M)) mat(p_x; p_y; p_z; 1) $
+    $ p' = underbrace(mat(bold(r_1), bold(r_2), bold(r_3), bold(t); 0, 0, 0, 1), bold(M)) mat(p_x; p_y; p_z; 1) $
   )
   
   Transforming a normal: $bold(n') = (bold(M)^(-1))^T bold(n)$
