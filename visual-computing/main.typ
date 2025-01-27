@@ -493,7 +493,7 @@ Change position & orientation of objects, project to screen, animating objects, 
 Rotating a point $p = mat(x, y, z)^T$ around axis $u = mat(u_1, u_2, u_3)$ by angle $theta$.
 + Convert $p$ to quaternion $p_Q = x i + y j + z k$
 + Convert $u$ to quaternion $q'' = u_1 i + u_2 j + u_3 k$, normalize $q' = q'' slash.big norm(q'')$
-+ Rotate quaternion $q = cos theta / 2 + q' sin theta / 2$ and $q^(-1) = cos theta / 2 - q' sin theta / 2$
++ Rotate quaternion $q = cos(theta / 2) + q' sin(theta / 2)$ and $q^(-1) = cos(theta / 2) - q' sin(theta / 2)$
 + Rotated point $p' = q p q^(-1)$. Convert to cartesian.
 
 == Lighting & Shading
@@ -502,7 +502,7 @@ Shading: Process of determining color of pixel
 
 *Solid angle*: $Omega = A / r^2$ steradians (where $r$ radius) \
 *Zenith, Azimuth*: Point $omega = (theta, phi.alt)$ on unit sphere:
-$omega_x = sin theta cos phi.alt, omega_y = sin theta sin phi.alt, omega_z = cos theta$ \
+$omega_x = sin(theta) cos(phi.alt), omega_y = sin(theta) sin(phi.alt), omega_z = cos(theta)$ \
 *Energy of photon*: $(h c) / lambda "J" ("kg" dot.c "m"^2 / s^2)$
 
 #colorbox(title: [Basic quanitities of radiometry], inline: false)[
