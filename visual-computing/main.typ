@@ -486,8 +486,9 @@ Change position & orientation of objects, project to screen, animating objects, 
 
 #colorbox(title: [Quaternions], color: orange)[
   Similar to $CC$, define $i^2 = j^2 = k^2 = - 1$, $i j k = -1$, $i j = k$, $j i = -k$, $j k = i$, $k j = -i$, $k i = j$, $i k = -j$. For $q = a + b i + c j + d k$, we have: \ 
-  - $norm(q) = sqrt(a^2 + b^2 + c^2 + d^2)$
-  - $overline(z) = a - b i - c j - d k$ and $z^(-1) = overline(z) slash.big norm(z)$
+  - $norm(q) = sqrt(a^2 + b^2 + c^2 + d^2)$, $z overline(z) = norm(z)^2$
+  - $overline(z) = a - b i - c j - d k$ and $z^(-1) = overline(z) slash.big norm(z)^2$
+  - For $z_1 = s_1 + v_1, z_2 = s_2 + v_2$ (where $s_i in RR$) we have $z_1 z_2 = s_1 s_2 - v_1 dot v_2 + s_1 v_2 + s_2 v_1 + v_1 times v_2$ where last term is sum of all components of cross product vector
 ]
 Rotating a point $p = mat(x, y, z)^T$ around axis $u = mat(u_1, u_2, u_3)$ by angle $theta$.
 + Convert $p$ to quaternion $p_Q = x i + y j + z k$
