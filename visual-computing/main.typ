@@ -147,8 +147,8 @@ $nabla^2 f(x, y) = (diff^2 f(x, y)) / (diff x^2) + (diff^2 f(x, y)) / (diff y^2)
   + Smooth image with Gaussian filter
   + Compute grad. mag. & orient. (Sobel, Prewitt, ...)
     #fitWidth($ M(x, y) = sqrt(((diff f) / (diff x))^2 + ((diff f) / (diff y))^2), alpha(x, y) = tan^(-1)((diff f) / (diff y) slash.big (diff f) / (diff x)) $)
-  + Nonmaxima suppression: quantize edges normal to 4 dirs, if smaller than either neighb. suppress
-  + Double thresholding: $T_"high", T_"low"$, keep if $>= T_"high"$ or $>= T_"low"$ and 8-conn. through $>= T_"low"$ to $T_"high"$ px. (first detect strong/weak edge pixels, then reject weak edge pixels not connected with strong edge pixels)
+  + Nonmaxima suppression: quantize edges normal to 4 dirs, if smaller than either neighb. (in given direction) suppress
+  + Double thresholding (hysteresis): $T_"high", T_"low"$, keep if $>= T_"high"$ or $>= T_"low"$ and 8-conn. through $>= T_"low"$ to $T_"high"$ px. (first detect strong/weak edge pixels, then reject weak edge pixels not connected with strong edge pixels)
 ]
 
 #colorbox(title: [Hough transformation], color: silver)[
@@ -192,11 +192,12 @@ Can be made scale-invariant by looking for strong responses to DoG filter over s
 ]
 Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$ vectorized image. $F(u, v) = 1 / N sum_(x = 0)^(N - 1) sum_(y = 0)^(N - 1) f(x, y) dot.c e^(-i 2 pi (u x + v y) / N)$, Dual Transform: $f(-x) = F(F(f))(x)$
 
-*Relevant*: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / (2i)$, $sinc(u) = sin(u) / u$ \
-*Dirac delta*: $delta(x) = 0 "if" x != 0 "else undefined"$. Properties: \
+*Relevant*: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / (2i)$, $sinc(u) = sin(u) / u$, $integral_(-infinity)^infinity e^(-2 pi i x u) dif x = delta(u)$. \
+*Dirac delta*: $delta(x) = 0 "if" x != 0 "else undefined"$. 
+Properties: \
 
 - $integral_(-oo)^infinity delta(x) dif x = 1$, $delta(alpha x) = delta(x) / abs(alpha)$ and $delta(-t) = delta(t)$
-- $(delta convolve f)(x) = integral_(-infinity)^(infinity) f(t) delta(x - t) d t = f(x)$
+- $(delta convolve f)(x) = integral_(-infinity)^(infinity) f(t) delta(x - t) d t = f(x)$, e.g. $delta(u - k) convolve f(u) = f(u - k)$
 
 *Sampling*: Mult with seq. of $delta$-fnts
 
@@ -217,6 +218,8 @@ Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$
 #grid(columns: (auto, auto), column-gutter: 1.5em, row-gutter: 0.8em,
   $bold(f(x)), f(x,y)$, $bold(F(u)), F(u, v)$,
   $sin(2 pi u_0 x + 2 pi v_0 y)$, [$1/(2i) (delta(u - u_0, v - v_0) - delta(u + u_0, v + v_0))$],
+  $cos(2 pi u_0 x + 2 pi v_0 y)$, [$1/(2) (delta(u - u_0, v - v_0) + delta(u + u_0, v + v_0))$],
+  $1$, $delta(x)$,
   [$text("Box")(x) = cases(1 #h(1em) x in [-1/2, 1/2], 0 #h(1em) text("else"))$], [$sinc(u) = sin(pi u) / (pi u) text("(norm. sinc)")$],
   [$h(x,y) = f(x)g(x)$], [$H(u, v) = F(u) G(v)$],
   [$delta(x - x_0)$], [$e^(-2 i pi u x_0)$],
@@ -438,9 +441,7 @@ Contemporary pipeline: CPU, Vector processing (per-vertex ops, transforms, light
 
 
 == Transformations
-Change position & orientation of objects, project to screen, animating objects, ...
-
-*Homogeneous coordinates* can represent affine maps (translation) with mat.-mul. Add dimension, project vertices $mat(x, y, z, w)^T$ onto $mat(x / w, y / w, z / w, 1)^T$.
+Change position & orientation of objects, project to screen, animating objects, ... *Homogeneous coordinates* can represent affine maps (translation) with mat.-mul. Add dimension, project vertices $mat(x, y, z, w)^T$ onto $mat(x / w, y / w, z / w, 1)^T$.
 
 #colorbox(color: silver)[
   #grid(columns: (auto, auto, auto, auto), column-gutter: (0em, 1em, 0em), row-gutter: 0.8em,
@@ -454,20 +455,9 @@ Change position & orientation of objects, project to screen, animating objects, 
     [Shear \ (2D)], $mat(1, a, 0; 0, 1, 0; 0, 0, 1)$
   )
 ]
-*Rigid transforms*: translation, rotation. 
+*Rigid transforms*: translation, rotation, (sometimes includes reflection). *Linear*: Rotation, Scaling, Shear.  *Projective transforms*: Rigid + Linear + Persp. + Paral.
 
-*Linear*: Rotation, Scaling, Shear. 
-
-*Projective transforms*: Rigid + Linear + Persp. + Paral.
-
-*Commutativity* ($M_1 M_2 = M_2 M_1$) holds for:
-#table(align: center, stroke: none,
-  columns: (auto, auto, auto),
-  [Translation], [Translation], [],
-  [Rotation], [Rotation], [Only in 2D!],
-  [Scaling], [Scaling], [],
-  [Scaling], [Rotation], []
-)
+*Commutativity* ($M_1 M_2 = M_2 M_1$) holds for: ($M_1$ translation, $M_2$ translation), ($M_1$ rotation, $M_2$ rotation, only in 2D), ($M_1$ scaling, $M_2$ scaling), ($M_1$ scaling, $M_2$ rotation)
 
 #colorbox(title: [Change of coord. system], color: purple, inline: false)[
   #grid(columns: (10em, auto),
@@ -527,7 +517,7 @@ $omega_x = sin theta cos phi.alt, omega_y = sin theta sin phi.alt, omega_z = cos
 *Bidir. reflectance distr. func.* (BRDF): relation between incident radiance and diff. refl. radiance. \
 $f_r (x, arrow(omega)_i, arrow(omega)_r) = (dif L_r (x, arrow(omega)_r)) / (dif E_i (x arrow(omega)_i)) = (dif L_r (x, arrow(omega)_r)) / (L_i (x, arrow(omega)_i) cos theta_i dif arrow(omega)_i)$ \
 *Reflection equation*: reflected radiance due to incident illumination from all directions (from BRDF): $integral_(H^2) f_r (x, arrow(omega)_i, arrow(omega)_r) L_i (x, arrow(omega)_i) cos theta_i d arrow(omega)_i = L_r (x, arrow(omega)_r)$ \
-*Types of reflections*: Exact comp. is slow $->$ Specular, ideal diffuse, glossy specular, retro-reflective. \
+*Types of reflections*: Ideal specular (perfect mirror), ideal diffuse (uniform reflection all directions), Glossy specular (majority light distributed in reflection direction), retro-reflective (reflects light back towards source)\
 *Attenuation*: $f_"att" = 1 / d_L^2$ due to spatial radiation, loss of flux when light travels through a medium.  *Types*: local illumination only considers the light hitting an object directly from the lightsource, global illumination also considers indirect light bouncing off from other objects that are hitting the object.
 
 #colorbox(title: [Phong Illumination Model], inline: false)[
@@ -536,7 +526,7 @@ $f_r (x, arrow(omega)_i, arrow(omega)_r) = (dif L_r (x, arrow(omega)_r)) / (dif 
     $ I_lambda = underbrace(I_a_lambda k_a O_d_lambda, "Ambient") + f_"att" I_(p_lambda) [underbrace(k_d O_(d_lambda)(N dot.c L), "Diffuse") + underbrace(k_s (R dot.c V)^n, "Specular")] $
   )
 
-  $h_i$ own emission coefficient, $I_a$ ambient light intensity, $k_a$ ambient light coefficient, $I_p$ directed light source intensity, $k_d$ diffuse reflection coefficient, $theta in [0, pi / 2]$ angle surface normal $N$ and light source vector $L$, attenuation factor $f_"att"$, $O_(d lambda)$ value of spectrum of object color at the point $lambda$.
+  $I_a$ ambient light intensity, $k_a$ ambient light coefficient, $I_p$ directed light source intensity, $k_d$ diffuse reflection coefficient, $theta in [0, pi / 2]$ angle surface normal $N$ and light source vector $L$, attenuation factor $f_"att"$, $O_(d lambda)$ value of spectrum of object color at the point $lambda$, $R$ is $L$ reflected along the normal $N$ ($R = 2N(N dot L) - L$, i.e. perfect reflection), $V$ is the direction pointing towards the viewer.
 
   $k_a, k_d, k_s, n$ are material dependent constants. Increasing $n$ causes the highlight to appear smaller in terms of area. As the power increase, more values are
 mapped to zero.
@@ -586,15 +576,17 @@ We need more advanced lighting models for metal objects (Cook-Torrence), replaci
 
 == Geometry and textures
 Considerations: Storage, acquisition of shapes, creation of shapes, editing shapes, rendering shapes.
-Explicit repr. can easily model complex shapes, and sample points, but take lots of storage.
+
+*Explicit* repr. can easily model complex shapes, and sample points, but take lots of storage.
 - *Subdivision surface*, define surfaces by primitives, use recursive algorithm for refining
 - *Point set surfaces*, store points as surface
 - *Polygonal meshes*, explicit set of vertices with position, possibly with additional information. Intersection of polygons: either empty, vertex, edge.
-Implicit repr. easily test inside / outside, compact storage, but sampling expensive, hard to model
-- *Implicit surfaces*, surface: zeros of a function
+- triangle meshes, NURBS, etc.
+*Implicit* repr. easily test inside / outside, compact storage, but sampling expensive, hard to model
+- algebraic surfaces, constructive solid geometry, level set methods, blobby surfaces, fractals
 We need to store textures as bitmaps, hence parameterizing complex surfaces.
 
-Manifolds: surface homeomorphic to disk, closed manifolds divids space into two., in manifold mesh there are at most two faces sharing an edge
+*Manifolds*: surface homeomorphic to disk, closed manifolds divids space into two., in manifold mesh there are at most two faces sharing an edge
 
 *Mesh data structures*: Locations, how vertices are connected, attributes such as normals, color etc. Must support rendering, geometry queries, modifications. E.g.
 - Triangle list (list of 3 points, redundant, e.g. STL).
@@ -720,9 +712,12 @@ TODO: Corner-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
 *Uniform grids*: Preprocess: compute bounding box, set grid res., rasterize objects, store refs. to objects. Traversal: incrementally rasterize rays - stop at intersection. Fast & easy, but non-adaptive to scene geometry.
 *Space partitioning trees*: octree, kd-tree, bsp-tree
 
-// TODO: space partitioning trees
-
+// TODO: space partitioning trees, K-D tree, octree
 Another solution: bounding volume hierarchies (BVH)
+
+== OpenGL
+
+*Model matrix*: from object space to world coordinates, *View matrix*: from world coordinates to camera coordinates, *Projection matrix*: from camera coordinates to screen space
 
 
 Facts:
