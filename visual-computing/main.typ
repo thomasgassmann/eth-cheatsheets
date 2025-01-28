@@ -647,14 +647,14 @@ Interpolate points $bold(p)_0, ..., bold(p)_n$ using basis fcts.
   Coefficients $bold(d)_i$ are called "de Boor" pts. Bases are piecewise, recursively def. polyn. over sequence of knots $u_0 < u_1 < u_2 < ...$ defined by knot vec. $T = bold(u) = mat(u_0, ..., u_(k + n + 1))$
 
   $
-  N_i^n (u) = (u - u_i) (N_i^(n-1)(u)) / (u_(i + n) - u_i) + (u_(i + n + 1) - u) (N_(i + 1)^(n - 1)(u)) / (u_(i + n + 1) - u_(i + 1))
+  N_i^n (u) = N_i^(n-1)(u) (u - u_i) / (u_(i + n) - u_i) + N_(i + 1)^(n - 1)(u) (u_(i + n + 1) - u) / (u_(i + n + 1) - u_(i + 1))
   $
 
   $
     N_i^0 (u) = cases(1 text("  ") u in [u_i, u_(i + 1)], 0 text("   else"))
   $
 
-  Partition of unity $sum_i N_i^n (u) = 1$, positivity $N_i^n(u) >= 0$, compact support $N_i^n (u) = 0$, $forall u in.not [u_i, u_(i + n + 1)]$, continuity $N_i^n$ is $(n - 1)$ times cont. differentiable.
+  Partition of unity $sum_i N_i^n (u) = 1$, positivity $N_i^n(u) >= 0$, compact support $N_i^n (u) = 0$, $forall u in.not [u_i, u_(i + n + 1)]$, continuity $N_i^n$ is $(n - 1)$ times cont. differentiable, local control, affine invariant.
 ]
 
 *Example:* $N_i^1 (u) = cases((u - u_i) / (u_(i + 1) - u_i) #h(0.5cm) u in [u_i, u_(i+1)], (u_(i + 2) - u) / (u_(i + 2) - u_(i + 1)) #h(0.25cm) u in [u_(i+1), u_(i+2)])$
