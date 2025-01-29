@@ -226,11 +226,11 @@ Properties: \
   [$e^(2 i pi(u_0 x + v_0 y))$], [$delta(u - u_0, v - v_0)$]
 )
 
-#image("fourier-transforms.png", height: 20em)
-
 #colorbox(title: [Image restoration])[
 Image degradation is applying kernel $h$ to some image $f$. The inverse $tilde(h)$ should compensate: $f(x) -> h(x) -> g(x) -> tilde(h)(x) -> f$. Determine with $F(tilde(h))(u, v) = F(h)(u, v) = 1$. Cancellation of freq., noise amplif. Regularize using $tilde(F)(tilde(h))(u, v) = F(h) slash.big (|F(h)|^2 + epsilon)$         
 ]
+
+#image("fourier-transforms.png", height: 20em)
 
 == Unitary transforms (PCA / KL)
 Images are vectorized row-by-row. Linear image processing algorithms can be written as $g = F f$. Auto-correl. fun.: $R_"ff" = E[f_i dot.c f_i^H] = (F dot.c F^H) / n$.
@@ -409,7 +409,7 @@ Contemporary pipeline: CPU, Vector processing (per-vertex ops, transforms, light
     fs: "Fragment shader",
     fc: "Fragment color\n(per-fragment)"
   ),
-  width: 100%,
+  width: 90%,
   engine: "sfdp"
 )
 
@@ -482,7 +482,7 @@ Change position & orientation of objects, project to screen, animating objects, 
 ])
 
 
-#image("perspective-projection.png")
+#image("perspective-projection.png", width: 20em)
 
 #colorbox(title: [Quaternions], color: orange)[
   Similar to $CC$, define $i^2 = j^2 = k^2 = - 1$, $i j k = -1$, $i j = k$, $j i = -k$, $j k = i$, $k j = -i$, $k i = j$, $i k = -j$. For $q = a + b i + c j + d k$, we have: \ 
@@ -548,9 +548,7 @@ Flat shading: one color per primitive
 ]
 
 #colorbox(title: [Phong Shading], color: gray)[
-  Lin. interpol. of vertex normals
-  
-  Barycentric interpolation of normals on triangles.
+  Lin. interpol. of vertex normals, barycentric interpolation of normals on triangles.
   #image("phong-shading.png")
   Properties:
     Lagrange: $x = a => n_x = n_a$ \
@@ -560,7 +558,7 @@ Flat shading: one color per primitive
   Problems: normal not defined / representative.
 ]
 
-Flat, Gouraud in screen space, Phong in obj. space
+Flat, Gouraud in screen space, Phong in obj. space, e.g. to get Gouraud shading we can move the code from Phong shading from fragment shader to vertex shader (only calculate for each vertex, then interpolate).
 
 *Transparency*: (2 obj., $P_1$ & $P_2$). Perceived intensity $I_lambda = I'_lambda_1 + I'_lambda_2$ where $I'_lambda_1$ is emission of $P_1$ and $I'_lambda_2$ is intensity filtered by $P_1$. We model it as follows: $I_lambda = I_(lambda_1) alpha_1 Delta t + I_(lambda_2) e^(-alpha_1 Delta t)$ where $alpha$ absorption, $Delta t$ thickness. \
 
@@ -585,13 +583,11 @@ Considerations: Storage, acquisition of shapes, creation of shapes, editing shap
 - triangle meshes, NURBS, etc.
 *Implicit* repr. easily test inside / outside, compact storage, but sampling expensive, hard to model
 - algebraic surfaces, constructive solid geometry, level set methods, blobby surfaces, fractals
-We need to store textures as bitmaps, hence parameterizing complex surfaces.
+Need to store textures as bitmaps, hence param. complex surfaces.
 
 *Manifolds*: surface homeomorphic to disk, closed manifolds divids space into two., in manifold mesh there are at most two faces sharing an edge
 
-*Mesh data structures*: Locations, how vertices are connected, attributes such as normals, color etc. Must support rendering, geometry queries, modifications. E.g.
-- Triangle list (list of 3 points, redundant, e.g. STL).
-- Indexed Face set (array of vertices + list of indices, e.g. OBJ, OFF, WRL, costly queries, modifications)
+*Mesh data structures*: Locations, how vertices are connected, attributes such as normals, color etc. Must support rendering, geometry queries, modifications. E.g. *Triangle list* (list of 3 points, redundant, e.g. STL) or *Indexed Face set* (array of vertices + list of indices, e.g. OBJ, OFF, WRL, costly queries, modifications).
 
 #colorbox(title: [Texture mapping])[
   Enhance details without additional geom. complexity. Map Texture $(u, v)$ coords to geom. $(x, y, z)$ coords. Issues: aliasing, level-of-detail, (e.g. sphere mapping: $(u, v) -> (sin u sin v, cos v, cos u sin v)$). We want low-distortion, bijective mapping, efficiency.
@@ -612,7 +608,8 @@ Magnification: for pixels mapping to area larger than pixel (jaggies), use bilin
 #colorbox(color: silver, inline: false)[
   *Light map*: Simulate effect of local light source. Can be pre-computed and dynamically adapted \
   *Environment map*: Mirror environment with imaginary sphere or cube for reflective objects \
-  *Bump map*: Perturb surface normal according to texture, represents small-scale geometry. Limitations: no bumps on silhouette, no self-occlusions, no self-shadowing. Height stored as grayscale textures.
+  *Bump map*: Perturb surface normal according to texture, represents small-scale geometry. Limitations: no bumps on silhouette, no self-occlusions, no self-shadowing. Height stored as grayscale textures. \
+  *Displacement mapping*: compared to bump map, displaces geometry, uses height map to displace points along surface normal
 ]
 
 *Procedural texture*: Generate texture from noise (Perlin, Gabor) from Guassian pyramid of noise and summing layers with weights.
@@ -639,8 +636,6 @@ Generate discrete pixel values - approxiate with finit amount. \
 ]
 
 Disadvantages: global support of basis functions, new control pts yields higher degree, $C^r$ continuity between segments of Bézier-Curves.
-
-Interpolate points $bold(p)_0, ..., bold(p)_n$ using basis fcts.
 
 #colorbox(title: [B-Spline functions])[
   B-Spline curve $bold(s)(u)$ built from piecewise polyn. bases $s(u) = sum_(i = 0)^k bold(d)_i N_i^n (u)$ \
@@ -687,7 +682,7 @@ Interpolate points $bold(p)_0, ..., bold(p)_n$ using basis fcts.
 
 Generalization of spline curves / surfaces allowing arbitrary control meshes using successive refinement (subdivision), converging to smooth limit surfaces, connecting splines and meshes. 
 
-TODO: Corner-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
+// TODO: Corner-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
 
 == Visibility and shadows
 *Painter's algorithm*: Render objects from furthest to nearest. Issues with cyclic overlaps &intersec. \
@@ -706,28 +701,24 @@ TODO: Corner-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
 ]
 *Ray-surface intersections*: Ray equation $bold(r)(t) = bold(o) + t bold(d)$. *Sphere*: $norm(bold(x) - bold(c)) - r^2 = 0$ where $bold(x)$ point of interest, $bold(c)$ center, $r$ radius. Solve for $t$: $norm(bold(o) + t bold(d) - bold(c))^2 - r^2 = 0$. *Triangle*: Barycentric coords. $bold(x) = s_1 bold(p)_1 + s_2 bold(p)_2 + s_3 bold(p)_3$. Intersect: $(bold(o) + t bold(d) - bold(p)_1) dot.c n = 0$. Using the following: $bold(n) = (bold(p)_2 - bold(p)_1) times (bold(p)_3 - bold(p)_1)$ we get $t = - ((bold(o) - bold(p)_1) dot.c bold(n)) / (bold(d) dot.c bold(n))$. Now compute the coeffs. $bold(s)_i$. Test whether $s_1 + s_2 + s_3 = 1$ and $0 <= s_i <= 1$. If so, inside triangle.
 
-*Ray-tracing shading extensions*: Refraction, mult. lights, area lights for soft shadows, motion blur (sample objs, intersect in time), depth of field \
-*Cost*: $O(N_x N_y N_o) = "#px" dot.c "#objects"$
+*Ray-tracing shading extensions*: Refraction, mult. lights, area lights for soft shadows, motion blur (sample objs, intersect in time), depth of field, cost: $O(N_x N_y N_o) = "#px" dot.c "#objects"$
 
 *Accelerate*: Accelerate with less intersections, introduce uniform grids or space partitioning trees. \
 *Uniform grids*: Preprocess: compute bounding box, set grid res., rasterize objects, store refs. to objects. Traversal: incrementally rasterize rays - stop at intersection. Fast & easy, but non-adaptive to scene geometry.
-*Space partitioning trees*: octree, kd-tree, bsp-tree
+*Space partitioning trees*: octree, kd-tree, bsp-tree, another solution: bounding volume hierarchies (BVH)
 
 // TODO: space partitioning trees, K-D tree, octree
-Another solution: bounding volume hierarchies (BVH)
 
 == OpenGL
 
 *Model matrix*: from object space to world coordinates, *View matrix*: from world coordinates to camera coordinates, *Projection matrix*: from camera coordinates to screen space
 
-
-Facts:
 + All 3D rot. matrices $R$ have property $R^(-1) = R^T$
 + Bézier curves are special cases of B-spline curves
 + Color buffer is updated only when depth test passed
 + Radiance is constant along a ray (in a vacuum)
 + Pinhole camera measures radiance
-+ $f_r (omega_i, omega_o) = f_r (omega_o, omega_i)$ is true for any valid BRDF fct
++ $f_r (omega_i, omega_o) = f_r (omega_o, omega_i)$ is true for any valid BRDF function
 + Given material with a BRDF fct that satisfies $integral_Omega f_r (omega_i, omega_o) dif omega_i = 1$, all incom. energy is reflected
 + For a perfect mirror material, its $f_r (omega_i, omega_o)$ is non-zero $<=> omega_i$ is reflection vec. of $omega_o$ against surf. normal at the point of interest
 + Due to persp. proj., barycentric coords. of values on a triangle of different depths are not an affine function of screen space positions.
