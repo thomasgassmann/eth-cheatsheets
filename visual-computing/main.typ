@@ -588,7 +588,7 @@ Considerations: Storage, acquisition of shapes, creation of shapes, editing shap
 - algebraic surfaces, constructive solid geometry, level set methods, blobby surfaces, fractals
 Need to store textures as bitmaps, hence param. complex surfaces.
 
-*Manifolds*: surface homeomorphic to disk, closed manifolds divids space into two., in manifold mesh there are at most two faces sharing an edge
+*Manifolds*: surface homeomorphic to disk, closed manifolds divids space into two., in manifold mesh there are at most two faces sharing an edge and each vertex has a 1-connected ring of faces around it (or 1-connected half-ring (i.e. boundary)).
 
 *Mesh data structures*: Locations, how vertices are connected, attributes such as normals, color etc. Must support rendering, geometry queries, modifications. E.g. *Triangle list* (list of 3 points, redundant, e.g. STL) or *Indexed Face set* (array of vertices + list of indices, e.g. OBJ, OFF, WRL, costly queries, modifications).
 
@@ -685,7 +685,7 @@ Disadvantages: global support of basis functions, new control pts yields higher 
 
 Generalization of spline curves / surfaces allowing arbitrary control meshes using successive refinement (subdivision), converging to smooth limit surfaces, connecting splines and meshes. 
 
-// TODO: Corner-Cutting, Doo-Sabin, Catmull-Clark Subdivision, Loop Subdivision
+// TODO: Corner-Cutting, Doo-Sabin, Catmull-Clark Subdivision (quadrilateral meshes), Loop Subdivision (triangular meshes)
 
 == Visibility and shadows
 *Painter's algorithm*: Render objects from furthest to nearest. Issues with cyclic overlaps &intersec. \
