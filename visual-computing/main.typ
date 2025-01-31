@@ -46,7 +46,7 @@ $f(x,y) = (1 - a) (1 - b) dot.c f(i, j) + a (1 - b) dot.c \ f(i + 1, j) + a b do
 *Image noise*:
 Common model for image noise: additive Gaussian. $I(x, y) = f(x, y) + c$ where $c tilde N(0, sigma^2)$ (so density $p(c) = (2 pi sigma^2)^(-1) e^((-c^2) / 2 sigma^2)$).
 Poisson (shot) noise: $p(k) = (lambda^k e^(- lambda)) / (k!)$. Rician noise (MRI): $p(I) = 1 / (sigma^2) exp((-(I^2 + f^2)) / (2 sigma^2)) I_0 ((I f) / (sigma^2))$
-Multiplicative noise: $I = f + f c$. Signal to noise ratio (SNR) s is index of image quality: $s = F / sigma$ where $F = 1 / (X Y) sum_(x = 1)^X sum_(y = 1)^Y f(x, y)$. Peak SNR (PSNR): $s_"peak" = (F_"max") / sigma$.
+Multiplicative noise: $I = f + f c$, Salt-and-pepper noise (impulse noise): sparsely occurring white and black pixels, Signal to noise ratio (SNR) s is index of image quality: $s = F / sigma$ where $F = 1 / (X Y) sum_(x = 1)^X sum_(y = 1)^Y f(x, y)$. Peak SNR (PSNR): $s_"peak" = (F_"max") / sigma$ (average signal, divided by stddev of signal).
 
 *Color camera concepts*: Prism (splitting light, 3 sensors, requires good alignment), Filter mosaic (coat filter on sensor, grid, introduces aliasing), Filter wheel (rotate filter in front of lens, static image), CMOS sensor (absorbing colors at different depths), Rolling shutter effect (the effect produced by the sequential readout of pixels while a digital camera is moving)
 
@@ -190,7 +190,7 @@ Can be made scale-invariant by looking for strong responses to DoG filter over s
   $F^(-1)(g(u))(x) = integral_RR g(u) dot.c exp(i 2 pi x u) dif u$ \
   $F(f(x, y))(u, v) = integral.double_(RR^2) f(x, y) e^(-i 2 pi (u x + v y)) dif x dif y$
 ]
-Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$ vectorized image. $F(u, v) = 1 / N sum_(x = 0)^(N - 1) sum_(y = 0)^(N - 1) f(x, y) dot.c e^(-i 2 pi (u x + v y) / N)$, Dual Transform: $f(-x) = F(F(f))(x)$
+Discrete FT: $F = bold(U) f$ where $F$ transformed image, $bold(U)$ FT base, $f$ vectorized image. $F(u, v) = sum_(x = 0)^(M - 1) sum_(y = 0)^(N - 1) f(x, y) dot.c exp(-i 2 pi ((u x)/M + (v y)/N))$, Dual Transform: $f(-x) = F(F(f))(x)$
 
 *Relevant*: $cos(x) = (e^(i x) + e^(-i x)) / 2 space.quad sin(x) = (e^(i x) - e^(-i x)) / (2i)$, $sinc(u) = sin(u) / u$, $integral_(-infinity)^infinity e^(-2 pi i x u) dif x = delta(u)$. \
 *Dirac delta*: $delta(x) = 0 "if" x != 0 "else undefined"$. 
@@ -199,7 +199,7 @@ Properties: \
 - $integral_(-oo)^infinity delta(x) dif x = 1$, $delta(alpha x) = delta(x) / abs(alpha)$ and $delta(-t) = delta(t)$
 - $(delta convolve f)(x) = integral_(-infinity)^(infinity) f(t) delta(x - t) d t = f(x)$, e.g. $delta(u - k) convolve f(u) = f(u - k)$
 
-*Sampling*: Mult with seq. of $delta$-fnts
+*Sampling*: Mult with seq. of $delta$-fnts, *Fourier Rotation Theorem*: $F[f compose R] = F[f] compose R$ for rotation matrix $R$.
 
 #grid(columns: (auto, auto, auto), column-gutter: 1.5em, row-gutter: 0.8em,
   [*Property*], $bold(f(x)), f(x,y)$, $bold(F(u)), F(u, v)$,
@@ -342,22 +342,25 @@ Classification: $f(x_1, theta)$ as score, take class with larger score. With $y_
 Regression: $f(x_1, theta)$ as value, can be used for classification by comparing value. With $y_i in RR^n, s_i = f(x_i, theta)$, we get: $cal(L)(y, f(x, theta)) = sum_(i = 1)^N norm(y_i - s_i)^2$
 
 #colorbox(title: [Radon transform], color: silver)[
-  Given object with unknown density $f(x, y)$, find $f$ by sending rays from all dirs through object and measure absorption on the other side. Assume parallel beams for given angle and no spreading of beam. X-Ray along line $L$ at distance $s$ has intensity $I(s)$, travelling $diff s$ reduces intens. by $diff I$. reduction depends on intens. and optical density $u(s)$: $(diff I) / I(s) = -u(s) diff s$. Radon transform of $f(x, y)$: $R f(L) = integral_L f(x) |dif x|$. With $(x, y) = (rho cos theta - s sin theta, rho sin theta + s cos theta)$ we get:
+  Given object with unknown density $f(x, y)$, find $f$ by sending rays from all dirs through object and measure absorption on the other side. Assume parallel beams for given angle and no spreading of beam. X-Ray along line $L$ at distance $s$ has intensity $I(s)$, travelling $diff s$ reduces intens. by $diff I$. reduction depends on intens. and optical density $u(s)$: $(diff I) / I(s) = -u(s) diff s$. $I_(text("finish")) = I_(text("start")) exp(-R)$ where $R = integral_L u(s) dif s$ for the path through the object $L$. Radon transform of $f(x, y)$: $R f(L) = integral_L f(x) |dif x|$.
+  
+  With $(x, y) = (rho cos theta - s sin theta, rho sin theta + s cos theta)$ and $rho$ the distance from the object center and $theta$ the angle, $s$ the distance along the line, we get:
   $R(rho, theta) = integral u(x, y) dif s$. We now want to find $u(x, y)$ given $R(rho, theta)$.
 ]
-The continuous case of a radon transform of a line is:
-#fitWidth($ R(rho, theta) = integral_(-oo)^infinity integral_(-infinity)^infinity u(x, y) delta(rho - x cos theta - y sin theta) diff x diff y $)
+The continuous case of a radon transform of a function $u$ is:
+#fitWidth($ R[u](rho, theta) = integral_(-oo)^infinity integral_(-infinity)^infinity u(x, y) delta(rho - x cos theta - y sin theta) dif x dif y $)
 
-*Properties of RT*: Linear, shifting input shifts the RT, rotating input rotates RT, RT of 2D convolution is 1D convolution of RT with respect to $rho$ ($R(f *_"2D" g) = R(f) *_"1D" R(g)$, RHS with fixed $theta$)
+*Properties of RT*: Linear, shifting input shifts the RT (does not affect angle), rotating input rotates RT by same angle, RT of 2D convolution is 1D convolution of RT with respect to $rho$, i.e. $R(f *_"2D" g) = R(f) *_"1D" R(g)$, RHS with fixed $theta$, convolution with respect to $rho$.
+
+*Fourier Slice Theorem*: $G_theta (omega) = F[f](omega cos(theta), omega sin(theta))$ where $G_theta (omega) = integral_(-infinity)^(infinity) R[f](rho, theta)  exp(-2 pi i omega rho) dif rho = F[R[f](rho, theta)](omega)$, 1D FT of projection at fixed angle $theta$ is slice of 2D FT of image.
 
 #image("radon-back-projection.png")
 
-*Back projection*: Given RT, find $u(x, y)$ \
-Fourier slice thm (apply with all proj. angles $theta$):
-+ Measure protection (attenuation) data
-+ 1D FT of projection data
-+ 2D inverse FT and sum with previous image (backpropagate)
-Requires precise attn. meas., sensitive to noise, unstable, hear to implem., blurring in final image. Add high-pass filter in Fourier domain after 2nd step.
+*Back projection algorithm*: Given RT, find $u(x, y)$, apply for all proj. angles $theta$:
++ Measure projection (attenuation) data, get $R[f](rho, theta)$ for fixed $theta$
++ 1D FT of projection data, get $G_(theta) (omega) = F[f](omega cos(theta), omega sin(theta))$ as above
++ 2D inverse FT the above, then sum with previous image (backpropagate)
+Requires precise attn. meas., sensitive to noise, unstable, blurring in final image (add high-pass filter in Fourier domain after 2nd step to prevent).
 
 = Computer graphics
 == Graphics pipeline
@@ -708,8 +711,6 @@ Generalization of spline curves / surfaces allowing arbitrary control meshes usi
 *Space partitioning trees*: octree, kd-tree, bsp-tree, another solution: bounding volume hierarchies (BVH)
 
 // TODO: space partitioning trees, K-D tree, octree
-
-== OpenGL
 
 *Model matrix*: from object space to world coordinates, *View matrix*: from world coordinates to camera coordinates, *Projection matrix*: from camera coordinates to screen space
 

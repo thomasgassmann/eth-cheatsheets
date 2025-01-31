@@ -8,10 +8,16 @@
   set text(font: "Libertinus Serif", lang: "en", size: 10pt)
 
   // Set paragraph spacing.
-  show par: set block(above: 0.75em, below: 0.75em)
+  show par: set block(above: 0.25em, below: 0.25em)
 
   set heading(numbering: "1.1")
   set par(leading: 0.58em)
+
+  set par(
+    first-line-indent: 0.5em,
+    spacing: 1em,
+    justify: true,
+  )
   
   show: columns.with(3, gutter: 1em)
 
