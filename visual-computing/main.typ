@@ -680,9 +680,9 @@ Disadvantages: global support of basis functions, new control pts yields higher 
 
 *deBoor algorithm*: generalize deCasteljau, evaluate B-spline of degree $n$ at $u$, set $d_i^0 = d_i$, finally $d_n^n = s(u)$
 $
-d_i^k = (1 - a_i^k) d_(i)^(k-1) + a_i^k d_(i+1)^(k-1), space space space a_i^k = (u-u_i)/(u_(i+n+1-k) - u_i)
+d_i^k = (1 - a_i^k) d_(i)^(k-1) + a_i^k d_(i+1)^(k-1), space space space a_i^k = (u-u_(i+k-1))/(u_(i+n) - u_(i+k-1))
 $
-Note that $a_i^k$ vanishes outside of $[u_i, u_(i+n+1-k)]$!
+Note that $a_i^k$ vanishes outside of $[u_(i+k-1), u_(i+n)]$!
 
 == Subdivision surfaces
 
