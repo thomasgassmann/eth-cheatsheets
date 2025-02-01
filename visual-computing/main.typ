@@ -640,25 +640,7 @@ Generate discrete pixel values - approxiate with finit amount. \
 
 Disadvantages: global support of basis functions, new control pts yields higher degree, $C^r$ continuity between segments of Bézier-Curves.
 
-#colorbox(title: [B-Spline functions])[
-  B-Spline curve $bold(s)(u)$ built from piecewise polyn. bases $s(u) = sum_(i = 0)^k bold(d)_i N_i^n (u)$ \
-  Coefficients $bold(d)_i$ are called "de Boor" pts. Bases are piecewise, recursively def. polyn. over sequence of knots $u_0 < u_1 < u_2 < ...$ defined by knot vec. $T = bold(u) = mat(u_0, ..., u_(k + n + 1))$
-
-  $
-  N_i^n (u) = N_i^(n-1)(u) (u - u_i) / (u_(i + n) - u_i) + N_(i + 1)^(n - 1)(u) (u_(i + n + 1) - u) / (u_(i + n + 1) - u_(i + 1))
-  $
-
-  $
-    N_i^0 (u) = cases(1 text("  ") u in [u_i, u_(i + 1)], 0 text("   else"))
-  $
-
-  Partition of unity $sum_i N_i^n (u) = 1$, positivity $N_i^n(u) >= 0$, compact support $N_i^n (u) = 0$, $forall u in.not [u_i, u_(i + n + 1)]$, continuity $N_i^n$ is $(n - 1)$ times cont. differentiable, local control, affine invariant.
-]
-
-*Example:* $N_i^1 (u) = cases((u - u_i) / (u_(i + 1) - u_i) #h(0.5cm) u in [u_i, u_(i+1)], (u_(i + 2) - u) / (u_(i + 2) - u_(i + 1)) #h(0.25cm) u in [u_(i+1), u_(i+2)])$
-
-#colorbox(title: [De Casteljau])[
-  Compute a triangular representation, successively interpolate, "corner cutting":
+*deCasteljau*: Compute a triangular representation, successively interpolate, "corner cutting":
   #grid(columns: 2, column-gutter: 0.5cm, [
     #table(
       columns: 4,
@@ -678,8 +660,29 @@ Disadvantages: global support of basis functions, new control pts yields higher 
     b_0^2(t) = (1 - t)b_0^1(t) + t b_1^1(t)
     $
   ])
-  
+
+#colorbox(title: [B-Spline functions])[
+  B-Spline curve $bold(s)(u)$ built from piecewise polyn. bases $s(u) = sum_(i = 0)^k bold(d)_i N_i^n (u)$ \
+  Coefficients $bold(d)_i$ are called "de Boor" pts. Bases are piecewise, recursively def. polyn. over sequence of knots $u_0 < u_1 < u_2 < ...$ defined by knot vec. $T = bold(u) = mat(u_0, ..., u_(k + n + 1))$
+
+  $
+  N_i^n (u) = N_i^(n-1)(u) (u - u_i) / (u_(i + n) - u_i) + N_(i + 1)^(n - 1)(u) (u_(i + n + 1) - u) / (u_(i + n + 1) - u_(i + 1))
+  $
+
+  $
+    N_i^0 (u) = cases(1 text("  ") u in [u_i, u_(i + 1)], 0 text("   else"))
+  $
+
+  Partition of unity $sum_i N_i^n (u) = 1$, positivity $N_i^n (u) >= 0$, compact support $N_i^n (u) = 0$, $forall u in.not [u_i, u_(i + n + 1)]$, continuity $N_i^n$ is $(n - 1)$ times cont. differentiable, local control, affine invariant.
 ]
+
+*Example:* $N_i^1 (u) = cases((u - u_i) / (u_(i + 1) - u_i) #h(0.5cm) u in [u_i, u_(i+1)], (u_(i + 2) - u) / (u_(i + 2) - u_(i + 1)) #h(0.25cm) u in [u_(i+1), u_(i+2)])$
+
+*deBoor algorithm*: generalize deCasteljau, evaluate B-spline of degree $n$ at $u$, set $d_i^0 = d_i$, finally $d_n^n = s(u)$
+$
+d_i^k = (1 - a_i^k) d_(i)^(k-1) + a_i^k d_(i+1)^(k-1), space space space a_i^k = (u-u_i)/(u_(i+n+1-k) - u_i)
+$
+Note that $a_i^k$ vanishes outside of $[u_i, u_(i+n+1-k)]$!
 
 == Subdivision surfaces
 
