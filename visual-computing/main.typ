@@ -285,7 +285,7 @@ $(dif I) / (dif t) = (diff I) / (diff x) (dif x) / (dif t) + (diff I) / (diff y)
 #colorbox(title: [Horn & Schunck algorithm])[
   Assumption: values $u(x, y)$, $v(x, y)$ are smooth and change slowly with $x, y$. Minimize $e_s + lambda e_c$ for $lambda > 0$ where
 
-  $e_s = integral.double ((u_x^2 + x_y^2) + (v_x^2 + v_y^2)) dif x dif y$ (smooth.) \
+  $e_s = integral.double ((u_x^2 + u_y^2) + (v_x^2 + v_y^2)) dif x dif y$ (smooth.) \
   $e_c = integral.double (I_x u + I_y v + I_t)^2 dif x dif y$ (bright. const.)
 
   Coupled PDEs solved using iter. methods and finite diffs: $(diff u) / (diff t) = Delta u - lambda (I_x u + I_y v + I_t) I_x$ and  $(diff v) / (diff t) = Delta v- lambda (I_x u + I_y v + I_t) I_y$. Has errors at boundaries / information spreads from corner-type patterns.
