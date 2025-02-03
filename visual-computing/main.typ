@@ -1,8 +1,6 @@
 #import "template.typ": *
 #import "@preview/diagraph:0.2.1": *
 
-// Take a look at the file `template.typ` in the file panel
-// to customize this template and discover how it works.
 #show: project.with(
   title: "Visual Computing",
   authors: (
@@ -129,10 +127,10 @@ Laplacian is rot. invariant (isotropic), usually more noisy since it uses 2nd de
 #fitWidth($ (diff f) / (diff x) = lim_(epsilon -> 0) (f(x + epsilon, y) / epsilon - f(x, y) / epsilon) approx (f(x_(n + 1), y) - f(x_n, y)) / (Delta x) $)
 Hence, diff. leads to the convolution $mat(-1, 1)$
 
-// necessary?
+// TODO: necessary?
 Image sharpening: enhances edges by increasing high frequency components: $I' = I + alpha abs(k convolve I)$ where $k$ high-pass filter, $alpha in [0, 1]$.
 
-// integral images?
+// TODO: integral images?
 
 == Edge detection
 #colorbox(title: [Laplacian operator], color: silver)[
@@ -223,7 +221,8 @@ Properties: \
   [$text("Box")(x) = cases(1 #h(1em) x in [-1/2, 1/2], 0 #h(1em) text("else"))$], [$sinc(u) = sin(pi u) / (pi u) text("(norm. sinc)")$],
   [$h(x,y) = f(x)g(x)$], [$H(u, v) = F(u) G(v)$],
   [$delta(x - x_0)$], [$e^(-2 i pi u x_0)$],
-  [$e^(2 i pi(u_0 x + v_0 y))$], [$delta(u - u_0, v - v_0)$]
+  [$e^(2 i pi(u_0 x + v_0 y))$], [$delta(u - u_0, v - v_0)$],
+  [$e^(-a x^2)$], [$sqrt(pi/a) exp(-(pi^2 u^2)/a)$],
 )
 
 #colorbox(title: [Image restoration])[
@@ -472,7 +471,7 @@ Change position & orientation of objects, project to screen, animating objects, 
 ]
 
 #grid(columns: 2, column-gutter: 1em, [
-  Parallel projection:
+  Parallel (orthographic) projection:
   $
     bold(M_"ort") = mat(1, 0, 0, 0; 0, 1, 0, 0; 0, 0, 0, 0; 0, 0, 0, 1)
   $
@@ -530,15 +529,15 @@ $f_r (x, arrow(omega)_i, arrow(omega)_r) = (dif L_r (x, arrow(omega)_r)) / (dif 
     $ I_lambda = underbrace(I_a_lambda k_a O_d_lambda, "Ambient") + f_"att" I_(p_lambda) [underbrace(k_d O_(d_lambda)(N dot.c L), "Diffuse") + underbrace(k_s (R dot.c V)^n, "Specular")] $
   )
 
-  $I_a$ ambient light intensity, $k_a$ ambient light coefficient, $I_p$ directed light source intensity, $k_d$ diffuse reflection coefficient, $theta in [0, pi / 2]$ angle surface normal $N$ and light source vector $L$, attenuation factor $f_"att"$, $O_(d lambda)$ value of spectrum of object color at the point $lambda$, $R$ is $L$ reflected along the normal $N$ ($R = 2N(N dot L) - L$, i.e. perfect reflection), $V$ is the direction pointing towards the viewer.
+  $I_a$ ambient light intensity, $k_a$ ambient light coefficient, $I_p$ directed light source intensity, $k_d$ diffuse reflection coefficient, $theta in [0, pi / 2]$ angle surface normal $N$ and light source vector $L$, attenuation factor $f_"att"$, $O_(d lambda)$ value of spectrum of object color at the point $lambda$, $R$ is $L$ reflected along the normal $N$ ($R = 2N(N dot L) - L$, i.e. perfect reflection), $V$ is the direction pointing towards the viewer, $n$ determines shape of highlight.
 
-  $k_a, k_d, k_s, n$ are material dependent constants. Increasing $n$ causes the highlight to appear smaller in terms of area. As the power increase, more values are
+  $k_a, k_d, k_s, n$ are material dependent constants. Increasing $n$ causes the highlight to appear smaller in terms of area (sharp, focused, highlights). As the power increase, more values are
 mapped to zero.
 ]
 
 == Shading models
 
-Flat shading: one color per primitive
+Flat shading: one color per primitive/polygon
 
 #colorbox(title: [Gouraud Shading], color: gray)[
   Lin.interpol. vertex intensities
@@ -547,7 +546,7 @@ Flat shading: one color per primitive
   + Calculate vertex normals by averaging _(weighted by angle)_
   + Evaluate illumination model for each vertex
   + Interpolate vertex colors bilinearly on the current scan line
-  Problems with scan line interpolation are perspective distortion, orientation dependence, shared vertices. Quality depends on size of primitives.
+  Problems with scan line interpolation are perspective distortion, orientation dependence, shared vertices, incorrect highlights. Quality depends on size of polygons.
 ]
 
 #colorbox(title: [Phong Shading], color: gray)[
@@ -588,6 +587,8 @@ Considerations: Storage, acquisition of shapes, creation of shapes, editing shap
 - algebraic surfaces, constructive solid geometry, level set methods, blobby surfaces, fractals
 Need to store textures as bitmaps, hence param. complex surfaces.
 
+// TODO: Laplacian pyramids: information at scale and orientation
+
 *Manifolds*: surface homeomorphic to disk, closed manifolds divids space into two., in manifold mesh there are at most two faces sharing an edge and each vertex has a 1-connected ring of faces around it (or 1-connected half-ring (i.e. boundary)).
 
 *Mesh data structures*: Locations, how vertices are connected, attributes such as normals, color etc. Must support rendering, geometry queries, modifications. E.g. *Triangle list* (list of 3 points, redundant, e.g. STL) or *Indexed Face set* (array of vertices + list of indices, e.g. OBJ, OFF, WRL, costly queries, modifications).
@@ -615,7 +616,7 @@ Magnification: for pixels mapping to area larger than pixel (jaggies), use bilin
   *Displacement mapping*: compared to bump map, displaces geometry, uses height map to displace points along surface normal
 ]
 
-*Procedural texture*: Generate texture from noise (Perlin, Gabor) from Guassian pyramid of noise and summing layers with weights.
+*Procedural texture*: Generate texture from noise (Perlin, Gabor) from Gaussian pyramid of noise and summing layers with weights.
 
 *Perspective interpolation* in world-space can yield non-linear variation in screen-space. Optimal resampling filter is hence spatially variant.
 
@@ -663,7 +664,7 @@ Disadvantages: global support of basis functions, new control pts yields higher 
 
 #colorbox(title: [B-Spline functions])[
   B-Spline curve $bold(s)(u)$ built from piecewise polyn. bases $s(u) = sum_(i = 0)^k bold(d)_i N_i^n (u)$ \
-  Coefficients $bold(d)_i$ are called "de Boor" pts. Bases are piecewise, recursively def. polyn. over sequence of knots $u_0 < u_1 < u_2 < ...$ defined by knot vec. $T = bold(u) = mat(u_0, ..., u_(k + n + 1))$
+  Coefficients $bold(d)_i$ are called "de Boor" pts. Bases are piecewise, recursively def. polyn. over sequence of knots $u_0 < u_1 < u_2 < ...$ defined by knot vec. $T = mat(u_0, ..., u_(k + n + 1))$
 
   $
   N_i^n (u) = N_i^(n-1)(u) (u - u_i) / (u_(i + n) - u_i) + N_(i + 1)^(n - 1)(u) (u_(i + n + 1) - u) / (u_(i + n + 1) - u_(i + 1))
@@ -673,12 +674,12 @@ Disadvantages: global support of basis functions, new control pts yields higher 
     N_i^0 (u) = cases(1 text("  ") u in [u_i, u_(i + 1)], 0 text("   else"))
   $
 
-  Partition of unity $sum_i N_i^n (u) = 1$, positivity $N_i^n (u) >= 0$, compact support $N_i^n (u) = 0$, $forall u in.not [u_i, u_(i + n + 1)]$, continuity $N_i^n$ is $(n - 1)$ times cont. differentiable, local control, affine invariant.
+  Partition of unity $sum_i^k N_i^n (u) = 1$, positivity $N_i^n (u) >= 0$, compact support $N_i^n (u) = 0$, $forall u in.not [u_i, u_(i + n + 1)]$, continuity $N_i^n$ is $(n - 1)$ times cont. differentiable, local control, affine invariant.
 ]
 
 *Example:* $N_i^1 (u) = cases((u - u_i) / (u_(i + 1) - u_i) #h(0.5cm) u in [u_i, u_(i+1)], (u_(i + 2) - u) / (u_(i + 2) - u_(i + 1)) #h(0.25cm) u in [u_(i+1), u_(i+2)])$
 
-*deBoor algorithm*: generalize deCasteljau, evaluate B-spline of degree $n$ at $u$, set $d_i^0 = d_i$, finally $d_n^n = s(u)$
+*deBoor algorithm*: generalizes deCasteljau, evaluate B-spline of degree $n$ at $u$, set $d_i^0 = d_i$, finally $d_0^n = s(u)$
 $
 d_i^k = (1 - a_i^k) d_(i)^(k-1) + a_i^k d_(i+1)^(k-1), space space space a_i^k = (u-u_(i+k-1))/(u_(i+n) - u_(i+k-1))
 $
