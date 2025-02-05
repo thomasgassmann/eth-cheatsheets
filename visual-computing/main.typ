@@ -127,7 +127,6 @@ Laplacian is rot. invariant (isotropic), usually more noisy since it uses 2nd de
 #fitWidth($ (diff f) / (diff x) = lim_(epsilon -> 0) (f(x + epsilon, y) / epsilon - f(x, y) / epsilon) approx (f(x_(n + 1), y) - f(x_n, y)) / (Delta x) $)
 Hence, diff. leads to the convolution $mat(-1, 1)$
 
-// TODO: necessary?
 Image sharpening: enhances edges by increasing high frequency components: $I' = I + alpha abs(k convolve I)$ where $k$ high-pass filter, $alpha in [0, 1]$.
 
 // TODO: integral images?
@@ -225,11 +224,11 @@ Properties: \
   [$e^(-a x^2)$], [$sqrt(pi/a) exp(-(pi^2 u^2)/a)$],
 )
 
+#image("fourier-transforms.png", height: 20em)
+
 #colorbox(title: [Image restoration])[
 Image degradation is applying kernel $h$ to some image $f$. The inverse $tilde(h)$ should compensate: $f(x) -> h(x) -> g(x) -> tilde(h)(x) -> f$. Determine with $F(tilde(h))(u, v) = F(h)(u, v) = 1$. Cancellation of freq., noise amplif. Regularize using $tilde(F)(tilde(h))(u, v) = F(h) slash.big (|F(h)|^2 + epsilon)$         
 ]
-
-#image("fourier-transforms.png", height: 20em)
 
 == Unitary transforms (PCA / KL)
 Images are vectorized row-by-row. Linear image processing algorithms can be written as $g = F f$. Auto-correl. fun.: $R_"ff" = E[f_i dot.c f_i^H] = (F dot.c F^H) / n$.
