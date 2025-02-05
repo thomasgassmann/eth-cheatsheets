@@ -174,7 +174,7 @@ $ S(Delta x, Delta y) approx mat(Delta x, Delta y) bold(M) mat(Delta x, Delta y)
     Invariant to shift, rot, brightness offset, not scaling, $(Delta x, Delta y)$ (blue box) constant, ellipses (eigenvectors) rotate but shapes (eigenvalues) remain same
 ])
 
-Can be made scale-invariant by looking for strong responses to DoG filter over scale space, then consider loc. max. in both position and scale space (see SIFT).
+Can be made *scale-invariant* by looking for strong responses to *DoG filter* over scale space, then consider loc. max. in both position and scale space (see SIFT).
 
 #colorbox(title: [_Lowe's_ Scale Invariant Feature Tranform (SIFT)],)[
   Used to track feature points over 2 images. Look for strong responses in Difference of Gaussian (DoG) over scale space and position, consider local maxima in both spaces to find blobs. Compute histogram of gradient directions (ignoring gradient mag. bc lighting etc.) at selected scale, pos., rot. by choosing principal direction. Now both pictures are at the same scale & orientation, compare gradient histog. to find matching points. $"DoG"(x, y) = 1 / k e^((x^2 + y^2) / (k sigma)^2) - e^(-(x^2 + y^2) / (sigma^2)), k = sqrt(2)$
@@ -467,7 +467,7 @@ Change position & orientation of objects, project to screen, animating objects, 
     $ p' = underbrace(mat(bold(r_1), bold(r_2), bold(r_3), bold(t); 0, 0, 0, 1), bold(M)) mat(p_x; p_y; p_z; 1) $
   )
   
-  Transforming a normal: $bold(n') = (bold(M)^(-1))^T bold(n)$
+  Transforming a normal: $bold(n') = (bold(M)^(-1))^top bold(n) = (M^top)^(-1)n$
 ]
 
 #grid(columns: 2, column-gutter: 1em, [
@@ -688,6 +688,11 @@ Note that $a_i^k$ vanishes outside of $[u_(i+k-1), u_(i+n)]$!
 == Subdivision surfaces
 
 Generalization of spline curves / surfaces allowing arbitrary control meshes using successive refinement (subdivision), converging to smooth limit surfaces, connecting splines and meshes. 
+
+- *interpolating* (new points are interpolation of control points) vs. *approximating* (control points moved, new points added in-between)
+- *primal* (faces are split) vs. *dual* (vertices are split)
+
+=== Loop subdivision
 
 // TODO: Corner-Cutting, Doo-Sabin, Catmull-Clark Subdivision (quadrilateral meshes), Loop Subdivision (triangular meshes)
 
