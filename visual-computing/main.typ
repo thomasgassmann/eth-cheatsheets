@@ -417,8 +417,8 @@ Contemporary pipeline: CPU, Vector processing (per-vertex ops, transforms, light
 
 == Light & Colors
 
-#grid(columns: 2, column-gutter: 0.5em, [
-  #image("ciergb.png", height: 15em)
+#grid(columns: (auto, 8em), column-gutter: 0.5em, [
+  #image("ciergb.png", height: 18em)
 ], [
   Light is mixture of many wavelengths. Consider $P(lambda)$ as intensity at wavelength $lambda$. Humans project inf. dimens. to 3D color (RGB). CIE experiment: some colors are not comb. of RGB. (neg. red needed)
 ])
@@ -623,7 +623,7 @@ Magnification: for pixels mapping to area larger than pixel (jaggies), use bilin
 
 == Scan conversion (rasterization)
 Generate discrete pixel values - approxiate with finit amount. \
-*Bresenham* line: choose closest pixel at each intersection. Fast decision, criterion based on midpoint $m$ and intersection point $q$. After computing first value $d$, we only need addition, bitshifts. $d_"new" = d_"old" + a$
+*Bresenham* line: choose closest pixel at each intersection. Fast decision, criterion based on midpoint $m$ and intersection point $q$. After computing first value $d$, we only need addition. E: $d_"new" = d_"old" + a$, NE: $d_"new" = d_"old" + a + b$, $d_0 =a +b/2$, use $a=dif y, b =- dif x$
 #image("bresenham-line.png")
 
 *Scan conversion of polygons*:
