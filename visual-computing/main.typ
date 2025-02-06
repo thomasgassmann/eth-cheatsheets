@@ -144,7 +144,7 @@ $nabla^2 f(x, y) = (diff^2 f(x, y)) / (diff x^2) + (diff^2 f(x, y)) / (diff y^2)
   + Smooth image with Gaussian filter
   + Compute grad. mag. & orient. (Sobel, Prewitt, ...)
     #fitWidth($ M(x, y) = sqrt(((diff f) / (diff x))^2 + ((diff f) / (diff y))^2), alpha(x, y) = tan^(-1)((diff f) / (diff y) slash.big (diff f) / (diff x)) $)
-  + Nonmaxima suppression: quantize edges normal to 4 dirs, if smaller than either neighb. (in given direction) suppress
+  + Nonmaxima suppression: quantize edges normal to 4 dirs, if smaller than either neighb. (dir. of edge normal) suppress
   + Double thresholding (hysteresis): $T_"high", T_"low"$, keep if $>= T_"high"$ or $>= T_"low"$ and 8-conn. through $>= T_"low"$ to $T_"high"$ px. (first detect strong/weak edge pixels, then reject weak edge pixels not connected with strong edge pixels)
 ]
 
@@ -455,7 +455,7 @@ Change position & orientation of objects, project to screen, animating objects, 
     [Trans.], $mat(1, 0, 0, t_x; 0, 1, 0, t_y; 0, 0, 1, t_z; 0, 0, 0, 1)$,
     [Scale], $mat(s_x, 0, 0, 0; 0, s_y, 0, 0; 0, 0, s_z, 0; 0, 0, 0, 1)$,
     [Rot. \ x], $mat(1, 0, 0, 0; 0, cos theta, -sin theta, 0; 0, sin theta, cos theta, 0; 0, 0, 0, 1)$,
-    [Rot. \ y], $mat(cos theta, 0, sin theta, 0; 0, 0, 1, 0; -sin theta, 0, cos theta, 0; 0, 0, 0, 1)$,
+    [Rot. \ y], $mat(cos theta, 0, sin theta, 0; 0, 1, 0, 0; -sin theta, 0, cos theta, 0; 0, 0, 0, 1)$,
     [Rot. \ z], $mat(cos theta, -sin theta, 0, 0; sin theta, cos theta, 0, 0; 0, 0, 1, 0; 0, 0, 0, 1)$,
     [Shear \ x], $mat(1, 0, "sh"_x, 0; 0, 1, "sh"_y, 0; 0, 0, 1, 0; 0, 0, 0, 1)$,
     [Rot \ (2D)], $mat(cos theta, -sin theta, 0; sin theta, cos theta, 0; 0, 0, 1)$,
