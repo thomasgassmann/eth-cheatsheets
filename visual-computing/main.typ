@@ -216,15 +216,21 @@ Properties: \
   $bold(f(x)), f(x,y)$, $bold(F(u)), F(u, v)$,
   $sin(2 pi u_0 x + 2 pi v_0 y)$, [$1/(2i) (delta(u - u_0, v - v_0) - delta(u + u_0, v + v_0))$],
   $cos(2 pi u_0 x + 2 pi v_0 y)$, [$1/(2) (delta(u - u_0, v - v_0) + delta(u + u_0, v + v_0))$],
-  $1$, $delta(x)$,
+  $sin(2 pi u_0 x)$, [$1/(2i) (delta(u - u_0) - delta(u + u_0))$],
+  $cos(2 pi u_0 x)$, [$1/(2) (delta(u - u_0) + delta(u + u_0))$],
+  $1$, $delta(u)$,
   [$text("Box")(x) = cases(1 #h(1em) x in [-1/2, 1/2], 0 #h(1em) text("else"))$], [$sinc(u) = sin(pi u) / (pi u) text("(norm. sinc)")$],
+  [$sinc(u) = sin(pi u) / (pi u)$], [$text("Box")(x) = cases(1 #h(1em) x in [-1/2, 1/2], 0 #h(1em) text("else"))$],
+  [$sinc(u) = sin(u) / (u)$], [$pi text("Box")(pi x)$],
+  [$sum_(n=-infinity)^infinity delta(x - n T)$], [$1/T sum_(n=-infinity)^infinity delta(u - n/T)$],
   [$h(x,y) = f(x)g(x)$], [$H(u, v) = F(u) G(v)$],
+  [$delta(x)$], [$1$],
   [$delta(x - x_0)$], [$e^(-2 i pi u x_0)$],
   [$e^(2 i pi(u_0 x + v_0 y))$], [$delta(u - u_0, v - v_0)$],
   [$e^(-a x^2)$], [$sqrt(pi/a) exp(-(pi^2 u^2)/a)$],
 )
 
-#image("fourier-transforms.png", height: 20em)
+#image("fourier-transforms.png", height: 12em)
 
 #colorbox(title: [Image restoration])[
 Image degradation is applying kernel $h$ to some image $f$. The inverse $tilde(h)$ should compensate: $f(x) -> h(x) -> g(x) -> tilde(h)(x) -> f$. Determine with $F(tilde(h))(u, v) = F(h)(u, v) = 1$. Cancellation of freq., noise amplif. Regularize using $tilde(F)(tilde(h))(u, v) = F(h) slash.big (|F(h)|^2 + epsilon)$         
@@ -290,7 +296,7 @@ $(dif I) / (dif t) = (diff I) / (diff x) (dif x) / (dif t) + (diff I) / (diff y)
 ]
 
 #colorbox(title: [Lucas-Kanade])[
-  Assumption: neighb. in NxM patch $Omega$ have same motion $mat(u, t)^T$ (spatial coherence), small movement, brightness constancy assumption. Minimize energy (using least squares) $E = sum_(x, y in Omega) (I_x (x, y) u + I_y (x, y) v + I_t (x, y))^2$
+  Assumption: neighb. in NxM patch $Omega$ have same motion $mat(u, v)^top$ (spatial coherence), small movement, brightness constancy assumption. Minimize energy (using least squares) $E = sum_(x, y in Omega) (I_x (x, y) u + I_y (x, y) v + I_t (x, y))^2$
   
   $mat(sum I_x^2, sum I_x I_y; sum I_x I_y, sum I_y^2) vec(u, v) = -vec(sum I_x I_t, sum I_y I_t)$ _sums over patch $Omega$_\
   Let $M = sum (nabla I) (nabla I)^T$ and $b = mat(-sum I_x I_t, -sum I_y I_t)$
