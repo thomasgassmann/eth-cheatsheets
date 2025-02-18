@@ -35,10 +35,13 @@ jobs:
           GIT_COMMIT=$(git rev-parse --short "$GITHUB_SHA")
           sed -i "s/GITCOMMIT/$GIT_COMMIT/g" ./commit.tex
           sed -i "s/GITCOMMIT/$GIT_COMMIT/g" ./visual-computing/template.typ
+          sed -i "s/GITCOMMIT/$GIT_COMMIT/g" ./large-language-models/template.typ
       - name: Setup typst
         uses: typst-community/setup-typst@v3
       - name: Compile typst
-        run: typst compile visual-computing/main.typ vc.pdf
+        run: |
+          typst compile visual-computing/main.typ vc.pdf
+          typst compile large-language-models/main.typ llm.pdf
       - name: Compile LaTeX document (xelatex)
         uses: xu-cheng/latex-action@v2
         with:
