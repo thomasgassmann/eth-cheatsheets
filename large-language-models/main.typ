@@ -35,6 +35,24 @@ An *energy function* is a function $hat(p) : Sigma^ast arrow RR$.
 
 Any normalizable energy function $hat(p)_"GN"$ (meaning $Z_G$ is finite) induces a language model, i.e., a distribution over $Sigma^ast$.
 
-#colorbox(title: [Locally normalized model /autoregressive model])[
-  
+#colorbox(title: [Sequence model], color: silver)[
+  For an alphabet $Sigma$ a sequence model is defined as a set of conditional probability distributions $p_"SM"(y | bold(y))$ for $y in Sigma, bold(y) in Sigma^ast$. $bold(y)$ is called history/context.
 ]
+
+#colorbox(title: [Locally normalized model /autoregressive model])[
+  For $p_"SM"$ a sequence model over $overline(Sigma)$: A locally normalized language model (LNM) over $Sigma$ is defined as:
+  $
+    p_"LN" (bold(y)) define p_"SM" (EOS | bold(y)) product_(t=1)^T p_"SM" (y_t |  bold(y)_(<t))
+  $
+  for $y in Sigma^ast, |bold(y)| = T$. The LNM is tight if $sum_(bold(y) in Sigma^ast) p_"LN" (bold(y)) = 1$.
+]
+
+#colorbox(title: [Prefix probability], color: silver)[
+  Let $p_"LM"$ be a language model. The prefix probability of $p_"LM"$ is:
+  $
+    pi (bold(y)) define sum_(y' in Sigma^ast) p_"LM" (bold(y) bold(y'))
+  $
+  i.e. the cumulative probability of all strings in the language beginning with $bold(y)$.
+]
+
+Any language model can be locally normalized. 
