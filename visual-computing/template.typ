@@ -8,7 +8,7 @@
   set text(font: "Libertinus Serif", lang: "en", size: 10pt)
 
   // Set paragraph spacing.
-  show par: set block(above: 0.25em, below: 0.25em)
+  set par(spacing: 0.25em)
 
   set heading(numbering: "1.1")
   set par(leading: 0.58em)
@@ -65,17 +65,24 @@
 
 #let fitWidth(content) = {
   layout((size) => {
-    style((styles) => {
-      let measures = measure(content, styles)
-      let scaleFactor = if measures.width > size.width { 100% * (size.width / measures.width) } else { 100% }
+    let measures = measure(content)
 
-      // Scale does not yet affect layout. place it - hidden box to adjust layout
-      let scaled = scale(x: scaleFactor, y: scaleFactor, content)
-      place(scaled)
-      hide(box(height: measures.height * scaleFactor))
-    })
+    // scalePercent is a length percent (e.g. 80%)
+    let scalePercent = if measures.width > size.width {
+      (size.width / measures.width) * 100%
+    } else {
+      100%
+    }
+
+    // place scaled content using a percent value that Typst accepts
+    place(scale(x: scalePercent, y: scalePercent, content))
+
+    // reserve the scaled height: scalePercent / 100% is a unitless ratio
+    hide(box(height: measures.height * (scalePercent / 100%)))
   })
 }
+
+
 
 #let slashCircle = symbol("\u{2298}")
 

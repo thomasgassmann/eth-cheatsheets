@@ -10,7 +10,7 @@
   set text(font: "Libertinus Serif", lang: "en", size: 10pt)
 
   // Set paragraph spacing.
-  show par: set block(above: 0.25em, below: 0.25em)
+  set par(spacing: 0.25em)
 
   set heading(numbering: "1.1")
   set par(leading: 0.58em)
@@ -57,20 +57,6 @@
     width: 100%,
     
     titleContent + content)
-}
-
-#let fitWidth(content) = {
-  layout((size) => {
-    style((styles) => {
-      let measures = measure(content, styles)
-      let scaleFactor = if measures.width > size.width { 100% * (size.width / measures.width) } else { 100% }
-
-      // Scale does not yet affect layout. place it - hidden box to adjust layout
-      let scaled = scale(x: scaleFactor, y: scaleFactor, content)
-      place(scaled)
-      hide(box(height: measures.height * scaleFactor))
-    })
-  })
 }
 
 #let slashCircle = symbol("\u{2298}")

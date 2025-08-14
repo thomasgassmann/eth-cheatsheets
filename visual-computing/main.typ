@@ -1,5 +1,5 @@
 #import "template.typ": *
-#import "@preview/diagraph:0.2.1": *
+#import "@preview/diagraph:0.3.5": *
 
 #show: project.with(
   title: "Visual Computing",
@@ -51,7 +51,7 @@ Multiplicative noise: $I = f + f c$, Salt-and-pepper noise (impulse noise): spar
 == Image segmentation
 Partition image into regions of interest.
 
-*Complete segmentation* of $I$: regions $R_1, ..., R_N$ s.t. $I = union.big_(i = 1)^N R_i$ and $R_i sect R_j = emptyset "for" i != j$.
+*Complete segmentation* of $I$: regions $R_1, ..., R_N$ s.t. $I = union.big_(i = 1)^N R_i$ and $R_i inter R_j = emptyset "for" i != j$.
 
 #colorbox(title: [Thresholding], color: silver)[
   produces binary image by labeling pixels _in_ or _out_ by comparing to some threshold $T$.

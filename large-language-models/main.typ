@@ -1,5 +1,4 @@
 #import "template.typ": *
-#import "@preview/diagraph:0.2.1": *
 
 #show: project.with(
   title: "Large Language Models",
