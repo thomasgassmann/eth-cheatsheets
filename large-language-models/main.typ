@@ -10,7 +10,7 @@
 #let define = $attach(=, t: "def")$
 #let EOS = $#math.script("EOS")$
 
-== Probability theory
+== Background
 
 Traditionally, a probability space is a triple $(Omega, cal(F), bb(P))$ where $bb(P)$ is a measure, $bb(P) [Omega] = 1$ and $cal(F) subset.eq cal(P) (Omega)$. To resolve e.g. the paradox of the infinite coin toss, we require $cal(F)$ to be a $sigma$-algebra.
 
@@ -43,6 +43,8 @@ Traditionally, a probability space is a triple $(Omega, cal(F), bb(P))$ where $b
 #colorbox(title: [Cross entropy], color: silver)[
   For two distributions $P$ and $Q$ over a set $cal(X)$, we define $H(P, Q) = - sum_(x in cal(X)) P(x) log(Q(x))$. The entropy $H(P) = H(P, P)$. Note that $H(P, Q) = H(P) + D_"KL" (P || Q)$.
 ]
+
+*Precision*: $"TP"/("TP" + "FP") = 1 - "FDR"$; *FDR*: $"FP"/("TP" + "FP")$; *TNR*: $"TN"/("TN" + "FP")$; *TPR/Recall*: $"TP"/("TP" + "FN")$; *FPR/$"error"_1$*: $"FP"/("TN" + "FP")$; *FNR/$"error"_2$*: $"FN"/("TP" + "FN")$; *F1*: $(2 "TP")/(2 "TP" + "FP" + "FN") = 2/(1/"Precision" + 1/"Recall")$; *Precision\@K*: precision of top-K results of a query, i.e. $("TP")/K$; *AP\@K*: average of all the Precision\@K values across all $K$ values, $(sum_(t=1)^K "Precision@t" times "rel"_t)/("#Positives")$, where $"rel"_t$ is an indicator variable if $t$-th element in prediction is positive (should actually be retrieved); *mAP*: mean of the AP\@K metric across all metrics in dataset
 
 == Foundations
 
@@ -200,6 +202,10 @@ Store all embedded prefixes and their following words in a database. At inferenc
 
 == Alignment
 
+// TODO: ppo, dpo
+
+*Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
+
 #colorbox(title: [RLHF], color: silver)[
 // TODO:
 Reinforcement Learning from Human Feedback (RLHF):
@@ -210,9 +216,32 @@ Reinforcement Learning from Human Feedback (RLHF):
 
 == Adverserial Attacks
 
+
+#colorbox(title: [Adverserial examples], color: silver)[
+  Perturb example with $delta$ to force misclassification, i.e. maximize $L(f_theta (x + delta), y)$ subject to $||delta||_infinity <= epsilon$. This can be solved using *projected gradient descent*.
+
+  Does not work for text as $x + delta$ is unlikely to be a valid token embedding. Solve $"argmax"_v (E_v - x_i)^top gradient_(x_i) L$ and replace $x_i$ with $v$.
+]
+
+== Privacy
+
+
+#colorbox(title: [Federated learning], color: silver)[
+  Clients send gradients to central server, but training data can be recovered from gradients. Weight-trap attacks are also possible if the servers sends a model s.t. $gradient_theta L(f_theta (x_i)) = x_i$.
+]
+
+Gold standard solutions to prevent server from seeing all training data: *secure multi-party computation* or *fully homomorphic encryption*. However, still slow and expensive.
+
+#colorbox(title: [Differential privacy])[
+  An algorithm $cal(M)$ is $epsilon$-differentially private if for any "neighboring" datasets $D_1, D_2$ differing only in a single element, and any output $S$ we have:
+  $
+    P[cal(M)(D_1) in S] <= exp(epsilon) P[cal(M)(D_2) in S]
+  $
+  If $cal(M)$ is $epsilon$-DP, then $f(cal(M))$ for any function $f$ is also $epsilon$-DP. If $cal(M)_1$ is $epsilon_1$-DP and $cal(M)_2$ is $epsilon_2$-DP, then $f(cal(M)_1, cal(M)_2)$ is $(epsilon_1 + epsilon_2)$-DP.
+]
+
 // TODO
 
 // TODO: model calibration
 
-
-// TODO: differential privacy definition
+// TODO: data memorization

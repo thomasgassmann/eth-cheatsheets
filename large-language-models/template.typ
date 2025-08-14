@@ -25,7 +25,7 @@
 
   // Title row.
   align(left)[
-    #link("https://github.com/thomasgassmann/eth-cheatsheets/commit/GITCOMMIT", "GITCOMMIT"), licensed under *CC BY-SA 4.0*
+    #link("https://github.com/thomasgassmann/eth-cheatsheets/commit/GITCOMMIT", "Commit: GITCOMMIT"), licensed under *CC BY-SA 4.0*
     *#block(authors.map(a => a.name + " (" + a.email + ")").join(), spacing: 0.3em)*
   ]
 
