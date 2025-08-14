@@ -6,13 +6,13 @@
 #let project(title: "", authors: (), date: none, body) = {
   // Set the document's basic properties.
   set document(author: authors.map(a => a.name), title: title)
-  set page(numbering: "1", number-align: center, flipped: true, margin: 3em)
+  set page(numbering: "1", number-align: center, flipped: true, margin: 1em)
   set text(font: "Libertinus Serif", lang: "en", size: 10pt)
 
   // Set paragraph spacing.
   set par(spacing: 0.25em)
 
-  set heading(numbering: "1.1")
+  set heading(numbering: none)
   set par(leading: 0.58em)
 
   set par(
@@ -25,10 +25,8 @@
 
   // Title row.
   align(left)[
-    #block(text(weight: 700, 1.75em, title))
-    #v(0.8em, weak: true)
-    #date, GITCOMMIT, licensed under CC BY-SA 4.0
-    #block(authors.map(a => a.name + " (" + a.email + ")").join())
+    #link("https://github.com/thomasgassmann/eth-cheatsheets/commit/GITCOMMIT", "GITCOMMIT"), licensed under *CC BY-SA 4.0*
+    *#block(authors.map(a => a.name + " (" + a.email + ")").join(), spacing: 0.3em)*
   ]
 
   // Main body.
