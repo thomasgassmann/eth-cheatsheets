@@ -57,7 +57,7 @@ Any normalizable energy function $hat(p)_"GN"$ (meaning $Z_G$ is finite) induces
   For an alphabet $Sigma$ a sequence model is defined as a set of conditional probability distributions $p_"SM"(y | bold(y))$ for $y in overline(Sigma)$ ($overline(Sigma) = Sigma union \{ EOS \}$) $bold(y) in Sigma^ast$. $bold(y)$ is called history/context. That is, we have $\{ p_"SM" (y | bold(y)) \}_(bold(y) in Sigma^ast)$ for $y in overline(Sigma)$.
 ]
 
-A sequence model is a probability distribution over $Sigma^ast union Sigma^infinity$.
+// A sequence model is a probability distribution over $Sigma^ast union Sigma^infinity$.
 
 #colorbox(title: [Locally normalized model /autoregressive model])[
   For $p_"SM"$ a sequence model over $overline(Sigma)$: A locally normalized language model (LNM) over $Sigma$ is defined as: $p_"LN" (bold(y)) define p_"SM" (EOS | bold(y)) product_(t=1)^(|bold(y)|) p_"SM" (y_t |  bold(y)_(<t))$ for $y in Sigma^ast$. The LNM is tight if $sum_(bold(y) in Sigma^ast) p_"LN" (bold(y)) = 1$.
@@ -95,14 +95,10 @@ We define $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in S
   An WFSA is a tuple $cal(A) = (Q, Sigma, delta, lambda, rho)$, where $delta subset.eq Q times (Sigma union {epsilon}) times RR times Q$ are the (weighted) transitions, and $lambda, rho: Q mapsto RR$ are the initial/final weights.
 ]
 
-A WFSA is *probabilistic* if $lambda, rho$ and the transition weights form are non-negative, $sum_(q in Q) lambda(q) = 1$ and for all $q in Q$ we have $rho(q) + sum_(q xarrow(a "/" w) q') w = 1$.
-
-The *weight of a path* $pi = q_1 xarrow(a_1 "/" w_1) q_2 dot dot q_N$ in a WFSA $cal(A)$ is given by $w(pi) = lambda(q_1) product_(i=1)^(N) w_i rho(q_N)$. $Pi(cal(A), y)$ is the set of all paths where $cal(A)$ yields $y$.
+A WFSA is *probabilistic* if $lambda, rho$ and the transition weights form are non-negative, $sum_(q in Q) lambda(q) = 1$ and for all $q in Q$ we have $rho(q) + sum_(q xarrow(a "/" w) q') w = 1$. The *weight of a path* $pi = q_1 xarrow(a_1 "/" w_1) q_2 dot dot q_N$ in a WFSA $cal(A)$ is given by $w(pi) = lambda(q_1) product_(i=1)^(N) w_i rho(q_N)$. $Pi(cal(A), y)$ is the set of all paths where $cal(A)$ yields $y$.
 
 // TODO: verify last below
-The *Allsum* of a WFSA $cal(A)$ is defined as $Z(cal(A)) = sum_(y in Sigma^ast) cal(A) (y) = sum_(y in Sigma^ast) sum_(pi in Pi(A, y)) w(pi) = arrow(lambda) sum_(d=0)^infinity T^d arrow(rho) = arrow(lambda) (I - T)^(-1) arrow(rho)$, where $T$ is the transition matrix of $cal(A)$.
-
-*Tightness of PFSA*: A state $q in Q$ is accessible if there exists a non-zero weighted path from an initial state to $q$. It is co-accessible if there exists a non-zero weighted path from $q$ to a final state. A PFSA is *tight* iff. all accessible states are co-accessible.
+The *Allsum* of a WFSA $cal(A)$ is defined as $Z(cal(A)) = sum_(y in Sigma^ast) cal(A) (y) = sum_(y in Sigma^ast) sum_(pi in Pi(A, y)) w(pi) = arrow(lambda) sum_(d=0)^infinity T^d arrow(rho) = arrow(lambda) (I - T)^(-1) arrow(rho)$, where $T$ is the transition matrix of $cal(A)$. *Tightness of PFSA*: A state $q in Q$ is accessible if there exists a non-zero weighted path from an initial state to $q$. It is co-accessible if there exists a non-zero weighted path from $q$ to a final state. A PFSA is *tight* iff. all accessible states are co-accessible.
 
 // TODO: CFG skipped
 
@@ -146,61 +142,69 @@ Using shorter notation we get $"softmax"((Q K^top)/(sqrt(d)))V$ as the definitio
 
 *Tightness of transformers*: Any transformer using soft attention is *tight* as its layers are continuous and the set of possible inputs to the first layer is compact, making $"enc"$ bounded. If $p_"LN"$ is an *$n$-gram model*, then there exists a transformer $cal(T)$ with $L(p_"LN") = L(cal(T))$.
 
-#grid(
-  columns: (auto, auto),
-  column-gutter: 1em,
-  figure(
-    image("encoder-decoder.png", width: 15em)
-  ),
-  [
-    test
-  ]
-)
-
 
 // TODO: number of parameters and time complexities)
 
 
 == Sampling
-In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. As this may not halt, we can set a max string length. To calibrate $p$ we can postprocess probabilities using a *sampling adapter* function $alpha: Delta^(|Sigma|-1) mapsto Delta^(|Sigma|-1)$. In *top-k sampling* we set $p(y_t | y_(<t)) = 0$ for all but the $K$ most probable tokens (and then renormalize). In *top-p sampling* (or *nucleus sampling*) we only take the top $p%$ of the probability mass (and renormalize).
+In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May not halt, so set max string length. To calibrate $p$ we can postprocess probabilities using a *sampling adapter* function $alpha: Delta^(|Sigma|-1) mapsto Delta^(|Sigma|-1)$ trading off recall for precision by increasing average sample's quality at expensive of diversity. In *top-k sampling* we set $p(y_t | y_(<t)) = 0$ for all but the $K$ most probable tokens (and then renormalize). In *top-p sampling* (or *nucleus sampling*) we only take the top $p%$ of the probability mass (and renormalize).
 
 == Transfer Learning
-Process of updating weights of a pretrained model for a new target task is called *fine-tuning*. In *multi-task learning* we share learned information across multiple tasks, which are learned jointly.
+In *multi-task learning* we share learned information across multiple tasks, which are learned jointly.
+// Process of updating weights of a pretrained model for a new target task is called *fine-tuning*. 
 
 #colorbox(title: [ELMo], color: silver)[
-  // TODO: verify this
-  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation of token $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task" >= 0, h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are the hidden states of the LM layers.
+  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation of token $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task"$ softmax weights, $h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are the hidden states of the LM layers.
 ]
+
+*CoVE* is similar to ELMo, but only uses the final layer instead of all layers.
 
 #colorbox(title: [BERT], color: silver)[
-  BERT (Bidirectional Encoder Representations from Transformers) is a encoder transformer pretrained using masked language modelling and next sentence prediction.
+  Bidirectional Encoder Representations from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
 ]
 
+// maybe add RoBERTa, AlBERT, Electra, T5
+
+
+#grid(
+  columns: (14.5em, auto),
+  column-gutter: 1em,
+  figure(
+    image("encoder-decoder.png", width: 14.5em, alt: "Encoder-decoder architecture")
+  ),
+  [
+    *Others*: T5 and BART are encoder-decoder transformers with bidirectional attention flow for input.
+  ]
+)
+
 == Parameter Efficient Fine-Tuning
-TODO: partial Fine-Tuning
+
+#colorbox(title: [Diff pruning], color: silver)[
+  Learn which parameters to update (*specification-based method*); learn sparse $delta$ s.t. $theta_"FT" = theta_"LM" + delta$; regularize $delta$ by $L_0$-norm; takes up more GPU memory than ful parameter fine-tuning as new parameters are introduced
+]
 
 #colorbox(title: [BitFit], color: silver)[
-  // TODO: as described in script
+  Only fine-tune bias terms (attention matrix query bias and middle-of-MLP bias).
 ]
 
 #colorbox(title: [Adapter tuning], color: silver)[
-  // TODO: as described in script
+  Insert small modules (adapters) into the model, e.g. common practice to place $h arrow.l h + f(h W_"down") W_"up"$ for non-linearity $f$ after each sublayer (i.e. after multi-head attention and MLP), have to be executed sequentially.
 ]
 
 #colorbox(title: [LoRA], color: silver)[
-  // TODO: as described in script
-  Replace weight matrices $W in RR^(d times k)$ with $W arrow.l W + alpha/r B A$, where $B in RR^(d times r), A in RR^(r times k)$.
+  Replace weight matrices $W in RR^(d times k)$ with $W arrow.l W + alpha/r B A$, where $B in RR^(d times r), A in RR^(r times k)$. Init $A$ with Gaussian, $B$ with zeros. Can be executed in parallel.
 ]
+
+*Discrete prompts* search for prompts in discrete space, i.e. a set of tokens, *continuous prompts* search for prompts directly in the embedding space.
 
 #colorbox(title: [Prefix tuning], color: silver)[
-  // TODO: as described in script
+  Continuous, prepend sequence of task-specific vectors to input, optimize $M_phi.alt$ to $"max"_phi.alt sum_(y_i) log P(y_i | h_(<i); theta; phi.alt)$ with $h_(<i) = [h_(<i)^((1)); dots; h_(<i)^((n))]$ copied from $M_phi.alt$ if within prefix and otherwise computed using pre-trained LM.
 ]
 
-#colorbox(title: [Diff pruning], color: silver)[
-  Learn which parameters to update; learn sparse $delta$ s.t. $theta_"FT" = theta_"LM" + delta$; regularize $delta$ by $L_0$-norm; takes up more GPU memory than ful parameter fine-tuning as new parameters are introduced
-]
+*In-context learning*: emergent behavior, models can perform previously unseen tasks in few-shot setting without parameter updates.
 
 == RAG
+Parametric vs. non-parametric models: parametric models store knowledge in parameters, non-parametric models store knowledge externally.
 
 #colorbox(title: [kNN-LM], color: silver)[
 // TODO:
@@ -239,11 +243,7 @@ Reinforcement Learning from Human Feedback (RLHF):
 Gold standard solutions to prevent server from seeing all training data: *secure multi-party computation* or *fully homomorphic encryption*. However, still slow and expensive.
 
 #colorbox(title: [Differential privacy])[
-  An algorithm $cal(M)$ is $epsilon$-differentially private if for any "neighboring" datasets $D_1, D_2$ differing only in a single element, and any output $S$ we have:
-  $
-    P[cal(M)(D_1) in S] <= exp(epsilon) P[cal(M)(D_2) in S]
-  $
-  If $cal(M)$ is $epsilon$-DP, then $f(cal(M))$ for any function $f$ is also $epsilon$-DP. If $cal(M)_1$ is $epsilon_1$-DP and $cal(M)_2$ is $epsilon_2$-DP, then $f(cal(M)_1, cal(M)_2)$ is $(epsilon_1 + epsilon_2)$-DP.
+  An algorithm $cal(M)$ is $epsilon$-differentially private if for any "neighboring" datasets $D_1, D_2$ differing only in a single element, and any output $S$ we have: *$PP[cal(M)(D_1) in S] <= exp(epsilon) PP[cal(M)(D_2) in S]$*. If $cal(M)$ is $epsilon$-DP, then $f(cal(M))$ for any function $f$ is also $epsilon$-DP. If $cal(M)_1$ is $epsilon_1$-DP and $cal(M)_2$ is $epsilon_2$-DP, then $f(cal(M)_1, cal(M)_2)$ is $(epsilon_1 + epsilon_2)$-DP.
 ]
 
 // TODO
