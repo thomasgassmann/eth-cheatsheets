@@ -3,6 +3,7 @@
 // The project function defines how your document looks.
 // It takes your content and some metadata and formats it.
 // Go ahead and customize it to your liking!
+
 #let project(title: "", authors: (), date: none, body) = {
   // Set the document's basic properties.
   set document(author: authors.map(a => a.name), title: title)
@@ -21,12 +22,11 @@
     justify: true,
   )
   
-  show: columns.with(3, gutter: 1em)
+  show: columns.with(4, gutter: 1.5em)
 
   // Title row.
   align(left)[
-    #link("https://github.com/thomasgassmann/eth-cheatsheets/commit/GITCOMMIT", "Commit: GITCOMMIT"), licensed under *CC BY-SA 4.0*
-    *#block(authors.map(a => a.name + " (" + a.email + ")").join(), spacing: 0.3em)*
+    #link("https://github.com/thomasgassmann/eth-cheatsheets/commit/GITCOMMIT", "GITCOMMIT"), Thomas Gassmann, BY-SA 4.0
   ]
 
   // Main body.

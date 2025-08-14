@@ -9,30 +9,21 @@
 
 #let define = $attach(=, t: "def")$
 #let EOS = $#math.script("EOS")$
-
-== Background
+#show heading: box
+#show heading: set text(fill: blue)
 
 Traditionally, a probability space is a triple $(Omega, cal(F), bb(P))$ where $bb(P)$ is a measure, $bb(P) [Omega] = 1$ and $cal(F) subset.eq cal(P) (Omega)$. To resolve e.g. the paradox of the infinite coin toss, we require $cal(F)$ to be a $sigma$-algebra.
 
 #colorbox(title: [$sigma$ algebra], color: silver)[
-  A set $cal(F) subset.eq cal(P) (Omega)$ is called a $sigma$-algebra s.t.:
-  - $Omega in cal(F)$
-  - $Sigma in cal(F) arrow.r.double Sigma^complement in cal(F)$
-  - If $Sigma_1, Sigma_2, dots in cal(F)$, then $union.big_(n=1)^infinity Sigma_n in cal(F)$
+  A set $cal(F) subset.eq cal(P) (Omega)$ is called a $sigma$-algebra s.t.: (1) $Omega in cal(F)$, (2) $Sigma in cal(F) arrow.r.double Sigma^complement in cal(F)$, (3) If $Sigma_1, Sigma_2, dots in cal(F)$, then $union.big_(n=1)^infinity Sigma_n in cal(F)$.
 ]
 
 #colorbox(title: [Probability measure], color: silver)[
-  A probability $bb(P)$ over a measure space $(Omega, cal(F))$ is a function $bb(P): cal(F) arrow [0,1]$ s.t.:
-  - $bb(P) (Omega) = 1$
-  - If $Sigma_1, Sigma_2, dots in cal(F)$ is a countable sequence of disjoint events, then $bb(P) [union.big_(n=1)^infinity Sigma_n] = sum_(n=1)^infinity bb(P) [Sigma_n]$.
-
-  i.e. we have a measure space if $Omega$ is a set and $cal(F)$ is a $sigma$-algebra over $Omega$.
+  A probability $bb(P)$ over a measure space $(Omega, cal(F))$ is a function $bb(P): cal(F) arrow [0,1]$ s.t.: (1) $bb(P) (Omega) = 1$, (2) If $Sigma_1, Sigma_2, dots in cal(F)$ is a countable sequence of disjoint events, then $bb(P) [union.big_(n=1)^infinity Sigma_n] = sum_(n=1)^infinity bb(P) [Sigma_n]$, i.e. we have a measure space if $Omega$ is a set and $cal(F)$ is a $sigma$-algebra over $Omega$.
 ]
 
 #colorbox(title: [Measureable function], color: silver)[
-  Let $(Omega, cal(F))$ and $(S, T)$ be measure spaces. A random variable is a measurable function from $Omega arrow S$.
-
-  A *measurable function* $x: Omega arrow S$ is such that $x^(-1) (Sigma)$ is measurable for $Sigma$ measurable, i.e. $Sigma in T arrow.double x^(-1) (Sigma) in cal(F)$.
+  Let $(Omega, cal(F))$ and $(S, T)$ be measure spaces. A random variable is a measurable function from $Omega arrow S$. A *measurable function* $x: Omega arrow S$ is such that $x^(-1) (Sigma)$ is measurable for $Sigma$ measurable, i.e. $Sigma in T arrow.double x^(-1) (Sigma) in cal(F)$.
 ]
 
 *Infinite coin toss paradox*: $1 = p(Sigma^infinity) = p(union_(omega in Sigma^infinity) {omega}) = sum_(omega in Sigma^infinity) p({omega}) = 0$.
@@ -47,7 +38,6 @@ Traditionally, a probability space is a triple $(Omega, cal(F), bb(P))$ where $b
 *Precision*: $"TP"/("TP" + "FP") = 1 - "FDR"$; *FDR*: $"FP"/("TP" + "FP")$; *TNR*: $"TN"/("TN" + "FP")$; *TPR/Recall*: $"TP"/("TP" + "FN")$; *FPR/$"error"_1$*: $"FP"/("TN" + "FP")$; *FNR/$"error"_2$*: $"FN"/("TP" + "FN")$; *F1*: $(2 "TP")/(2 "TP" + "FP" + "FN") = 2/(1/"Precision" + 1/"Recall")$; *Precision\@K*: precision of top-K results of a query, i.e. $("TP")/K$; *AP\@K*: average of all the Precision\@K values across all $K$ values, $(sum_(t=1)^K "Precision@t" times "rel"_t)/("#Positives")$, where $"rel"_t$ is an indicator variable if $t$-th element in prediction is positive (should actually be retrieved); *mAP*: mean of the AP\@K metric across all metrics in dataset
 
 == Foundations
-
 An *alphabet* $Sigma$ is a finite, non-empty set. A *string* is a finite sequence of symbols drawn from an alphabet. $Sigma^ast$ is the set of all strings over $Sigma$, and is countable. $Sigma^infinity$ is the set of infinite sequences over $Sigma$. A *language* is a subset of $Sigma^ast$ for some alphabet $Sigma$. A language model is a distribution over $Sigma^ast$.
 
 // #colorbox(title: [Language Model (Informal)], color: silver)[
@@ -58,10 +48,7 @@ An *alphabet* $Sigma$ is a finite, non-empty set. A *string* is a finite sequenc
 
 #colorbox(title: [Globally normalized model])[
   Let $hat(p)_("GN")(bold(y)) : Sigma^ast arrow RR$ be an energy function. A globally normalized model (GNM) is defined as:
-  $
-    p_("LM")(bold(y)) define (exp(- hat(p)_("GN")(bold(y)))) / (sum_(y' in Sigma^ast) exp(-hat(p)_("GN")(bold(y')))) define exp(-hat(p)_"GN" (bold(y)))
-  $
-  where $Z_"G" define sum_(bold(y') in Sigma^ast) exp(-hat(p)_"GN" (bold(y')))$ is the normalization constant.
+  $p_("LM")(bold(y)) define (exp(- hat(p)_("GN")(bold(y)))) / (sum_(y' in Sigma^ast) exp(-hat(p)_("GN")(bold(y')))) define exp(-hat(p)_"GN" (bold(y)))$ where $Z_"G" define sum_(bold(y') in Sigma^ast) exp(-hat(p)_"GN" (bold(y')))$ is the normalization constant.
 ]
 
 Any normalizable energy function $hat(p)_"GN"$ (meaning $Z_G$ is finite) induces a language model, i.e., a distribution over $Sigma^ast$.
@@ -73,19 +60,11 @@ Any normalizable energy function $hat(p)_"GN"$ (meaning $Z_G$ is finite) induces
 A sequence model is a probability distribution over $Sigma^ast union Sigma^infinity$.
 
 #colorbox(title: [Locally normalized model /autoregressive model])[
-  For $p_"SM"$ a sequence model over $overline(Sigma)$: A locally normalized language model (LNM) over $Sigma$ is defined as:
-  $
-    p_"LN" (bold(y)) define p_"SM" (EOS | bold(y)) product_(t=1)^(|bold(y)|) p_"SM" (y_t |  bold(y)_(<t))
-  $
-  for $y in Sigma^ast$. The LNM is tight if $sum_(bold(y) in Sigma^ast) p_"LN" (bold(y)) = 1$.
+  For $p_"SM"$ a sequence model over $overline(Sigma)$: A locally normalized language model (LNM) over $Sigma$ is defined as: $p_"LN" (bold(y)) define p_"SM" (EOS | bold(y)) product_(t=1)^(|bold(y)|) p_"SM" (y_t |  bold(y)_(<t))$ for $y in Sigma^ast$. The LNM is tight if $sum_(bold(y) in Sigma^ast) p_"LN" (bold(y)) = 1$.
 ]
 
 #colorbox(title: [Prefix probability], color: silver)[
-  Let $p_"LM"$ be a language model. The prefix probability of $p_"LM"$ is:
-  $
-    pi (bold(y)) define sum_(y' in Sigma^ast) p_"LM" (bold(y) bold(y'))
-  $
-  i.e. the cumulative probability of all strings in the language beginning with $bold(y)$.
+  Let $p_"LM"$ be a language model. The prefix probability of $p_"LM"$ is: $pi (bold(y)) define sum_(y' in Sigma^ast) p_"LM" (bold(y) bold(y'))$, i.e. the cumulative probability of all strings in the language beginning with $bold(y)$.
 ]
 
 Any language model can be locally normalized. TODO: should know how to prove this, telescoping product, see page 24
@@ -100,10 +79,7 @@ The *softmax* function is defined as $"softmax"(x)_i = exp(x_i / tau) / (sum_(j=
 The *sparsemax* function is defined as $"sparsemax" (x) = "argmin"_(z in Delta^(n-1)) ||z - x||_2^2$. This addresses the drawback of softmax that $"softmax"_i (z) > 0 space forall z, i$ (in some tasks sparse probability is preferable).
 
 #colorbox(title: [Representation-based Language Model (RBLM)])[
-  An embedding matrix $E$ and an encoding function $"enc": Sigma^ast mapsto RR^d$ define a locally normalized language model using the sequence model:
-  $
-    p_"SM" (overline(y)_t | bold(overline(y))_(<t)) = "softmax" (E "enc" (bold(overline(y))_(<t)))_(overline(y)_t)
-  $
+  An embedding matrix $E$ and an encoding function $"enc": Sigma^ast mapsto RR^d$ define a locally normalized language model using the sequence model: $p_"SM" (overline(y)_t | bold(overline(y))_(<t)) = "softmax" (E "enc" (bold(overline(y))_(<t)))_(overline(y)_t)$
 ]
 
 We define $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in Sigma^t) ||"enc"(omega)||_2$, where $e(dot)$ is the symbol embedding function.
@@ -111,7 +87,6 @@ We define $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in S
 *RBLM Tightness:* If $s dot z(t) <= log(t)$ for all $t >= N$ for some $N$, then the induced RBLM is *tight*. In particular, $"enc"(dot)$ is bounded, then the model is *tight*.
 
 == Finite State Language Models
-
 #colorbox(title: [FSA])[
   An FSA is a tuple $cal(A) = (Q, Sigma, delta, I, F)$, where $Q$ is a finite set of states, $Sigma$ is a alphabet, $delta subset.eq Q times (Sigma union {epsilon}) times Q$ are the transitions, and $I, F subset.eq Q$ are the initial/final states.
 ]
@@ -132,7 +107,6 @@ The *Allsum* of a WFSA $cal(A)$ is defined as $Z(cal(A)) = sum_(y in Sigma^ast) 
 // TODO: CFG skipped
 
 == RNNs
-
 A RNN is given by an initial state $h_0 in RR^d$ and a map $h_t = f(h_(t-1), y_t)$. An RNN-LM uses $"enc"(y_(<=t)) = h_t$.
 
 #colorbox(title: [Elman RNN])[
@@ -146,30 +120,63 @@ A *Heaviside Elman RNN* is an Elman RNN using a Heaviside function as non-linear
 *Minsky's construction* encodes any dPFSA using $U in RR^(|Sigma||Q| times |Sigma||Q|)$ to encode which states are reachable from $h_(t-1)$ and $V in RR^(|Sigma||Q| times |Sigma|)$ to encode which states can be transitioned to using $y_t$ (the hidden state dimensionality can be reduced to $Omega(|Sigma|sqrt(|Q|))$). Satured Sigmoid Elman RNNs are Turing-complete (because they can encode two-stack PDAs). Is thus undecidable whether an RNN-LM is *tight*.
 
 == Transformers
+$K,Q,V$ matrices usually do not have a bias.
 
-// TODO: transformer definition, attention definition, self-attention, cross-attention, multi-head attention
+#colorbox(title: [Attention])[
+  Let $f: RR^d times RR^d mapsto RR^d$ be a scoring function (e.g. dot product) and $f_(Delta^(d-1))$ a projection function (e.g. softmax). Let $q in RR^d$, $K_t = (k_1^top, dots, k_t^top) in RR^(t times d)$ and $V_t = (v_1^top, dots, v_t^top) in RR^(t times d)$. Attention over $K_t, V_t$ is a function $"Att"(q, K_t, V_t): RR^d times RR^(t times d) times RR^(t times d) mapsto RR^d$ computing the vector $a$ as follows:
+  $
+    s_t = (s_1, dots, s_t) = f_(Delta^(d-1)) (f(q, k_1), dots, f(q, k_t))\
+    a_t = "Att"(q, K_t, V_t) = s_1 v_1 + dots + s_t v_t
+  $
+]
 
-// TODO: architecture in vasvani et al (where MLP, where layer norm, number of parameters and time complexities)
+Using shorter notation we get $"softmax"((Q K^top)/(sqrt(d)))V$ as the definition of *soft attention*, with the softmax function applied to each row independently and $Q in RR^(n times d), K in RR^(t times d), V in RR^(t times d)$ are functions of the input.
+
+#colorbox(title: [Transformer layer])[
+  Let $Q,K,V,O$ be parameterized functions from $RR^d$ to $RR^d$. A transformer $cal(T): RR^(T times d) mapsto RR^(T times d)$ takes as input $X = (x_1^top, dots, x_T^top)$ and returns $Z = (z_1^top, dots, z_T^top) in RR^(T times d)$ s.t. $a_t = "Att"(Q(x_t), K(X_t), V(X_t)) + x_t$ and $z_t = O(a_t) + a_t$ for $t = 1, dots, T$.
+]
+
+#colorbox(title: [Multi-head Attention Block])[
+  Let $H$ number of heads, $Q_h (dot)$, $K_h (dot)$, $V_h (dot)$ parameterized functions from $RR^(T times d)$ to $RR^(T times d)$ and $f_H: RR^(T H times d) mapsto RR^(T times d)$. A multi-head attention block of input $X$ is defined as:
+  
+  $f_H ("cat"_(1 <= h <= H) ("sftmx"(Q_h (X) K_h (X)^top)) V_h (X)))$
+]
+
+*Position encodings*: Sinuisoidal encodings are $P(k, 2i) = sin(k/(n^(2i\/d)))$ and $P(k, 2i+1) = cos(k/(n^(2i\/d)))$, where $k$ is the position in the sequence and $i$ the dimension. Note that $P(x+k, dot)$ is a linear function of $P(x, dot)$.
 
 *Tightness of transformers*: Any transformer using soft attention is *tight* as its layers are continuous and the set of possible inputs to the first layer is compact, making $"enc"$ bounded. If $p_"LN"$ is an *$n$-gram model*, then there exists a transformer $cal(T)$ with $L(p_"LN") = L(cal(T))$.
 
-== Sampling
+#grid(
+  columns: (auto, auto),
+  column-gutter: 1em,
+  figure(
+    image("encoder-decoder.png", width: 15em)
+  ),
+  [
+    test
+  ]
+)
 
+
+// TODO: number of parameters and time complexities)
+
+
+== Sampling
 In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. As this may not halt, we can set a max string length. To calibrate $p$ we can postprocess probabilities using a *sampling adapter* function $alpha: Delta^(|Sigma|-1) mapsto Delta^(|Sigma|-1)$. In *top-k sampling* we set $p(y_t | y_(<t)) = 0$ for all but the $K$ most probable tokens (and then renormalize). In *top-p sampling* (or *nucleus sampling*) we only take the top $p%$ of the probability mass (and renormalize).
 
 == Transfer Learning
+Process of updating weights of a pretrained model for a new target task is called *fine-tuning*. In *multi-task learning* we share learned information across multiple tasks, which are learned jointly.
 
 #colorbox(title: [ELMo], color: silver)[
   // TODO: verify this
-  We have a forward and backward LM using $L$ LSTM layers. ELMo representation of token $y_t$ is given by $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task" >= 0, h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are the hidden states of the LM layers.
+  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation of token $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task" >= 0, h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are the hidden states of the LM layers.
 ]
 
 #colorbox(title: [BERT], color: silver)[
-  BERT is a encoder transformer pretrained using masked language modelling and next sentence prediction.
+  BERT (Bidirectional Encoder Representations from Transformers) is a encoder transformer pretrained using masked language modelling and next sentence prediction.
 ]
 
 == Parameter Efficient Fine-Tuning
-
 TODO: partial Fine-Tuning
 
 #colorbox(title: [BitFit], color: silver)[
@@ -201,10 +208,11 @@ Store all embedded prefixes and their following words in a database. At inferenc
 ]
 
 == Alignment
+*Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
+
 
 // TODO: ppo, dpo
 
-*Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
 
 #colorbox(title: [RLHF], color: silver)[
 // TODO:
@@ -215,8 +223,6 @@ Reinforcement Learning from Human Feedback (RLHF):
 ]
 
 == Adverserial Attacks
-
-
 #colorbox(title: [Adverserial examples], color: silver)[
   Perturb example with $delta$ to force misclassification, i.e. maximize $L(f_theta (x + delta), y)$ subject to $||delta||_infinity <= epsilon$. This can be solved using *projected gradient descent*.
 
