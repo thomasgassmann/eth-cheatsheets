@@ -70,6 +70,7 @@ jobs:
           ANA1_TOKEN: ${{ secrets.ANA1_TOKEN }}
           ANA2_TOKEN: ${{ secrets.ANA2_TOKEN }}
           VC_TOKEN: ${{ secrets.VC_TOKEN }}
+          LLM_TOKEN: ${{ secrets.LLM_TOKEN }}
         run: |
           TAG="nightly"
           git tag -f "$TAG"
@@ -106,3 +107,7 @@ jobs:
           curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-hs24-based-on-jhoffmanns-cheatsheet/files/423/update/ \
             -H "Authorization: $VC_TOKEN" \
             -F "file=@./vc.pdf"
+
+          curl https://exams.vis.ethz.ch/api/document/tgassmann/cheatsheet-fs25_0/files/528/update/ \
+            -H "Authorization: $LLM_TOKEN" \
+            -F "file=@./llm.pdf"

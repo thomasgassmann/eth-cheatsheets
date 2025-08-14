@@ -107,3 +107,5 @@ The *sparsemax* function is defined as $"sparsemax" (x) = "argmin"_(z in Delta^(
     p_"SM" (overline(y)_t | bold(overline(y))_(<t)) = "softmax" (E "enc" (bold(overline(y))_(<t)))_(overline(y)_t)
   $
 ]
+
+
