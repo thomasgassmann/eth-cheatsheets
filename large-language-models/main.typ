@@ -135,10 +135,10 @@ $"softmax"((Q K^top)/(sqrt(d)))V$ as the definition of *soft attention*, with th
 *Number of parameters*: embedding/unembedding matrices share weights, embedding: $V D$, layer norm: $2D$, multi-headed attention block with $H$ heads (assuming _no bias_): $D dot D\/H dot 3 dot H + D dot D + 2 dot D$ (with bias $4D^2 + 6D$)
 
 == Sampling
-In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May not halt, so set max string length. To calibrate $p$ we can postprocess probabilities using a *sampling adapter* function $alpha: Delta^(|Sigma|-1) mapsto Delta^(|Sigma|-1)$ trading off recall for precision by increasing average sample's quality at expensive of diversity. In *top-k sampling* we set $p(y_t | y_(<t)) = 0$ for all but the $K$ most probable tokens (and then renormalize). In *top-p sampling* (or *nucleus sampling*) we only take the top $p%$ of the probability mass (and renormalize).
+In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May not halt, so set max string length. To calibrate $p$ we can postprocess probabilities using a *sampling adapter* function $alpha: Delta^(|Sigma|-1) mapsto Delta^(|Sigma|-1)$ trading off recall for precision by increasing average sample's quality at expensive of diversity. In *top-k sampling* we set $p(y_t | y_(<t)) = 0$ for all but the $K$ most probable tokens (and then renormalize). In *top-p sampling* (or *nucleus sampling*) we only take the top $p%$ of the probability mass (and renormalize), *Beam search*: pruned breadth-first search, beam search of depth 1 is greedy
 
 == Transfer Learning
-In *multi-task learning* we share learned information across multiple tasks, which are learned jointly.
+*multi-task learning* shares learnt info across many jointly learnt tasks
 // Process of updating weights of a pretrained model for a new target task is called *fine-tuning*. 
 
 // maybe add RoBERTa, AlBERT, Electra, T5
