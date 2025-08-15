@@ -7,7 +7,7 @@
 #let project(title: "", authors: (), date: none, body) = {
   // Set the document's basic properties.
   set document(author: authors.map(a => a.name), title: title)
-  set page(numbering: "1", number-align: center, flipped: true, margin: 0.75em)
+  set page(numbering: none, number-align: center, flipped: true, margin: 0.3em)
   set text(font: "Libertinus Serif", lang: "en", size: 10pt)
 
   // Set paragraph spacing.

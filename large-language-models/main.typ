@@ -132,10 +132,7 @@ $"softmax"((Q K^top)/(sqrt(d)))V$ as the definition of *soft attention*, with th
 
 *Position encodings*: Sinuisoidal encodings are $P(k, 2i) = sin(k/(n^(2i\/d)))$ and $P(k, 2i+1) = cos(k/(n^(2i\/d)))$, where $k$ is the position in the sequence and $i$ the dimension. Note that $P(x+k, dot)$ is a linear function of $P(x, dot)$.
 *Tightness of transformers*: Any transformer with soft attention is *tight* as layers are continuous and set of possible inputs to the first layer is compact, thus $"enc"$ bounded. If $p_"LN"$ is *$n$-gram model*, there exists a transformer $cal(T)$ with $L(p_"LN") = L(cal(T))$.
-
-
-// TODO: number of parameters and time complexities)
-
+*Number of parameters*: embedding/unembedding matrices share weights, embedding: $V D$, layer norm: $2D$, multi-headed attention block with $H$ heads (assuming _no bias_): $D dot D\/H dot 3 dot H + D dot D + 2 dot D$ (with bias $4D^2 + 6D$)
 
 == Sampling
 In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May not halt, so set max string length. To calibrate $p$ we can postprocess probabilities using a *sampling adapter* function $alpha: Delta^(|Sigma|-1) mapsto Delta^(|Sigma|-1)$ trading off recall for precision by increasing average sample's quality at expensive of diversity. In *top-k sampling* we set $p(y_t | y_(<t)) = 0$ for all but the $K$ most probable tokens (and then renormalize). In *top-p sampling* (or *nucleus sampling*) we only take the top $p%$ of the probability mass (and renormalize).
@@ -144,18 +141,17 @@ In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May
 In *multi-task learning* we share learned information across multiple tasks, which are learned jointly.
 // Process of updating weights of a pretrained model for a new target task is called *fine-tuning*. 
 
-#colorbox(title: [BERT], color: silver)[
-  Bidir. Encoder Repr. from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
-]
-
 // maybe add RoBERTa, AlBERT, Electra, T5
 
+#colorbox(title: [ELMo], color: silver)[
+  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation tokens $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task"$ softmax, $h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are hidden states of LM layers.
+]
 
 #grid(
-  columns: (11.5em, auto),
+  columns: (13em, auto),
   column-gutter: 1em,
   figure(
-    image("encoder-decoder.png", width: 11.5em, alt: "Encoder-decoder architecture")
+    image("encoder-decoder.png", width: 13em, alt: "Encoder-decoder architecture")
   ),
   [
     *CoVE* is similar to ELMo, but only uses the final layer instead of all layers.
@@ -164,8 +160,8 @@ In *multi-task learning* we share learned information across multiple tasks, whi
   ]
 )
 
-#colorbox(title: [ELMo], color: silver)[
-  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation tokens $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task"$ softmax, $h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are hidden states of LM layers.
+#colorbox(title: [BERT], color: silver)[
+  Bidir. Encoder Repr. from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
 ]
 
 == PEFT and Prompting
@@ -179,7 +175,7 @@ In *multi-task learning* we share learned information across multiple tasks, whi
 ]
 
 #colorbox(title: [Adapter tuning], color: silver)[
-  Insert adapters into model, common practice to place $h arrow.l h + f(h W_"down") W_"up"$ for non-linearity $f$ after each sublayer (multi-head attention and MLP), needs sequential execution
+  Add adapters into model, common to place $h arrow.l h + f(h W_"down") W_"up"$ for non-linearity $f$ after each sublayer (multi-head attention and MLP), needs sequential execution
 ]
 
 #colorbox(title: [LoRA], color: silver)[
@@ -205,9 +201,6 @@ parametric models store knowledge in parameters, non-parametric models externall
 ]
 
 With *dense retrieval*, we use dot product of encoding in embedding space, use contrastive learning to train. *REALM* retrieves texts, concatenates them to input, unlike prototypical RAG jointly optimizes retrieve and predict steps, *RETRO*: fuses artefact into intermediate layer using chunked cross-attention, *kNN-LM*: store embedded prefixes and following words in database, at inference retrieve $k$ nn. of prefix and norm. exp-distances to probability distribution $p_xi$ over words, then sample from convex combination of $p_xi$ and original LM. Dynamic Gating: Set weighting of distributions depending on prefix.
-
-
-
 
 == Alignment
 *Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
@@ -245,7 +238,5 @@ prevent server from seeing all training data: *secure MPC* or *fully homomorphic
 #colorbox(title: [Differential privacy])[
   An algorithm $cal(M)$ is $epsilon$-differentially private if for any "neighboring" datasets $D_1, D_2$ differing only in a single element, and any output $S$ we have: *$PP[cal(M)(D_1) in S] <= exp(epsilon) PP[cal(M)(D_2) in S]$*. If $cal(M)$ is $epsilon$-DP, then $f(cal(M))$ for any function $f$ is also $epsilon$-DP. If $cal(M)_1$ is $epsilon_1$-DP and $cal(M)_2$ is $epsilon_2$-DP, then $f(cal(M)_1, cal(M)_2)$ is $(epsilon_1 + epsilon_2)$-DP.
 ]
-
-// TODO
 
 // TODO: data memorization
