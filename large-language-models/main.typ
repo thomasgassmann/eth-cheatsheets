@@ -13,19 +13,18 @@
 #show heading: set text(fill: blue)
 
 Probability space is a triple $(Omega, cal(F), bb(P))$ where $bb(P)$ is a measure, $bb(P) [Omega] = 1$ and $cal(F) subset.eq cal(P) (Omega)$. To resolve e.g. the paradox of the infinite coin toss, we require $cal(F)$ to be a $sigma$-algebra.
+*Infinite coin toss paradox*: $1 = p(Sigma^infinity) = p(union_(omega in Sigma^infinity) {omega}) = sum_(omega in Sigma^infinity) p({omega}) = 0$.
 
 #colorbox(title: [$sigma$ algebra], color: silver)[
   A set $cal(F) subset.eq cal(P) (Omega)$ is called a $sigma$-algebra s.t.: (1) $Omega in cal(F)$, (2) $Sigma in cal(F) arrow.r.double Sigma^complement in cal(F)$, (3) If $Sigma_1, Sigma_2, dots in cal(F)$, then $union.big_(n=1)^infinity Sigma_n in cal(F)$.
 ]
 
-*Infinite coin toss paradox*: $1 = p(Sigma^infinity) = p(union_(omega in Sigma^infinity) {omega}) = sum_(omega in Sigma^infinity) p({omega}) = 0$.
-
 #colorbox(title: [Probability measure], color: silver)[
-  A probability $bb(P)$ over a measure space $(Omega, cal(F))$ is a function $bb(P): cal(F) arrow [0,1]$ s.t.: (1) $bb(P) (Omega) = 1$, (2) If $Sigma_1, Sigma_2, dots in cal(F)$ is a countable sequence of disjoint events, then $bb(P) [union.big_(n=1)^infinity Sigma_n] = sum_(n=1)^infinity bb(P) [Sigma_n]$, i.e. we have a measure space if $Omega$ is a set and $cal(F)$ is a $sigma$-algebra over $Omega$.
+  Probability $bb(P)$ over a measure space $(Omega, cal(F))$ is $bb(P): cal(F) arrow [0,1]$ s.t.: (1) $bb(P) (Omega) = 1$, (2) If $Sigma_1, Sigma_2, dots in cal(F)$ is countable seq. of disjoint events, then $bb(P) [union.big_(n=1)^infinity Sigma_n] = sum_(n=1)^infinity bb(P) [Sigma_n]$, i.e. we have a measure space if $Omega$ is a set and $cal(F)$ is a $sigma$-algebra over $Omega$.
 ]
 
 #colorbox(title: [Measureable function], color: silver)[
-  Let $(Omega, cal(F))$ and $(S, T)$ be measure spaces. A random variable is a measurable function from $Omega arrow S$. A *measurable function* $x: Omega arrow S$ is such that $x^(-1) (Sigma)$ is measurable for $Sigma$ measurable, i.e. $Sigma in T arrow.double x^(-1) (Sigma) in cal(F)$.
+  $(Omega, cal(F))$ and $(S, T)$ measure spaces. RV is a measurable function from $Omega arrow S$. A *measurable function* $x: Omega arrow S$ is such that $x^(-1) (Sigma)$ is measurable for $Sigma$ measurable, i.e. $Sigma in T arrow.double x^(-1) (Sigma) in cal(F)$.
 ]
 
 #colorbox(title: [KL divergence], color: silver)[ For two distributions $P$ and $Q$ we define $D_"KL" (P || Q) = sum_(x in cal(X)) P(x) log(P(x) / (Q(x)))$.
@@ -35,7 +34,7 @@ Probability space is a triple $(Omega, cal(F), bb(P))$ where $bb(P)$ is a measur
   For two distributions $P$ and $Q$ over a set $cal(X)$, we define $H(P, Q) = - sum_(x in cal(X)) P(x) log(Q(x))$. The entropy $H(P) = H(P, P)$. Note that $H(P, Q) = H(P) + D_"KL" (P || Q)$.
 ]
 
-*Precision*: $"TP"/("TP" + "FP") = 1 - "FDR"$; *FDR*: $"FP"/("TP" + "FP")$; *TNR*: $"TN"/("TN" + "FP")$; *TPR/Recall*: $"TP"/("TP" + "FN")$; *FPR/$"error"_1$*: $"FP"/("TN" + "FP")$; *FNR/$"error"_2$*: $"FN"/("TP" + "FN")$; *F1*: $(2 "TP")/(2 "TP" + "FP" + "FN") = 2/(1/"Precision" + 1/"Recall")$; *Precision\@K*: precision of top-K results of a query, i.e. $("TP")/K$; *AP\@K*: average of all the Precision\@K values across all $K$ values, $(sum_(t=1)^K "Precision@t" times "rel"_t)/("#Positives")$, where $"rel"_t$ is an indicator variable if $t$-th element in prediction is positive (should actually be retrieved); *mAP*: mean of the AP\@K metric across all metrics in dataset
+*Precision*: $"TP"/("TP" + "FP") = 1 - "FDR"$; *FDR*: $"FP"/("TP" + "FP")$; *TNR*: $"TN"/("TN" + "FP")$; *TPR/Recall*: $"TP"/("TP" + "FN")$; *FPR/$"error"_1$*: $"FP"/("TN" + "FP")$; *FNR/$"error"_2$*: $"FN"/("TP" + "FN")$; *F1*: $(2 "TP")/(2 "TP" + "FP" + "FN") = 2/(1/"Precision" + 1/"Recall")$; *Precision\@K*: precision of top-K results of a query, i.e. $("TP")/K$; *AP\@K*: average of all the Precision\@K values across all $K$ values, $(sum_(t=1)^K "Precision@t" times "rel"_t)/("#Positives")$, where $"rel"_t$ is an indicator variable if $t$-th element in prediction should actually be retrieved (pos.); *mAP*: mean of the AP\@K metric across all metrics in dataset
 
 == Foundations
 An *alphabet* $Sigma$ is a finite, non-empty set. A *string* is a finite sequence of symbols drawn from an alphabet. $Sigma^ast$ is the set of all strings over $Sigma$, and is countable. $Sigma^infinity$ is the set of infinite sequences over $Sigma$. A *language* is a subset of $Sigma^ast$ for some alphabet $Sigma$. A language model is a distribution over $Sigma^ast$.
@@ -75,13 +74,13 @@ Any language model can be locally normalized.
   *(2)* If $p_"LN" (EOS | bold(y)) >= f(t)$ for all $bold(y) in Sigma^t$ (and $t$) and $sum_(t=1)^(infinity) f(t) = infinity$, then $p_"LN"$ is tight.
 ]
 
-*softmax* is defined as $"softmax"(x)_i = exp(x_i / tau) / (sum_(j=1)^n exp(x_j / tau)))$ for a temperature parameter $tau > 0$. As $t arrow infinity$ the distribution becomes uniform, as $tau arrow 0$ the distribution becomes spiked. We have $"softmax"(x) = "argmax"_(p in Delta^(n-1)) p^top x - tau sum_(i=1)^n p_i log(p_i)$. The *sparsemax* function is defined as $"sparsemax" (x) = "argmin"_(z in Delta^(n-1)) ||z - x||_2^2$. This addresses the drawback of softmax that $"softmax"_i (z) > 0 space forall z, i$ (in some tasks sparse probability is preferable).
+*softmax* is defined as $"softmax"(x)_i = exp(x_i / tau) / (sum_(j=1)^n exp(x_j / tau)))$ for a temperature parameter $tau > 0$. As $t arrow infinity$ the distribution becomes uniform, as $tau arrow 0$ the distribution becomes spiked. We have $"softmax"(x) = "argmax"_(p in Delta^(n-1)) p^top x - tau sum_(i=1)^n p_i log(p_i)$. The *sparsemax* function is defined as $"sparsemax" (x) = "argmin"_(z in Delta^(n-1)) ||z - x||_2^2$. This addresses the drawback of softmax that $"softmax"_i (z) > 0 space forall z, i$ (some tasks prefer sparse probability).
 
 #colorbox(title: [Representation-based Language Model (RBLM)])[
-  An embedding matrix $E$ and an encoding function $"enc": Sigma^ast mapsto RR^d$ define a locally normalized language model using the sequence model: $p_"SM" (overline(y)_t | bold(overline(y))_(<t)) = "softmax" (E "enc" (bold(overline(y))_(<t)))_(overline(y)_t)$
+  Embedding matrix $E$ and an encoding function $"enc": Sigma^ast mapsto RR^d$ define a locally normalized language model using the sequence model: $p_"SM" (overline(y)_t | bold(overline(y))_(<t)) = "softmax" (E "enc" (bold(overline(y))_(<t)))_(overline(y)_t)$
 ]
 
-Define $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in Sigma^t) ||"enc"(omega)||_2$, where $e(dot)$ is the symbol embedding function. *RBLM Tightness:* If $s dot z(t) <= log(t)$ for all $t >= N$ for some $N$, then the induced RBLM is *tight*. In particular, $"enc"(dot)$ is bounded, then model is *tight*.
+$s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in Sigma^t) ||"enc"(omega)||_2$, where $e(dot)$ is the symbol embedding function. *RBLM Tightness:* If $s dot z(t) <= log(t)$ for all $t >= N$ for some $N$, then the induced RBLM is *tight*. In particular, $"enc"(dot)$ is bounded, then model is *tight*.
 
 == Finite State Language Models
 #colorbox(title: [FSA])[
@@ -92,7 +91,7 @@ Define $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in Sigm
   An WFSA is a tuple $cal(A) = (Q, Sigma, delta, lambda, rho)$, where $delta subset.eq Q times (Sigma union {epsilon}) times RR times Q$ are the (weighted) transitions, and $lambda, rho: Q mapsto RR$ are the initial/final weights.
 ]
 
-A WFSA is *probabilistic* if $lambda, rho$ and the transition weights form are non-negative, $sum_(q in Q) lambda(q) = 1$ and for all $q in Q$ we have $rho(q) + sum_(q xarrow(a "/" w) q') w = 1$. The *weight of a path* $pi = q_1 xarrow(a_1 "/" w_1) q_2 dot dot q_N$ in a WFSA $cal(A)$ is given by $w(pi) = lambda(q_1) product_(i=1)^(N) w_i rho(q_N)$. $Pi(cal(A), y)$ is the set of all paths where $cal(A)$ yields $y$.
+WFSA is *probabilistic* if $lambda, rho$ and the transition weights form are non-negative, $sum_(q in Q) lambda(q) = 1$ and for all $q in Q$ we have $rho(q) + sum_(q xarrow(a "/" w) q') w = 1$. The *weight of a path* $pi = q_1 xarrow(a_1 "/" w_1) q_2 dot dot q_N$ in a WFSA $cal(A)$ is given by $w(pi) = lambda(q_1) product_(i=1)^(N) w_i rho(q_N)$. $Pi(cal(A), y)$ is the set of all paths where $cal(A)$ yields $y$.
 
 The *Allsum* of a WFSA $cal(A)$ is defined as $Z(cal(A)) = sum_(y in Sigma^ast) cal(A) (y) = sum_(y in Sigma^ast) sum_(pi in Pi(A, y)) w(pi) = arrow(lambda) sum_(d=0)^infinity T^d arrow(rho) = arrow(lambda) (I - T)^(-1) arrow(rho)$, where $T$ is the transition matrix of $cal(A)$. *Tightness of PFSA*: A state $q in Q$ is accessible if there exists a non-zero weighted path from an initial state to $q$. It is co-accessible if there exists a non-zero weighted path from $q$ to a final state. A PFSA is *tight* iff. all accessible states are co-accessible.
 
@@ -146,7 +145,7 @@ In *multi-task learning* we share learned information across multiple tasks, whi
 // Process of updating weights of a pretrained model for a new target task is called *fine-tuning*. 
 
 #colorbox(title: [ELMo], color: silver)[
-  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation of token $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task"$ softmax weights, $h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are the hidden states of the LM layers.
+  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation tokens $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task"$ softmax, $h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are hidden states of LM layers.
 ]
 
 #colorbox(title: [BERT], color: silver)[
@@ -193,7 +192,7 @@ In *multi-task learning* we share learned information across multiple tasks, whi
   Continuous, prepend sequence of task-specific vectors to input, optimize $M_phi.alt$ to $"max"_phi.alt sum_(y_i) log P(y_i | h_(<i); theta; phi.alt)$ with $h_(<i) = [h_(<i)^((1)); dots; h_(<i)^((n))]$ copied from $M_phi.alt$ if within prefix and otherwise computed using pre-trained LM.
 ]
 
-*In-context learning*: emergent behavior, models can perform previously unseen tasks in few-shot setting without parameter updates. *Prompting strategies*: chain-of-thought (model generates step-by-step reasoning), least-to-most (problem decomposition, solve separately), program-of-thought (formulate reasoning steps as program); *Self-consistency*: generate variety of output with temp. $T > 0$ and select most frequent answer
+*In-context learning*: emergent behavior, models perform previously unseen tasks in few-shot setting without parameter updates. *Prompting strategies*: chain-of-thought (model generates step-by-step reasoning), least-to-most (problem decomposition, solve separately), program-of-thought (formulate reasoning steps as program); *Self-consistency*: generate variety of output with temp. $T > 0$ and select most frequent ans
 
 == VLMs
 Text encoder, vision encoder, fusion module (produce cross-modal representations) and optionally decoder. *Merged attention* concatenates text and image features together (feed into single transformer block), *co-attention* feeds text and image features into separate transformer blocks (then use cross-attention to fuse like in encoder-decoder), *pre-training* via *Masked Language Modeling* (MLM), *Image-Text Matching* (ITM), *Image-Text Contrastive Learning* (ITC, predict $N$ matched pairs from $N^2$ possible image-text pairs, e.g. $cal(L)_"ITC"^(i 2 t) (theta) = -1/N sum_(i=1)^N log(exp(s_(i,i)^(i 2 t) \/ sigma) / (sum_(j=1)^N exp(s_(i,j)^(i 2 t) \/ sigma)))$, where $s_(i,j)^(i 2 t) = v_i^top w_j$ for image and word embeddings, used by e.g. CLIP), *Masked Image Modeling* (MIM).
@@ -201,14 +200,13 @@ Text encoder, vision encoder, fusion module (produce cross-modal representations
 == RAG
 parametric models store knowledge in parameters, non-parametric models externally.
 
-#colorbox(title: [kNN-LM], color: silver)[
-// TODO:
-Store all embedded prefixes and following words in a database. Retrieve $k$ nearest neighbors at of prefix and normalize exponentiated distances to a probability distribution $p_xi$ over words at inference. Next, sample from convex combination of $p_xi$ and original LM. Dynamic Gating: Set weighting of distributions depending on prefix.
-]
-
 #colorbox(title: [TF-IDF], color: silver)[
   $"tf"_(t,d) = log("count"(t,d)+1)$, $"idf"_t = log(N\/"df"_t)$, $"tf-idf"_(t,d) = "tf"_(t,d) dot "idf"_t$ where $N$ is number of docs, score with norm. cos. sim., after simplification $"score"(q,d) = sum_(t in q) "tf-idf"_(t,d)/(|d|)$, bad: dimension of vectors is same as vocabulary
 ]
+
+With *dense retrieval*, we use dot product of encoding in embedding space, use contrastive learning to train. *REALM* retrieves texts, concatenates them to input, unlike prototypical RAG jointly optimizes retrieve and predict steps, *RETRO*: fuses artefact into intermediate layer using chunked cross-attention, *kNN-LM*: store embedded prefixes and following words in database, at inference retrieve $k$ nn. of prefix and norm. exp-distances to probability distribution $p_xi$ over words, then sample from convex combination of $p_xi$ and original LM. Dynamic Gating: Set weighting of distributions depending on prefix.
+
+
 
 
 == Alignment
