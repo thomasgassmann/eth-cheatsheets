@@ -105,7 +105,7 @@ A RNN is given by an initial state $h_0 in RR^d$ and a map $h_t = f(h_(t-1), y_t
 ]
 
 A softmax RNN is *tight* if for all $t >= N$ (for some $N$) we have $s ||h_t||_2 <= log(t)$, where $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$. Elman RNNs with a bounded activation function $sigma$ and the softmax projection function are *tight*. A *Heaviside Elman RNN* is an Elman RNN using a Heaviside function as non-linearity. Heaviside Elman RNNs (over $overline(RR)$) are equivalent to deterministic PFSAs (generalizes to any activation function with finite image). 
-*Minsky's construction* encodes any dPFSA using $U in RR^(|Sigma||Q| times |Sigma||Q|)$ to encode which states are reachable from $h_(t-1)$ and $V in RR^(|Sigma||Q| times |Sigma|)$ to encode which states can be transitioned to using $y_t$ (the hidden state dimensionality can be reduced to $Omega(|Sigma|sqrt(|Q|))$). Satured Sigmoid Elman RNNs are Turing-complete (because they can encode two-stack PDAs). Is thus undecidable whether an RNN-LM is *tight*.
+*Minsky's construction* encodes dPFSA using $U in RR^(|Sigma||Q| times |Sigma||Q|)$ for which states are reachable from $h_(t-1)$ (_all_ next states) and $V in RR^(|Sigma||Q| times |Sigma|)$ to encode which states can be transitioned to with $y_t$ (all states that can be transitioned to using $y_t$). $bold(b) = -1$ for Heaviside. (hidden state dimensionality can be reduced to $Omega(|Sigma|sqrt(|Q|))$). Satured Sigmoid Elman RNNs are Turing-complete (can encode two-stack PDAs). *Undecidable* whether an RNN-LM is *tight*.
 
 == Transformers
 $K,Q,V$ usually no bias.
