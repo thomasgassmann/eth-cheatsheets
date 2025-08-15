@@ -10,7 +10,7 @@
 #let define = $attach(=, t: "def")$
 #let EOS = $#math.script("EOS")$
 #show heading: box
-#show heading: set text(fill: blue)
+#show heading: set text(fill: blue, spacing: 0.2em)
 
 Probability space is a triple $(Omega, cal(F), bb(P))$ where $bb(P)$ is a measure, $bb(P) [Omega] = 1$ and $cal(F) subset.eq cal(P) (Omega)$. To resolve e.g. the paradox of the infinite coin toss, we require $cal(F)$ to be a $sigma$-algebra.
 *Infinite coin toss paradox*: $1 = p(Sigma^infinity) = p(union_(omega in Sigma^infinity) {omega}) = sum_(omega in Sigma^infinity) p({omega}) = 0$.
@@ -213,19 +213,22 @@ With *dense retrieval*, we use dot product of encoding in embedding space, use c
 *Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
 
 
-// TODO: ppo, dpo
+// TODO: ppo
 
+#colorbox(title: [Instruction tuning], color: silver)[
+Finetune LM on collection of datasets described via instructions.]
 
 #colorbox(title: [RLHF], color: silver)[
-// TODO:
 Reinforcement Learning from Human Feedback (RLHF): 
 *(1)* Collect a dataset of instructions and answers and fine-tune a model on it.
 *(2)* Produce comparison data by sampling several model outputs for a given prompt and asking humans to rank them. Train a reward model based on this data.
 *(3)* Use PPO to fine-tune the LM (policy) using the reward model as a reward function.
 ]
 
+RLHF with PPO is expensive, unstable and sensitive to choice of hyperparams, reward model is also large (expensive to load/compute), *DPO* (Direct Preference Optimization) directly fine-tunes LM to max log-likelihood of preference data, uses *Bardley-Terry* model given by $p(y_w succ y_l) = sigma(r(x,y_w) - r(x, y_l))$, binary classification, minimize negative log-likelihood loss
+
 == Privacy
-Gold standard is to prevent server from seeing all training data: *secure multi-party computation* or *fully homomorphic encryption*. Still slow and expensive.
+prevent server from seeing all training data: *secure MPC* or *fully homomorphic encryption*. Still slow and expensive.
 
 #colorbox(title: [Adverserial examples], color: silver)[
   Perturb example with $delta$ to force misclassification, i.e. maximize $L(f_theta (x + delta), y)$ subject to $||delta||_infinity <= epsilon$. This can be solved using *projected gradient descent*.
