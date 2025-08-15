@@ -131,7 +131,7 @@ $"softmax"((Q K^top)/(sqrt(d)))V$ as the definition of *soft attention*, with th
 ]
 
 *Position encodings*: Sinuisoidal encodings are $P(k, 2i) = sin(k/(n^(2i\/d)))$ and $P(k, 2i+1) = cos(k/(n^(2i\/d)))$, where $k$ is the position in the sequence and $i$ the dimension. Note that $P(x+k, dot)$ is a linear function of $P(x, dot)$.
-*Tightness of transformers*: Any transformer with soft attention is *tight* as its layers are continuous and set of possible inputs to the first layer is compact, making $"enc"$ bounded. If $p_"LN"$ is *$n$-gram model*, there exists a transformer $cal(T)$ with $L(p_"LN") = L(cal(T))$.
+*Tightness of transformers*: Any transformer with soft attention is *tight* as layers are continuous and set of possible inputs to the first layer is compact, thus $"enc"$ bounded. If $p_"LN"$ is *$n$-gram model*, there exists a transformer $cal(T)$ with $L(p_"LN") = L(cal(T))$.
 
 
 // TODO: number of parameters and time complexities)
@@ -143,10 +143,6 @@ In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May
 == Transfer Learning
 In *multi-task learning* we share learned information across multiple tasks, which are learned jointly.
 // Process of updating weights of a pretrained model for a new target task is called *fine-tuning*. 
-
-#colorbox(title: [ELMo], color: silver)[
-  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation tokens $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task"$ softmax, $h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are hidden states of LM layers.
-]
 
 #colorbox(title: [BERT], color: silver)[
   Bidir. Encoder Repr. from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
@@ -167,6 +163,10 @@ In *multi-task learning* we share learned information across multiple tasks, whi
     *Others*: T5 and BART are encoder-decoder transformers with bidirectional attention flow for input.
   ]
 )
+
+#colorbox(title: [ELMo], color: silver)[
+  Forward and backward LM using $L$ LSTM layers, produces context-dependent representation tokens $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task"$ softmax, $h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are hidden states of LM layers.
+]
 
 == PEFT and Prompting
 
@@ -225,7 +225,10 @@ Reinforcement Learning from Human Feedback (RLHF):
 *(3)* Use PPO to fine-tune the LM (policy) using the reward model as a reward function.
 ]
 
-RLHF with PPO is expensive, unstable and sensitive to choice of hyperparams, reward model is also large (expensive to load/compute), *DPO* (Direct Preference Optimization) directly fine-tunes LM to max log-likelihood of preference data, uses *Bardley-Terry* model given by $p(y_w succ y_l) = sigma(r(x,y_w) - r(x, y_l))$, binary classification, minimize negative log-likelihood loss
+RLHF with PPO is expensive, unstable and sensitive to choice of hyperparams, reward model is also large (expensive to load/compute), *DPO* (Direct Preference Optimization) directly fine-tunes LM to max log-likelihood of preference data, uses *Bardley-Terry* model given by $p(y_w succ y_l) = sigma(r(x,y_w) - r(x, y_l))$, binary classification, minimize negative log-likelihood loss, *best-of-n*: one can also simply overgenerate $n$ samples, rank them and pick the one with highest reward (no LM update)
+
+== Calibration
+Ensure models output probability reflects true likelihood of event, let $B_m$ be samples with pred in interval $((m-1)/M), m/M]$, reliability diagram plots $"conf"(B_m) = sum p_i$ vs. $"acc"(B_m) = 1/(|B_m|) sum bold(1)(y_i = hat(y_i))$, we also have $"ECE" = sum (|B_m|)/M | "acc"(B_m) - "conf"(B_m)|$, can regularize calibration during training or rescale using softmax temp.
 
 == Privacy
 prevent server from seeing all training data: *secure MPC* or *fully homomorphic encryption*. Still slow and expensive.
@@ -244,7 +247,5 @@ prevent server from seeing all training data: *secure MPC* or *fully homomorphic
 ]
 
 // TODO
-
-// TODO: model calibration
 
 // TODO: data memorization
