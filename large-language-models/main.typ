@@ -164,6 +164,8 @@ In *multi-task learning* we share learned information across multiple tasks, whi
   Bidir. Encoder Repr. from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
 ]
 
+*BPE*: repeatedly merge most frequent symbol pair $('A','B')$ with $'A B'$, hyperparam: vocab size; tradeoff with sequence length
+
 == PEFT and Prompting
 
 #colorbox(title: [Diff pruning], color: silver)[
