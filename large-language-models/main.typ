@@ -12,11 +12,13 @@
 #show heading: box
 #show heading: set text(fill: blue)
 
-Traditionally, a probability space is a triple $(Omega, cal(F), bb(P))$ where $bb(P)$ is a measure, $bb(P) [Omega] = 1$ and $cal(F) subset.eq cal(P) (Omega)$. To resolve e.g. the paradox of the infinite coin toss, we require $cal(F)$ to be a $sigma$-algebra.
+Probability space is a triple $(Omega, cal(F), bb(P))$ where $bb(P)$ is a measure, $bb(P) [Omega] = 1$ and $cal(F) subset.eq cal(P) (Omega)$. To resolve e.g. the paradox of the infinite coin toss, we require $cal(F)$ to be a $sigma$-algebra.
 
 #colorbox(title: [$sigma$ algebra], color: silver)[
   A set $cal(F) subset.eq cal(P) (Omega)$ is called a $sigma$-algebra s.t.: (1) $Omega in cal(F)$, (2) $Sigma in cal(F) arrow.r.double Sigma^complement in cal(F)$, (3) If $Sigma_1, Sigma_2, dots in cal(F)$, then $union.big_(n=1)^infinity Sigma_n in cal(F)$.
 ]
+
+*Infinite coin toss paradox*: $1 = p(Sigma^infinity) = p(union_(omega in Sigma^infinity) {omega}) = sum_(omega in Sigma^infinity) p({omega}) = 0$.
 
 #colorbox(title: [Probability measure], color: silver)[
   A probability $bb(P)$ over a measure space $(Omega, cal(F))$ is a function $bb(P): cal(F) arrow [0,1]$ s.t.: (1) $bb(P) (Omega) = 1$, (2) If $Sigma_1, Sigma_2, dots in cal(F)$ is a countable sequence of disjoint events, then $bb(P) [union.big_(n=1)^infinity Sigma_n] = sum_(n=1)^infinity bb(P) [Sigma_n]$, i.e. we have a measure space if $Omega$ is a set and $cal(F)$ is a $sigma$-algebra over $Omega$.
@@ -25,8 +27,6 @@ Traditionally, a probability space is a triple $(Omega, cal(F), bb(P))$ where $b
 #colorbox(title: [Measureable function], color: silver)[
   Let $(Omega, cal(F))$ and $(S, T)$ be measure spaces. A random variable is a measurable function from $Omega arrow S$. A *measurable function* $x: Omega arrow S$ is such that $x^(-1) (Sigma)$ is measurable for $Sigma$ measurable, i.e. $Sigma in T arrow.double x^(-1) (Sigma) in cal(F)$.
 ]
-
-*Infinite coin toss paradox*: $1 = p(Sigma^infinity) = p(union_(omega in Sigma^infinity) {omega}) = sum_(omega in Sigma^infinity) p({omega}) = 0$.
 
 #colorbox(title: [KL divergence], color: silver)[ For two distributions $P$ and $Q$ we define $D_"KL" (P || Q) = sum_(x in cal(X)) P(x) log(P(x) / (Q(x)))$.
 ]
@@ -51,7 +51,7 @@ An *alphabet* $Sigma$ is a finite, non-empty set. A *string* is a finite sequenc
   $p_("LM")(bold(y)) define (exp(- hat(p)_("GN")(bold(y)))) / (sum_(y' in Sigma^ast) exp(-hat(p)_("GN")(bold(y')))) define exp(-hat(p)_"GN" (bold(y)))$ where $Z_"G" define sum_(bold(y') in Sigma^ast) exp(-hat(p)_"GN" (bold(y')))$ is the normalization constant.
 ]
 
-Any normalizable energy function $hat(p)_"GN"$ (meaning $Z_G$ is finite) induces a language model, i.e., a distribution over $Sigma^ast$.
+Any normalizable energy function $hat(p)_"GN"$ ($Z_G$ is finite) induces a language model.
 
 #colorbox(title: [Sequence model], color: silver)[
   For an alphabet $Sigma$ a sequence model is defined as a set of conditional probability distributions $p_"SM"(y | bold(y))$ for $y in overline(Sigma)$ ($overline(Sigma) = Sigma union \{ EOS \}$) $bold(y) in Sigma^ast$. $bold(y)$ is called history/context. That is, we have $\{ p_"SM" (y | bold(y)) \}_(bold(y) in Sigma^ast)$ for $y in overline(Sigma)$.
@@ -116,7 +116,7 @@ A *Heaviside Elman RNN* is an Elman RNN using a Heaviside function as non-linear
 *Minsky's construction* encodes any dPFSA using $U in RR^(|Sigma||Q| times |Sigma||Q|)$ to encode which states are reachable from $h_(t-1)$ and $V in RR^(|Sigma||Q| times |Sigma|)$ to encode which states can be transitioned to using $y_t$ (the hidden state dimensionality can be reduced to $Omega(|Sigma|sqrt(|Q|))$). Satured Sigmoid Elman RNNs are Turing-complete (because they can encode two-stack PDAs). Is thus undecidable whether an RNN-LM is *tight*.
 
 == Transformers
-$K,Q,V$ matrices usually do not have a bias.
+$K,Q,V$ usually no bias.
 
 #colorbox(title: [Attention])[
   Let $f: RR^d times RR^d mapsto RR^d$ be a scoring function (e.g. dot product) and $f_(Delta^(d-1))$ a projection function (e.g. softmax). Let $q in RR^d$, $K_t = (k_1^top, dots, k_t^top) in RR^(t times d)$ and $V_t = (v_1^top, dots, v_t^top) in RR^(t times d)$. Attention over $K_t, V_t$ is a function $"Att"(q, K_t, V_t): RR^d times RR^(t times d) times RR^(t times d) mapsto RR^d$ computing the vector $a$ as follows:
@@ -157,8 +157,6 @@ In *multi-task learning* we share learned information across multiple tasks, whi
   Forward and backward LM using $L$ LSTM layers, produces context-dependent representation of token $y_t$ as $gamma^("task") sum_(l=0)^L s_l^"task" h_(t l)^"LM"$ where $s_l^"task"$ softmax weights, $h_(t l)^"LM" = (arrow(h)_(t l)^"LM", arrow.l(h)_(t l)^"LM")$. $arrow(h)_(t l)^"LM"$ and $arrow.l(h)_(t l)^"LM")$ are the hidden states of the LM layers.
 ]
 
-*CoVE* is similar to ELMo, but only uses the final layer instead of all layers.
-
 #colorbox(title: [BERT], color: silver)[
   Bidirectional Encoder Representations from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
 ]
@@ -167,17 +165,19 @@ In *multi-task learning* we share learned information across multiple tasks, whi
 
 
 #grid(
-  columns: (14.5em, auto),
+  columns: (12em, auto),
   column-gutter: 1em,
   figure(
-    image("encoder-decoder.png", width: 14.5em, alt: "Encoder-decoder architecture")
+    image("encoder-decoder.png", width: 12em, alt: "Encoder-decoder architecture")
   ),
   [
+    *CoVE* is similar to ELMo, but only uses the final layer instead of all layers.
+
     *Others*: T5 and BART are encoder-decoder transformers with bidirectional attention flow for input.
   ]
 )
 
-== Parameter Efficient Fine-Tuning
+== PEFT and Prompting
 
 #colorbox(title: [Diff pruning], color: silver)[
   Learn which parameters to update (*specification-based method*); learn sparse $delta$ s.t. $theta_"FT" = theta_"LM" + delta$; regularize $delta$ by $L_0$-norm; takes up more GPU memory than ful parameter fine-tuning as new parameters are introduced
@@ -188,20 +188,22 @@ In *multi-task learning* we share learned information across multiple tasks, whi
 ]
 
 #colorbox(title: [Adapter tuning], color: silver)[
-  Insert small modules (adapters) into the model, e.g. common practice to place $h arrow.l h + f(h W_"down") W_"up"$ for non-linearity $f$ after each sublayer (i.e. after multi-head attention and MLP), have to be executed sequentially.
+  Insert adapters into model, common practice to place $h arrow.l h + f(h W_"down") W_"up"$ for non-linearity $f$ after each sublayer (multi-head attention and MLP), needs sequential execution
 ]
 
 #colorbox(title: [LoRA], color: silver)[
   Replace weight matrices $W in RR^(d times k)$ with $W arrow.l W + alpha/r B A$, where $B in RR^(d times r), A in RR^(r times k)$. Init $A$ with Gaussian, $B$ with zeros. Can be executed in parallel.
 ]
 
-*Discrete prompts* search for prompts in discrete space, i.e. a set of tokens, *continuous prompts* search for prompts directly in the embedding space.
+*Discrete prompts* search for prompts in discrete set of tokens, *continuous prompts* search for prompts in embedding space.
 
 #colorbox(title: [Prefix tuning], color: silver)[
   Continuous, prepend sequence of task-specific vectors to input, optimize $M_phi.alt$ to $"max"_phi.alt sum_(y_i) log P(y_i | h_(<i); theta; phi.alt)$ with $h_(<i) = [h_(<i)^((1)); dots; h_(<i)^((n))]$ copied from $M_phi.alt$ if within prefix and otherwise computed using pre-trained LM.
 ]
 
 *In-context learning*: emergent behavior, models can perform previously unseen tasks in few-shot setting without parameter updates.
+
+*Prompting strategies*: chain-of-thought (model generates step-by-step reasoning), least-to-most (problem decomposition, solve separately), program-of-thought (formulate reasoning steps as program); *Self-consistency*: generate variety of output with temp. $T > 0$ and select most frequent answer
 
 == RAG
 Parametric vs. non-parametric models: parametric models store knowledge in parameters, non-parametric models store knowledge externally.
@@ -210,6 +212,11 @@ Parametric vs. non-parametric models: parametric models store knowledge in param
 // TODO:
 Store all embedded prefixes and their following words in a database. At inference time, retrieve the $k$ nearest neighbors of a prefix and normalize the exponentiated distances to a probability distribution $p_xi$ over words. Then sample from a convex combination of $p_xi$ and the original LM. Dynamic Gating: Set the weighting of distributions depending on the prefix.
 ]
+
+#colorbox(title: [TF-IDF], color: silver)[
+  $"tf"_(t,d) = log("count"(t,d)+1)$, $"idf"_t = log(N\/"df"_t)$, $"tf-idf"_(t,d) = "tf"_(t,d) dot "idf"_t$ where $N$ is number of docs, score with norm. cos. sim., after simplification $"score"(q,d) = sum_(t in q) "tf-idf"_(t,d)/(|d|)$
+]
+
 
 == Alignment
 *Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
@@ -226,21 +233,18 @@ Reinforcement Learning from Human Feedback (RLHF):
 3. Use PPO to fine-tune the LM (policy) using the reward model as a reward function.
 ]
 
-== Adverserial Attacks
+== Privacy
+Gold standard solutions to prevent server from seeing all training data: *secure multi-party computation* or *fully homomorphic encryption*. However, still slow and expensive.
+
 #colorbox(title: [Adverserial examples], color: silver)[
   Perturb example with $delta$ to force misclassification, i.e. maximize $L(f_theta (x + delta), y)$ subject to $||delta||_infinity <= epsilon$. This can be solved using *projected gradient descent*.
 
   Does not work for text as $x + delta$ is unlikely to be a valid token embedding. Solve $"argmax"_v (E_v - x_i)^top gradient_(x_i) L$ and replace $x_i$ with $v$.
 ]
 
-== Privacy
-
-
 #colorbox(title: [Federated learning], color: silver)[
   Clients send gradients to central server, but training data can be recovered from gradients. Weight-trap attacks are also possible if the servers sends a model s.t. $gradient_theta L(f_theta (x_i)) = x_i$.
 ]
-
-Gold standard solutions to prevent server from seeing all training data: *secure multi-party computation* or *fully homomorphic encryption*. However, still slow and expensive.
 
 #colorbox(title: [Differential privacy])[
   An algorithm $cal(M)$ is $epsilon$-differentially private if for any "neighboring" datasets $D_1, D_2$ differing only in a single element, and any output $S$ we have: *$PP[cal(M)(D_1) in S] <= exp(epsilon) PP[cal(M)(D_2) in S]$*. If $cal(M)$ is $epsilon$-DP, then $f(cal(M))$ for any function $f$ is also $epsilon$-DP. If $cal(M)_1$ is $epsilon_1$-DP and $cal(M)_2$ is $epsilon_2$-DP, then $f(cal(M)_1, cal(M)_2)$ is $(epsilon_1 + epsilon_2)$-DP.
