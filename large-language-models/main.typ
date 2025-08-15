@@ -48,7 +48,7 @@ An *alphabet* $Sigma$ is a finite, non-empty set. A *string* is a finite sequenc
 
 #colorbox(title: [Globally normalized model])[
   Let $hat(p)_("GN")(bold(y)) : Sigma^ast arrow RR$ be an energy function. A globally normalized model (GNM) is defined as:
-  $p_("LM")(bold(y)) define (exp(- hat(p)_("GN")(bold(y)))) / (sum_(y' in Sigma^ast) exp(-hat(p)_("GN")(bold(y')))) define exp(-hat(p)_"GN" (bold(y)))$ where $Z_"G" define sum_(bold(y') in Sigma^ast) exp(-hat(p)_"GN" (bold(y')))$ is the normalization constant.
+  $p_("LM")(bold(y)) define (exp(- hat(p)_("GN")(bold(y)))) / (sum_(y' in Sigma^ast) exp(-hat(p)_("GN")(bold(y')))) define exp(-hat(p)_"GN" (bold(y)))$ where $Z_"G" = sum_(bold(y') in Sigma^ast) exp(-hat(p)_"GN" (bold(y')))$ is the normalization constant.
 ]
 
 Any normalizable energy function $hat(p)_"GN"$ ($Z_G$ is finite) induces a language model.
@@ -60,31 +60,28 @@ Any normalizable energy function $hat(p)_"GN"$ ($Z_G$ is finite) induces a langu
 // A sequence model is a probability distribution over $Sigma^ast union Sigma^infinity$.
 
 #colorbox(title: [Locally normalized model /autoregressive model])[
-  For $p_"SM"$ a sequence model over $overline(Sigma)$: A locally normalized language model (LNM) over $Sigma$ is defined as: $p_"LN" (bold(y)) define p_"SM" (EOS | bold(y)) product_(t=1)^(|bold(y)|) p_"SM" (y_t |  bold(y)_(<t))$ for $y in Sigma^ast$. The LNM is tight if $sum_(bold(y) in Sigma^ast) p_"LN" (bold(y)) = 1$.
+  For $p_"SM"$ a sequence model over $overline(Sigma)$: A locally normalized language model (LNM) over $Sigma$ is defined as: $p_"LN" (bold(y)) define p_"SM" (EOS | bold(y)) product_(t=1)^(|bold(y)|) p_"SM" (y_t |  bold(y)_(<t))$ for $y in Sigma^ast$. LNM is tight if $sum_(bold(y) in Sigma^ast) p_"LN" (bold(y)) = 1$.
 ]
 
 #colorbox(title: [Prefix probability], color: silver)[
-  Let $p_"LM"$ be a language model. The prefix probability of $p_"LM"$ is: $pi (bold(y)) define sum_(y' in Sigma^ast) p_"LM" (bold(y) bold(y'))$, i.e. the cumulative probability of all strings in the language beginning with $bold(y)$.
+  Let $p_"LM"$ be a language model. The prefix probability of $p_"LM"$ is: $pi (bold(y)) define sum_(y' in Sigma^ast) p_"LM" (bold(y) bold(y'))$, i.e. cumulative probability of all strings in the language beginning with $bold(y)$.
 ]
 
-Any language model can be locally normalized. TODO: should know how to prove this, telescoping product, see page 24
+Any language model can be locally normalized.
+// TODO: should know how to prove this, telescoping product, see page 24
 
 #colorbox(title: [Tightness conditions], color: silver)[
-  1. Let $p_EOS (t) = (sum_(omega in Sigma^(t-1)) p_"LN" (omega) p_"LN" (EOS | omega))/(sum_(omega in Sigma^(t-1)) p_"LN" (omega))$. $p_"LN"$ is *tight* iff. $exists t >= 1: p_EOS (t) = 1 or sum_(t=1)^infinity p_EOS (t) = infinity$.
-  2. If $p_"LN" (EOS | bold(y)) >= f(t)$ for all $bold(y) in Sigma^t$ (and $t$) and $sum_(t=1)^(infinity) f(t) = infinity$, then $p_"LN"$ is tight.
+  *(1)* Let $p_EOS (t) = (sum_(omega in Sigma^(t-1)) p_"LN" (omega) p_"LN" (EOS | omega))/(sum_(omega in Sigma^(t-1)) p_"LN" (omega))$. $p_"LN"$ is *tight* iff. $exists t >= 1: p_EOS (t) = 1 or sum_(t=1)^infinity p_EOS (t) = infinity$.
+  *(2)* If $p_"LN" (EOS | bold(y)) >= f(t)$ for all $bold(y) in Sigma^t$ (and $t$) and $sum_(t=1)^(infinity) f(t) = infinity$, then $p_"LN"$ is tight.
 ]
 
-The *softmax* function is defined as $"softmax"(x)_i = exp(x_i / tau) / (sum_(j=1)^n exp(x_j / tau)))$ for a temperature parameter $tau > 0$. As $t arrow infinity$ the distribution becomes uniform, as $tau arrow 0$ the distribution becomes spiked. We have $"softmax"(x) = "argmax"_(p in Delta^(n-1)) p^top x - tau sum_(i=1)^n p_i log(p_i)$.
-
-The *sparsemax* function is defined as $"sparsemax" (x) = "argmin"_(z in Delta^(n-1)) ||z - x||_2^2$. This addresses the drawback of softmax that $"softmax"_i (z) > 0 space forall z, i$ (in some tasks sparse probability is preferable).
+*softmax* is defined as $"softmax"(x)_i = exp(x_i / tau) / (sum_(j=1)^n exp(x_j / tau)))$ for a temperature parameter $tau > 0$. As $t arrow infinity$ the distribution becomes uniform, as $tau arrow 0$ the distribution becomes spiked. We have $"softmax"(x) = "argmax"_(p in Delta^(n-1)) p^top x - tau sum_(i=1)^n p_i log(p_i)$. The *sparsemax* function is defined as $"sparsemax" (x) = "argmin"_(z in Delta^(n-1)) ||z - x||_2^2$. This addresses the drawback of softmax that $"softmax"_i (z) > 0 space forall z, i$ (in some tasks sparse probability is preferable).
 
 #colorbox(title: [Representation-based Language Model (RBLM)])[
   An embedding matrix $E$ and an encoding function $"enc": Sigma^ast mapsto RR^d$ define a locally normalized language model using the sequence model: $p_"SM" (overline(y)_t | bold(overline(y))_(<t)) = "softmax" (E "enc" (bold(overline(y))_(<t)))_(overline(y)_t)$
 ]
 
-We define $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in Sigma^t) ||"enc"(omega)||_2$, where $e(dot)$ is the symbol embedding function.
-
-*RBLM Tightness:* If $s dot z(t) <= log(t)$ for all $t >= N$ for some $N$, then the induced RBLM is *tight*. In particular, $"enc"(dot)$ is bounded, then the model is *tight*.
+Define $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in Sigma^t) ||"enc"(omega)||_2$, where $e(dot)$ is the symbol embedding function. *RBLM Tightness:* If $s dot z(t) <= log(t)$ for all $t >= N$ for some $N$, then the induced RBLM is *tight*. In particular, $"enc"(dot)$ is bounded, then model is *tight*.
 
 == Finite State Language Models
 #colorbox(title: [FSA])[
@@ -97,10 +94,9 @@ We define $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in S
 
 A WFSA is *probabilistic* if $lambda, rho$ and the transition weights form are non-negative, $sum_(q in Q) lambda(q) = 1$ and for all $q in Q$ we have $rho(q) + sum_(q xarrow(a "/" w) q') w = 1$. The *weight of a path* $pi = q_1 xarrow(a_1 "/" w_1) q_2 dot dot q_N$ in a WFSA $cal(A)$ is given by $w(pi) = lambda(q_1) product_(i=1)^(N) w_i rho(q_N)$. $Pi(cal(A), y)$ is the set of all paths where $cal(A)$ yields $y$.
 
-// TODO: verify last below
 The *Allsum* of a WFSA $cal(A)$ is defined as $Z(cal(A)) = sum_(y in Sigma^ast) cal(A) (y) = sum_(y in Sigma^ast) sum_(pi in Pi(A, y)) w(pi) = arrow(lambda) sum_(d=0)^infinity T^d arrow(rho) = arrow(lambda) (I - T)^(-1) arrow(rho)$, where $T$ is the transition matrix of $cal(A)$. *Tightness of PFSA*: A state $q in Q$ is accessible if there exists a non-zero weighted path from an initial state to $q$. It is co-accessible if there exists a non-zero weighted path from $q$ to a final state. A PFSA is *tight* iff. all accessible states are co-accessible.
 
-// TODO: CFG skipped
+// CFG skipped
 
 == RNNs
 A RNN is given by an initial state $h_0 in RR^d$ and a map $h_t = f(h_(t-1), y_t)$. An RNN-LM uses $"enc"(y_(<=t)) = h_t$.
@@ -109,10 +105,7 @@ A RNN is given by an initial state $h_0 in RR^d$ and a map $h_t = f(h_(t-1), y_t
   In an Elman RNN we have $f(h_(t-1),y_t) = sigma(U h_(t-1) + V e'(y_t) + b)$, where $U in RR^(d times d), V in RR^(d times R), b in RR^d$ and $e': Sigma mapsto RR^R$ is the embedding function.
 ]
 
-A softmax RNN is *tight* if for all $t >= N$ (for some $N$) we have $s ||h_t||_2 <= log(t)$, where $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$. In particular, Elman (and Jordan) RNNs with a bounded activation function $sigma$ and the softmax projection function are *tight*.
-
-A *Heaviside Elman RNN* is an Elman RNN using a Heaviside function as non-linearity. Heaviside Elman RNNs (over $overline(RR)$) are equivalent to deterministic PFSAs (this generalizes to any activation function with finite image).
-
+A softmax RNN is *tight* if for all $t >= N$ (for some $N$) we have $s ||h_t||_2 <= log(t)$, where $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$. Elman RNNs with a bounded activation function $sigma$ and the softmax projection function are *tight*. A *Heaviside Elman RNN* is an Elman RNN using a Heaviside function as non-linearity. Heaviside Elman RNNs (over $overline(RR)$) are equivalent to deterministic PFSAs (generalizes to any activation function with finite image). 
 *Minsky's construction* encodes any dPFSA using $U in RR^(|Sigma||Q| times |Sigma||Q|)$ to encode which states are reachable from $h_(t-1)$ and $V in RR^(|Sigma||Q| times |Sigma|)$ to encode which states can be transitioned to using $y_t$ (the hidden state dimensionality can be reduced to $Omega(|Sigma|sqrt(|Q|))$). Satured Sigmoid Elman RNNs are Turing-complete (because they can encode two-stack PDAs). Is thus undecidable whether an RNN-LM is *tight*.
 
 == Transformers
@@ -126,7 +119,7 @@ $K,Q,V$ usually no bias.
   $
 ]
 
-Using shorter notation we get $"softmax"((Q K^top)/(sqrt(d)))V$ as the definition of *soft attention*, with the softmax function applied to each row independently and $Q in RR^(n times d), K in RR^(t times d), V in RR^(t times d)$ are functions of the input.
+$"softmax"((Q K^top)/(sqrt(d)))V$ as the definition of *soft attention*, with the softmax function applied to each row independently and $Q in RR^(n times d), K in RR^(t times d), V in RR^(t times d)$ are functions of the input.
 
 #colorbox(title: [Transformer layer])[
   Let $Q,K,V,O$ be parameterized functions from $RR^d$ to $RR^d$. A transformer $cal(T): RR^(T times d) mapsto RR^(T times d)$ takes as input $X = (x_1^top, dots, x_T^top)$ and returns $Z = (z_1^top, dots, z_T^top) in RR^(T times d)$ s.t. $a_t = "Att"(Q(x_t), K(X_t), V(X_t)) + x_t$ and $z_t = O(a_t) + a_t$ for $t = 1, dots, T$.
@@ -139,8 +132,7 @@ Using shorter notation we get $"softmax"((Q K^top)/(sqrt(d)))V$ as the definitio
 ]
 
 *Position encodings*: Sinuisoidal encodings are $P(k, 2i) = sin(k/(n^(2i\/d)))$ and $P(k, 2i+1) = cos(k/(n^(2i\/d)))$, where $k$ is the position in the sequence and $i$ the dimension. Note that $P(x+k, dot)$ is a linear function of $P(x, dot)$.
-
-*Tightness of transformers*: Any transformer using soft attention is *tight* as its layers are continuous and the set of possible inputs to the first layer is compact, making $"enc"$ bounded. If $p_"LN"$ is an *$n$-gram model*, then there exists a transformer $cal(T)$ with $L(p_"LN") = L(cal(T))$.
+*Tightness of transformers*: Any transformer with soft attention is *tight* as its layers are continuous and set of possible inputs to the first layer is compact, making $"enc"$ bounded. If $p_"LN"$ is *$n$-gram model*, there exists a transformer $cal(T)$ with $L(p_"LN") = L(cal(T))$.
 
 
 // TODO: number of parameters and time complexities)
@@ -158,17 +150,17 @@ In *multi-task learning* we share learned information across multiple tasks, whi
 ]
 
 #colorbox(title: [BERT], color: silver)[
-  Bidirectional Encoder Representations from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
+  Bidir. Encoder Repr. from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
 ]
 
 // maybe add RoBERTa, AlBERT, Electra, T5
 
 
 #grid(
-  columns: (12em, auto),
+  columns: (11.5em, auto),
   column-gutter: 1em,
   figure(
-    image("encoder-decoder.png", width: 12em, alt: "Encoder-decoder architecture")
+    image("encoder-decoder.png", width: 11.5em, alt: "Encoder-decoder architecture")
   ),
   [
     *CoVE* is similar to ELMo, but only uses the final layer instead of all layers.
@@ -180,7 +172,7 @@ In *multi-task learning* we share learned information across multiple tasks, whi
 == PEFT and Prompting
 
 #colorbox(title: [Diff pruning], color: silver)[
-  Learn which parameters to update (*specification-based method*); learn sparse $delta$ s.t. $theta_"FT" = theta_"LM" + delta$; regularize $delta$ by $L_0$-norm; takes up more GPU memory than ful parameter fine-tuning as new parameters are introduced
+  Learn which parameters to tune (*specification-based method*); learn sparse $delta$ s.t. $theta_"FT" = theta_"LM" + delta$; regularize $delta$ by $L_0$-norm; takes up more GPU memory than ful parameter fine-tuning as new parameters are introduced
 ]
 
 #colorbox(title: [BitFit], color: silver)[
@@ -201,20 +193,21 @@ In *multi-task learning* we share learned information across multiple tasks, whi
   Continuous, prepend sequence of task-specific vectors to input, optimize $M_phi.alt$ to $"max"_phi.alt sum_(y_i) log P(y_i | h_(<i); theta; phi.alt)$ with $h_(<i) = [h_(<i)^((1)); dots; h_(<i)^((n))]$ copied from $M_phi.alt$ if within prefix and otherwise computed using pre-trained LM.
 ]
 
-*In-context learning*: emergent behavior, models can perform previously unseen tasks in few-shot setting without parameter updates.
+*In-context learning*: emergent behavior, models can perform previously unseen tasks in few-shot setting without parameter updates. *Prompting strategies*: chain-of-thought (model generates step-by-step reasoning), least-to-most (problem decomposition, solve separately), program-of-thought (formulate reasoning steps as program); *Self-consistency*: generate variety of output with temp. $T > 0$ and select most frequent answer
 
-*Prompting strategies*: chain-of-thought (model generates step-by-step reasoning), least-to-most (problem decomposition, solve separately), program-of-thought (formulate reasoning steps as program); *Self-consistency*: generate variety of output with temp. $T > 0$ and select most frequent answer
+== VLMs
+Text encoder, vision encoder, fusion module (produce cross-modal representations) and optionally decoder. *Merged attention* concatenates text and image features together (feed into single transformer block), *co-attention* feeds text and image features into separate transformer blocks (then use cross-attention to fuse like in encoder-decoder), *pre-training* via *Masked Language Modeling* (MLM), *Image-Text Matching* (ITM), *Image-Text Contrastive Learning* (ITC, predict $N$ matched pairs from $N^2$ possible image-text pairs, e.g. $cal(L)_"ITC"^(i 2 t) (theta) = -1/N sum_(i=1)^N log(exp(s_(i,i)^(i 2 t) \/ sigma) / (sum_(j=1)^N exp(s_(i,j)^(i 2 t) \/ sigma)))$, where $s_(i,j)^(i 2 t) = v_i^top w_j$ for image and word embeddings, used by e.g. CLIP), *Masked Image Modeling* (MIM).
 
 == RAG
-Parametric vs. non-parametric models: parametric models store knowledge in parameters, non-parametric models store knowledge externally.
+parametric models store knowledge in parameters, non-parametric models externally.
 
 #colorbox(title: [kNN-LM], color: silver)[
 // TODO:
-Store all embedded prefixes and their following words in a database. At inference time, retrieve the $k$ nearest neighbors of a prefix and normalize the exponentiated distances to a probability distribution $p_xi$ over words. Then sample from a convex combination of $p_xi$ and the original LM. Dynamic Gating: Set the weighting of distributions depending on the prefix.
+Store all embedded prefixes and following words in a database. Retrieve $k$ nearest neighbors at of prefix and normalize exponentiated distances to a probability distribution $p_xi$ over words at inference. Next, sample from convex combination of $p_xi$ and original LM. Dynamic Gating: Set weighting of distributions depending on prefix.
 ]
 
 #colorbox(title: [TF-IDF], color: silver)[
-  $"tf"_(t,d) = log("count"(t,d)+1)$, $"idf"_t = log(N\/"df"_t)$, $"tf-idf"_(t,d) = "tf"_(t,d) dot "idf"_t$ where $N$ is number of docs, score with norm. cos. sim., after simplification $"score"(q,d) = sum_(t in q) "tf-idf"_(t,d)/(|d|)$
+  $"tf"_(t,d) = log("count"(t,d)+1)$, $"idf"_t = log(N\/"df"_t)$, $"tf-idf"_(t,d) = "tf"_(t,d) dot "idf"_t$ where $N$ is number of docs, score with norm. cos. sim., after simplification $"score"(q,d) = sum_(t in q) "tf-idf"_(t,d)/(|d|)$, bad: dimension of vectors is same as vocabulary
 ]
 
 
@@ -227,18 +220,17 @@ Store all embedded prefixes and their following words in a database. At inferenc
 
 #colorbox(title: [RLHF], color: silver)[
 // TODO:
-Reinforcement Learning from Human Feedback (RLHF):
-1. Collect a dataset of instructions and answers and fine-tune a model on it.
-2. Produce comparison data by sampling several model outputs for a given prompt and asking humans to rank them. Train a reward model based on this data.
-3. Use PPO to fine-tune the LM (policy) using the reward model as a reward function.
+Reinforcement Learning from Human Feedback (RLHF): 
+*(1)* Collect a dataset of instructions and answers and fine-tune a model on it.
+*(2)* Produce comparison data by sampling several model outputs for a given prompt and asking humans to rank them. Train a reward model based on this data.
+*(3)* Use PPO to fine-tune the LM (policy) using the reward model as a reward function.
 ]
 
 == Privacy
-Gold standard solutions to prevent server from seeing all training data: *secure multi-party computation* or *fully homomorphic encryption*. However, still slow and expensive.
+Gold standard is to prevent server from seeing all training data: *secure multi-party computation* or *fully homomorphic encryption*. Still slow and expensive.
 
 #colorbox(title: [Adverserial examples], color: silver)[
   Perturb example with $delta$ to force misclassification, i.e. maximize $L(f_theta (x + delta), y)$ subject to $||delta||_infinity <= epsilon$. This can be solved using *projected gradient descent*.
-
   Does not work for text as $x + delta$ is unlikely to be a valid token embedding. Solve $"argmax"_v (E_v - x_i)^top gradient_(x_i) L$ and replace $x_i$ with $v$.
 ]
 
