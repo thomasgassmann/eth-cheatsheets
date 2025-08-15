@@ -167,6 +167,7 @@ In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May
 *BPE*: repeatedly merge most frequent symbol pair $('A','B')$ with $'A B'$, hyperparam: vocab size; tradeoff with sequence length
 
 == PEFT and Prompting
+*Discrete prompts* search for prompts in discrete set of tokens, *continuous prompts* search for prompts in embedding space.
 
 #colorbox(title: [Diff pruning], color: silver)[
   Learn which parameters to tune (*specification-based method*); learn sparse $delta$ s.t. $theta_"FT" = theta_"LM" + delta$; regularize $delta$ by $L_0$-norm; takes up more GPU memory than ful parameter fine-tuning as new parameters are introduced
@@ -184,8 +185,6 @@ In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May
   Replace weight matrices $W in RR^(d times k)$ with $W arrow.l W + alpha/r B A$, where $B in RR^(d times r), A in RR^(r times k)$. Init $A$ with Gaussian, $B$ with zeros. Can be executed in parallel.
 ]
 
-*Discrete prompts* search for prompts in discrete set of tokens, *continuous prompts* search for prompts in embedding space.
-
 #colorbox(title: [Prefix tuning], color: silver)[
   Continuous, prepend sequence of task-specific vectors to input, optimize $M_phi.alt$ to $"max"_phi.alt sum_(y_i) log P(y_i | h_(<i); theta; phi.alt)$ with $h_(<i) = [h_(<i)^((1)); dots; h_(<i)^((n))]$ copied from $M_phi.alt$ if within prefix and otherwise computed using pre-trained LM.
 ]
@@ -193,7 +192,7 @@ In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May
 *In-context learning*: emergent behavior, models perform previously unseen tasks in few-shot setting without parameter updates. *Prompting strategies*: chain-of-thought (model generates step-by-step reasoning), least-to-most (problem decomposition, solve separately), program-of-thought (formulate reasoning steps as program); *Self-consistency*: generate variety of output with temp. $T > 0$ and select most frequent ans
 
 == VLMs
-Text encoder, vision encoder, fusion module (produce cross-modal representations) and optionally decoder. *Merged attention* concatenates text and image features together (feed into single transformer block), *co-attention* feeds text and image features into separate transformer blocks (then use cross-attention to fuse like in encoder-decoder), *pre-training* via *Masked Language Modeling* (MLM), *Image-Text Matching* (ITM), *Image-Text Contrastive Learning* (ITC, predict $N$ matched pairs from $N^2$ possible image-text pairs, e.g. $cal(L)_"ITC"^(i 2 t) (theta) = -1/N sum_(i=1)^N log(exp(s_(i,i)^(i 2 t) \/ sigma) / (sum_(j=1)^N exp(s_(i,j)^(i 2 t) \/ sigma)))$, where $s_(i,j)^(i 2 t) = v_i^top w_j$ for image and word embeddings, used by e.g. CLIP), *Masked Image Modeling* (MIM).
+Text encoder, vision encoder, fusion module (get cross-modal representations) and optionally decoder. *Merged attention* concatenates text and image features together (feed into single transformer block), *co-attention* feeds text and image features into separate transformer blocks (then use cross-attention to fuse like in encoder-decoder), *pre-training* via *Masked Language Modeling* (MLM), *Image-Text Matching* (ITM), *Image-Text Contrastive Learning* (ITC, predict $N$ matched pairs from $N^2$ possible image-text pairs, e.g. $cal(L)_"ITC"^(i 2 t) (theta) = -1/N sum_(i=1)^N log(exp(s_(i,i)^(i 2 t) \/ sigma) / (sum_(j=1)^N exp(s_(i,j)^(i 2 t) \/ sigma)))$, where $s_(i,j)^(i 2 t) = v_i^top w_j$ for image and word embeddings, used by e.g. CLIP), *Masked Image Modeling* (MIM).
 
 == RAG
 parametric models store knowledge in parameters, non-parametric models externally.
@@ -202,7 +201,7 @@ parametric models store knowledge in parameters, non-parametric models externall
   $"tf"_(t,d) = log("count"(t,d)+1)$, $"idf"_t = log(N\/"df"_t)$, $"tf-idf"_(t,d) = "tf"_(t,d) dot "idf"_t$ where $N$ is number of docs, score with norm. cos. sim., after simplification $"score"(q,d) = sum_(t in q) "tf-idf"_(t,d)/(|d|)$, bad: dimension of vectors is same as vocabulary
 ]
 
-With *dense retrieval*, we use dot product of encoding in embedding space, use contrastive learning to train. *REALM* retrieves texts, concatenates them to input, unlike prototypical RAG jointly optimizes retrieve and predict steps, *RETRO*: fuses artefact into intermediate layer using chunked cross-attention, *kNN-LM*: store embedded prefixes and following words in database, at inference retrieve $k$ nn. of prefix and norm. exp-distances to probability distribution $p_xi$ over words, then sample from convex combination of $p_xi$ and original LM. Dynamic Gating: Set weighting of distributions depending on prefix.
+In *dense retrieval*, we use dot product of encoding in embedding space, use contrastive learning to train. *REALM* retrieves texts, concatenates them to input, unlike prototypical RAG jointly optimizes retrieve and predict steps, *RETRO*: fuses artefact into intermediate layer using chunked cross-attention, *kNN-LM*: store embedded prefixes and following words in database, at inference retrieve $k$ nn. of prefix and norm. exp-distances to probability distribution $p_xi$ over words, then sample from convex combination of $p_xi$ and original LM. Dynamic Gating: weighting of distributions depending on prefix, *Bi-encoder*: make separate sentence embeddings, then use cos. sim., *Cross-encoder*: pass both sentences to transformer simultaneously
 
 == Alignment
 *Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
@@ -242,3 +241,5 @@ prevent server from seeing all training data: *secure MPC* or *fully homomorphic
 ]
 
 // TODO: data memorization
+
+// TODO: greedy coordinate gradient descent
