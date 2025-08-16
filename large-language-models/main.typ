@@ -130,7 +130,7 @@ $"softmax"((Q K^top)/(sqrt(d)))V$ as the definition of *soft attention*, with th
   $f_H ("cat"_(1 <= h <= H) ("sftmx"(Q_h (X) K_h (X)^top)) V_h (X)))$
 ]
 
-*Position encodings*: Sinuisoidal encodings are $P(k, 2i) = sin(k/(n^(2i\/d)))$ and $P(k, 2i+1) = cos(k/(n^(2i\/d)))$, where $k$ is the position in the sequence and $i$ the dimension. Note that $P(x+k, dot)$ is a linear function of $P(x, dot)$.
+*Position encodings*: Sinusoidal are $P(k, 2i) = sin(k/(n^(2i\/d)))$ and $P(k, 2i+1) = cos(k/(n^(2i\/d)))$, where $k$ position in the sequence, $i$ dimension. $P(x+k, dot)$ is a linear function of $P(x, dot)$.
 *Tightness of transformers*: Any transformer with soft attention is *tight* as layers are continuous and set of possible inputs to the first layer is compact, thus $"enc"$ bounded. If $p_"LN"$ is *$n$-gram model*, there exists a transformer $cal(T)$ with $L(p_"LN") = L(cal(T))$.
 *Number of parameters*: embedding/unembedding matrices share weights, embedding: $V D$, layer norm: $2D$, multi-headed attention block with $H$ heads (assuming _no bias_): $D dot D\/H dot 3 dot H + D dot D + 2 dot D$ (with bias $4D^2 + 6D$)
 
@@ -164,7 +164,7 @@ In *ancestral sampling* we sample $y_t ~ p(dot | y_(<t))$ until $y_t = EOS$. May
   Bidir. Encoder Repr. from Transformers is encoder transformer pretrained using *masked language modelling* and *next sentence prediction*. First token of every sequence is special [CLS] token, final hidden state of this token used as aggregate sentence representation, sentences separated with [SEP] token.
 ]
 
-*BPE*: repeatedly merge most frequent symbol pair $('A','B')$ with $'A B'$, hyperparam: vocab size; tradeoff with sequence length
+*BPE* (Byte Pair Encoding): repeatedly merge most frequent symbol pair $('A','B')$ with $'A B'$, hyperparam: vocab size; tradeoff with sequence length, *BPE dropout*: randomly drop some merges at train time, learn equiv. tokenization
 
 == PEFT and Prompting
 *Discrete prompts* search for prompts in discrete set of tokens, *continuous prompts* search for prompts in embedding space.
@@ -201,7 +201,7 @@ parametric models store knowledge in parameters, non-parametric models externall
   $"tf"_(t,d) = log("count"(t,d)+1)$, $"idf"_t = log(N\/"df"_t)$, $"tf-idf"_(t,d) = "tf"_(t,d) dot "idf"_t$ where $N$ is number of docs, score with norm. cos. sim., after simplification $"score"(q,d) = sum_(t in q) "tf-idf"_(t,d)/(|d|)$, bad: dimension of vectors is same as vocabulary
 ]
 
-In *dense retrieval*, we use dot product of encoding in embedding space, use contrastive learning to train. *REALM* retrieves texts, concatenates them to input, unlike prototypical RAG jointly optimizes retrieve and predict steps, *RETRO*: fuses artefact into intermediate layer using chunked cross-attention, *kNN-LM*: store embedded prefixes and following words in database, at inference retrieve $k$ nn. of prefix and norm. exp-distances to probability distribution $p_xi$ over words, then sample from convex combination of $p_xi$ and original LM. Dynamic Gating: weighting of distributions depending on prefix, *Bi-encoder*: make separate sentence embeddings, then use cos. sim., *Cross-encoder*: pass both sentences to transformer simultaneously
+*dense retrieval* uses dot product of encoding in embedding space, contrastive learning to train. *REALM* retrieve texts, concatenate to input, unlike default RAG jointly optimizes retrieve and predict steps, *RETRO*: fuses artefact into intermediate layer using chunked cross-attention, *kNN-LM*: store prefixes emb. and following words in database, at inference retrieve $k$ near. neighb. of prefix and norm. exp-distances to prob. distribution $p_xi$ over words, then sample from convex combination of $p_xi$ and original LM. Dynamic Gating: weigh distributions depending on prefix, *Bi-encoder*: make separate sentence embeddings, then use cos. sim., *Cross-encoder*: pass both sent. to transformer simultaneously
 
 == Alignment
 *Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
@@ -216,10 +216,10 @@ Finetune LM on collection of datasets described via instructions.]
 Reinforcement Learning from Human Feedback (RLHF): 
 *(1)* Collect a dataset of instructions and answers and fine-tune a model on it.
 *(2)* Produce comparison data by sampling several model outputs for a given prompt and asking humans to rank them. Train a reward model based on this data.
-*(3)* Use PPO to fine-tune the LM (policy) using the reward model as a reward function.
+*(3)* PPO to fine-tune the LM (policy) using the reward model as a reward function.
 ]
 
-RLHF with PPO is expensive, unstable and sensitive to choice of hyperparams, reward model is also large (expensive to load/compute), *DPO* (Direct Preference Optimization) directly fine-tunes LM to max log-likelihood of preference data, uses *Bardley-Terry* model given by $p(y_w succ y_l) = sigma(r(x,y_w) - r(x, y_l))$, binary classification, minimize negative log-likelihood loss, *best-of-n*: one can also simply overgenerate $n$ samples, rank them and pick the one with highest reward (no LM update)
+RLHF w/ PPO is expensive, unstable/sensitive to choice of hyperparams, reward model is large (expensive load/compute), *DPO* (Direct Pref. Opt.) directly fine-tunes LM to max log-likelihood of preference data, uses *Bradley-Terry* model given by $p(y_w succ y_l) = sigma(r(x,y_w) - r(x, y_l))$, binary classification, minimize neg. log-likelihood loss, *best-of-n*: one can also simply overgenerate $n$ samples, rank them and pick the one with highest reward (no LM update)
 
 == Calibration
 Ensure models output probability reflects true likelihood of event, let $B_m$ be samples with pred in interval $((m-1)/M), m/M]$, reliability diagram plots $"conf"(B_m) = sum p_i$ vs. $"acc"(B_m) = 1/(|B_m|) sum bold(1)(y_i = hat(y_i))$, we also have $"ECE" = sum (|B_m|)/M | "acc"(B_m) - "conf"(B_m)|$, can regularize calibration during training or rescale using softmax temp.
