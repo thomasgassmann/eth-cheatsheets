@@ -66,8 +66,7 @@ Any normalizable energy function $hat(p)_"GN"$ ($Z_G$ is finite) induces a langu
   Let $p_"LM"$ be a language model. The prefix probability of $p_"LM"$ is: $pi (bold(y)) define sum_(y' in Sigma^ast) p_"LM" (bold(y) bold(y'))$, i.e. cumulative probability of all strings in the language beginning with $bold(y)$.
 ]
 
-Any language model can be locally normalized.
-// TODO: should know how to prove this, telescoping product, see page 24
+*Any LM* can be *locally normalized*. To prove this, define $p_"SM" (y|bold(y))=pi(bold(y)y)\/pi(bold(y))$ and $p_"SM" (EOS|bold(y))=p_"LM" (bold(y))\/pi(bold(y))$. Then, case distinction $pi(bold(y)) > 0$.
 
 #colorbox(title: [Tightness conditions], color: silver)[
   *(1)* Let $p_EOS (t) = (sum_(omega in Sigma^(t-1)) p_"LN" (omega) p_"LN" (EOS | omega))/(sum_(omega in Sigma^(t-1)) p_"LN" (omega))$. $p_"LN"$ is *tight* iff. $exists t >= 1: p_EOS (t) = 1 or sum_(t=1)^infinity p_EOS (t) = infinity$.
@@ -206,9 +205,6 @@ parametric models store knowledge in parameters, non-parametric models externall
 == Alignment
 *Log-derivative trick*: $gradient_theta log p(x; theta) = (gradient_theta p(x; theta)) / (p(x; theta))$, can be used to show that $gradient_theta EE_(p(x;theta)) [f(x)] = EE_(p(x;theta)) [gradient_theta log p(x;theta) f(x)]$, which can be approximated using Monte Carlo sampling.
 
-
-// TODO: ppo
-
 #colorbox(title: [Instruction tuning], color: silver)[
 Finetune LM on collection of datasets described via instructions.]
 
@@ -237,8 +233,10 @@ prevent server from seeing all training data: *secure MPC* or *fully homomorphic
 ]
 
 #colorbox(title: [Differential privacy])[
-  An algorithm $cal(M)$ is $epsilon$-differentially private if for any "neighboring" datasets $D_1, D_2$ differing only in a single element, and any output $S$ we have: *$PP[cal(M)(D_1) in S] <= exp(epsilon) PP[cal(M)(D_2) in S]$*. If $cal(M)$ is $epsilon$-DP, then $f(cal(M))$ for any function $f$ is also $epsilon$-DP. If $cal(M)_1$ is $epsilon_1$-DP and $cal(M)_2$ is $epsilon_2$-DP, then $f(cal(M)_1, cal(M)_2)$ is $(epsilon_1 + epsilon_2)$-DP.
+  An algorithm $cal(M)$ is $epsilon$-differentially private if for any "neighboring" datasets $D_1, D_2$ differing only in a single element, and any output $S$ we have: *$PP[cal(M)(D_1) in S] <= exp(epsilon) PP[cal(M)(D_2) in S]$*.
 ]
+
+If $cal(M)$ is $epsilon$-DP, then $f(cal(M))$ for any function $f$ is also $epsilon$-DP. If $cal(M)_1$ is $epsilon_1$-DP and $cal(M)_2$ is $epsilon_2$-DP, then $f(cal(M)_1, cal(M)_2)$ is $(epsilon_1 + epsilon_2)$-DP.
 
 // TODO: data memorization
 

@@ -11,18 +11,18 @@
   set text(font: "Libertinus Serif", lang: "en", size: 10pt)
 
   // Set paragraph spacing.
-  set par(spacing: 0.2em)
+  set par(spacing: 0.25em)
 
   set heading(numbering: none)
-  set par(leading: 0.5em)
+  set par(leading: 0.3em)
 
   set par(
-    first-line-indent: 0.5em,
-    spacing: 1em,
+    first-line-indent: 0.2em,
+    spacing: 0.9em,
     justify: true,
   )
   
-  show: columns.with(4, gutter: 1.5em)
+  show: columns.with(4, gutter: 1em)
 
   // Title row.
   align(left)[
