@@ -215,29 +215,37 @@ Reinforcement Learning from Human Feedback (RLHF):
 *(3)* PPO to fine-tune the LM (policy) using the reward model as a reward function.
 ]
 
-RLHF with PPO is expensive, unstable/sensitive to choice of hyperparams, reward model is large (expensive load/compute), *DPO* (Direct Pref. Opt.) directly fine-tunes LM to max log-likelihood of preference data, uses *Bradley-Terry* model given by $p(y_w succ y_l) = sigma(r(x,y_w) - r(x, y_l))$, binary classification, minimize neg. log-likelihood loss, *best-of-n*: one can also simply overgenerate $n$ samples, rank them and pick the one with highest reward (no LM update), *Policy gradient/PPO*: $theta_(t+1) arrow.l theta_t + alpha/n sum_(i=1)^n R(s;p) gradient_theta log p_theta (s)$, see also log-derivative trick above, should also regularize and mixin pretrain gradients: $EE_((x,y) ~ D_(pi_theta^"RL")) [R(x,y) - beta log(pi_theta^"RL" (y|x)\/pi^"SFT" (y|x))] + gamma EE_((x)~D_"pretrain") [log(pi_theta^"RL" (x))]$
+RLHF with PPO is expensive, unstable/sensitive to choice of hyperparams, reward model is large (expensive load/compute), *DPO* (Direct Pref. Opt.) directly fine-tunes LM to max log-likelihood of preference data, uses *Bradley-Terry* model given by $p(y_w succ y_l) = sigma(r(x,y_w) - r(x, y_l))$, binary classification, minimize neg. log-likelihood loss, *best-of-n*: one can also simply overgenerate $n$ samples, rank them and pick the one with highest reward (no LM update), *Policy gradient/PPO*: $theta_(t+1) arrow.l theta_t + alpha/n sum_(i=1)^n R(s;p) gradient_theta log p_theta (s)$, see also log-derivative trick, should regularize and mixin pretrain gradients: $EE_((x,y) ~ D_(pi_theta^"RL")) [R(x,y) - beta log(pi_theta^"RL" (y|x)\/pi^"SFT" (y|x))] + gamma EE_((x)~D_"pretrain") [log(pi_theta^"RL" (x))]$
 
 == Calibration
 Ensure models output probability reflects true likelihood of event, let $B_m$ be samples with pred in interval $((m-1)/M), m/M]$, reliability diagram plots $"conf"(B_m) = sum p_i$ vs. $"acc"(B_m) = 1/(|B_m|) sum bold(1)(y_i = hat(y_i))$, we also have $"ECE" = sum (|B_m|)/M | "acc"(B_m) - "conf"(B_m)|$, can regularize calibration during training or rescale using softmax temp.
 
 == Privacy
-prevent server from seeing all training data: *secure MPC* or *fully homomorphic encryption*. Still slow and expensive.
+Prevent server see train data: *secure MPC*, *fully homomorphic enc.*. Slow, expens.
 
 #colorbox(title: [Adverserial examples], color: silver)[
-  Perturb example with $delta$ to force misclassification, i.e. maximize $L(f_theta (x + delta), y)$ subject to $||delta||_infinity <= epsilon$. This can be solved using *projected gradient descent*.
-  Does not work for text as $x + delta$ is unlikely to be a valid token embedding. Solve $"argmax"_v (E_v - x_i)^top gradient_(x_i) L$ and replace $x_i$ with $v$.
+  Perturb example with $delta$ to force misclassification, i.e. maximize $L(f_theta (x + delta), y)$ subject to $||delta||_infinity <= epsilon$. This can be solved using *projected gradient descent* (project back to perturbation set by clipping vals after each step).
 ]
 
-#colorbox(title: [Federated learning], color: silver)[
-  Clients send gradients to central server, but training data can be recovered from gradients. Weight-trap attacks are also possible if the servers sends a model s.t. $gradient_theta L(f_theta (x_i)) = x_i$.
+Does not work for *text* as $x + delta$ is unlikely to be a valid token embedding. Solve $"argmax"_v (E_v - x_i)^top gradient_(x_i) L$ and replace $x_i$ with $v$. Leads to *Greedy coordinate GC*: (1) compute gradient and get top-$k$ tokens that max. previous argmax for each pos. in sequence, (2) select $B$ possible substitutions u.a.r. and calculate the their loss, then take best substitution, (3) repeat step 1,2 $T$ times, *Defenses*: filter by perplexity (text adverserial examples don't look natural), detect if model produces unsafe output using model (jailbreak detector), adverserial training to train model to be robust against these attacks, represenatation engineering by ML on internal activations, *Prompt injection*:  Inject instructions into model context to cause unintended behavior (LLM cannot distinguish instructions/data). *Prompt-injection Defenses*: delimiters of data/instructions (only superficial separation), use another ML classifier to detect, instruction hierarchy, system-level isolation (convert user prompt into plan, when dealing with 3rd party data *privileged* LM cannot read data but instead calls *quarantined* LM, quarantined LM cannot access tools, privileged LM can not directly read returned text form quarantined LM)
+*Data Poisoning/backdoors*: Inject malicious data to manipulate model (trigger word), can poison *RLHF* (make reward model learn backdoor misclassification) or *pre-training* (e.g. wikipedia, image datasets).
+
+#colorbox(title: [Watermarking], color: silver)[
+  embed detectable signal into output, e.g. red list (hash token, create red/green list based on hash for subsequent token, in hard red list set all probs. to zero, in soft red list shift logits before softmax)
 ]
+
+*Model stealing*: can erecover hidden dimension by getting rank of matrix $Y$ as logit $y_i = z_i W^top$
+
+#colorbox(title: [Federated learning], color: silver)[
+  Clients send gradients to central server, but training data can be recovered from gradients. Weight-trap attacks are possible if the servers sends a model s.t. $gradient_theta L(f_theta (x_i)) = x_i$.
+]
+
+*Defenses memorization*: memor. filters (remove mem. from output directly, side-channel!), dedup.
 
 #colorbox(title: [Differential privacy])[
   An algorithm $cal(M)$ is $epsilon$-differentially private if for any "neighboring" datasets $D_1, D_2$ differing only in a single element, and any output $S$ we have: *$PP[cal(M)(D_1) in S] <= exp(epsilon) PP[cal(M)(D_2) in S]$*.
 ]
 
 If $cal(M)$ is $epsilon$-DP, then $f(cal(M))$ for any function $f$ is also $epsilon$-DP. If $cal(M)_1$ is $epsilon_1$-DP and $cal(M)_2$ is $epsilon_2$-DP, then $f(cal(M)_1, cal(M)_2)$ is $(epsilon_1 + epsilon_2)$-DP.
-
-// TODO: data memorization
-
-// TODO: greedy coordinate gradient descent
+*DP-SGD*: compute *per-sample gradients*, clip them ($g_i arrow.l C dot g_i \/ max(C, ||g_i||_2)$), aggregate and add noise ($cal(N)(0, sigma^2 I_(d times d)) + 1/n sum g_i$), hurts learning
+*Membership Inference*: determine whether specific data point used to train, security game distinguishing $M(D_0)$ and $M(D_1)$, can use e.g. canaries or data extraction
