@@ -26,7 +26,7 @@
 
   // Title row.
   align(left)[
-    #link("https://github.com/thomasgassmann/eth-cheatsheets/commit/GITCOMMIT", "GITCOMMIT"), Thomas Gassmann, BY-SA 4.0
+    #link("https://github.com/thomasgassmann/eth-cheatsheets/commit/GITCOMMIT", "GITCOMMIT"), Thomas Gassmann, CC BY-SA 4.0
   ]
 
   // Main body.
