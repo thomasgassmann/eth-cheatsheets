@@ -81,13 +81,12 @@ Any normalizable energy function $hat(p)_"GN"$ ($Z_G$ is finite) induces a langu
 
 $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$ and $z(t) = max_(omega in Sigma^t) ||"enc"(omega)||_2$, where $e(dot)$ is the symbol embedding function. *RBLM Tightness:* If $s dot z(t) <= log(t)$ for all $t >= N$ for some $N$, then the induced RBLM is *tight*. In particular, $"enc"(dot)$ is bounded, then model is *tight*.
 
-== Finite State Language Models
-#colorbox(title: [FSA])[
-  An FSA is a tuple $cal(A) = (Q, Sigma, delta, I, F)$, where $Q$ is a finite set of states, $Sigma$ is a alphabet, $delta subset.eq Q times (Sigma union {epsilon}) times Q$ are the transitions, and $I, F subset.eq Q$ are the initial/final states.
-]
+== Finite State LMs
+$n$-gram assumption: $p_"SM" (y_t|bold(y_(<t))) = p_"SM" (y_t|bold(y_(t-n+1)^(t-1)))$, every $n$-gram is prob. WFSA
 
-#colorbox(title: [Weighted FSA])[
-  An WFSA is a tuple $cal(A) = (Q, Sigma, delta, lambda, rho)$, where $delta subset.eq Q times (Sigma union {epsilon}) times RR times Q$ are the (weighted) transitions, and $lambda, rho: Q mapsto RR$ are the initial/final weights.
+#colorbox(title: [FSA])[
+  An *FSA* is a tuple $cal(A) = (Q, Sigma, delta, I, F)$, where $Q$ is a finite set of states, $Sigma$ is a alphabet, $delta subset.eq Q times (Sigma union {epsilon}) times Q$ are the transitions, and $I, F subset.eq Q$ are the initial/final states. 
+  An *WFSA* is a tuple $cal(A) = (Q, Sigma, delta, lambda, rho)$, where $delta subset.eq Q times (Sigma union {epsilon}) times RR times Q$ are the (weighted) transitions, and $lambda, rho: Q mapsto RR$ are the initial/final weights.
 ]
 
 WFSA is *probabilistic* if $lambda, rho$ and the transition weights form are non-negative, $sum_(q in Q) lambda(q) = 1$ and for all $q in Q$ we have $rho(q) + sum_(q xarrow(a "/" w) q') w = 1$. The *weight of a path* $pi = q_1 xarrow(a_1 "/" w_1) q_2 dot dot q_N$ in a WFSA $cal(A)$ is given by $w(pi) = lambda(q_1) product_(i=1)^(N) w_i rho(q_N)$. $Pi(cal(A), y)$ is the set of all paths where $cal(A)$ yields $y$.
@@ -103,8 +102,8 @@ A RNN is given by an initial state $h_0 in RR^d$ and a map $h_t = f(h_(t-1), y_t
   In an Elman RNN we have $f(h_(t-1),y_t) = sigma(U h_(t-1) + V e'(y_t) + b)$, where $U in RR^(d times d), V in RR^(d times R), b in RR^d$ and $e': Sigma mapsto RR^R$ is the embedding function.
 ]
 
-A softmax RNN is *tight* if for all $t >= N$ (for some $N$) we have $s ||h_t||_2 <= log(t)$, where $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$. Elman RNNs with a bounded activation function $sigma$ and the softmax projection function are *tight*. A *Heaviside Elman RNN* is an Elman RNN using a Heaviside function as non-linearity. Heaviside Elman RNNs (over $overline(RR)$) are equivalent to deterministic PFSAs (generalizes to any activation function with finite image). 
-*Minsky's construction* encodes dPFSA using $U in RR^(|Sigma||Q| times |Sigma||Q|)$ for which states are reachable from $h_(t-1)$ (_all_ next states) and $V in RR^(|Sigma||Q| times |Sigma|)$ to encode which states can be transitioned to with $y_t$ (all states that can be transitioned to using $y_t$). $bold(b) = -1$ for Heaviside. (hidden state dimensionality can be reduced to $Omega(|Sigma|sqrt(|Q|))$). Satured Sigmoid Elman RNNs are Turing-complete (can encode two-stack PDAs). *Undecidable* whether an RNN-LM is *tight*.
+A softmax RNN is *tight* if for all $t >= N$ (for some $N$) we have $s ||h_t||_2 <= log(t)$, where $s = max_(y in Sigma) ||e(y) - e(EOS)||_2$. Elman RNNs with a bounded activation function $sigma$ and the softmax projection function are *tight*. A *Heaviside Elman RNN* is an Elman RNN using a Heaviside function as non-linearity. Heaviside Elman RNNs (finite $overline(RR)$) are equivalent to deterministic PFSAs (generalizes to any activation function with finite image) (regular). 
+*Minsky's construction* encodes dPFSA using $U in RR^(|Sigma||Q| times |Sigma||Q|)$ for which states are reachable from $h_(t-1)$ (_all_ next states) and $V in RR^(|Sigma||Q| times |Sigma|)$ to encode which states can be transitioned to with $y_t$ (all states that can be transitioned to using $y_t$). $bold(b) = -1$ for Heaviside. (hidden state dimensionality can be reduced to $Omega(|Sigma|sqrt(|Q|))$). Sat. Sigmoid Elman RNNs are Turing-complete (can encode 2-stack PDA). *Undecidable* if an RNN-LM (rational weights!) *tight*.
 
 == Transformers
 $K,Q,V$ usually no bias.
