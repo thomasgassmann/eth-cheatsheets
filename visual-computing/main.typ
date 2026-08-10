@@ -124,7 +124,7 @@ The Gaussian kernel is rot. symmetric, single lobe (neighbor's influence decreas
 
 Laplacian is rot. invariant (isotropic), usually more noisy since it uses 2nd derivative.
 
-#fitWidth($ (diff f) / (diff x) = lim_(epsilon -> 0) (f(x + epsilon, y) / epsilon - f(x, y) / epsilon) approx (f(x_(n + 1), y) - f(x_n, y)) / (Delta x) $)
+#fitWidth($ (partial f) / (partial x) = lim_(epsilon -> 0) (f(x + epsilon, y) / epsilon - f(x, y) / epsilon) approx (f(x_(n + 1), y) - f(x_n, y)) / (Delta x) $)
 Hence, diff. leads to the convolution $mat(-1, 1)$
 
 Image sharpening: enhances edges by increasing high frequency components: $I' = I + alpha abs(k convolve I)$ where $k$ high-pass filter, $alpha in [0, 1]$.
@@ -137,13 +137,13 @@ Image sharpening: enhances edges by increasing high frequency components: $I' = 
 ]
 
 $"LoG"(x, y) = - 1/ (pi sigma^4) (1 - (x^2 + y^2) / (2 sigma^2)) exp(-(x^2 + y^2) / (2 sigma^2))$
-$nabla^2 f(x, y) = (diff^2 f(x, y)) / (diff x^2) + (diff^2 f(x, y)) / (diff y^2)$, DoG can approximate LoG.
+$nabla^2 f(x, y) = (partial^2 f(x, y)) / (partial x^2) + (partial^2 f(x, y)) / (partial y^2)$, DoG can approximate LoG.
 
 #colorbox(title: [Canny edge detector], color: silver)[
   Thin, uninterrupted edges, no guarantee on the connectivity of edges, extended more completely than with simple thresh.
   + Smooth image with Gaussian filter
   + Compute grad. mag. & orient. (Sobel, Prewitt, ...)
-    #fitWidth($ M(x, y) = sqrt(((diff f) / (diff x))^2 + ((diff f) / (diff y))^2), alpha(x, y) = tan^(-1)((diff f) / (diff y) slash.big (diff f) / (diff x)) $)
+    #fitWidth($ M(x, y) = sqrt(((partial f) / (partial x))^2 + ((partial f) / (partial y))^2), alpha(x, y) = tan^(-1)((partial f) / (partial y) slash.big (partial f) / (partial x)) $)
   + Nonmaxima suppression: quantize edges normal to 4 dirs, if smaller than either neighb. (dir. of edge normal) suppress
   + Double thresholding (hysteresis): $T_"high", T_"low"$, keep if $>= T_"high"$ or $>= T_"low"$ and 8-conn. through $>= T_"low"$ to $T_"high"$ px. (first detect strong/weak edge pixels, then reject weak edge pixels not connected with strong edge pixels)
 ]
@@ -276,13 +276,13 @@ High compression (10-100x) and 24-bit colors possible, but artifacts / incorrect
 *Image pyramids*: iter. applied approx. filter / downsampler. Gaussian pyramid, Laplacian is difference between 2 levels in Gaussian pyramid. \
 
 == Optical flow
-Apparent motion of brightness patterns. We set $u = (dif x) / (dif t)$, $v = (dif y) / (dif t)$, $I_x = (diff I) / (diff x)$, $I_y = (diff I) / (diff y)$, $I_t = (diff I) / (diff t)$
+Apparent motion of brightness patterns. We set $u = (dif x) / (dif t)$, $v = (dif y) / (dif t)$, $I_x = (partial I) / (partial x)$, $I_y = (partial I) / (partial y)$, $I_t = (partial I) / (partial t)$
 
 Brightness constancy: \
-$I(x, y, t) = I(x + (dif x) / (dif t) diff t, y + (dif y) / (dif t) diff t, t + diff t)$
+$I(x, y, t) = I(x + (dif x) / (dif t) partial t, y + (dif y) / (dif t) partial t, t + partial t)$
 
 Optical flow constraint: \
-$(dif I) / (dif t) = (diff I) / (diff x) (dif x) / (dif t) + (diff I) / (diff y) (dif y) / (dif t) + (diff I) / (diff t) = 0$
+$(dif I) / (dif t) = (partial I) / (partial x) (dif x) / (dif t) + (partial I) / (partial y) (dif y) / (dif t) + (partial I) / (partial t) = 0$
 
 *Aperture problem*: when flow is computed for point along linear feature (e.g. edge), not possible to determine exact location of corresponding point in second image, only possible to determine the flow normal to linear feature, 2 unknowns for every pixel $(u, v)$ but only one equation $=> oo$ solutions, opt. flow defines a line in $(u, v)$ space, compute normal flow. Need additional constraints to solve.
 
@@ -292,7 +292,7 @@ $(dif I) / (dif t) = (diff I) / (diff x) (dif x) / (dif t) + (diff I) / (diff y)
   $e_s = integral.double ((u_x^2 + u_y^2) + (v_x^2 + v_y^2)) dif x dif y$ (smooth.) \
   $e_c = integral.double (I_x u + I_y v + I_t)^2 dif x dif y$ (bright. const.)
 
-  Coupled PDEs solved using iter. methods and finite diffs: $(diff u) / (diff t) = Delta u - lambda (I_x u + I_y v + I_t) I_x$ and  $(diff v) / (diff t) = Delta v- lambda (I_x u + I_y v + I_t) I_y$. Has errors at boundaries / information spreads from corner-type patterns.
+  Coupled PDEs solved using iter. methods and finite diffs: $(partial u) / (partial t) = Delta u - lambda (I_x u + I_y v + I_t) I_x$ and  $(partial v) / (partial t) = Delta v- lambda (I_x u + I_y v + I_t) I_y$. Has errors at boundaries / information spreads from corner-type patterns.
 ]
 
 #colorbox(title: [Lucas-Kanade])[
@@ -346,7 +346,7 @@ Classification: $f(x_1, theta)$ as score, take class with larger score. With $y_
 Regression: $f(x_1, theta)$ as value, can be used for classification by comparing value. With $y_i in RR^n, s_i = f(x_i, theta)$, we get: $cal(L)(y, f(x, theta)) = sum_(i = 1)^N norm(y_i - s_i)^2$
 
 #colorbox(title: [Radon transform], color: silver)[
-  Given object with unknown density $f(x, y)$, find $f$ by sending rays from all dirs through object and measure absorption on the other side. Assume parallel beams for given angle and no spreading of beam. X-Ray along line $L$ at distance $s$ has intensity $I(s)$, travelling $diff s$ reduces intens. by $diff I$. reduction depends on intens. and optical density $u(s)$: $(diff I) / I(s) = -u(s) diff s$. $I_(text("finish")) = I_(text("start")) exp(-R)$ where $R = integral_L u(s) dif s$ for the path through the object $L$. Radon transform of $f(x, y)$: $R f(L) = integral_L f(x) |dif x|$.
+  Given object with unknown density $f(x, y)$, find $f$ by sending rays from all dirs through object and measure absorption on the other side. Assume parallel beams for given angle and no spreading of beam. X-Ray along line $L$ at distance $s$ has intensity $I(s)$, travelling $partial s$ reduces intens. by $partial I$. reduction depends on intens. and optical density $u(s)$: $(partial I) / I(s) = -u(s) partial s$. $I_(text("finish")) = I_(text("start")) exp(-R)$ where $R = integral_L u(s) dif s$ for the path through the object $L$. Radon transform of $f(x, y)$: $R f(L) = integral_L f(x) |dif x|$.
   
   With $(x, y) = (rho cos theta - s sin theta, rho sin theta + s cos theta)$ and $rho$ the distance from the object center and $theta$ the angle, $s$ the distance along the line, we get:
   $R(rho, theta) = integral u(x, y) dif s$. We now want to find $u(x, y)$ given $R(rho, theta)$.
