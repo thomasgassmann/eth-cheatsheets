@@ -47,7 +47,7 @@ An *alphabet* $Sigma$ is a finite, non-empty set. A *string* is a finite sequenc
 
 #colorbox(title: [Globally normalized model])[
   Let $hat(p)_("GN")(bold(y)) : Sigma^ast arrow RR$ be an energy function. A globally normalized model (GNM) is defined as:
-  $p_("LM")(bold(y)) define (exp(- hat(p)_("GN")(bold(y)))) / (sum_(y' in Sigma^ast) exp(-hat(p)_("GN")(bold(y')))) define exp(-hat(p)_"GN" (bold(y)))$ where $Z_"G" = sum_(bold(y') in Sigma^ast) exp(-hat(p)_"GN" (bold(y')))$ is the normalization constant.
+  $p_("LM")(bold(y)) define (exp(- hat(p)_("GN")(bold(y)))) / (sum_(y' in Sigma^ast) exp(-hat(p)_("GN")(bold(y')))) define 1/Z_"G" exp(-hat(p)_"GN" (bold(y)))$ where $Z_"G" = sum_(bold(y') in Sigma^ast) exp(-hat(p)_"GN" (bold(y')))$ is the normalization constant.
 ]
 
 Any normalizable energy function $hat(p)_"GN"$ ($Z_G$ is finite) induces a language model.
